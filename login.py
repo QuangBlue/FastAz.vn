@@ -1,6 +1,6 @@
 import requests
 
-def main():
+def check_user():
     idd = input('Id: ')
     pas = input('Password: ')
     data = {
@@ -33,6 +33,19 @@ def main():
     if x.json()['success'] == False:
         print (x.json()['message'])
 
+def create_use(user_name,password,first_name,last_name,email):
+    data = {
+        'user_name':user_name,
+        'password' :password,
+        'first_name' :first_name,
+        'last_name' :last_name,
+        'email' : email,
+        'swpm_api_action' : 'create',
+        'key' : 'e3003c44deff96ebe7db442100f3b473'
+    }
+    x = requests.post('http://fastaz.vn/', data = data)
+    print (x.text)
 
 if __name__ == '__main__':
-    main()
+    
+    check_user()
