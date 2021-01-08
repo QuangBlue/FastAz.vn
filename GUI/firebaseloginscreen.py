@@ -23,17 +23,17 @@ Builder.load_file("signupscreen.kv")
 Builder.load_file("welcomescreen.kv")
 Builder.load_file("loadingpopup.kv")
 Builder.load_file("firebaseloginscreen.kv")
-# Builder.load_file("Test.kv")
-
+Builder.load_file("pushproductsscreen.kv")
 
 # Import the screens used to log the user in
 from welcomescreen import WelcomeScreen
 from signinscreen import SignInScreen
 from signupscreen import SignUpScreen
+from PushProductsScreen import PushProductsScreen
 
-
-#Huy imports
+# Huy imports
 import urllib.parse
+
 
 class FirebaseLoginScreen(Screen, EventDispatcher):
     """Use this widget as a complete module to incorporate Firebase user
@@ -60,7 +60,7 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
     # Firebase Authentication Credentials - what developers want to retrieve
     refresh_token = ""
     localId = ""
-    idToken = ""  #Co can su dung khong?
+    idToken = ""  # Co can su dung khong?
 
     # Properties used to send events to update some parts of the UI
     login_success = BooleanProperty(False)  # Called upon successful sign in
@@ -85,13 +85,12 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
             print("Attempting to sign user in: ", id, password)
             params = urllib.parse.urlencode({'username': id, 'password': password})
             headers = {'Content-type': 'application/x-www-form-urlencoded',
-           'Accept': 'text/plain'}
+                       'Accept': 'text/plain'}
             UrlRequest('http://fastaz.vn/wp-json/jwt-auth/v1/token', req_body=params,
-                             on_success=self.sign_in_success,
-                             on_failure=self.sign_in_failure,
-                             req_headers=headers,
-                             on_error=self.sign_in_error, ca_file=certifi.where())
-
+                       on_success=self.sign_in_success,
+                       on_failure=self.sign_in_failure,
+                       req_headers=headers,
+                       on_error=self.sign_in_error, ca_file=certifi.where())
 
         # if self.debug:
         #     print("Attempting to sign user in: ", email, password)
@@ -178,9 +177,11 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
         if self.debug:
             print("Successfully signed in a user: ", log_in_data)
         # User's email/password exist, but are they verified?
-        self.hide_loading_screen()
+        self.ids.screen_manager.current = "push_products_screen"
+
         self.refresh_token = log_in_data['data']['token']
         self.localId = log_in_data['data']['id']
+
         # self.idToken = log_in_data['data']['idToken']
         # self.save_refresh_token(self.refresh_token)
 

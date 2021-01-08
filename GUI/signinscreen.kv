@@ -23,6 +23,7 @@
             password: True
             write_tab: False
             multiline: False
+            #on_text_validate:root.parent.parent.sign_in(email.text, password.text)
             on_text_validate:root.parent.parent.sign_in(email.text, password.text)
 
 
@@ -48,7 +49,7 @@
                 root.parent.parent.sign_in(email.text, password.text)
                 sign_in_button.opacity = 0
                 sign_in_button.disabled = True
-                root.parent.current = "Test"
+                root.parent.current = "push_products_screen"
 
 
         MDRaisedButton:
