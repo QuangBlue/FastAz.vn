@@ -60,6 +60,7 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
     # Firebase Authentication Credentials - what developers want to retrieve
     refresh_token = ""
     localId = ""
+    signInCodeStatus = BooleanProperty(False)  # True - sign in successfully / False - sign in unsuccesfuly
     idToken = ""  # Co can su dung khong?
 
     # Properties used to send events to update some parts of the UI
@@ -87,21 +88,16 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
             headers = {'Content-type': 'application/x-www-form-urlencoded',
                        'Accept': 'text/plain'}
             UrlRequest('http://fastaz.vn/wp-json/jwt-auth/v1/token', req_body=params,
-                       on_success=self.sign_in_success,
-                       on_failure=self.sign_in_failure,
+                       on_success=self.sign_in_validation,
                        req_headers=headers,
                        on_error=self.sign_in_error, ca_file=certifi.where())
 
-        # if self.debug:
-        #     print("Attempting to sign user in: ", email, password)
-        # sign_in_url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=" + self.web_api_key
-        # sign_in_payload = dumps(
-        #     {"email": email, "password": password, "returnSecureToken": True})
-        #
-        # UrlRequest(sign_in_url, req_body=sign_in_payload,
-        #            on_success=self.sign_in_success,
-        #            on_failure=self.sign_in_failure,
-        #            on_error=self.sign_in_error, ca_file=certifi.where())
+    def sign_in_validation(self, urlrequest, log_in_data):
+        self.signInCodeStatus = log_in_data['success']
+        if self.signInCodeStatus:
+            self.sign_in_success(urlrequest, log_in_data)
+        else:
+            self.sign_in_failure(urlrequest, log_in_data)
 
     def log_out(self):
         '''Clear the user's refresh token, marked them as not signed in, and
@@ -179,9 +175,6 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
         # User's email/password exist, but are they verified?
         self.ids.screen_manager.current = "push_products_screen"
 
-        self.refresh_token = log_in_data['data']['token']
-        self.localId = log_in_data['data']['id']
-
         # self.idToken = log_in_data['data']['idToken']
         # self.save_refresh_token(self.refresh_token)
 
@@ -213,14 +206,15 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
         """Displays an error message to the user if their attempt to create an
         account was invalid.
         """
-        self.hide_loading_screen()
-        self.email_not_found = False  # Triggers hiding the sign in button
-        msg = failure_data['error']['message'].replace("_", " ").capitalize()
-        toast(msg)
-        if msg == "Email not found":
-            self.email_not_found = True
-        if self.debug:
-            print("Couldn't sign the user in: ", failure_data)
+        print("YOYOYO")
+        # self.hide_loading_screen()
+        # self.email_not_found = False  # Triggers hiding the sign in button
+        # msg = failure_data['error']['message'].replace("_", " ").capitalize()
+        # toast(msg)
+        # if msg == "Email not found":
+        #     self.email_not_found = True
+        # if self.debug:
+        #     print("Couldn't sign the user in: ", failure_data)
 
     def sign_in_error(self, *args):
         self.hide_loading_screen()
