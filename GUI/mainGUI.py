@@ -1,7 +1,7 @@
 from kivymd.app import MDApp
 
 
-class MainApp(MDApp):
+class MainGUIApp(MDApp):
     user_idToken = ""
     local_id = ""
 
@@ -14,4 +14,4 @@ class MainApp(MDApp):
         self.root.current = 'firebase_login_screen'
 
 
-MainApp().run()
+MainGUIApp().run()
