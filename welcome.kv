@@ -1,0 +1,308 @@
+<ScaleLabel@MDLabel>:
+	_scale: 1. if self.texture_size[0] < self.width else float(self.width) / self.texture_size[0]
+	canvas.before:
+		PushMatrix
+		Scale:
+			origin: self.center
+			x: self._scale or 1.
+			y: self._scale or 1.
+	canvas.after:
+		PopMatrix
+    font_name:"font//Nunito//Nunito-SemiBold.ttf"
+
+<Button_Create_User_Database@ButtonBehavior+Image>:
+    on_press: app.create_user_database()
+<Button_Sign_In_Database@ButtonBehavior+Image>:
+    on_press: app.sign_in_database()
+<Button_Sign_Up@ButtonBehavior+Image>:
+    on_press: app.sign_up_screen()
+
+<Button_Sign_In@ButtonBehavior+Image>:
+    on_press: app.sign_in_screen()
+ScreenManager:
+    WelcomeScreen:
+    SignInScreen:
+    CreateUserScreen:
+<WelcomeScreen>
+    name : 'welcomescreen'
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'img//bg_login_v1.png'
+    orientation : 'vertical'
+    MDBoxLayout:
+        orientation : 'vertical'
+        MDBoxLayout:
+            size_hint_y : 0.08
+            # md_bg_color: 255/255, 255/255, 255/255, 1
+            Widget:
+                size_hint_x : 0.1
+            Image:
+                source : 'logo//logo_long_full_white.png'
+                size_hint_x : 0.9
+            Widget:
+                size_hint_x : 4.5
+            ScaleLabel:
+                text : 'HOME'
+                color : 255/255, 255/255, 255/255, 1
+                font_size : self.height * 0.25
+            ScaleLabel:
+                text : 'BẢNG GIÁ'
+                color : 255/255, 255/255, 255/255, 1
+                font_size : self.height * 0.25
+            ScaleLabel:
+                text : 'HƯỚNG DẪN'
+                color : 255/255, 255/255, 255/255, 1
+                font_size : self.height * 0.25
+            Button_Sign_In:
+                name : 'login_button'
+                source: "img//button_login.png"
+                size_hint_x : 0.9   
+            Widget:
+                size_hint_x : 0.1
+        MDBoxLayout:
+            size_hint_y : 0.8
+            MDFloatLayout:
+                Image:
+                    source : 'img//welcome_1.png'
+                    size_hint_x : 0.7
+                    pos_hint : {'x' : 0.4 }
+                    color: 255/255, 255/255, 255/255 , 1
+                ScaleLabel:
+                    text : 'Ứng Dụng'
+                    font_size : self.height * 0.04
+                    pos_hint : {'x' : 0.1, 'y' : 0.18}
+                    color: 255/255, 255/255, 255/255 , 1
+                    size_hint_x : 0.2
+                ScaleLabel:
+                    text : 'QUẢN LÝ BÁN HÀNG'
+                    font_size : self.height * 0.05
+                    pos_hint : {'x' : 0.1 , 'y' : 0.10}
+                    color: 255/255, 255/255, 255/255 , 1
+                    size_hint_x : 0.3
+                    font_name:"font//Nunito//Nunito-Bold.ttf"
+                ScaleLabel:
+                    text : 'Công cụ giúp bạn quản lý thật nhanh và đơn giản các kênh bán hàng thương mại điện tử như Shopee, Lazada, Tiki, Sendo ...'
+                    pos_hint : {'x' : 0.1 , 'y' : 0.01}
+                    font_size : self.height * 0.02
+                    color: 255/255, 255/255, 255/255 , 1
+                    size_hint_x : 0.4
+                Button_Sign_Up:
+                    name : 'login_button'
+                    source: "img//button_login_1.png"
+                    size_hint_x : 0.2
+                    pos_hint : {'center_x' : 0.25 , 'center_y' : 0.39}
+
+<CreateUserScreen>
+    name : 'createuserscreen'
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'img//bg_login_v1.png'
+    orientation : 'vertical'
+    MDBoxLayout:
+        orientation : 'vertical'
+    ScaleLabel:
+        text : 'ĐĂNG KÝ'
+        color: 255/255, 255/255, 255/255 , 1
+        font_size : self.height * 0.06
+        halign : 'center'
+        pos_hint : {'center_x' : 0.5, 'center_y' : 0.85}
+        font_name:"font//Nunito//Nunito-Bold.ttf"
+        size_hint_x : 0.3
+    MDTextFieldRound:
+        id : username_create
+        max_text_length: 20
+        font_size : '20sp'
+        pos_hint : {'center_x' : 0.5 , 'center_y' : 0.75}
+        size_hint : (0.5,0.06)
+        hint_text : 'Tên đăng nhập của bạn'
+        helper_text : 'Thông tin bắt buộc'
+        helper_text_mode : 'on_error'
+        icon_right : 'account'
+        icon_color : app.theme_cls.primary_color
+        required : True
+        mode: "rectangle"
+        normal_color : 255, 255, 255, 1
+        color_active: 237/255, 237/255, 237/255, 1
+        font_name:"font//Nunito//Nunito-SemiBold.ttf"
+        write_tab: False
+        multiline: False
+
+
+    MDTextFieldRound:
+        id : password_create
+        max_text_length: 20
+        font_size : '20sp'
+        pos_hint : {'center_x' : 0.5 , 'center_y' : 0.65}
+        size_hint : (0.5,0.06)
+        hint_text : 'Mật khẩu của bạn'
+        helper_text : 'Thông tin bắt buộc'
+        helper_text_mode : 'on_error'
+        icon_right : 'onepassword'
+        icon_color : app.theme_cls.primary_color
+        required : True
+        mode: "rectangle"
+        normal_color : 255, 255, 255, 1
+        color_active: 237/255, 237/255, 237/255, 1
+        font_name:"font//Nunito//Nunito-SemiBold.ttf"
+        write_tab: False
+        multiline: False
+
+    MDTextFieldRound:
+        id : email_create
+        max_text_length: 50
+        font_size : '20sp'
+        pos_hint : {'center_x' : 0.5 , 'center_y' : 0.55}
+        size_hint : (0.5,0.06)
+        hint_text : 'Email'
+        helper_text : 'Thông tin bắt buộc'
+        helper_text_mode : 'on_error'
+        icon_right : 'email'
+        icon_color : app.theme_cls.primary_color
+        required : True
+        mode: "rectangle"
+        normal_color : 255, 255, 255, 1
+        color_active: 237/255, 237/255, 237/255, 1
+        font_name:"font//Nunito//Nunito-SemiBold.ttf"
+        write_tab: False
+        multiline: False
+
+    MDTextFieldRound:
+        id : name_create
+        max_text_length: 20
+        font_size : '20sp'
+        pos_hint : {'center_x' : 0.5 , 'center_y' : 0.45}
+        size_hint : (0.5,0.06)
+        hint_text : 'Tên hiển thị'
+        icon_right : 'face'
+        icon_color : app.theme_cls.primary_color
+        mode: "rectangle"
+        normal_color : 255, 255, 255, 1
+        color_active: 237/255, 237/255, 237/255, 1
+        font_name:"font//Nunito//Nunito-SemiBold.ttf"
+        write_tab: False
+        multiline: False
+    MDTextFieldRound:
+        id : phone_create
+        max_text_length: 20
+        font_size : '20sp'
+        pos_hint : {'center_x' : 0.5 , 'center_y' : 0.35}
+        size_hint : (0.5,0.06)
+        hint_text : 'Số điện thoại'
+        icon_right : 'phone'
+        icon_color : app.theme_cls.primary_color
+        mode: "rectangle"
+        normal_color : 255, 255, 255, 1
+        color_active: 237/255, 237/255, 237/255, 1
+        font_name:"font//Nunito//Nunito-SemiBold.ttf"
+        write_tab: False
+        multiline: False
+    Button_Create_User_Database:
+        source: "img//button_login_1.png"
+        size_hint_x : 0.2
+        pos_hint : {'center_x' : 0.5, 'center_y' : 0.2}
+
+
+    MDFloatingActionButton:
+        icon : 'arrow-left'
+        md_bg_color : app.theme_cls.primary_color
+        user_font_size : '60sp'
+        pos_hint : {'center_x' : 0.04 , 'center_y' : 0.07}
+        on_press :
+            root.manager.current = 'welcomescreen'
+            root.manager.transition.direction = 'right'
+    # MDFloatingActionButton:
+    #     id : disabled_button
+    #     disabled : True
+    #     icon : 'account-plus'
+    #     md_bg_color : app.theme_cls.primary_color
+    #     user_font_size : '60sp'
+    #     pos_hint : {'center_x' : 0.96 , 'center_y' : 0.07}
+    #     on_press :
+    #         root.manager.current = 'welcomescreen'
+    #         root.manager.transition.direction = 'right'
+<SignInScreen>
+    name : 'signinscreen'
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'img//bg_login_v1.png'
+    orientation : 'vertical'
+    MDBoxLayout:
+        size_hint_y : 1
+        MDFloatLayout:
+            MDFloatingActionButton:
+                icon : 'arrow-left'
+                md_bg_color : app.theme_cls.primary_color
+                user_font_size : '60sp'
+                pos_hint : {'center_x' : 0.04 , 'center_y' : 0.07}
+                on_press :
+                    root.manager.current = 'welcomescreen'
+                    root.manager.transition.direction = 'right'
+            MDFloatingActionButton:
+                id : disabled_button
+                disabled : True
+                icon : 'arrow-right'
+                md_bg_color : app.theme_cls.primary_color
+                user_font_size : '60sp'
+                pos_hint : {'center_x' : 0.96 , 'center_y' : 0.07}
+                on_press :
+                    root.manager.current = 'welcomescreen'
+                    root.manager.transition.direction = 'right'
+
+            ScaleLabel:
+                text : 'ĐĂNG NHẬP'
+                color: 255/255, 255/255, 255/255 , 1
+                font_size : self.height * 0.06
+                halign : 'center'
+                pos_hint : {'center_x' : 0.5, 'center_y' : 0.85}
+                font_name:"font//Nunito//Nunito-Bold.ttf"
+                size_hint_x : 0.3
+            
+            MDTextFieldRound:
+                id : username_text_field
+                font_size : '20sp'
+                pos_hint : {'center_x' : 0.5 , 'center_y' : 0.7}
+                size_hint : (0.5,0.06)
+                hint_text : 'Tên đăng nhập của bạn'
+                helper_text : 'Thông tin bắt buộc'
+                helper_text_mode : 'on_error'
+                icon_right : 'account'
+                icon_color : app.theme_cls.primary_color
+                required : True
+                mode: "rectangle"
+                normal_color : 255, 255, 255, 1
+                color_active: 237/255, 237/255, 237/255, 1
+                font_name:"font//Nunito//Nunito-SemiBold.ttf"
+                write_tab: False
+                multiline: False
+            MDTextFieldRound:
+                id : password_text_field
+                font_size : '20sp'
+                password : True
+                pos_hint : {'center_x' : 0.5 , 'center_y' : 0.6}
+                size_hint : (0.5,0.06)
+                hint_text : 'Mật khẩu của bạn'
+                helper_text : 'Thông tin bắt buộc'
+                helper_text_mode : 'on_error'
+                icon_right : 'eye-off' 
+                icon_color : app.theme_cls.primary_color
+                required : True
+                mode: "rectangle"
+                normal_color : 255, 255, 255, 1
+                color_active: 237/255, 237/255, 237/255, 1
+                font_name:"font//Nunito//Nunito-SemiBold.ttf"
+                write_tab: False
+                multiline: False
+
+            Button_Sign_In_Database:
+
+                source: "img//button_login.png"
+                size_hint : ( 0.2 , 0.7)
+                pos_hint : {'center_x' : 0.5 , 'center_y' : 0.45}
+
+
