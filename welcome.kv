@@ -40,11 +40,11 @@ ScreenManager:
                 size_hint_x : 0.1
             Image:
                 source : 'logo//logo_long_full_white.png'
-                size_hint_x : 0.9
+                size_hint_x : 1.2
             Widget:
-                size_hint_x : 4.5
+                size_hint_x : 4.2
             ScaleLabel:
-                text : 'HOME'
+                text : 'TRANG CHỦ'
                 color : 255/255, 255/255, 255/255, 1
                 font_size : self.height * 0.25
             ScaleLabel:
@@ -91,7 +91,7 @@ ScreenManager:
                 Button_Sign_Up:
                     name : 'login_button'
                     source: "img//button_login_1.png"
-                    size_hint_x : 0.2
+                    size_hint : (0.2 , 0.1)
                     pos_hint : {'center_x' : 0.25 , 'center_y' : 0.39}
 
 <CreateUserScreen>
@@ -202,7 +202,7 @@ ScreenManager:
         multiline: False
     Button_Create_User_Database:
         source: "img//button_login_1.png"
-        size_hint_x : 0.2
+        size_hint : (0.2 , 0.1)
         pos_hint : {'center_x' : 0.5, 'center_y' : 0.2}
 
 
@@ -298,11 +298,14 @@ ScreenManager:
                 font_name:"font//Nunito//Nunito-SemiBold.ttf"
                 write_tab: False
                 multiline: False
-
+            # MDBoxLayout:
+            #     pos_hint : {'center_x' : 0.5 , 'center_y' : 0.45}
+            #     size_hint : ( 0.1 , 0.1)
             Button_Sign_In_Database:
-
-                source: "img//button_login.png"
-                size_hint : ( 0.2 , 0.7)
                 pos_hint : {'center_x' : 0.5 , 'center_y' : 0.45}
+                size_hint : ( 0.2 , 0.1)
+                source: "img//button_login.png"
+
+
 
 
