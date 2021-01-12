@@ -81,7 +81,7 @@ class FastAZ(MDApp):
                 self.dialog.open()
     # HÀM CHECK TÀI KHOẢN                
     def check_user_database(self):
-        self.result = False  #Demo Trả Kết Quả
+        self.result = True  #Demo Trả Kết Quả
         return self.result
 
 
