@@ -99,6 +99,21 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
         else:
             self.sign_in_failure(urlrequest, log_in_data)
 
+    def sign_in_failure(self, urlrequest, failure_data):
+        """Displays an error message to the user if their attempt to create an
+        account was invalid.
+        """
+        self.hide_loading_screen()
+        self.email_not_found = False  # Triggers hiding the sign in button
+
+
+        msg = "Sign in unsuccessful"
+        toast(msg)
+        # if msg == "Email not found":
+        #     self.email_not_found = True
+        # if self.debug:
+        #     print("Couldn't sign the user in: ", failure_data)
+
     def log_out(self):
         '''Clear the user's refresh token, marked them as not signed in, and
         go back to the welcome screen.
@@ -202,21 +217,9 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
         if self.debug:
             print("Sign up Error: ", args)
 
-    def sign_in_failure(self, urlrequest, failure_data):
-        """Displays an error message to the user if their attempt to create an
-        account was invalid.
-        """
-        print("YOYOYO")
-        # self.hide_loading_screen()
-        # self.email_not_found = False  # Triggers hiding the sign in button
-        # msg = failure_data['error']['message'].replace("_", " ").capitalize()
-        # toast(msg)
-        # if msg == "Email not found":
-        #     self.email_not_found = True
-        # if self.debug:
-        #     print("Couldn't sign the user in: ", failure_data)
 
     def sign_in_error(self, *args):
+        # Used by urlrequest => error
         self.hide_loading_screen()
         if self.debug:
             print("Sign in error", args)
