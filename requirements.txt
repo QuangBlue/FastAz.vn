@@ -2,4 +2,4 @@ pymongo
 dnspython
 pyinstaller
 kivy
-requests
+kivymd
