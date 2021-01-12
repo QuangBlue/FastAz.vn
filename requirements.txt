@@ -3,3 +3,4 @@ dnspython
 pyinstaller
 kivy
 kivymd
+requests
