@@ -29,6 +29,11 @@ sm.add_widget(CreateUserScreen(name = 'createuserscreen'))
 
 
 class FastAZ(MDApp):
+    def __init__(self, **kwargs):
+        super().__init__(kwargs)
+        self.username_text = ""
+        self.password_text = ""
+        #HELLO THIS IS APPLE
     def build(self):
         self.theme_cls.primary_palette = 'Cyan'
         # self.theme_cls.theme_style = "Dark"
