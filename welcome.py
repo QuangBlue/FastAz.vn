@@ -215,6 +215,6 @@ class FastAZ(MDApp):
                         exec(f"self.strng.get_screen('dashboardscreen').ids.{i}.md_bg_color = (40/255, 40/255, 40/255, 1)")
                 break
 
-
+#THIS IS COMMENT OF QUANGBLUE
 
 FastAZ().run()
