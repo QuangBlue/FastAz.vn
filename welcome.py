@@ -170,7 +170,7 @@ class FastAZ(MDApp):
                                                         ,lambda a:sign_up_failure_dialog.dismiss())
             sign_up_failure_dialog.open()
         else:
-            print("Unidentified Sgn Up Error !!!")
+            print("Unidentified Sign Up Error !!!")
     def retrieve_user_config(self):
         # check if user already had setting, if so, pull config from mongoDB
         # Else create user setting
