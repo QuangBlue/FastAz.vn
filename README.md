@@ -8,4 +8,4 @@ Kích hoạt môi trường ảo. pipenv shell
 
 Cài đặt dependencies trong file requirements.txt pipenv install -r ./requirements.txt
 
-Tao cố tình conlít
+Tao cố tình conlít - 456
