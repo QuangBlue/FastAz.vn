@@ -1,3 +1,6 @@
+#:import NoTransition kivy.uix.screenmanager.NoTransition
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+
 <ScaleLabel@MDLabel>:
 	_scale: 1. if self.texture_size[0] < self.width else float(self.width) / self.texture_size[0]
 	canvas.before:
@@ -16,13 +19,17 @@
     on_press: app.sign_in_database()
 <Button_Sign_Up@ButtonBehavior+Image>:
     on_press: app.sign_up_screen()
-
 <Button_Sign_In@ButtonBehavior+Image>:
     on_press: app.sign_in_screen()
+<Button_DB@ButtonBehavior+Image>:
+    pos_hint : {'center_x': 0.5 , 'center_y' : 0.5} 
+<Button_DB_Log_Out@ButtonBehavior+Image>:
+    pos_hint : {'center_x': 0.5 , 'center_y' : 0.5} 
 ScreenManager:
     WelcomeScreen:
     SignInScreen:
     CreateUserScreen:
+    DashBoardScreen:
 <WelcomeScreen>
     name : 'welcomescreen'
     canvas.before:
@@ -305,6 +312,178 @@ ScreenManager:
                 pos_hint : {'center_x' : 0.5 , 'center_y' : 0.45}
                 size_hint : ( 0.2 , 0.1)
                 source: "img//button_login.png"
+<DashBoardScreen>
+    name : 'dashboardscreen'
+    # canvas.before:
+    #     Rectangle:
+    #         pos: self.pos
+    #         size: self.size
+    #         source: 'img//bg_login_v1.png'
+    md_bg_color: 240/255, 240/255, 240/255, 1
+    MDBoxLayout:
+        padding : 20
+        MDBoxLayout:
+            # md_bg_color: 40/255, 40/255, 40/255, 1
+            orientation : 'vertical'
+            size_hint_x : 0.17
+            spacing : 40
+            canvas.before:
+                Color:
+                    rgba : 40/255, 40/255, 40/255, 1
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius : [20]
+            Image:
+                source : 'logo//logo_long_full_white.png'
+                size_hint : ( 0.6 ,0.2)
+                pos_hint : {'center_x' : 0.5 , 'center_y' : 0.5}
+            MDFillRoundFlatIconButton:
+                id: bt_dashboard
+                icon: "desktop-mac-dashboard"
+                text: ' Trang chủ'
+                pos_hint: {'center_x' : 0.5 , 'center_y' : 0.5}
+                font_name: "font//Nunito//Nunito-SemiBold.ttf"
+                font_size: '24sp'
+                theme_text_color: "Custom"
+                text_color: 250/255, 250/255, 250/255, 1
+                icon_color: 250/255, 250/255, 250/255, 1
+                md_bg_color: 40/255, 40/255, 40/255, 1
+                size_hint: ( 0.85 ,0.08)
+                halign: "left"
+                on_press:
+                    x = 'bt_dashboard'
+                    app.button_change_color(x)
+                    dashboard.current = 'screen_1'
+            MDFillRoundFlatIconButton:
+                id: bt_boot_items
+                icon: "arrow-up"
+                text: 'Đẩy sản phẩm'
+                pos_hint: {'center_x' : 0.5 , 'center_y' : 0.5}
+                font_name: "font//Nunito//Nunito-SemiBold.ttf"
+                font_size: '24sp'
+                theme_text_color: "Custom"
+                text_color: 250/255, 250/255, 250/255, 1
+                icon_color: 250/255, 250/255, 250/255, 1
+                md_bg_color: 40/255, 40/255, 40/255, 1
+                size_hint: ( 0.85 ,0.08)
+                halign: "left"
+                on_press:
+                    x = 'bt_boot_items'
+                    app.button_change_color(x)
+                    dashboard.current = 'screen_2'
+            MDFillRoundFlatIconButton:
+                id: bt_reply_ratings
+                icon: "star"
+                text: ' Trả lời đánh giá'
+                pos_hint: {'center_x' : 0.5 , 'center_y' : 0.5}
+                font_name: "font//Nunito//Nunito-SemiBold.ttf"
+                font_size: '24sp'
+                theme_text_color: "Custom"
+                text_color: 250/255, 250/255, 250/255, 1
+                icon_color: 250/255, 250/255, 250/255, 1
+                md_bg_color: 40/255, 40/255, 40/255, 1
+                size_hint: ( 0.85 ,0.08)
+                halign: "left"
+                on_press:
+                    x = 'bt_reply_ratings'
+                    app.button_change_color(x)
+                    dashboard.current = 'screen_3'
+            MDFillRoundFlatIconButton:
+                id: bt_setting
+                icon: "database-settings"
+                text: ' Cài đặt'
+                pos_hint: {'center_x' : 0.5 , 'center_y' : 0.5}
+                font_name: "font//Nunito//Nunito-SemiBold.ttf"
+                font_size: '24sp'
+                theme_text_color: "Custom"
+                text_color: 250/255, 250/255, 250/255, 1
+                icon_color: 250/255, 250/255, 250/255, 1
+                md_bg_color: 40/255, 40/255, 40/255, 1
+                size_hint: ( 0.85 ,0.08)
+                halign: "left"
+                on_press:
+                    x = 'bt_setting'
+                    app.button_change_color(x)
+                    dashboard.current = 'screen_4'
+            # Button_DB:
+            #     id: bt_dashboard 
+            #     source: "img//bt_dashboard_color.png"
+            #     size_hint: ( 0.9 , 0.2)
+            #     on_release:
+            #         x = 'bt_dashboard'
+            #         app.button_change_color(x)
+            #         dashboard.current = 'screen_1'
+            # Button_DB:
+            #     id: bt_boot_items
+            #     source: "img//bt_boot_items_white.png"
+            #     size_hint: ( 0.9 , 0.2)
+            #     on_release:
+            #         x = 'bt_boot_items'
+            #         app.button_change_color(x)
+            #         dashboard.current = 'screen_2'
+            # Button_DB:
+            #     id: bt_reply_ratings
+            #     source: "img//bt_reply_ratings_white.png"
+            #     size_hint: ( 0.9 , 0.2)
+            #     on_release:
+            #         x = 'bt_reply_ratings'
+            #         app.button_change_color(x)             
+            #         dashboard.current = 'screen_3'
+            # Button_DB:
+            #     id: bt_setting
+            #     source: "img//bt_setting_white.png"
+            #     size_hint: ( 0.9 , 0.2)
+            #     on_release:
+            #         x = 'bt_setting'
+            #         app.button_change_color(x) 
+            #         dashboard.current = 'screen_4'
+            Widget:
+                size_hint_y : 1
+            Button_DB_Log_Out:
+                source: "img//log_out.png"
+                size_hint: ( 0.7 , 0.2)
+                on_release:
+                    # dashboard.current = 'screen_4' ShaderTransition
+                    root.manager.current = 'welcomescreen'
+                    root.manager.transition = FadeTransition()
+            
+        MDBoxLayout:
+
+            orientation : 'vertical'
+
+            MDBoxLayout:
+                md_bg_color: 200/255, 200/255, 200/255, 1
+                size_hint_y : 0.1
+
+            MDBoxLayout:
+                ScreenManager:
+                    id : dashboard
+                    transition : NoTransition()
+                    Screen_1:
+                    Screen_2:
+                    Screen_3:
+                    Screen_4:
+<Screen_1>:
+    name: 'screen_1' 
+    md_bg_color: 40/255, 40/255, 40/255, 1
+    Button:
+        text: 'Một'
+<Screen_2>:
+    name: 'screen_2' 
+    md_bg_color: 40/255, 40/255, 40/255, 1
+    Button:
+        text: 'Hai'
+<Screen_3>:
+    name: 'screen_3' 
+    md_bg_color: 40/255, 40/255, 40/255, 1
+    Button:
+        text: 'Ba'
+<Screen_4>:
+    name: 'screen_4' 
+    md_bg_color: 40/255, 40/255, 40/255, 1
+    Button:
+        text: 'Bốn'
 
 
 
