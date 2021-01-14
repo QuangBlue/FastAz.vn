@@ -214,11 +214,7 @@ class FastAZ(MDApp):
                         exec(f"self.strng.get_screen('dashboardscreen').ids.{i}.icon_color = (255/255, 255/255, 255/255, 1)")
                         exec(f"self.strng.get_screen('dashboardscreen').ids.{i}.md_bg_color = (40/255, 40/255, 40/255, 1)")
                 break
-<<<<<<< HEAD
 
-#comment from Huy
-=======
 ######### TÉDSSTSTST 
 
->>>>>>> f6c4a457e894d4570d71fda7847aec76d97d74ff
 FastAZ().run()
