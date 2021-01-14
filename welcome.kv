@@ -305,6 +305,8 @@ ScreenManager:
                 font_name:"font//Nunito//Nunito-SemiBold.ttf"
                 write_tab: False
                 multiline: False
+                on_text_validate:app.sign_in_database()
+
             # MDBoxLayout:
             #     pos_hint : {'center_x' : 0.5 , 'center_y' : 0.45}
             #     size_hint : ( 0.1 , 0.1)
