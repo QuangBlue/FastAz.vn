@@ -216,8 +216,11 @@ class FastAZ(MDApp):
                 break
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #THIS IS COMMENT OF QUANGBLUE
 =======
+=======
+>>>>>>> e970f56a2fae7ab97bcb5695b1e0b79b26479494
 #HELLO THIS IS AAMRKEWMRLKEWMRW
 
 >>>>>>> e970f56a2fae7ab97bcb5695b1e0b79b26479494
