@@ -46,6 +46,31 @@ def create_use(user_name,password,first_name,last_name,email):
     x = requests.post('http://fastaz.vn/', data = data)
     print (x.text)
 
+
+#Reset Password Có 2 bước cho user
+# 
+# B1 : tạo yêu cầu vào hệ thống sẽ gửi 1 đoạn code 4 chữ số cho khách hàng qua email - Dùng hàm reset_password(email)
+# B2 : nhập email cũ + password mới + mật mã vừa gửi qua email - Dùng hàm set_new_password(email,password,code)
+
+def reset_password(email):
+    data = {
+        'email' : email
+    }
+    url = 'http://fastaz.vn/wp-json/bdpwr/v1/reset-password'
+    r = requests.post(url, data=data)
+    print (r.text)
+
+def set_new_password(email,password,code):
+    data = {
+        'email' : email,
+        'password': password,
+        'code' : code
+    }
+    url = 'http://fastaz.vn/wp-json/bdpwr/v1/set-password'
+    r = requests.post(url, data=data)
+    print (r.text)
+
 if __name__ == '__main__':
-    
-    check_user()
+    pass
+    # reset_password('quangblue2401@gmail.com')
+    # set_new_password('quangblue2401@gmail.com','Quang123456',7026)
