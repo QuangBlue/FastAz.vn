@@ -188,7 +188,7 @@ class FastAZ(MDApp):
                                                         ,lambda a:sign_up_failure_dialog.dismiss())
             sign_up_failure_dialog.open()
         else:
-            print("Unidentified Sgn Up Error !!!")
+            print("Unidentified Sign Up Error !!!")
     def retrieve_user_config(self):
         # check if user already had setting, if so, pull config from mongoDB
         # Else create user setting
@@ -215,6 +215,11 @@ class FastAZ(MDApp):
                         exec(f"self.strng.get_screen('dashboardscreen').ids.{i}.md_bg_color = (40/255, 40/255, 40/255, 1)")
                 break
 
+<<<<<<< HEAD
 #THIS IS COMMENT OF QUANGBLUE
+=======
+#HELLO THIS IS AAMRKEWMRLKEWMRW
+
+>>>>>>> e970f56a2fae7ab97bcb5695b1e0b79b26479494
 
 FastAZ().run()
