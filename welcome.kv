@@ -323,21 +323,21 @@ ScreenManager:
     #         source: 'img//bg_login_v1.png'
     md_bg_color: 240/255, 240/255, 240/255, 1
     MDBoxLayout:
-        padding : 20
+        # spacing : 20
         MDBoxLayout:
             # md_bg_color: 40/255, 40/255, 40/255, 1
             orientation : 'vertical'
             size_hint_x : 0.17
-            spacing : 40
+            spacing : 30
             canvas.before:
                 Color:
-                    rgba : 40/255, 40/255, 40/255, 1
+                    rgba : 255/255, 255/255, 255/255, 1
                 RoundedRectangle:
                     pos: self.pos
                     size: self.size
-                    radius : [20]
+                    # radius : [20]
             Image:
-                source : 'logo//logo_long_full_white.png'
+                source : 'logo//logo_long_full_color.png'
                 size_hint : ( 0.6 ,0.2)
                 pos_hint : {'center_x' : 0.5 , 'center_y' : 0.5}
             MDFillRoundFlatIconButton:
@@ -345,15 +345,14 @@ ScreenManager:
                 icon: "desktop-mac-dashboard"
                 text: ' Trang chủ'
                 pos_hint: {'center_x' : 0.5 , 'center_y' : 0.5}
-                font_name: "font//Nunito//Nunito-SemiBold.ttf"
-                font_size: '24sp'
+                font_name: "font//Roboto//Roboto-Regular.ttf"
+                font_size: '20sp'
                 theme_text_color: "Custom"
-                text_color: 250/255, 250/255, 250/255, 1
-                icon_color: 250/255, 250/255, 250/255, 1
-                md_bg_color: 40/255, 40/255, 40/255, 1
-                size_hint: ( 0.85 ,0.08)
-                halign: "left"
-                on_press:
+                text_color: 1/255, 126/255, 230/255, 1
+                icon_color: 1/255, 126/255, 230/255, 1
+                md_bg_color: 255/255, 255/255, 255/255, 1
+                size_hint: ( 0.85 ,0.1)
+                on_release:
                     x = 'bt_dashboard'
                     app.button_change_color(x)
                     dashboard.current = 'screen_1'
@@ -362,15 +361,14 @@ ScreenManager:
                 icon: "arrow-up"
                 text: 'Đẩy sản phẩm'
                 pos_hint: {'center_x' : 0.5 , 'center_y' : 0.5}
-                font_name: "font//Nunito//Nunito-SemiBold.ttf"
-                font_size: '24sp'
+                font_name: "font//Roboto//Roboto-Regular.ttf"
+                font_size: '20sp'
                 theme_text_color: "Custom"
-                text_color: 250/255, 250/255, 250/255, 1
-                icon_color: 250/255, 250/255, 250/255, 1
-                md_bg_color: 40/255, 40/255, 40/255, 1
-                size_hint: ( 0.85 ,0.08)
-                halign: "left"
-                on_press:
+                text_color: 10/255, 10/255, 10/255, 1
+                icon_color: 10/255, 10/255, 10/255, 1
+                md_bg_color: 255/255, 255/255, 255/255, 1
+                size_hint: ( 0.85 ,0.1)
+                on_release:
                     x = 'bt_boot_items'
                     app.button_change_color(x)
                     dashboard.current = 'screen_2'
@@ -379,15 +377,14 @@ ScreenManager:
                 icon: "star"
                 text: ' Trả lời đánh giá'
                 pos_hint: {'center_x' : 0.5 , 'center_y' : 0.5}
-                font_name: "font//Nunito//Nunito-SemiBold.ttf"
-                font_size: '24sp'
+                font_name: "font//Roboto//Roboto-Regular.ttf"
+                font_size: '20sp'
                 theme_text_color: "Custom"
-                text_color: 250/255, 250/255, 250/255, 1
-                icon_color: 250/255, 250/255, 250/255, 1
-                md_bg_color: 40/255, 40/255, 40/255, 1
-                size_hint: ( 0.85 ,0.08)
-                halign: "left"
-                on_press:
+                text_color: 10/255, 10/255, 10/255, 1
+                icon_color: 10/255, 10/255, 10/255, 1
+                md_bg_color: 255/255, 255/255, 255/255, 1
+                size_hint: ( 0.85 ,0.1)
+                on_release:
                     x = 'bt_reply_ratings'
                     app.button_change_color(x)
                     dashboard.current = 'screen_3'
@@ -396,15 +393,14 @@ ScreenManager:
                 icon: "database-settings"
                 text: ' Cài đặt'
                 pos_hint: {'center_x' : 0.5 , 'center_y' : 0.5}
-                font_name: "font//Nunito//Nunito-SemiBold.ttf"
-                font_size: '24sp'
+                font_name: "font//Roboto//Roboto-Regular.ttf"
+                font_size: '20sp'
                 theme_text_color: "Custom"
-                text_color: 250/255, 250/255, 250/255, 1
-                icon_color: 250/255, 250/255, 250/255, 1
-                md_bg_color: 40/255, 40/255, 40/255, 1
-                size_hint: ( 0.85 ,0.08)
-                halign: "left"
-                on_press:
+                text_color: 10/255, 10/255, 10/255, 1
+                icon_color: 10/255, 10/255, 10/255, 1
+                md_bg_color: 255/255, 255/255, 255/255, 1
+                size_hint: ( 0.85 ,0.1)
+                on_release:
                     x = 'bt_setting'
                     app.button_change_color(x)
                     dashboard.current = 'screen_4'
@@ -453,10 +449,34 @@ ScreenManager:
         MDBoxLayout:
 
             orientation : 'vertical'
-
+            md_bg_color: 230/255, 230/255, 230/255, 1
+            padding: 20
+            spacing: 20
             MDBoxLayout:
-                md_bg_color: 200/255, 200/255, 200/255, 1
+                md_bg_color: 255/255, 255/255, 255/255, 1
                 size_hint_y : 0.1
+                MDBoxLayout:
+                    id: box_layout
+                    size_hint: (None,None)
+                    text:''
+                    btn_size: (80,80)
+                    size: (80,80)
+                    bg_color: (0.404, 0.227, 0.718, 1.0)
+                        
+                    Button:
+                        text: box_layout.text
+                        markup: True
+                        size_hint: (None,None)
+                        size: box_layout.btn_size
+                        background_normal: ''
+                        background_color: (0,0,0,0)
+                        canvas.before:
+                            Color:
+                                rgba: (0,0,0,0)
+                            Ellipse:
+                                size: self.size
+                                pos: self.pos 
+                                source: "img//log_out.png"
 
             MDBoxLayout:
                 ScreenManager:

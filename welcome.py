@@ -70,7 +70,7 @@ class FastAZ(MDApp):
         self.strng.transition.direction = 'left'
 
     def sign_in_screen(self):
-        self.strng.current = 'signinscreen'
+        self.strng.current = 'signinscreen'# 'signinscreen' 'dashboardscreen'
         self.strng.transition.direction = 'left'
 
     def create_user_database(self):
@@ -202,19 +202,22 @@ class FastAZ(MDApp):
     def button_change_color(self,x):
         l = ['bt_dashboard' , 'bt_boot_items' , 'bt_reply_ratings' , 'bt_setting']
         for k in l:
-            if x == k :
-                r = exec(f"self.strng.get_screen('dashboardscreen').ids.{x}.md_bg_color = (255/255, 255/255, 255/255, 1)")
-                r = exec(f"self.strng.get_screen('dashboardscreen').ids.{x}.text_color = (10/255, 10/255, 10/255, 1)")
-                r = exec(f"self.strng.get_screen('dashboardscreen').ids.{x}.icon_color = (10/255, 10/255, 10/255, 1)")
-                for i in l:
+            if x == k : # Press - Down
+                # r = exec(f"self.strng.get_screen('dashboardscreen').ids.{x}.md_bg_color = (1/255, 1/255, 1/255, 1)")
+                # r = exec(f"self.strng.get_screen('dashboardscreen').ids.{x}.text_color = (255/255, 255/255, 255/255, 1)")
+                # r = exec(f"self.strng.get_screen('dashboardscreen').ids.{x}.icon_color = (255/255, 255/255, 255/255, 1)")
+                r = exec(f"self.strng.get_screen('dashboardscreen').ids.{x}.text_color = (1/255, 126/255, 230/255, 1)")
+                r = exec(f"self.strng.get_screen('dashboardscreen').ids.{x}.icon_color = (1/255, 126/255, 230/255, 1)")
+                for i in l: # Press - up
                     if i == x:
                         continue
                     else:
-                        exec(f"self.strng.get_screen('dashboardscreen').ids.{i}.text_color = (255/255, 255/255, 255/255, 1)")
-                        exec(f"self.strng.get_screen('dashboardscreen').ids.{i}.icon_color = (255/255, 255/255, 255/255, 1)")
-                        exec(f"self.strng.get_screen('dashboardscreen').ids.{i}.md_bg_color = (40/255, 40/255, 40/255, 1)")
+                        # exec(f"self.strng.get_screen('dashboardscreen').ids.{i}.text_color = (1/255, 1/255, 1/255, 1)")
+                        # exec(f"self.strng.get_screen('dashboardscreen').ids.{i}.icon_color = (1/255, 1/255, 1/255, 1)")
+                        # exec(f"self.strng.get_screen('dashboardscreen').ids.{i}.md_bg_color = (255/255, 255/255, 255/255, 1)")
+                        exec(f"self.strng.get_screen('dashboardscreen').ids.{i}.text_color = (10/255, 10/255, 10/255, 1)")
+                        exec(f"self.strng.get_screen('dashboardscreen').ids.{i}.icon_color = (10/255, 10/255, 10/255, 1)")
+                       
                 break
 
-
-######### TÉD231231231231232342353452345234513
 FastAZ().run()

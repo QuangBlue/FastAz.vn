@@ -73,4 +73,4 @@ def set_new_password(email,password,code):
 if __name__ == '__main__':
     pass
     # reset_password('quangblue2401@gmail.com')
-    # set_new_password('quangblue2401@gmail.com','Quang123456',7026)
+    # set_new_password('quangblue2401@gmail.com','Quang123456',9405)
