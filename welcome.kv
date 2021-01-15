@@ -1,5 +1,6 @@
 #:import NoTransition kivy.uix.screenmanager.NoTransition
 #:import FadeTransition kivy.uix.screenmanager.FadeTransition
+#:import MDDropdownMenu kivymd.uix.menu.MDDropdownMenu
 
 <ScaleLabel@MDLabel>:
 	_scale: 1. if self.texture_size[0] < self.width else float(self.width) / self.texture_size[0]
@@ -361,6 +362,7 @@ ScreenManager:
                 icon_color: 1/255, 126/255, 230/255, 1
                 md_bg_color: 255/255, 255/255, 255/255, 1
                 size_hint: ( 0.85 ,0.1)
+                active: False
                 on_release:
                     x = 'bt_dashboard'
                     app.button_change_color(x)
@@ -377,7 +379,8 @@ ScreenManager:
                 icon_color: 10/255, 10/255, 10/255, 1
                 md_bg_color: 255/255, 255/255, 255/255, 1
                 size_hint: ( 0.85 ,0.1)
-                on_release:
+                active: False
+                on_release:                
                     x = 'bt_boot_items'
                     app.button_change_color(x)
                     dashboard.current = 'screen_2'
@@ -393,6 +396,7 @@ ScreenManager:
                 icon_color: 10/255, 10/255, 10/255, 1
                 md_bg_color: 255/255, 255/255, 255/255, 1
                 size_hint: ( 0.85 ,0.1)
+                active: False
                 on_release:
                     x = 'bt_reply_ratings'
                     app.button_change_color(x)
@@ -409,6 +413,7 @@ ScreenManager:
                 icon_color: 10/255, 10/255, 10/255, 1
                 md_bg_color: 255/255, 255/255, 255/255, 1
                 size_hint: ( 0.85 ,0.1)
+                active: False
                 on_release:
                     x = 'bt_setting'
                     app.button_change_color(x)
@@ -447,13 +452,13 @@ ScreenManager:
             #         dashboard.current = 'screen_4'
             Widget:
                 size_hint_y : 1
-            Button_DB_Log_Out:
-                source: "img//log_out.png"
-                size_hint: ( 0.7 , 0.2)
-                on_release:
-                    # dashboard.current = 'screen_4' ShaderTransition
-                    root.manager.current = 'welcomescreen'
-                    root.manager.transition = FadeTransition()
+            # Button_DB_Log_Out:
+            #     source: "img//log_out.png"
+            #     size_hint: ( 0.7 , 0.2)
+            #     on_release:
+            #         # dashboard.current = 'screen_4' ShaderTransition
+            #         root.manager.current = 'welcomescreen'
+            #         root.manager.transition = FadeTransition()
             
         MDBoxLayout:
 
@@ -462,30 +467,50 @@ ScreenManager:
             padding: 20
             spacing: 20
             MDBoxLayout:
-                md_bg_color: 255/255, 255/255, 255/255, 1
+                padding: (30,0,10,0)
+                # md_bg_color: 255/255, 255/255, 255/255, 1
                 size_hint_y : 0.1
-                MDBoxLayout:
-                    id: box_layout
-                    size_hint: (None,None)
-                    text:''
-                    btn_size: (80,80)
-                    size: (80,80)
-                    bg_color: (0.404, 0.227, 0.718, 1.0)
-                        
-                    Button:
-                        text: box_layout.text
-                        markup: True
-                        size_hint: (None,None)
-                        size: box_layout.btn_size
-                        background_normal: ''
-                        background_color: (0,0,0,0)
-                        canvas.before:
-                            Color:
-                                rgba: (0,0,0,0)
-                            Ellipse:
-                                size: self.size
-                                pos: self.pos 
-                                source: "img//log_out.png"
+                canvas.before: 
+                    Color:
+                        rgba : 255/255, 255/255, 255/255, 1
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+                        radius : [15]
+                            
+                ScaleLabel:
+                    id: title_dashboard
+                    text: "TRANG CHỦ"
+                    font_name: "font//Nunito//Nunito-Bold.ttf"
+                    # pos_hint: {'x' : 0.8 , 'right_y' :0.5}
+                    font_size: self.height * 0.30
+                    color: 50/255, 50/255, 50/255 , 1
+                    size_hint_x : 0.8
+                    halign : 'left'
+
+
+
+
+                ScaleLabel:
+                    text : "Hi Quang"
+                    # font_name: "font//Nunito//Nunito-SemiBold.ttf"
+                    # pos_hint: {'x' : 0.8 , 'right_y' :0.5}
+                    font_size: self.height * 0.24
+                    color: 50/255, 50/255, 50/255 , 1
+                    size_hint_x : 0.1
+                    halign : 'right'
+
+                Button_DB_Log_Out:
+                    id: dropdown_item
+                    source: "img//teamwork.png"
+                    size_hint: ( 0.1 , 0.6)
+                    elevation_normal: 12
+                    pos_hint: {"center_x": .9, "center_y": .5}
+                    on_release: 
+                        root.menu.open()
+                # # Widget:
+                #     size_hint_x: 0.05
+
 
             MDBoxLayout:
                 ScreenManager:

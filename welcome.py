@@ -11,6 +11,8 @@ from kivy.network.urlrequest import UrlRequest
 import urllib.parse  # Encoder for UrlRequest
 import certifi  # Certificate for UrlRequest
 import json
+from kivymd.uix.menu import MDDropdownMenu
+from kivy.properties import ObjectProperty
 
 Config.set('graphics', 'resizable', False)
 Window.size = (1920, 1080)
@@ -28,11 +30,30 @@ class SignInScreen(Screen):
 
 class CreateUserScreen(Screen):
     pass
-
-
 class DashBoardScreen(Screen):
-    pass
 
+    def on_enter(self):
+        menu_items = [
+            {"text": "Thông Tin Tài Khoản"},
+            {"text": "Gia Hạn Vip"},
+            {"text": "Liên hệ"},
+            {"text": "Đăng xuất"}  
+            ]
+        self.menu = MDDropdownMenu(
+            caller=self.ids.dropdown_item,
+            items=menu_items,
+            position="auto",
+            width_mult=4,
+            selected_color= (224/255, 224/255, 224/255, 1),
+
+        )
+        self.menu.bind(on_release=self.set_item)
+
+    def set_item(self, instance_menu, instance_menu_item):
+        if instance_menu_item.text == "Đăng xuất":
+            self.manager.current = 'welcomescreen'
+            self.manager.transition.direction = 'right'
+            instance_menu.dismiss()
 
 class Screen_1(Screen):
     pass
@@ -212,28 +233,21 @@ class FastAZ(MDApp):
         # Update user config everytime user quits or manually update setting in dashboard.
         pass
 
-    # Create Effec Button DashBoard Screen
+    # Create Effect Button DashBoard Screen
     def button_change_color(self, x):
         l = ['bt_dashboard', 'bt_boot_items', 'bt_reply_ratings', 'bt_setting']
         for k in l:
             if x == k : # Press - Down
-                # r = exec(f"self.strng.get_screen('dashboardscreen').ids.{x}.md_bg_color = (1/255, 1/255, 1/255, 1)")
-                # r = exec(f"self.strng.get_screen('dashboardscreen').ids.{x}.text_color = (255/255, 255/255, 255/255, 1)")
-                # r = exec(f"self.strng.get_screen('dashboardscreen').ids.{x}.icon_color = (255/255, 255/255, 255/255, 1)")
-                r = exec(f"self.strng.get_screen('dashboardscreen').ids.{x}.text_color = (1/255, 126/255, 230/255, 1)")
-                r = exec(f"self.strng.get_screen('dashboardscreen').ids.{x}.icon_color = (1/255, 126/255, 230/255, 1)")
+                exec(f"self.strng.get_screen('dashboardscreen').ids.{x}.text_color = (1/255, 126/255, 230/255, 1)")
+                exec(f"self.strng.get_screen('dashboardscreen').ids.{x}.icon_color = (1/255, 126/255, 230/255, 1)")
+                exec(f"self.strng.get_screen('dashboardscreen').ids.title_dashboard.text = self.strng.get_screen('dashboardscreen').ids.{x}.text.upper()")
                 for i in l: # Press - up
                     if i == x:
                         continue
                     else:
-                        # exec(f"self.strng.get_screen('dashboardscreen').ids.{i}.text_color = (1/255, 1/255, 1/255, 1)")
-                        # exec(f"self.strng.get_screen('dashboardscreen').ids.{i}.icon_color = (1/255, 1/255, 1/255, 1)")
-                        # exec(f"self.strng.get_screen('dashboardscreen').ids.{i}.md_bg_color = (255/255, 255/255, 255/255, 1)")
                         exec(f"self.strng.get_screen('dashboardscreen').ids.{i}.text_color = (10/255, 10/255, 10/255, 1)")
                         exec(f"self.strng.get_screen('dashboardscreen').ids.{i}.icon_color = (10/255, 10/255, 10/255, 1)")
-                       
                 break
-
     def log_out(self):
         self.clear_user_input_fields()
         self.strng.current = 'signinscreen'
