@@ -17,6 +17,8 @@
     on_press: app.create_user_database()
 <Button_Sign_In_Database@ButtonBehavior+Image>:
     on_press: app.sign_in_database()
+<Button_Reset_User_Password@ButtonBehavior+Image>:
+    on_press: app.open_reset_dialog()
 <Button_Sign_Up@ButtonBehavior+Image>:
     on_press: app.sign_up_screen()
 <Button_Sign_In@ButtonBehavior+Image>:
@@ -30,6 +32,7 @@ ScreenManager:
     SignInScreen:
     CreateUserScreen:
     DashBoardScreen:
+    ResetPasswordScreen:
 <WelcomeScreen>
     name : 'welcomescreen'
     canvas.before:
@@ -207,6 +210,7 @@ ScreenManager:
         font_name:"font//Nunito//Nunito-SemiBold.ttf"
         write_tab: False
         multiline: False
+        on_text_validate: app.create_user_database()
     Button_Create_User_Database:
         source: "img//button_login_1.png"
         size_hint : (0.2 , 0.1)
@@ -311,9 +315,14 @@ ScreenManager:
             #     pos_hint : {'center_x' : 0.5 , 'center_y' : 0.45}
             #     size_hint : ( 0.1 , 0.1)
             Button_Sign_In_Database:
-                pos_hint : {'center_x' : 0.5 , 'center_y' : 0.45}
+                pos_hint : {'center_x' : 0.40 , 'center_y' : 0.45}
                 size_hint : ( 0.2 , 0.1)
                 source: "img//button_login.png"
+            Button_Reset_User_Password:
+                pos_hint : {'center_x' : 0.60 , 'center_y' : 0.45}
+                size_hint : ( 0.2 , 0.1)
+                source: "img//button_cre.png"
+
 <DashBoardScreen>
     name : 'dashboardscreen'
     # canvas.before:
@@ -487,6 +496,14 @@ ScreenManager:
     Button:
         text: 'Bốn'
 
+<ResetPasswordScreen>:
+    name: "resetpasswordscreen"
+    orientation: "vertical"
+    spacing: "12dp"
+    size_hint_y: None
+    height: "43dp"     # Không được bỏ dòng này, bug của MD custom dialog, height lớn hơn 44dp sẽ không chạy
 
-
+    MDTextField:
+        id: reset_password_textfield
+        hint_text: "Email"
 
