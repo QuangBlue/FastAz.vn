@@ -72,8 +72,24 @@ class Screen_4(Screen):
 
 
 class ResetPasswordScreen(Screen):
+    def check_status(self):
+        result = True
+        if result == True:
+            self.ids.bt_sendcode.opacity = 0
+            self.ids.bt_sendcode.disabled = True
+        else :
+            pass
+        return result
+
+    def set_new_password(self):
+        result = True 
+        return result
+
+class Reset_Screen_1(Screen):
     pass
 
+class Reset_Screen_2(Screen):
+    pass
 
 # BƯỚC 2 ADD CLASS CHO SCREEN VÀO SCREEN MANAGER
 # BƯỚC 3 ADD VÀO FILE KV
@@ -82,8 +98,9 @@ sm.add_widget(WelcomeScreen(name='welcomescreen'))
 sm.add_widget(SignInScreen(name='signinscreen'))
 sm.add_widget(CreateUserScreen(name='createuserscreen'))
 sm.add_widget(DashBoardScreen(name='dashboardscreen'))
-sm.add_widget(DashBoardScreen(name='resetpasswordscreen'))
+sm.add_widget(ResetPasswordScreen(name='resetpasswordscreen'))
 
+rs = ScreenManager()
 
 class FastAZ(MDApp):
     def __init__(self, **kwargs):
@@ -259,13 +276,12 @@ class FastAZ(MDApp):
         #                   text=dialog_text,
         #                   size_hint=(0.5, 0.2), buttons=[MDFlatButton(text=button_text, on_release=button_on_release)])
 
-        dialog = MDDialog(title="Nhập email bạn muốn reset:",
-                          type="custom",
-                          content_cls=ResetPasswordScreen(),
-                          buttons=[MDFlatButton(text="OK", text_color=self.theme_cls.primary_color,
-                                                on_release=self.reset_email_validation,
-                                                )])
-        dialog.open()
+        self.dialog = MDDialog(title="Lấy lại mật khẩu",
+                        type="custom",
+                        content_cls=ResetPasswordScreen(),
+                        buttons=[MDFlatButton(text="Thoát", text_color=self.theme_cls.primary_color)])
+        self.dialog.set_normal_height()
+        self.dialog.open()
 
     def reset_email_validation(self,button_obj):
         print("here")
