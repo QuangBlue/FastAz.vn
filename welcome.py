@@ -268,20 +268,23 @@ class FastAZ(MDApp):
         dialog.open()
 
     def reset_email_validation(self,button_obj):
-        print("here")
-        print(self.strng.get_screen('resetpasswordscreen').ids.reset_password_textfield.text)
+        email = self.strng.get_screen('resetpasswordscreen').ids.reset_password_textfield.text
 
-        # print("Attempting to reset user's password with email: ", email)
-        # params = urllib.parse.urlencode({'email': email})
-        # headers = {'Content-type': 'application/x-www-form-urlencoded',
-        #            'Accept': 'text/plain'}
-        # UrlRequest(self.RESET_PASSWORD_URL, req_body=params,
-        #            on_success=self.set_new_password_validation,
-        #            req_headers=headers,
-        #            on_error=self.unidentified_request_errors, ca_file=certifi.where())
+        print("Attempting to reset user's password with email: ", email)
+        params = urllib.parse.urlencode({'email': email})
+        headers = {'Content-type': 'application/x-www-form-urlencoded',
+                   'Accept': 'text/plain'}
+        UrlRequest(self.RESET_PASSWORD_URL, req_body=params,
+                   on_success=self.set_new_password_validation,
+                   req_headers=headers,
+                   on_error=self.unidentified_request_errors, ca_file=certifi.where())
 
     def set_new_password_validation(self, urlrequest, got_json):
         print(got_json)
+        if got_json[] == :
+
+        else:
+
         # params = {
         #     'email' : email,
         #     'password': password,
