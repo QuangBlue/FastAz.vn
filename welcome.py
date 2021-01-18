@@ -63,7 +63,7 @@ class Screen_2(Screen):
     pass
 
 
-class Screen_3(Screen):
+class Reply_Ratings_Screen(Screen):
     pass
 
 
@@ -77,12 +77,19 @@ class ResetPasswordScreen(Screen):
         if result == True:
             self.ids.bt_sendcode.opacity = 0
             self.ids.bt_sendcode.disabled = True
+            self.ids.bt_resetpass.opacity = 1
+            self.ids.bt_resetpass.disabled = False
+        
         else :
-            pass
+            self.ids.error_status.text ='Vui lòng nhập đúng email đã đăng ký '
         return result
 
     def set_new_password(self):
         result = True 
+        if result == True:
+            pass
+        else :
+            self.ids.error_status.text = "Vui lòng nhập đúng email đã đăng ký"
         return result
 
 class Reset_Screen_1(Screen):
@@ -124,7 +131,7 @@ class FastAZ(MDApp):
         self.strng.transition.direction = 'left'
 
     def sign_in_screen(self):
-        self.strng.current = 'signinscreen'# 'signinscreen' 'dashboardscreen'
+        self.strng.current = 'dashboardscreen'# 'signinscreen' 'dashboardscreen'
         self.strng.transition.direction = 'left'
 
     def create_user_database(self):
