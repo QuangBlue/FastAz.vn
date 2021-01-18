@@ -76,8 +76,11 @@ class Screen_4(Screen):
 
 
 class ResetPasswordScreen(Screen):
-    def check_status(self):
+    object_property = ObjectProperty(None)
 
+    def check_status(self):
+        #NEED TO GET EMAIL INPUT RIGHT HEREEEEEEEEEEE
+        # result = reset_email_validation(email)
         result = True
         if result == True:
             self.ids.bt_sendcode.opacity = 0
@@ -208,7 +211,7 @@ class FastAZ(MDApp):
 
     def unidentified_request_errors(self, *args):
         # Required by Urlrequest
-        print("!!!Error messages: ", args)
+        print("!!! Unidentified Error: ", args)
 
     def create_dialog(self, dialog_title: str, dialog_text: str, button_text: str, button_on_release) -> MDDialog:
         """ Create a pop-up dialog with custom input parameters"""
@@ -290,49 +293,27 @@ class FastAZ(MDApp):
         self.dialog.set_normal_height()
         self.dialog.open()
 
-    def reset_email_validation(self):
+    def reset_email_validation(self,email):
         email = 'huy8208@gmail.com'
         print("Attempting to reset user's password with email: ", email)
-
         params = json.dumps({'email': email})
         headers = {'Content-type': 'application/json',
                    'Accept': 'text/plain'}
         result = UrlRequest(self.RESET_PASSWORD_URL, req_body=params,
-                            on_success=self.set_new_password_validation,
                             req_headers=headers,
                             on_error=self.unidentified_request_errors, ca_file=certifi.where())
         result.wait()
-        print(result.result)
-        # params = urllib.parse.urlencode({'email': email})
-        # headers = {'Content-type': 'application/x-www-form-urlencoded',
-        #            'Accept': 'text/plain'}
-        # result = UrlRequest(self.RESET_PASSWORD_URL, req_body=params,
-        #                     on_success=self.set_new_password_validation,
-        #                     req_headers=headers,
-        #                     on_error=self.unidentified_request_errors, ca_file=certifi.where())
-        # print(result.result)
-        # print(result.error)
-    def set_new_password_validation(self, urlrequest, json):
-        print("HERE")
-        print(urlrequest)
-        print(json)
-        # if got_json[] == :
-        #
-        # else:
-        #
-        # params = {
-        #     'email' : email,
-        #     'password': password,
-        #     'code' : code
-        # }
-        # headers = {'Content-type': 'application/x-www-form-urlencoded',
-        #            'Accept': 'text/plain'}
-        # UrlRequest(self.SET_NEW_PASSWORD_URL, req_body=params,
-        #            on_success=,
-        #            req_headers=headers,
-        #            on_error=self.unidentified_request_errors, ca_file=certifi.where())
+        result = result.result
+        if result['data']['status'] == 200:
+            print(result['message'])
+            return True
+        elif result['data']['status'] == 500:
+            print(result['message'])
+            return False
+        else:
+            print('Unidentified Error!!! ', result)
+            exit(151)
 
 
-# FastAZ().run()
-test = FastAZ()
-test.reset_email_validation()
+
+FastAZ().run()

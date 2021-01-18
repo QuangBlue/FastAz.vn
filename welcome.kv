@@ -588,8 +588,8 @@ ScreenManager:
                     size_hint: (0.6,0.5)
                     on_release:
                         x = root.check_status()
-                        if x == True : reset_password_screen.current = 'reset_screen_2' 
-                        elif x == False : error_status.text = "Vui lòng nhập đúng email đã đăng ký" 
+                        if x == True : reset_password_screen.current = 'reset_screen_2'
+                        elif x == False : error_status.text = "Vui lòng nhập đúng email đã đăng ký"
                 MDLabel:
                     id: error_status
                     text:''
@@ -599,7 +599,8 @@ ScreenManager:
                     color: 253/255, 40/255, 40/255 , 1
                     pos_hint: {"center_x": .5, "center_y": .35}
 <Reset_Screen_1>:
-    name: 'reset_screen_1' 
+    name: 'reset_screen_1'
+    id: reset_screen_number1
     MDLabel:
         text:'Vui lòng cung cấp email đăng ký tài khoản. Bạn sẽ nhận được Mã Xác Thực để cài lại mật khẩu'
         halign: 'center'
@@ -607,6 +608,7 @@ ScreenManager:
         font_size: "18sp"
         color: 30/255, 30/255, 30/255 , 1
     MDTextField:
+        id:email_dang_ky
         hint_text: "Email đăng ký"
         icon_right: 'email'
 <Reset_Screen_2>:
