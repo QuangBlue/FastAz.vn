@@ -1,4 +1,3 @@
-import requests
 from kivy.lang import Builder
 from kivymd.app import MDApp
 from kivy.core.window import Window
@@ -31,8 +30,6 @@ class SignInScreen(Screen):
 
 class CreateUserScreen(Screen):
     pass
-
-
 class DashBoardScreen(Screen):
 
     def on_enter(self):
@@ -40,14 +37,14 @@ class DashBoardScreen(Screen):
             {"text": "Thông Tin Tài Khoản"},
             {"text": "Gia Hạn Vip"},
             {"text": "Liên hệ"},
-            {"text": "Đăng xuất"}
-        ]
+            {"text": "Đăng xuất"}  
+            ]
         self.menu = MDDropdownMenu(
             caller=self.ids.dropdown_item,
             items=menu_items,
             position="auto",
             width_mult=4,
-            selected_color=(224 / 255, 224 / 255, 224 / 255, 1),
+            selected_color= (224/255, 224/255, 224/255, 1),
 
         )
         self.menu.bind(on_release=self.set_item)
@@ -58,7 +55,6 @@ class DashBoardScreen(Screen):
             self.manager.transition.direction = 'right'
             instance_menu.dismiss()
 
-
 class Screen_1(Screen):
     pass
 
@@ -67,7 +63,7 @@ class Screen_2(Screen):
     pass
 
 
-class Screen_3(Screen):
+class Reply_Ratings_Screen(Screen):
     pass
 
 
@@ -76,31 +72,31 @@ class Screen_4(Screen):
 
 
 class ResetPasswordScreen(Screen):
-    object_property = ObjectProperty(None)
-
     def check_status(self):
-        #NEED TO GET EMAIL INPUT RIGHT HEREEEEEEEEEEE
-        # result = reset_email_validation(email)
         result = True
         if result == True:
             self.ids.bt_sendcode.opacity = 0
             self.ids.bt_sendcode.disabled = True
-        else:
-            pass
+            self.ids.bt_resetpass.opacity = 1
+            self.ids.bt_resetpass.disabled = False
+        
+        else :
+            self.ids.error_status.text ='Vui lòng nhập đúng email đã đăng ký '
         return result
 
     def set_new_password(self):
-        result = True
+        result = True 
+        if result == True:
+            pass
+        else :
+            self.ids.error_status.text = "Vui lòng nhập đúng email đã đăng ký"
         return result
-
 
 class Reset_Screen_1(Screen):
     pass
 
-
 class Reset_Screen_2(Screen):
     pass
-
 
 # BƯỚC 2 ADD CLASS CHO SCREEN VÀO SCREEN MANAGER
 # BƯỚC 3 ADD VÀO FILE KV
@@ -112,7 +108,6 @@ sm.add_widget(DashBoardScreen(name='dashboardscreen'))
 sm.add_widget(ResetPasswordScreen(name='resetpasswordscreen'))
 
 rs = ScreenManager()
-
 
 class FastAZ(MDApp):
     def __init__(self, **kwargs):
@@ -136,7 +131,7 @@ class FastAZ(MDApp):
         self.strng.transition.direction = 'left'
 
     def sign_in_screen(self):
-        self.strng.current = 'signinscreen'  # 'signinscreen' 'dashboardscreen'
+        self.strng.current = 'dashboardscreen'# 'signinscreen' 'dashboardscreen'
         self.strng.transition.direction = 'left'
 
     def create_user_database(self):
@@ -211,7 +206,7 @@ class FastAZ(MDApp):
 
     def unidentified_request_errors(self, *args):
         # Required by Urlrequest
-        print("!!! Unidentified Error: ", args)
+        print("!!!Error messages: ", args)
 
     def create_dialog(self, dialog_title: str, dialog_text: str, button_text: str, button_on_release) -> MDDialog:
         """ Create a pop-up dialog with custom input parameters"""
@@ -266,54 +261,61 @@ class FastAZ(MDApp):
     def button_change_color(self, x):
         l = ['bt_dashboard', 'bt_boot_items', 'bt_reply_ratings', 'bt_setting']
         for k in l:
-            if x == k:  # Press - Down
+            if x == k : # Press - Down
                 exec(f"self.strng.get_screen('dashboardscreen').ids.{x}.text_color = (1/255, 126/255, 230/255, 1)")
                 exec(f"self.strng.get_screen('dashboardscreen').ids.{x}.icon_color = (1/255, 126/255, 230/255, 1)")
-                exec(
-                    f"self.strng.get_screen('dashboardscreen').ids.title_dashboard.text = self.strng.get_screen('dashboardscreen').ids.{x}.text.upper()")
-                for i in l:  # Press - up
+                exec(f"self.strng.get_screen('dashboardscreen').ids.title_dashboard.text = self.strng.get_screen('dashboardscreen').ids.{x}.text.upper()")
+                for i in l: # Press - up
                     if i == x:
                         continue
                     else:
-                        exec(
-                            f"self.strng.get_screen('dashboardscreen').ids.{i}.text_color = (10/255, 10/255, 10/255, 1)")
-                        exec(
-                            f"self.strng.get_screen('dashboardscreen').ids.{i}.icon_color = (10/255, 10/255, 10/255, 1)")
+                        exec(f"self.strng.get_screen('dashboardscreen').ids.{i}.text_color = (10/255, 10/255, 10/255, 1)")
+                        exec(f"self.strng.get_screen('dashboardscreen').ids.{i}.icon_color = (10/255, 10/255, 10/255, 1)")
                 break
-
     def log_out(self):
         self.clear_user_input_fields()
         self.strng.current = 'signinscreen'
 
     def open_reset_dialog(self):
+        # dialog = MDDialog(title=dialog_title, text=dialog_text, size_hint=(0.5, 0.2), buttons=[MDFlatButton(
+        # text=button_text, on_release=button_on_release)])
+        # dialog = MDDialog(title=dialog_title,
+        #                   text=dialog_text,
+        #                   size_hint=(0.5, 0.2), buttons=[MDFlatButton(text=button_text, on_release=button_on_release)])
+
         self.dialog = MDDialog(title="Lấy lại mật khẩu",
-                               type="custom",
-                               content_cls=ResetPasswordScreen(),
-                               buttons=[MDFlatButton(text="Thoát", text_color=self.theme_cls.primary_color)])
+                        type="custom",
+                        content_cls=ResetPasswordScreen(),
+                        buttons=[MDFlatButton(text="Thoát", text_color=self.theme_cls.primary_color)])
         self.dialog.set_normal_height()
         self.dialog.open()
 
-    def reset_email_validation(self,email):
-        email = 'huy8208@gmail.com'
-        print("Attempting to reset user's password with email: ", email)
-        params = json.dumps({'email': email})
-        headers = {'Content-type': 'application/json',
-                   'Accept': 'text/plain'}
-        result = UrlRequest(self.RESET_PASSWORD_URL, req_body=params,
-                            req_headers=headers,
-                            on_error=self.unidentified_request_errors, ca_file=certifi.where())
-        result.wait()
-        result = result.result
-        if result['data']['status'] == 200:
-            print(result['message'])
-            return True
-        elif result['data']['status'] == 500:
-            print(result['message'])
-            return False
-        else:
-            print('Unidentified Error!!! ', result)
-            exit(151)
+    def reset_email_validation(self,button_obj):
+        print("here")
+        print(self.strng.get_screen('resetpasswordscreen').ids.reset_password_textfield.text)
 
+        # print("Attempting to reset user's password with email: ", email)
+        # params = urllib.parse.urlencode({'email': email})
+        # headers = {'Content-type': 'application/x-www-form-urlencoded',
+        #            'Accept': 'text/plain'}
+        # UrlRequest(self.RESET_PASSWORD_URL, req_body=params,
+        #            on_success=self.set_new_password_validation,
+        #            req_headers=headers,
+        #            on_error=self.unidentified_request_errors, ca_file=certifi.where())
+
+    def set_new_password_validation(self, urlrequest, got_json):
+        print(got_json)
+        # params = {
+        #     'email' : email,
+        #     'password': password,
+        #     'code' : code
+        # }
+        # headers = {'Content-type': 'application/x-www-form-urlencoded',
+        #            'Accept': 'text/plain'}
+        # UrlRequest(self.SET_NEW_PASSWORD_URL, req_body=params,
+        #            on_success=,
+        #            req_headers=headers,
+        #            on_error=self.unidentified_request_errors, ca_file=certifi.where())
 
 
 FastAZ().run()

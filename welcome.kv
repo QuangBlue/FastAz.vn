@@ -406,7 +406,7 @@ ScreenManager:
                 on_release:
                     x = 'bt_reply_ratings'
                     app.button_change_color(x)
-                    dashboard.current = 'screen_3'
+                    dashboard.current = 'reply_ratings_screen'
             MDFillRoundFlatIconButton:
                 id: bt_setting
                 icon: "database-settings"
@@ -470,8 +470,8 @@ ScreenManager:
 
             orientation : 'vertical'
             md_bg_color: 230/255, 230/255, 230/255, 1
-            padding: 20
-            spacing: 20
+            padding: 15
+            spacing: 15
             MDBoxLayout:
                 padding: (30,0,10,0)
                 # md_bg_color: 255/255, 255/255, 255/255, 1
@@ -482,13 +482,12 @@ ScreenManager:
                     RoundedRectangle:
                         size: self.size
                         pos: self.pos
-                        radius : [15]
+                        radius : [12]
                             
                 ScaleLabel:
                     id: title_dashboard
                     text: "TRANG CHỦ"
                     font_name: "font//Nunito//Nunito-Bold.ttf"
-                    # pos_hint: {'x' : 0.8 , 'right_y' :0.5}
                     font_size: self.height * 0.30
                     color: 50/255, 50/255, 50/255 , 1
                     size_hint_x : 0.8
@@ -516,33 +515,194 @@ ScreenManager:
                         root.menu.open()
 
             MDBoxLayout:
+                canvas.before: 
+                    Color:
+                        rgba : 255/255, 255/255, 255/255, 1
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+                        radius : [12]
                 ScreenManager:
                     id : dashboard
                     transition : NoTransition()
                     Screen_1:
                     Screen_2:
-                    Screen_3:
+                    Reply_Ratings_Screen:
                     Screen_4:
 <Screen_1>:
     name: 'screen_1' 
-    md_bg_color: 40/255, 40/255, 40/255, 1
-    Button:
-        text: 'Một'
+    md_bg_color: 255/255, 255/255, 255/255, 1
+    
 <Screen_2>:
     name: 'screen_2' 
-    md_bg_color: 40/255, 40/255, 40/255, 1
-    Button:
-        text: 'Hai'
-<Screen_3>:
-    name: 'screen_3' 
-    md_bg_color: 40/255, 40/255, 40/255, 1
-    Button:
-        text: 'Ba'
+    md_bg_color: 255/255, 255/255, 255/255, 1
+
+<Reply_Ratings_Screen>:
+    name: 'reply_ratings_screen' 
+    md_bg_color: 255/255, 255/255, 255/255, 1
+    padding: 5
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: (0,10,0,10)
+        MDBoxLayout: #box 1
+            orientation: "vertical"
+            size_hint_y: 0.7
+            MDBoxLayout: #Box title
+                orientation: "vertical"
+                size_hint_y: 0.1
+                padding: (30,0,10,0)
+                ScaleLabel:
+                    text: "Thông tin đánh giá"
+                    font_name: "font//Nunito//Nunito-SemiBold.ttf"
+                    # pos_hint: {'x' : 0.8 , 'right_y' :0.5}
+                    font_size: self.height * 0.55
+                    color: 60/255, 60/255, 60/255 , 1
+                    halign : 'left'
+            MDBoxLayout:
+                orientation: "vertical"
+                padding: (50,10,50,0)
+                MDGridLayout:
+                    cols: 2
+                    row_force_default: True
+                    row_default_height: 100
+                    spacing : 20
+                    MDLabel:
+                        text: 'Đánh giá 5 sao :'
+                        size_hint_x : None
+                        width: 200
+                        font_name: "font//Nunito//Nunito-SemiBold.ttf"
+                        font_size: self.height * 0.2
+                    MDTextField:
+                        hint_text: "Đây là nội dung đánh giá cho các đánh giá 5 sao"
+                        mode: "rectangle"
+                        size_hint_y : 0.7
+                        multiline: True
+                        max_text_length: 500
+                        color_mode: 'custom'
+                        # line_color_focus: 1/255, 126/255, 230/255, 1
+                        normal_color: 1/255, 126/255, 230/255, 1
+                    MDLabel:
+                        text: 'Đánh giá 4 sao :'
+                        size_hint_x : None
+                        width: 200
+                        font_name: "font//Nunito//Nunito-SemiBold.ttf"
+                        font_size: self.height * 0.2
+                    MDTextField:
+                        hint_text: "Đây là nội dung đánh giá cho các đánh giá 4 sao"
+                        mode: "rectangle"
+                        size_hint_y : 0.7
+                        multiline: True
+                        max_text_length: 500
+                        color_mode: 'custom'
+                        line_color_focus: 1/255, 126/255, 230/255, 1
+                    MDLabel:
+                        text: 'Đánh giá 3 sao :'
+                        size_hint_x : None
+                        width: 200
+                        font_name: "font//Nunito//Nunito-SemiBold.ttf"
+                        font_size: self.height * 0.2
+                    MDTextField:
+                        hint_text: "Đây là nội dung đánh giá cho các đánh giá 3 sao"
+                        mode: "rectangle"
+                        size_hint_y : 0.7
+                        multiline: True
+                        max_text_length: 500
+                        color_mode: 'custom'
+                        line_color_focus: 1/255, 126/255, 230/255, 1
+                    MDLabel:
+                        text: 'Đánh giá 2 sao :'
+                        size_hint_x : None
+                        width: 200
+                        font_name: "font//Nunito//Nunito-SemiBold.ttf"
+                        font_size: self.height * 0.2
+                    MDTextField:
+                        hint_text: "Đây là nội dung đánh giá cho các đánh giá 2 sao"
+                        mode: "rectangle"
+                        size_hint_y : 0.7
+                        multiline: True
+                        max_text_length: 500
+                        color_mode: 'custom'
+                        line_color_focus: 1/255, 126/255, 230/255, 1
+                    MDLabel:
+                        text: 'Đánh giá 1 sao :'
+                        size_hint_x : None
+                        width: 200
+                        font_name: "font//Nunito//Nunito-SemiBold.ttf"
+                        font_size: self.height * 0.2
+                    MDTextField:
+                        hint_text: "Đây là nội dung đánh giá cho các đánh giá 1 sao"
+                        mode: "rectangle"
+                        size_hint_y : 0.7
+                        multiline: True
+                        max_text_length: 500
+                        color_mode: 'custom'
+                        line_color_focus: 1/255, 126/255, 230/255, 1
+        MDBoxLayout: #box 2
+            orientation: "vertical"
+            size_hint_y: 0.2
+            MDBoxLayout: 
+                orientation: "vertical"
+                size_hint_y: 0.6
+                padding: (30,20,10,0)
+                ScaleLabel:
+                    text: "Cài đặt"
+                    font_name: "font//Nunito//Nunito-SemiBold.ttf"
+                    # pos_hint: {'x' : 0.8 , 'right_y' :0.5}
+                    font_size: self.height * 0.60
+                    color: 60/255, 60/255, 60/255 , 1
+                    halign : 'left'
+            MDBoxLayout:
+                orientation: "vertical"
+                padding: (50,10,50,0)
+                MDBoxLayout:
+                    MDBoxLayout:
+                        MDFloatLayout:
+                            MDLabel:
+                                text: "Tự động trả lời"
+                                font_name: "font//Nunito//Nunito-Regular.ttf"
+                                pos_hint: {'center_x' : 0.5 , 'center_y' :0.5}
+                                font_size: 22
+                                color: 60/255, 60/255, 60/255 , 1
+                            MDCheckbox:
+                                size_hint: None, None
+                                size: "48dp", "48dp"
+                                pos_hint: {'center_x' : 0.3 , 'center_y' :0.5}
+
+                    MDBoxLayout:
+                        MDLabel:
+                            text: "Thời gian trả lời"
+                            font_name: "font//Nunito//Nunito-Regular.ttf"
+                            # pos_hint: {'x' : 0.8 , 'right_y' :0.5}
+                            font_size: 22
+                            color: 60/255, 60/255, 60/255 , 1
+                            halign : 'left'
+                
+        MDBoxLayout:
+            size_hint_y: 0.1
+            MDFloatLayout:
+                MDFillRoundFlatButton:
+                    text: 'Lưu'
+                    font_name: "font//Nunito//Nunito-SemiBold.ttf"
+                    font_size: 34
+                    text_color: 255/255, 255/255, 255/255 , 1
+                    theme_text_color: "Custom"
+                    md_bg_color: 1/255, 126/255, 230/255, 1
+                    pos_hint: {'center_x' : 0.4 , 'center_y' :0.5}
+                    size_hint: (0.15, 0.68)
+                MDFillRoundFlatButton:
+                    text: 'Hủy'
+                    font_name: "font//Nunito//Nunito-SemiBold.ttf"
+                    font_size: 34
+                    text_color: 255/255, 255/255, 255/255 , 1
+                    theme_text_color: "Custom"
+                    md_bg_color: 50/255, 50/255, 50/255, 1
+                    pos_hint: {'center_x' : 0.6 , 'center_y' :0.5}
+                    size_hint: (0.15, 0.68)
+
+
 <Screen_4>:
     name: 'screen_4' 
-    md_bg_color: 40/255, 40/255, 40/255, 1
-    Button:
-        text: 'Bốn'
+    md_bg_color: 255/255, 255/255, 255/255, 1
 
 <ResetPasswordScreen>:
     name: "resetpasswordscreen"
@@ -563,6 +723,8 @@ ScreenManager:
             MDFloatLayout:
                 MDFillRoundFlatIconButton:
                     id: bt_resetpass
+                    opacity: 0
+                    disabled: True
                     icon: "email"
                     text: "ĐẶT LẠI MẬT KHẨU"
                     font_size: "18sp"
@@ -571,9 +733,8 @@ ScreenManager:
                     md_bg_color: 50/255, 137/255, 255/255, 1
                     size_hint: (0.6,0.5)
                     on_release:
-                        x = root.set_new_password()
-                        if x == True : error_status.text = 'Đã đặt lại mật khẩu thành công'
-                        elif x == False : error_status.text = "Vui lòng nhập đúng email đã đăng ký"
+                        y = root.set_new_password()
+                        if y == True : error_status.text = 'Đã đặt lại mật khẩu thành công'
                 MDFillRoundFlatIconButton:
                     id: bt_sendcode
                     opacity: 1
@@ -588,8 +749,7 @@ ScreenManager:
                     size_hint: (0.6,0.5)
                     on_release:
                         x = root.check_status()
-                        if x == True : reset_password_screen.current = 'reset_screen_2'
-                        elif x == False : error_status.text = "Vui lòng nhập đúng email đã đăng ký"
+                        if x == True : reset_password_screen.current = 'reset_screen_2' 
                 MDLabel:
                     id: error_status
                     text:''
@@ -599,8 +759,7 @@ ScreenManager:
                     color: 253/255, 40/255, 40/255 , 1
                     pos_hint: {"center_x": .5, "center_y": .35}
 <Reset_Screen_1>:
-    name: 'reset_screen_1'
-    id: reset_screen_number1
+    name: 'reset_screen_1' 
     MDLabel:
         text:'Vui lòng cung cấp email đăng ký tài khoản. Bạn sẽ nhận được Mã Xác Thực để cài lại mật khẩu'
         halign: 'center'
@@ -608,7 +767,6 @@ ScreenManager:
         font_size: "18sp"
         color: 30/255, 30/255, 30/255 , 1
     MDTextField:
-        id:email_dang_ky
         hint_text: "Email đăng ký"
         icon_right: 'email'
 <Reset_Screen_2>:
