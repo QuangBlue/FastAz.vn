@@ -9,15 +9,31 @@ client = pymongo.MongoClient(
 # Create Shopee__Registered_Users Collection
 # ShopeeRegisteredUsers = db['Shopee__Registered_Users']
 
+
 # Get database and collection
 db = client.get_database("Shopee_Master_Tool_Database")
 registered_Users_Collection = db.get_collection("Shopee__Registered_Users")
 
-test = {'hello': 'apple'}
 
-registered_Users_Collection.insert_one(test)
+def insertDB(data):
+    registered_Users_Collection.insert_one(data)
 
-documents = registered_Users_Collection.find({})
 
-for document in documents:
-    print(document)
+def retrieveDB():
+    document = registered_Users_Collection.find({})
+    return document
+
+def updateDB(old,new):
+    registered_Users_Collection.document.replace_one(old,new)
+
+# data = {"_id":"ABC124",'Name': 'Giày China', 'SKU': '4567', 'Image': 'URL'}
+#
+# insertDB(data)
+
+everything = retrieveDB()
+for elem in everything:
+    print(elem)
+old = {'Name': 'Giày Adidas'}
+data = {'Name':'hang tau chat luong cao'}
+updateDB(old,data)
+
