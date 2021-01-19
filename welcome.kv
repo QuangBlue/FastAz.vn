@@ -125,19 +125,24 @@ ScreenManager:
         size_hint_x : 0.3
     MDTextFieldRound:
         id : username_create
-        max_text_length: 20
+        # max_text_length: 20
+        # color_mode: 'custom'
         font_size : '20sp'
+        color:  1/255, 1/255, 1/255, 1
         pos_hint : {'center_x' : 0.5 , 'center_y' : 0.75}
         size_hint : (0.5,0.06)
         hint_text : 'Tên đăng nhập của bạn'
-        helper_text : 'Thông tin bắt buộc'
-        helper_text_mode : 'on_error'
+        # helper_text : 'Thông tin bắt buộc'
+        # helper_text_mode : 'on_error'
         icon_right : 'account'
-        icon_color : app.theme_cls.primary_color
-        required : True
+        icon_color : 255/255, 255/255, 255/255, 1
+        hint_text_color: 10/255, 10/255, 50/255, 1
+        # required : True
         mode: "rectangle"
-        normal_color : 255, 255, 255, 1
-        color_active: 237/255, 237/255, 237/255, 1
+        color_mode: 'custom'
+        line_color_focus: 1, 0, 1, 1
+        normal_color : 0, 0, 0, 0.1
+        color_active: 255/255, 255/255, 255/255, 1
         font_name:"font//Nunito//Nunito-SemiBold.ttf"
         write_tab: False
         multiline: False
