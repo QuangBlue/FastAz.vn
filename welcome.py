@@ -13,7 +13,7 @@ import certifi  # Certificate for UrlRequest
 import json
 from kivymd.uix.menu import MDDropdownMenu
 from kivy.properties import ObjectProperty
-
+import MongoDB_Setup
 Config.set('graphics', 'resizable', False)
 Window.size = (1920, 1080)
 
@@ -73,8 +73,10 @@ class Screen_4(Screen):
 
 class ResetPasswordScreen(Screen):
     def check_status(self):
-        result = True
-        if result == True:
+        email = self.reset_password_screen.get_screen("reset_screen_1").ids.email_dang_ky.text
+        print(email)
+        result = self.reset_email_validation(email)
+        if result:
             self.ids.bt_sendcode.opacity = 0
             self.ids.bt_sendcode.disabled = True
             self.ids.bt_resetpass.opacity = 1
@@ -129,9 +131,8 @@ class FastAZ(MDApp):
     def sign_up_screen(self):
         self.strng.current = 'createuserscreen'
         self.strng.transition.direction = 'left'
-
     def sign_in_screen(self):
-        self.strng.current = 'dashboardscreen'# 'signinscreen' 'dashboardscreen'
+        self.strng.current = 'signinscreen'# 'signinscreen' 'dashboardscreen'
         self.strng.transition.direction = 'left'
 
     def create_user_database(self):
@@ -290,32 +291,25 @@ class FastAZ(MDApp):
         self.dialog.set_normal_height()
         self.dialog.open()
 
-    def reset_email_validation(self,button_obj):
-        print("here")
-        print(self.strng.get_screen('resetpasswordscreen').ids.reset_password_textfield.text)
-
-        # print("Attempting to reset user's password with email: ", email)
-        # params = urllib.parse.urlencode({'email': email})
-        # headers = {'Content-type': 'application/x-www-form-urlencoded',
-        #            'Accept': 'text/plain'}
-        # UrlRequest(self.RESET_PASSWORD_URL, req_body=params,
-        #            on_success=self.set_new_password_validation,
-        #            req_headers=headers,
-        #            on_error=self.unidentified_request_errors, ca_file=certifi.where())
-
-    def set_new_password_validation(self, urlrequest, got_json):
-        print(got_json)
-        # params = {
-        #     'email' : email,
-        #     'password': password,
-        #     'code' : code
-        # }
-        # headers = {'Content-type': 'application/x-www-form-urlencoded',
-        #            'Accept': 'text/plain'}
-        # UrlRequest(self.SET_NEW_PASSWORD_URL, req_body=params,
-        #            on_success=,
-        #            req_headers=headers,
-        #            on_error=self.unidentified_request_errors, ca_file=certifi.where())
+    def reset_email_validation(self,email):
+        print("Attempting to reset user's password with email: ", email)
+        params = json.dumps({'email': email})
+        headers = {'Content-type': 'application/json',
+                   'Accept': 'text/plain'}
+        result = UrlRequest(self.RESET_PASSWORD_URL, req_body=params,
+                            req_headers=headers,
+                            on_error=self.unidentified_request_errors, ca_file=certifi.where())
+        result.wait()
+        result = result.result
+        if result['data']['status'] == 200:
+            print(result['message'])
+            return True
+        elif result['data']['status'] == 500:
+            print(result['message'])
+            return False
+        else:
+            print('Unidentified Error!!! ', result)
+            exit(151)
 
 
 FastAZ().run()
