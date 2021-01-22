@@ -1,20 +1,25 @@
 import pymongo
 import datetime
+from User import User
 
-client = pymongo.MongoClient(
-    "mongodb+srv://huy8208:741456963@shopeemastertoolcluster.n4haz.mongodb.net/Shopee_Master_Tool_Database?retryWrites=true&w=majority")
+# What does this mongoDB do?
+# update one document
+# update multiple documents
+# insert one document
+# insert multiple documents
+
 # client = pymongo.MongoClient("mongodb+srv://quang_db:Thangkhung123@cluster0.cv2te.mongodb.net/shopee_db?retryWrites=true&w=majority")
-
-
 # db = client['Shopee_Master_Tool_Database'] Create a database, if it already exists, skips
 # Collection == table
 # Create Shopee__Registered_Users Collection
 # ShopeeRegisteredUsers = db['Shopee__Registered_Users']
-
-
 # Get database and collection
 # db = client.get_database("shopee_db")
 # registered_Users_Collection = db.get_collection("user_db")
+
+
+client = pymongo.MongoClient(
+    "mongodb+srv://huy8208:741456963@shopeemastertoolcluster.n4haz.mongodb.net/Shopee_Master_Tool_Database?retryWrites=true&w=majority")
 db = client.get_database("Shopee_Master_Tool_Database")
 registered_Users_Collection = db.get_collection("Shopee__Registered_Users")
 
@@ -47,11 +52,10 @@ def update_one(old_data,
 
 
 data = {"_id": "ABC123", 'Name': 'Giày China', 'SKU': '4567', 'Image': 'URL'}
-insertDB(data)
 
-# everything = retrieveDB()
-# for elem in everything:
-#     print(elem)
-# ids = "ABC123"
-# data = {'Name': 'hang tau chat luong cao'}
+user1 = User(username="Huy", password="yes", avatar="img1234", token="token")
+user1.add_new_product("113", "Balo Nike", 100, "Image URL")
+user1.add_new_product("114", "Giay Nike", 200, "Image URL")
 
+print(user1)
+insertDB(user1.as_dict())
