@@ -11,6 +11,7 @@ import webbrowser
 import time
 import Network
 import MongoDB_Setup
+
 # MANAGER SCREEN ---- WELCOME ----
 class WelcomeScreen(QMainWindow):
     def __init__(self):
@@ -223,9 +224,9 @@ class SetNewPasswordScreen(QMainWindow):
 
     # SETTING BUTTON
         self.bt_back.clicked.connect(self.back_to_welcome)
-        self.bt_set_new_password.clicked.connect(self.check_code)
+        self.bt_set_new_password.clicked.connect(self.reset_code_validation)
 
-    def check_code(self):
+    def reset_code_validation(self):
         if not self.email_set.text() or not self.password_set.text() or not self.password_set_1.text() or not self.code_set.text():
             self.text_error.setText('Vui lòng nhập đủ thông tin')
         elif self.password_set.text() != self.password_set_1.text():
