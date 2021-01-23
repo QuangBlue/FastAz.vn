@@ -93,9 +93,9 @@ class User:
              "Product_img": self._new_product.get_product_img()}
 
 
-user1 = User(username="Huy", password="yes", avatar="img1234")
-user1.add_new_product("114", "Balo Nike", 100, "Image URL")
-print(user1)
+# user1 = User(username="Huy", password="yes", avatar="img1234")
+# user1.add_new_product("114", "Balo Nike", 100, "Image URL")
+# print(user1)
 
 # Username: Huy
 # Password: yes

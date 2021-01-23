@@ -51,9 +51,9 @@ def update_one(old_data,
     )
 
 
-data = {"_id": "ABC123", 'Name': 'Giày China', 'SKU': '4567', 'Image': 'URL'}
+# data = {"_id": "ABC123", 'Name': 'Giày China', 'SKU': '4567', 'Image': 'URL'}
 
-user1 = User(username="Huy", password="yes", avatar="img1234")
-user1.add_new_product(115, "Giày xịn", 1000, "img_")
+# user1 = User(username="Huy", password="yes", avatar="img1234")
+# user1.add_new_product(115, "Giày xịn", 1000, "img_")
 
-insertDB(user1.as_dict())
+# insertDB(user1.as_dict())

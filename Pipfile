@@ -10,6 +10,7 @@ pyinstaller = "*"
 requests = "*"
 Kivy = "*"
 kivymd = {file = "https://github.com/kivymd/KivyMD/archive/master.zip"}
+pyqt5 = "*"
 
 [dev-packages]
 
