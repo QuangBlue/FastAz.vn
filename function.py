@@ -1,52 +1,5 @@
 import requests, json, math, hashlib, random, pickle, time, os.path
-from config import *
 
-
-# class get_item_shop_id:
-#     def __init__(self,url):
-#         headers = {
-#             'referer': url,
-#             'user-agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36'
-#             }
-#         #https://shopee.vn/api/v2/search_items/?by=pop&entry_point=ShopBySearch&limit=30&match_id=9224727&newest=0&order=desc&page_type=shop&version=2
-#         id_shop = url[23:30]
-#         url_get = f'https://shopee.vn/api/v2/search_items/?by=sales&limit=30&match_id={id_shop}&newest=0&order=desc&page_type=shop&version=2'
-#         i = requests.get(url_get, headers = headers )       
-#         info_items = i.json()
-
-#         total_items = info_items['total_count']
-#         print (total_items)
-#         page_items = math.ceil(total_items/30)
-#         print (page_items)
-#         list_items = []
-
-#         for page in range(page_items):
-#             print(page)
-#             url_get = f'https://shopee.vn/api/v2/search_items/?by=sales&limit=30&match_id={id_shop}&newest={page*30}&order=desc&page_type=shop&version=2'
-#             i = requests.get(url_get, headers = headers )
-#             total = i.json()
-#             print (total['items'][0])
-#             # for x in range(30):
-#             #     list_items.append(total['items'][x])
-
-#         self.i = i.status_code
-#         self.x = len(info_items['items'])
-#         self.li = len(list_items)
-
-#     def status_code(self):
-#         return self.i
-
-#     def total_items(self):
-#         return self.x
-
-#     def list_items(self):
-#         return self.li
-    
-# x = get_item_shop_id('https://shopee.vn/shop/9224727/search')
-
-# print (x.status_code())
-# print (x.total_items())
-# print (x.list_items())
 def temp(idsp):
     print ('Chưa tạo Def')
 

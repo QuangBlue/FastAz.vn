@@ -5,10 +5,12 @@ import PyQt5.QtGui as QtGui
 from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QMainWindow as QMainWindow
-from PyQt5.QtWidgets import QApplication, QVBoxLayout, QWidget, QPushButton, QRadioButton, QHBoxLayout, QDialog, QDesktopWidget
+from PyQt5.QtWidgets import QApplication, QVBoxLayout, QWidget, QPushButton, QRadioButton, QHBoxLayout, QDialog, QDesktopWidget, QMessageBox
 import qrc.file_img_rc
 import webbrowser
 import time
+import Network
+import MongoDB_Setup
 
 # MANAGER SCREEN ---- WELCOME ----
 class WelcomeScreen(QMainWindow):
@@ -16,7 +18,7 @@ class WelcomeScreen(QMainWindow):
         super(WelcomeScreen,self).__init__()
         loadUi("ui//welcome.ui",self)
 
-    # SETTING BUTTON    
+    # SETTING BUTTON
         self.pushButton_trangchu.clicked.connect(self.open_webbrowser)
         self.pushButton_banggia.clicked.connect(self.open_webbrowser)
         self.pushButton_huongdan.clicked.connect(self.open_webbrowser)
@@ -32,11 +34,11 @@ class WelcomeScreen(QMainWindow):
         sign_up_screen = SignUpScreen()
         widget.addWidget(sign_up_screen)
         widget.setCurrentIndex(widget.currentIndex()+1)
-        
+
 
     def open_webbrowser(self):
         webbrowser.open('http://fastaz.vn/')
-    
+
 
 # MANAGER SCREEN ---- SIGN IN ----
 
@@ -45,50 +47,33 @@ class SignInScreen(QMainWindow):
         super(SignInScreen,self).__init__()
         loadUi("ui//sign_in_screen.ui",self)
 
-    # SETTING FRAME ERROR HIDE    
+    # SETTING FRAME ERROR HIDE
         self.bt_x.clicked.connect(lambda : self.frame_error.hide())
         self.frame_error.hide()
 
 
     # SETTING BUTTON
         self.bt_back.clicked.connect(self.back_to_welcome)
-        self.bt_dangky.clicked.connect(self.sign_up_screen)   
+        self.bt_dangky.clicked.connect(self.sign_up_screen)
         self.pushButton_login.clicked.connect(self.check_login)
         self.bt_reset_password.clicked.connect(self.reset_password_screen)
 
 
     def check_login(self):
-        textUsername = ''
-        textPassword = ''
 
         def showMessage(message):
             self.frame_error.show()
             self.text_error.setText(message)
 
-        # CHECK USER
-        if not self.username.text():
-            textUsername = 'Username đang trống '
-        else:
-            textUsername = ''
-
-        # CHECK PASSWORD
-        if not self.password.text():
-            textPassword = 'Password đang trống '
-        else:
-            textPassword = ''
-
-        # CHECK FIELDS
-        if textUsername + textPassword != '':
-            text = textUsername + textPassword
-            showMessage(text)
-        else:
-            text = "Đăng nhập thành công"
-            if self.checkBox_savepass.isChecked():
-                text= text + " | Đã lưu mật khẩu"
-            showMessage(text)
+        re = Network.Network.sign_in(self,self.username.text(),self.password.text())
+        if re['success']:
+            print (f'Đã đăng nhập thành công user {self.username.text()}. Id: {self.password.text()}' )
+            # Push len database, phai check xem da co username chua
             dashboard_screen = DashboardScreen()
             widget.addWidget(dashboard_screen)
             widget.setCurrentIndex(widget.currentIndex()+1)
+        elif re['success'] == False:
+            showMessage(re['message'])
 
     def back_to_welcome(self):
         welcome_screen = WelcomeScreen()
@@ -105,7 +90,7 @@ class SignInScreen(QMainWindow):
         widget.addWidget(reset_password_screen)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
-    
+
 
 # MANAGER SCREEN ---- SIGN UP ----
 
@@ -114,10 +99,10 @@ class SignUpScreen(QMainWindow):
         super(SignUpScreen,self).__init__()
         loadUi("ui//sign_up_screen.ui",self)
 
-    # SETTING FRAME ERROR HIDE    
+    # SETTING FRAME ERROR HIDE
         self.bt_x.clicked.connect(lambda : self.frame_error.hide())
         self.frame_error.hide()
-        
+
     # SETTING BUTTON
 
         self.bt_back.clicked.connect(self.back_to_welcome)
@@ -125,40 +110,33 @@ class SignUpScreen(QMainWindow):
         self.pushButton_signup.clicked.connect(self.check_signup)
 
     def check_signup(self):
-        textUsername_create = ''
-        textPassword_create = ''
-        textEmail_create = ''
 
         def showMessage(message):
             self.frame_error.show()
             self.text_error.setText(message)
-
-        # CHECK USER
-        if not self.username_create.text():
-            textUsername_create = 'Username đang trống '
-        else:
-            textUsername_create = ''
-
-        # CHECK PASSWORD
-        if not self.pass_create.text():
-            textPassword_create = 'Password đang trống '
-        else:
-            textPassword_create = ''
+        us = self.username_create.text()
+        pw = self.pass_create.text()
+        em = self.email_create.text()
+        fn = self.name_create.text()
+        ph = self.phone_create.text()
         
-        # CHECK EMAIL
-        if not self.email_create.text():
-            textEmail_create = 'Email đang trống '
-        else:
-            textEmail_create = ''
-
-        # CHECK FIELDS
-        if textUsername_create + textPassword_create + textEmail_create != '':
-            text = textUsername_create + textPassword_create + textEmail_create
-            showMessage(text)
-        else:
-            text = "Đăng ký thành công"
-            showMessage(text)
-
+        input_field = [us,pw,em,fn,ph]
+        
+        if not (all(input_field)):
+            showMessage("Thiếu dữ liệu đăng ký! Bạn hãy thử lại nhé.")
+        else:    
+            sign_up_result = Network.Network.sign_up(self,us,pw,fn,ph,em)
+            # print(sign_up_result)
+            if sign_up_result['result'] == 'success':
+                print("Create account successfully")
+                self.sign_in_screen()    
+            elif sign_up_result['result'] == 'failure' and 'email' in sign_up_result[
+                'errors']:  
+                print("Sign up error!. Both username and email already existed error!")
+                showMessage("Username hoặc email đã được đăng ký.  Bạn hãy thử đăng ký lại nhé.")
+            elif sign_up_result['result'] == 'failure': 
+                print("Sign up error!. email already existed error!")
+                showMessage("Username hoặc email đã được đăng ký.  Bạn hãy thử đăng ký lại nhé.")
 
     def back_to_welcome(self):
         welcome_screen = WelcomeScreen()
@@ -177,14 +155,14 @@ class ResetPasswordScreen(QMainWindow):
         super(ResetPasswordScreen,self).__init__()
         loadUi("ui//reset_password_screen.ui",self)
 
-    # SETTING FRAME ERROR HIDE    
+    # SETTING FRAME ERROR HIDE
         self.bt_x.clicked.connect(lambda : self.frame_error.hide())
         self.frame_error.hide()
 
     # SETTING BUTTON
         self.bt_back.clicked.connect(self.back_to_welcome)
         self.bt_dangnhap.clicked.connect(self.sign_in_screen)
-        self.bt_dangky.clicked.connect(self.sign_up_screen)
+        self.bt_dangky.clicked.connect(self.show_popup) #sign_up_screen)
         self.bt_reset_password.clicked.connect(self.send_code_reset)
 
     def send_code_reset(self):
@@ -193,19 +171,31 @@ class ResetPasswordScreen(QMainWindow):
             self.frame_error.show()
             self.text_error.setText(message)
 
+
+
         if not self.email_reset.text():
             text = 'Vui lòng nhập Email đăng ký'
             showMessage(text)
         else:
-            result = True
-            if result == False: ##################### <------ Làm hàm điều kiện
-                text = 'Email không chính xác hoặc chưa đăng ký'
-                showMessage(text)
-            elif result == True:
+            getCode = Network.Network.reset_password(self,self.email_reset.text())
+            # print(getCode)
+            showMessage(getCode["message"])
+            if getCode['data']['status'] == 200:
                 set_new_password_screen = SetNewPasswordScreen()
                 widget.addWidget(set_new_password_screen)
                 widget.setCurrentIndex(widget.currentIndex()+1)
-            
+            # if result == False: ##################### <------ Làm hàm điều kiện
+            #     text = 'Email không chính xác hoặc chưa đăng ký'
+            #     showMessage(text)
+            # elif result == True:
+
+    def show_popup(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("Error")
+        msg.setText("Server đang bảo trì, bạn hãy thử lại sau 30' nhé!")
+        msg.setStandardButtons(QMessageBox.Ok|QMessageBox.Close)
+        msg.exec_()
+
 
     def back_to_welcome(self):
         welcome_screen = WelcomeScreen()
@@ -229,14 +219,14 @@ class SetNewPasswordScreen(QMainWindow):
         super(SetNewPasswordScreen,self).__init__()
         loadUi("ui//set_new_password_screen.ui",self)
 
-    # SETTING FRAME ERROR HIDE    
+    # SETTING FRAME ERROR HIDE
         self.bt_x.clicked.connect(lambda : self.frame_error.hide())
 
     # SETTING BUTTON
         self.bt_back.clicked.connect(self.back_to_welcome)
-        self.bt_set_new_password.clicked.connect(self.check_code)
+        self.bt_set_new_password.clicked.connect(self.reset_code_validation)
 
-    def check_code(self):
+    def reset_code_validation(self):
         if not self.email_set.text() or not self.password_set.text() or not self.password_set_1.text() or not self.code_set.text():
             self.text_error.setText('Vui lòng nhập đủ thông tin')
         elif self.password_set.text() != self.password_set_1.text():
@@ -250,8 +240,8 @@ class SetNewPasswordScreen(QMainWindow):
 
                 # sign_in_screen = SignInScreen()
                 # widget.addWidget(sign_in_screen)
-                # widget.setCurrentIndex(widget.currentIndex()+1) 
-            
+                # widget.setCurrentIndex(widget.currentIndex()+1)
+
     def back_to_welcome(self):
         welcome_screen = WelcomeScreen()
         widget.addWidget(welcome_screen)
@@ -266,7 +256,7 @@ class DashboardScreen(QMainWindow):
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
 
-        
+
         self.btn_minimize.clicked.connect(lambda: self.showMinimized())
         self.btn_maximize_restore.clicked.connect(lambda: self.restore_or_maximize())
         self.btn_close.clicked.connect(lambda: self.close())
@@ -274,9 +264,10 @@ class DashboardScreen(QMainWindow):
     def restore_or_maximize(self):
         pass
 
-    
+
     def showMinimized(self):
         pass
+
 
 
 if __name__ == '__main__':
@@ -287,4 +278,4 @@ if __name__ == '__main__':
     # widget.setFixedWidth(1920)
     # widget.setFixedHeight(1080)
     widget.show()
-    app.exec_() 
+    app.exec_()

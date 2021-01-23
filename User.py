@@ -21,17 +21,15 @@ Product_id: indexed, unique
 """
 import json
 
-#1. list = [key:value]
-#2. list.append(
 
-#3. them vao __init__ trong product
-#    them bien moi vao __init__ trong user
-#   them bien moi vao
+# keo du lieu tu shopee _> app
+# Không cần tự add thêm field mới
+# Khong can check neu 2 dua no khac nhau => lien tuc update cai key-values pair của productID đó theo thằng username n
+# Chỉnh sửa lại _list_data_push_product
+# Viet def update productID dựa trên username và token
 
-# keo du lieu tu shopee _> app -> so sanh voi cau truc du lieu local -> mongodb
-# can lam: thay đổi _list_data_push_product => so sánh productID vừa kéo về từ shopee và productID trong mongoDB
-# Nếu 2 đứa nó khác nhau => xoá productID trong mongoDB và copy từ shopee qua.
-
+# Sau này khi có nhiều khách hàng:
+# Chỉ update product ID (dựa vào account nào) khi nó khác nhau giữa shopee và mongodb thì mới update.
 class Product:
     def __init__(self, productID=None, productName=None, productQuantity=None, productImage=None):
         try:
@@ -62,7 +60,7 @@ class User:
             self._username = str(username)
             self._password = str(password)
             self._avatar = str(avatar)
-            self._token = {"token":{"":""}}
+            self._token = {"token": {"": ""}}
             self._new_product = None
             self._list_data_push_product = dict()
         except ValueError as e:
@@ -71,8 +69,8 @@ class User:
     def __str__(self):
         """Print out user's object as str"""
         return "Username: " + str(self._username) + "\n" + "Password: " + self._password + \
-               "\n" + "Avatar: " + self._avatar + "\n" + str(json.dumps(self._token)) + \
-               "\n" + str(json.dumps(self._list_data_push_product, indent=4))
+               "\n" + "Avatar: " + self._avatar + "\n" + json.dumps(self._token) + \
+               "\n" + json.dumps(self._list_data_push_product, indent=4)
 
     def as_dict(self):
         dict1 = {"Username": self._username, "Password": self._password,
@@ -88,7 +86,26 @@ class User:
                 user1.add_new_product(productID, productName, productQuantity, productImage)
         """
         self._new_product = Product(productID, productName, productQuantity, productImage)
-        self._list_data_push_product[self._new_product.get_product_id()] = \
-            {"Product_name": self._new_product.get_product_name(),
+        self._list_data_push_product["Product"] = \
+            {"Product_ID": self._new_product.get_product_id(),
+             "Product_name": self._new_product.get_product_name(),
              "Product_quantity": self._new_product.get_product_quantity(),
              "Product_img": self._new_product.get_product_img()}
+
+
+# user1 = User(username="Huy", password="yes", avatar="img1234")
+# user1.add_new_product("114", "Balo Nike", 100, "Image URL")
+# print(user1)
+
+# Username: Huy
+# Password: yes
+# Avatar: img1234
+# {"token": {"": ""}}
+# {
+#     "Product": {
+#         "Product_ID": 114,
+#         "Product_name": "Balo Nike",
+#         "Product_quantity": 100,
+#         "Product_img": "Image URL
+#     }
+# }

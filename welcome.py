@@ -37,7 +37,7 @@ class DashBoardScreen(Screen):
             {"text": "Thông Tin Tài Khoản"},
             {"text": "Gia Hạn Vip"},
             {"text": "Liên hệ"},
-            {"text": "Đăng xuất"}  
+            {"text": "Đăng xuất"}
             ]
         self.menu = MDDropdownMenu(
             caller=self.ids.dropdown_item,
@@ -81,13 +81,13 @@ class ResetPasswordScreen(Screen):
             self.ids.bt_sendcode.disabled = True
             self.ids.bt_resetpass.opacity = 1
             self.ids.bt_resetpass.disabled = False
-        
+
         else :
             self.ids.error_status.text ='Vui lòng nhập đúng email đã đăng ký '
         return result
 
     def set_new_password(self):
-        result = True 
+        result = True
         if result == True:
             pass
         else :
