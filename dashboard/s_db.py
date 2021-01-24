@@ -5,7 +5,7 @@ GLOBAL_TITLE_BAR = True
 
 count = 1
 
-class UIFunctions(Dashboard):
+class UIFunctions:
     GLOBAL_STATE = 0
     GLOBAL_TITLE_BAR = True
 
@@ -138,10 +138,10 @@ class UIFunctions(Dashboard):
 
         ## SHOW ==> DROP SHADOW
         self.shadow = QGraphicsDropShadowEffect(self)
-        self.shadow.setBlurRadius(17)
+        self.shadow.setBlurRadius(30)
         self.shadow.setXOffset(0)
         self.shadow.setYOffset(0)
-        self.shadow.setColor(QColor(0, 0, 0, 150))
+        self.shadow.setColor(QColor(1, 0, 0, 255))
         self.frame_main.setGraphicsEffect(self.shadow)
 
         ## ==> RESIZE WINDOW
@@ -157,7 +157,7 @@ class UIFunctions(Dashboard):
         ## SHOW ==> CLOSE APPLICATION
         self.btn_close.clicked.connect(lambda: self.close())
 
-class Style(Dashboard):
+class Style:
 
     style_bt_standard = (
     """

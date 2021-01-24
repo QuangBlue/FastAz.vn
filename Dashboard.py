@@ -15,6 +15,7 @@ class Dashboard(QMainWindow):
     def __init__(self):
         super(Dashboard,self).__init__()
         loadUi("ui//dashboard_screen.ui",self)
+        self.resize(1920, 1080)
         # ########################################################################
         ## THÊM NUT MENU TẠI ĐÂY
         # ########################################################################

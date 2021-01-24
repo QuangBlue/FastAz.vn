@@ -7,8 +7,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1409</width>
-    <height>958</height>
+    <width>1476</width>
+    <height>1018</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -19,8 +19,8 @@
   </property>
   <property name="sizeIncrement">
    <size>
-    <width>0</width>
-    <height>0</height>
+    <width>1920</width>
+    <height>1080</height>
    </size>
   </property>
   <property name="baseSize">
@@ -600,6 +600,12 @@ color: rgb(210, 210, 210);</string>
     </property>
     <item>
      <widget class="QFrame" name="frame_main">
+      <property name="baseSize">
+       <size>
+        <width>1920</width>
+        <height>1080</height>
+       </size>
+      </property>
       <property name="styleSheet">
        <string notr="true"/>
       </property>
@@ -907,7 +913,7 @@ QPushButton:pressed {
                       <string/>
                      </property>
                      <property name="icon">
-                      <iconset resource="qrc/file_img.qrc">
+                      <iconset resource="../qrc/file_img.qrc">
                        <normaloff>:/icon/cil-window-minimize.png</normaloff>:/icon/cil-window-minimize.png</iconset>
                      </property>
                     </widget>
@@ -939,7 +945,7 @@ QPushButton:pressed {
                       <string/>
                      </property>
                      <property name="icon">
-                      <iconset resource="qrc/file_img.qrc">
+                      <iconset resource="../qrc/file_img.qrc">
                        <normaloff>:/icon/cil-window-maximize.png</normaloff>:/icon/cil-window-maximize.png</iconset>
                      </property>
                     </widget>
@@ -971,7 +977,7 @@ QPushButton:pressed {
                       <string/>
                      </property>
                      <property name="icon">
-                      <iconset resource="qrc/file_img.qrc">
+                      <iconset resource="../qrc/file_img.qrc">
                        <normaloff>:/icon/cil-x.png</normaloff>:/icon/cil-x.png</iconset>
                      </property>
                     </widget>
@@ -1301,7 +1307,7 @@ QPushButton:pressed {
                    <string notr="true">background: transparent;</string>
                   </property>
                   <property name="currentIndex">
-                   <number>1</number>
+                   <number>0</number>
                   </property>
                   <widget class="QWidget" name="page_home">
                    <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -1342,22 +1348,6 @@ QPushButton:pressed {
                   <widget class="QWidget" name="page_settings">
                    <layout class="QHBoxLayout" name="horizontalLayout_9">
                     <item>
-                     <widget class="QLabel" name="label_9">
-                      <property name="font">
-                       <font>
-                        <family>Nunito</family>
-                        <pointsize>15</pointsize>
-                       </font>
-                      </property>
-                      <property name="text">
-                       <string>Page Index 1</string>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignCenter</set>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
                      <widget class="QLabel" name="label_8">
                       <property name="font">
                        <font>
@@ -1367,6 +1357,22 @@ QPushButton:pressed {
                       </property>
                       <property name="text">
                        <string>SETTINGS</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="label_9">
+                      <property name="font">
+                       <font>
+                        <family>Nunito</family>
+                        <pointsize>15</pointsize>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>Page Index 1</string>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -1526,7 +1532,7 @@ QPushButton:pressed {
   </widget>
  </widget>
  <resources>
-  <include location="qrc/file_img.qrc"/>
+  <include location="../qrc/file_img.qrc"/>
  </resources>
  <connections/>
 </ui>

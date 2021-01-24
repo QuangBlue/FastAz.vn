@@ -11,6 +11,7 @@ import webbrowser
 import time
 import Network
 import MongoDB_Setup
+from Dashboard import Dashboard
 
 # MANAGER SCREEN ---- WELCOME ----
 class WelcomeScreen(QMainWindow):
@@ -46,7 +47,6 @@ class SignInScreen(QMainWindow):
     def __init__(self):
         super(SignInScreen,self).__init__()
         loadUi("ui//sign_in_screen.ui",self)
-
     # SETTING FRAME ERROR HIDE
         self.bt_x.clicked.connect(lambda : self.frame_error.hide())
         self.frame_error.hide()
@@ -57,7 +57,7 @@ class SignInScreen(QMainWindow):
         self.bt_dangky.clicked.connect(self.sign_up_screen)
         self.pushButton_login.clicked.connect(self.check_login)
         self.bt_reset_password.clicked.connect(self.reset_password_screen)
-
+        self.password.returnPressed.connect(self.check_login)
 
     def check_login(self):
 
@@ -69,9 +69,10 @@ class SignInScreen(QMainWindow):
         if re['success']:
             print (f'Đã đăng nhập thành công user {self.username.text()}. Id: {self.password.text()}' )
             # Push len database, phai check xem da co username chua
-            dashboard_screen = DashboardScreen()
-            widget.addWidget(dashboard_screen)
-            widget.setCurrentIndex(widget.currentIndex()+1)
+
+            self.ui = Dashboard()
+            widget.close()
+
         elif re['success'] == False:
             showMessage(re['message'])
 
@@ -89,7 +90,6 @@ class SignInScreen(QMainWindow):
         reset_password_screen = ResetPasswordScreen()
         widget.addWidget(reset_password_screen)
         widget.setCurrentIndex(widget.currentIndex()+1)
-
 
 
 # MANAGER SCREEN ---- SIGN UP ----
@@ -172,7 +172,6 @@ class ResetPasswordScreen(QMainWindow):
             self.text_error.setText(message)
 
 
-
         if not self.email_reset.text():
             text = 'Vui lòng nhập Email đăng ký'
             showMessage(text)
@@ -185,9 +184,6 @@ class ResetPasswordScreen(QMainWindow):
                 widget.addWidget(set_new_password_screen)
                 widget.setCurrentIndex(widget.currentIndex()+1)
             # if result == False: ##################### <------ Làm hàm điều kiện
-            #     text = 'Email không chính xác hoặc chưa đăng ký'
-            #     showMessage(text)
-            # elif result == True:
 
     def show_popup(self):
         msg = QMessageBox()
@@ -238,35 +234,11 @@ class SetNewPasswordScreen(QMainWindow):
             elif result == True:
                 self.text_error.setText('Đã đặt lại mật khẩu thành công chuyển tới Đăng Nhập sau 3s')
 
-                # sign_in_screen = SignInScreen()
-                # widget.addWidget(sign_in_screen)
-                # widget.setCurrentIndex(widget.currentIndex()+1)
 
     def back_to_welcome(self):
         welcome_screen = WelcomeScreen()
         widget.addWidget(welcome_screen)
         widget.setCurrentIndex(widget.currentIndex()+1)
-
-GLOBAL_STATE = 0
-
-class DashboardScreen(QMainWindow):
-    def __init__(self):
-        super(DashboardScreen,self).__init__()
-        loadUi("ui//dashboard.ui",self)
-        self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
-        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
-
-
-        self.btn_minimize.clicked.connect(lambda: self.showMinimized())
-        self.btn_maximize_restore.clicked.connect(lambda: self.restore_or_maximize())
-        self.btn_close.clicked.connect(lambda: self.close())
-
-    def restore_or_maximize(self):
-        pass
-
-
-    def showMinimized(self):
-        pass
 
 
 
@@ -275,7 +247,6 @@ if __name__ == '__main__':
     widget = QtWidgets.QStackedWidget()
     welcome_screen = WelcomeScreen()
     widget.addWidget(welcome_screen)
-    # widget.setFixedWidth(1920)
-    # widget.setFixedHeight(1080)
+    widget.resize(1920, 1080)
     widget.show()
     app.exec_()
