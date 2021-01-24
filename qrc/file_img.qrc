@@ -4,6 +4,7 @@
     <file>bg_login_v1.png</file>
   </qresource>
   <qresource prefix="icon">
+    <file>cil-size-grip.png</file>
     <file>cil-zoom-out.png</file>
     <file>cil-zoom-in.png</file>
     <file>cil-x.png</file>
