@@ -181,6 +181,7 @@ class ResetPasswordScreen(QMainWindow):
             # print(request_result)
             showMessage(request_result["message"])
             if request_result['data']['status'] == 200:
+                loading.appWait(3000) #Can phai tim ra cach toi uu hon, bo vao trong network def
                 set_new_password_screen = SetNewPasswordScreen()
                 widget.addWidget(set_new_password_screen)
                 widget.setCurrentIndex(widget.currentIndex()+1)
@@ -241,7 +242,7 @@ class SetNewPasswordScreen(QMainWindow):
             # print(request_result)            
             showMessage(request_result['message'])
             if request_result['data']['status'] == 200:
-                loading.appWait()
+                loading.appWait(3000) # Can phai tim ra cach toi uu hon.
                 self.sign_in_screen()
                 
 

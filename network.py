@@ -2,6 +2,7 @@ import requests
 import main_pyqt5
 import loading
 class Network:
+
     def sign_in(self,username,password):
         try:
             data = {
@@ -38,7 +39,6 @@ class Network:
         #
         # if x.json()['success'] == False:
         #     print (x.json()['message'])
-
     def sign_up(self,user_name,password,name,phone,email):
         try:
             data = {'user_name': user_name,
@@ -76,6 +76,7 @@ class Network:
         else:
             return r.json()
 
+    @loading.setWaitCursor
     def set_new_password(self,email,password,code):
         try:
             data = {
