@@ -25,10 +25,10 @@ class Dashboard(QMainWindow):
         
             
         self.stackedWidget.setMinimumWidth(20)
+        UIFunctions.addNewMenu(self, "Tài khoản Shopee", "btn_new_user_shopee", "url(:/icon/cil-user-follow.png)", True)
         UIFunctions.addNewMenu(self, "Open File", "btn_open_file", "url(:/icon/cil-folder-open.png)", True)
         UIFunctions.addNewMenu(self, "Save", "btn_save", "url(:/icon/cil-save.png)", True)
         UIFunctions.addNewMenu(self, "New", "btn_new", "url(:/icon/cil-file.png)", True)
-        UIFunctions.addNewMenu(self, "New User", "btn_new_user", "url(:/icon/cil-user-follow.png)", True)
         UIFunctions.addNewMenu(self, "Setting", "btn_settings", "url(:/icon/cil-settings.png)", False)
 
 
@@ -39,7 +39,8 @@ class Dashboard(QMainWindow):
         # ########################################################################
 
         UIFunctions.userIcon(self, "QH", "", True)
-
+        self.label_user_icon.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
+        self.label_user_icon.customContextMenuRequested.connect(lambda pos, child=self.label_user_icon: self.customMenuEvent(pos, child))
         # ########################################################################
         ## ẨN CỬA SỔ MẶC ĐỊNH
         # ########################################################################
@@ -72,7 +73,7 @@ class Dashboard(QMainWindow):
         ## LỰA CHỌN MENU MẶC ĐỊNH
         # ########################################################################
         
-        UIFunctions.selectStandardMenu(self, "btn_open_file")
+        UIFunctions.selectStandardMenu(self, "btn_new_user_shopee")
         self.stackedWidget.setCurrentWidget(self.page_home)
 
         # ########################################################################
@@ -81,6 +82,17 @@ class Dashboard(QMainWindow):
         UIFunctions.uiDefinitions(self)
         self.show()
 
+    def customMenuEvent(self, eventPosition, child):
+        child = self.childAt(self.sender().mapTo(self, eventPosition))
+        contextMenu = QMenu(self)
+        getText = contextMenu.addAction("Text")
+        getName = contextMenu.addAction("Name")
+        quitAct = contextMenu.addAction("Quit")
+        action = contextMenu.exec_(child.mapToGlobal(eventPosition))
+
+
+        if action == quitAct:
+            self.close()
 
     def mousePressEvent(self, event):
         self.dragPos = event.globalPos()
@@ -109,10 +121,10 @@ class Dashboard(QMainWindow):
             UIFunctions.labelPage(self, "New")
             btnWidget.setStyleSheet(UIFunctions.selectMenu(self,btnWidget.styleSheet()))
 
-        if btnWidget.objectName() == "btn_new_user":
+        if btnWidget.objectName() == "btn_new_user_shopee":
             self.stackedWidget.setCurrentWidget(self.page_home)
             UIFunctions.resetStyle(self, "btn_new_user")
-            UIFunctions.labelPage(self, "New User")
+            UIFunctions.labelPage(self, "Tài khoản Shopee")
             btnWidget.setStyleSheet(UIFunctions.selectMenu(self,btnWidget.styleSheet()))
 
         if btnWidget.objectName() == "btn_settings":
@@ -126,4 +138,5 @@ if __name__ == '__main__':
     QtGui.QFontDatabase.addApplicationFont('font/Nunito/Nunito-Regular.ttf')
     QtGui.QFontDatabase.addApplicationFont('font/Nunito/Nunito-Regular.ttf')
     dashboard = Dashboard()
+    dashboard.installEventFilter(dashboard)
     app.exec_() 
