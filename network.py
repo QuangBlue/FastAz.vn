@@ -1,6 +1,6 @@
 import requests
 import main_pyqt5
-
+import loading
 class Network:
     def sign_in(self,username,password):
         try:
@@ -61,6 +61,7 @@ class Network:
     # B1 : tạo yêu cầu vào hệ thống sẽ gửi 1 đoạn code 4 chữ số cho khách hàng qua email - Dùng hàm reset_password(email)
     # B2 : nhập email cũ + password mới + mật mã vừa gửi qua email - Dùng hàm set_new_password(email,password,code)
 
+    @loading.setWaitCursor
     def reset_password(self,email):
         try:
             data = {
@@ -74,16 +75,22 @@ class Network:
             raise Exception("Lỗi Server!!!")
         else:
             return r.json()
-    def set_new_password(self,email,password,code):
-        data = {
-            'email' : email,
-            'password': password,
-            'code' : code
-        }
-        url = 'http://fastaz.vn/wp-json/bdpwr/v1/set-password'
-        r = requests.post(url, data=data)
-        return r.json()
 
+    def set_new_password(self,email,password,code):
+        try:
+            data = {
+                'email' : email,
+                'password': password,
+                'code' : code
+            }
+            url = 'http://fastaz.vn/wp-json/bdpwr/v1/set-password'
+            r = requests.post(url, data=data)
+        except (requests.exceptions.HTTPError,requests.exceptions.ConnectionError,requests.exceptions.Timeout,requests.exceptions.RequestException) as err:
+            print(str(err))
+            main_pyqt5.ResetPasswordScreen.show_popup(self)
+            raise Exception("Lỗi Server!!!")
+        else:
+            return r.json()
 
 if __name__ == '__main__':
     pass

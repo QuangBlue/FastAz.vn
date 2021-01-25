@@ -12,6 +12,7 @@ import time
 import Network
 import MongoDB_Setup
 from Dashboard import Dashboard
+import loading
 
 # MANAGER SCREEN ---- WELCOME ----
 class WelcomeScreen(QMainWindow):
@@ -176,13 +177,14 @@ class ResetPasswordScreen(QMainWindow):
             text = 'Vui lòng nhập Email đăng ký'
             showMessage(text)
         else:
-            getCode = Network.Network.reset_password(self,self.email_reset.text())
-            # print(getCode)
-            showMessage(getCode["message"])
-            if getCode['data']['status'] == 200:
+            request_result = Network.Network.reset_password(self,self.email_reset.text())
+            # print(request_result)
+            showMessage(request_result["message"])
+            if request_result['data']['status'] == 200:
                 set_new_password_screen = SetNewPasswordScreen()
                 widget.addWidget(set_new_password_screen)
                 widget.setCurrentIndex(widget.currentIndex()+1)
+                
             # if result == False: ##################### <------ Làm hàm điều kiện
 
     def show_popup(self):
@@ -223,21 +225,36 @@ class SetNewPasswordScreen(QMainWindow):
         self.bt_set_new_password.clicked.connect(self.reset_code_validation)
 
     def reset_code_validation(self):
+
+        def showMessage(message):
+            self.frame_error.show()
+            self.text_error.setText(message)
+
         if not self.email_set.text() or not self.password_set.text() or not self.password_set_1.text() or not self.code_set.text():
             self.text_error.setText('Vui lòng nhập đủ thông tin')
+            self.frame_error.show()
         elif self.password_set.text() != self.password_set_1.text():
             self.text_error.setText('Mật khẩu xác nhận không chính xác')
+            self.frame_error.show()
         else:
-            result = True##################### <------ Làm hàm điều kiện
-            if result == False:
-                self.text_error.setText('Email hoặc CODE không đúng')
-            elif result == True:
-                self.text_error.setText('Đã đặt lại mật khẩu thành công chuyển tới Đăng Nhập sau 3s')
+            request_result = Network.Network.set_new_password(self,self.email_set.text(),self.password_set.text(),self.code_set.text())
+            # print(request_result)            
+            showMessage(request_result['message'])
+            if request_result['data']['status'] == 200:
+                loading.appWait()
+                self.sign_in_screen()
+                
 
+            
 
     def back_to_welcome(self):
         welcome_screen = WelcomeScreen()
         widget.addWidget(welcome_screen)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+
+    def sign_in_screen(self):
+        sign_in_screen = SignInScreen()
+        widget.addWidget(sign_in_screen)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
 
