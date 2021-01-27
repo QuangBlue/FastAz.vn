@@ -1,6 +1,7 @@
 import sys
-import PyQt5.QtCore as QtCore
-import PyQt5.QtGui as QtGui
+from PyQt5 import *
+# import PyQt5.QtCore as QtCore
+# import PyQt5.QtGui as QtGui
 from PyQt5.uic import loadUi
 import qrc.file_img_rc
 import webbrowser
@@ -26,12 +27,22 @@ class Dashboard(QMainWindow):
             
         self.stackedWidget.setMinimumWidth(20)
         UIFunctions.addNewMenu(self, "Tài khoản Shopee", "btn_new_user_shopee", "url(:/icon/cil-user-follow.png)", True)
-        UIFunctions.addNewMenu(self, "Open File", "btn_open_file", "url(:/icon/cil-folder-open.png)", True)
-        UIFunctions.addNewMenu(self, "Save", "btn_save", "url(:/icon/cil-save.png)", True)
-        UIFunctions.addNewMenu(self, "New", "btn_new", "url(:/icon/cil-file.png)", True)
+        UIFunctions.addNewMenu(self, "Trả lời Đánh giá", "btn_reply_ratting", "url(:/icon/cil-star.png)", True)
+        UIFunctions.addNewMenu(self, "Đẩy sản phẩm", "btn_push_product", "url(:/icon/cil-chevron-double-up-alt.png)", True)
+        UIFunctions.addNewMenu(self, "Chat bot", "btn_chat_bot", "url(:/icon/cil-mood-very-good.png)", True)
         UIFunctions.addNewMenu(self, "Setting", "btn_settings", "url(:/icon/cil-settings.png)", False)
 
 
+        people = [{"name" : "Quang", "ten_shop" : "1", "shop_id" : "2", "san_pham" : "3" ,"don_hang" : "4"},{"name" : "Huy", "ten_shop" : "1", "shop_id" : "2", "san_pham" : "3" ,"don_hang" : "4"},{"name" : "QuangHuy", "ten_shop" : "1", "shop_id" : "2", "san_pham" : "3" ,"don_hang" : "4"}]
+        row = 0
+        self.tableWidget.setRowCount(len(people) if len(people) >25 else 25)
+        for p in people:
+            self.tableWidget.setItem(row, 0,QtWidgets.QTableWidgetItem(p['name']))
+            self.tableWidget.setItem(row, 1,QtWidgets.QTableWidgetItem(p['ten_shop']))
+            self.tableWidget.setItem(row, 2,QtWidgets.QTableWidgetItem(p['shop_id']))
+            self.tableWidget.setItem(row, 3,QtWidgets.QTableWidgetItem(p['san_pham']))
+            self.tableWidget.setItem(row, 4,QtWidgets.QTableWidgetItem(p['don_hang']))
+            row = row + 1
 
 
         # ########################################################################
@@ -74,7 +85,7 @@ class Dashboard(QMainWindow):
         # ########################################################################
         
         UIFunctions.selectStandardMenu(self, "btn_new_user_shopee")
-        self.stackedWidget.setCurrentWidget(self.page_home)
+        self.stackedWidget.setCurrentWidget(self.page_new_user_shopee)
 
         # ########################################################################
         ## HÀM CHẠY CÁC CHỨC NĂNG CỦA CỬA SỔ
@@ -103,28 +114,28 @@ class Dashboard(QMainWindow):
     def Button(self):
         btnWidget = self.sender()
 
-        if btnWidget.objectName() == "btn_open_file":
-            self.stackedWidget.setCurrentWidget(self.page_home)
-            UIFunctions.resetStyle(self, "btn_open_file")
-            UIFunctions.labelPage(self, "Open File")
+        if btnWidget.objectName() == "btn_new_user_shopee":
+            self.stackedWidget.setCurrentWidget(self.page_new_user_shopee)
+            UIFunctions.resetStyle(self, "btn_new_user_shopee")
+            UIFunctions.labelPage(self, "Tài khoản Shopee")
             btnWidget.setStyleSheet(UIFunctions.selectMenu(self,btnWidget.styleSheet()))
 
-        if btnWidget.objectName() == "btn_save":
-            self.stackedWidget.setCurrentWidget(self.page_home)
-            UIFunctions.resetStyle(self, "btn_save")
-            UIFunctions.labelPage(self, "Save")
+        if btnWidget.objectName() == "btn_reply_ratting":
+            self.stackedWidget.setCurrentWidget(self.page_reply_ratting)
+            UIFunctions.resetStyle(self, "btn_reply_ratting")
+            UIFunctions.labelPage(self, "Trả lời Đánh giá")
             btnWidget.setStyleSheet(UIFunctions.selectMenu(self, btnWidget.styleSheet()))
 
-        if btnWidget.objectName() == "btn_new":
-            self.stackedWidget.setCurrentWidget(self.page_home)
-            UIFunctions.resetStyle(self, "btn_new")
-            UIFunctions.labelPage(self, "New")
+        if btnWidget.objectName() == "btn_push_product":
+            self.stackedWidget.setCurrentWidget(self.page_push_product)
+            UIFunctions.resetStyle(self, "btn_push_product")
+            UIFunctions.labelPage(self, "Đẩy sản phẩm")
             btnWidget.setStyleSheet(UIFunctions.selectMenu(self,btnWidget.styleSheet()))
 
-        if btnWidget.objectName() == "btn_new_user_shopee":
-            self.stackedWidget.setCurrentWidget(self.page_home)
-            UIFunctions.resetStyle(self, "btn_new_user")
-            UIFunctions.labelPage(self, "Tài khoản Shopee")
+        if btnWidget.objectName() == "btn_chat_bot":
+            self.stackedWidget.setCurrentWidget(self.page_chat_bot)
+            UIFunctions.resetStyle(self, "btn_chat_bot")
+            UIFunctions.labelPage(self, "Chat bot")
             btnWidget.setStyleSheet(UIFunctions.selectMenu(self,btnWidget.styleSheet()))
 
         if btnWidget.objectName() == "btn_settings":
