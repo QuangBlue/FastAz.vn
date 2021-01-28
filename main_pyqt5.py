@@ -12,6 +12,7 @@ import time
 import Network
 import MongoDB_Setup
 from Dashboard import Dashboard
+from browser import Browser
 import loading
 
 # MANAGER SCREEN ---- WELCOME ----

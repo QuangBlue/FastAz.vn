@@ -10,6 +10,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 sys.path.insert(0, 'dashboard/')
 from s_db import *
+from browser import Browser
   
 
 class Dashboard(QMainWindow):
@@ -32,6 +33,10 @@ class Dashboard(QMainWindow):
         UIFunctions.addNewMenu(self, "Chat bot", "btn_chat_bot", "url(:/icon/cil-mood-very-good.png)", True)
         UIFunctions.addNewMenu(self, "Setting", "btn_settings", "url(:/icon/cil-settings.png)", False)
 
+
+        # ########################################################################
+        ## HIỂN THỊ DANH SÁCH TÀI KHOẢN SHOPEE
+        # ########################################################################
 
         people = [{"name" : "Quang", "ten_shop" : "1", "shop_id" : "2", "san_pham" : "3" ,"don_hang" : "4"},{"name" : "Huy", "ten_shop" : "1", "shop_id" : "2", "san_pham" : "3" ,"don_hang" : "4"},{"name" : "QuangHuy", "ten_shop" : "1", "shop_id" : "2", "san_pham" : "3" ,"don_hang" : "4"}]
         row = 0
@@ -79,6 +84,13 @@ class Dashboard(QMainWindow):
         ## NÚT TOGGLE
         # ########################################################################
         self.btn_toggle_menu.clicked.connect(lambda: UIFunctions.toggleMenu(self, 220, True))
+
+        
+        # ########################################################################
+        ## NÚT MỞ BROWER --> ADD USER SHOPEE
+        # ########################################################################
+
+        self.btn_add_user.clicked.connect(lambda: UIFunctions.open_browser(self))
 
         # ########################################################################
         ## LỰA CHỌN MENU MẶC ĐỊNH

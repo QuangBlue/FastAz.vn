@@ -1,4 +1,5 @@
 from Dashboard import *
+from browser import Browser
 
 GLOBAL_STATE = 0
 GLOBAL_TITLE_BAR = True
@@ -102,6 +103,10 @@ class UIFunctions:
     def labelPage(self, text):
         newText = '| ' + text.upper()
         self.label_top_info_2.setText(newText)
+
+    def open_browser(self):
+        self.ui = Browser()
+        self.ui.show()
 
     def userIcon(self, initialsTooltip, icon, showHide):
         if showHide:
