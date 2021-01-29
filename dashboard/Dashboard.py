@@ -7,7 +7,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from dashboard.s_db import *
-from browser import Browser
+from dashboard.browser import Browser
   
 
 class Dashboard(QMainWindow):

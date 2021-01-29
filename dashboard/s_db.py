@@ -1,5 +1,5 @@
-from Dashboard import *
-from browser import Browser
+from dashboard.Dashboard import *
+from dashboard.browser import Browser
 
 GLOBAL_STATE = 0
 GLOBAL_TITLE_BAR = True

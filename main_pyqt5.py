@@ -13,8 +13,8 @@ import Network
 
 ## IMPORT SCREEN
 import MongoDB_Setup
-from Dashboard import Dashboard
-from browser import Browser
+from dashboard.Dashboard import Dashboard
+
 
 ## HUY'S IMPORT
 import loading
