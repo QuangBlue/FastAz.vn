@@ -44,9 +44,9 @@ class UIFunctions:
         if enable:
             width = self.frame_left_menu.width()
             maxExtend = maxWidth
-            standard = 70
+            standard = 75
 
-            if width == 70:
+            if width == 75:
                 widthExtended = maxExtend
             else:
                 widthExtended = standard
@@ -69,7 +69,7 @@ class UIFunctions:
         sizePolicy3.setVerticalStretch(0)
         sizePolicy3.setHeightForWidth(button.sizePolicy().hasHeightForWidth())
         button.setSizePolicy(sizePolicy3)
-        button.setMinimumSize(QSize(0, 70))
+        button.setMinimumSize(QSize(0, 75))
         button.setLayoutDirection(Qt.LeftToRight)
         button.setFont(font)
         button.setStyleSheet(Style.style_bt_standard.replace('ICON_REPLACE', icon))
@@ -174,7 +174,7 @@ class Style:
         border-left: 28px solid rgb(27, 29, 35);
         background-color: rgb(27, 29, 35);
         text-align: left;
-        padding-left: 45px;
+        padding-left: 50px;
     }
     QPushButton[Active=true] {
         background-image: ICON_REPLACE;
@@ -185,7 +185,7 @@ class Style:
         border-right: 5px solid rgb(44, 49, 60);
         background-color: rgb(27, 29, 35);
         text-align: left;
-        padding-left: 45px;
+        padding-left: 50px;
     }
     QPushButton:hover {
         background-color: rgb(33, 37, 43);

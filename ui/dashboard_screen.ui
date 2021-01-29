@@ -7,8 +7,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1751</width>
-    <height>1041</height>
+    <width>1475</width>
+    <height>1005</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -572,6 +572,12 @@ QToolTip {
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="minimumSize">
+    <size>
+     <width>1450</width>
+     <height>0</height>
+    </size>
+   </property>
    <property name="baseSize">
     <size>
      <width>1920</width>
@@ -712,7 +718,7 @@ QCheckBox::indicator:hover {
 QCheckBox::indicator:checked {
     background: 3px solid rgb(52, 59, 72);
 	border: 3px solid rgb(52, 59, 72);	
-	background-image: url(:/16x16/icons/16x16/cil-check-alt.png);
+	background-image: url(:/icon/cil-check-alt.png);
 }
 
 /* RADIO BUTTON */
@@ -737,25 +743,27 @@ QComboBox{
 	border-radius: 5px;
 	border: 2px solid rgb(27, 29, 35);
 	padding: 5px;
-	padding-left: 10px;
+	padding-left: 40px;
 }
 QComboBox:hover{
 	border: 2px solid rgb(64, 71, 88);
 }
 QComboBox::drop-down {
+
 	subcontrol-origin: padding;
 	subcontrol-position: top right;
 	width: 25px; 
-	border-left-width: 3px;
+	border-left-width: 0px;
 	border-left-color: rgba(39, 44, 54, 150);
 	border-left-style: solid;
 	border-top-right-radius: 3px;
 	border-bottom-right-radius: 3px;	
-	background-image: url(:/16x16/icons/16x16/cil-arrow-bottom.png);
+	/*background-image: url(:/icon/cil-arrow-bottom.png);
 	background-position: center;
-	background-repeat: no-reperat;
+	background-repeat: no-reperat;*/
  }
 QComboBox QAbstractItemView {
+	background-image : none;
 	color: rgb(85, 170, 255);	
 	background-color: rgb(27, 29, 35);
 	padding: 10px;
@@ -840,13 +848,13 @@ QSlider::handle:vertical:pressed {
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>65</height>
+           <height>75</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>65</height>
+           <height>75</height>
           </size>
          </property>
          <property name="styleSheet">
@@ -878,7 +886,7 @@ QSlider::handle:vertical:pressed {
            <widget class="QFrame" name="frame_toggle">
             <property name="maximumSize">
              <size>
-              <width>70</width>
+              <width>75</width>
               <height>16777215</height>
              </size>
             </property>
@@ -1242,6 +1250,99 @@ QPushButton:pressed {
                  </widget>
                 </item>
                 <item>
+                 <widget class="QComboBox" name="comboBox">
+                  <property name="maximumSize">
+                   <size>
+                    <width>240</width>
+                    <height>36</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Nunito</family>
+                    <pointsize>22</pointsize>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="focusPolicy">
+                   <enum>Qt::ClickFocus</enum>
+                  </property>
+                  <property name="contextMenuPolicy">
+                   <enum>Qt::DefaultContextMenu</enum>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QComboBox{
+	color: rgb(255, 255, 255);
+	border: none;
+	border-radius: 18px;
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));
+}</string>
+                  </property>
+                  <property name="editable">
+                   <bool>false</bool>
+                  </property>
+                  <property name="insertPolicy">
+                   <enum>QComboBox::NoInsert</enum>
+                  </property>
+                  <property name="sizeAdjustPolicy">
+                   <enum>QComboBox::AdjustToContentsOnFirstShow</enum>
+                  </property>
+                  <property name="duplicatesEnabled">
+                   <bool>false</bool>
+                  </property>
+                  <item>
+                   <property name="text">
+                    <string>Tài khoản số 1</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Tài khoản số 2</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Tài khoản số 3</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Tài khoản số 4</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Tài khoản số 5</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Tài khoản số 6</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Tài khoản số 7</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Tài khoản số 8</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Tài khoản số 9</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Tài khoản số 10</string>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
+                <item>
                  <widget class="QLabel" name="label_top_info_2">
                   <property name="minimumSize">
                    <size>
@@ -1319,7 +1420,7 @@ QPushButton:pressed {
             </property>
             <property name="maximumSize">
              <size>
-              <width>70</width>
+              <width>75</width>
               <height>16777215</height>
              </size>
             </property>
@@ -1611,7 +1712,7 @@ QPushButton:pressed {
                       <property name="font">
                        <font>
                         <family>Nunito</family>
-                        <pointsize>14</pointsize>
+                        <pointsize>17</pointsize>
                        </font>
                       </property>
                       <property name="styleSheet">
