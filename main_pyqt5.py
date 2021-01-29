@@ -1,18 +1,22 @@
 import sys
 import PyQt5
-import PyQt5.QtCore as QtCore
-import PyQt5.QtGui as QtGui
+from PyQt5 import QtWidgets, QtGui, QtCore
 from PyQt5.uic import loadUi
-from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QMainWindow as QMainWindow
-from PyQt5.QtWidgets import QApplication, QVBoxLayout, QWidget, QPushButton, QRadioButton, QHBoxLayout, QDialog, QDesktopWidget, QMessageBox
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+from PyQt5.QtWidgets import *
 import qrc.file_img_rc
 import webbrowser
 import time
 import Network
+
+
+## IMPORT SCREEN
 import MongoDB_Setup
 from Dashboard import Dashboard
 from browser import Browser
+
+## HUY'S IMPORT
 import loading
 
 # MANAGER SCREEN ---- WELCOME ----

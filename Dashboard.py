@@ -1,15 +1,12 @@
 import sys
-from PyQt5 import *
-# import PyQt5.QtCore as QtCore
-# import PyQt5.QtGui as QtGui
+from PyQt5 import QtWidgets, QtGui, QtCore
 from PyQt5.uic import loadUi
 import qrc.file_img_rc
 import webbrowser
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
-sys.path.insert(0, 'dashboard/')
-from s_db import *
+from dashboard.s_db import *
 from browser import Browser
   
 
