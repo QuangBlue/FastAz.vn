@@ -48,7 +48,7 @@ class Dashboard(QMainWindow):
 
         # btn_giahan= QPushButton(self.tableWidget)
         # btn_giahan.setText('Gia Hạn')
-        # self.tableWidget.setCellWidget(5,5,btn_giahan)
+        # self.setCellWidget(5,5,btn_giahan)
         row = 0
         self.tableWidget.setRowCount(len(data_example) if len(data_example) >25 else 25)
         for data in data_example:
