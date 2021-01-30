@@ -7,6 +7,7 @@ User data structure:
 "Password" : <string>,
 "Avatar" : <string>,
 "Token" : <string>,
+"Shopee": <list>,
 "List_data_push_product" : {
         Product_id:{ "Product_name" : <string>, "Product_quantity": <int>, "Product_img": <string>}
         ...
@@ -18,6 +19,9 @@ Username : indexed, unique
 Token : indexed, unique
 Product_id: indexed, unique
 
+
+{'success': True, 'statusCode': 200, 'code': 'jwt_auth_valid_credential', 'message': 'Credential is valid', 'data': {'token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9mYXN0YXoudm4iLCJpYXQiOjE2MTE5OTU2NzIsIm5iZiI6MTYxMTk5NTY3MiwiZXhwIjoxNjEyNjAwNDcyLCJkYXRhIjp7InVzZXIiOnsiaWQiOjEwfX19.MhcityYV1yxr02_5ILfbG7GxlSB-27540MpQKR_k1Ho', 'id': 10, 'email': 'huy8208@gmail.com'
+, 'nicename': 'huy_admin', 'firstName': 'huy_admin', 'lastName': '', 'displayName': 'huy_admin'}}
 """
 import json
 
@@ -55,28 +59,28 @@ class Product:
 
 
 class User:
-    def __init__(self, username=None, password=None, avatar=None):
+    def __init__(self, username=None, password=None, avatar=None,token=None):
         try:
-            self._username = str(username)
+            self._username_fastaz = str(username)
             self._password = str(password)
             self._avatar = str(avatar)
-            self._token = {"token": {"": ""}}
-            self._new_product = None
-            self._list_data_push_product = dict()
+            self._token = token
+            self._shopee = list()
+            # self._list_data_push_product = dict()
         except ValueError as e:
             print(e)
 
     def __str__(self):
         """Print out user's object as str"""
-        return "Username: " + str(self._username) + "\n" + "Password: " + self._password + \
-               "\n" + "Avatar: " + self._avatar + "\n" + json.dumps(self._token) + \
-               "\n" + json.dumps(self._list_data_push_product, indent=4)
+        return "Username: " + str(self._username_fastaz) + "\n" + "Password: " + self._password + \
+               "\n" + "Avatar: " + self._avatar + "\n" + self._token + "\n"
+               + self._shopee
+            #    + json.dumps(self._list_data_push_product, indent=4)
 
     def as_dict(self):
-        dict1 = {"Username": self._username, "Password": self._password,
-                 "Avatar": self._avatar}
-        dict1.update(self._token)
-        dict1.update(self._list_data_push_product)
+        dict1 = {"Username_fastAZ": self._username_fastaz, "Password": self._password,
+                 "Avatar": self._avatar,"Token":self._token,"Shopee": self._shopee}
+        # dict1.update(self._list_data_push_product)
         return dict1
 
     def add_new_product(self, productID, productName, productQuantity, productImage):

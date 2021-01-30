@@ -1,7 +1,6 @@
 import pymongo
 import datetime
-from User import User
-
+import Backend.users as userClass
 # What does this mongoDB do?
 # update one document
 # update multiple documents
@@ -20,17 +19,11 @@ from User import User
 
 client = pymongo.MongoClient(
     "mongodb+srv://huy8208:741456963@shopeemastertoolcluster.n4haz.mongodb.net/Shopee_Master_Tool_Database?retryWrites=true&w=majority")
-db = client.get_database("Shopee_Master_Tool_Database")
-registered_Users_Collection = db.get_collection("Shopee__Registered_Users")
+with client:
+    db = client.get_database("Shopee_Master_Tool_Database")
+    registered_Users_Collection = db.get_collection("Shopee__Registered_Users")
 
 
-def insertDB(data):
-    registered_Users_Collection.insert_one(data)
-
-
-def retrieveDB():
-    document = registered_Users_Collection.find({})
-    return document
 
 
 def find_and_updateDB(ids, data):
@@ -51,9 +44,20 @@ def update_one(old_data,
     )
 
 
+def check_username_fastaz(username):
+    if registered_Users_Collection.count_documents({"Username_fastAZ":username}) != 0:
+        return True
+    else:
+        return False
+
+def insert_new_user_mongodb(username, password, avatar,token):
+    newUser = userClass.User(username,password,avatar,token)
+    registered_Users_Collection.insert_one(newUser.as_dict())
+
 # data = {"_id": "ABC123", 'Name': 'Giày China', 'SKU': '4567', 'Image': 'URL'}
 
 # user1 = User(username="Huy", password="yes", avatar="img1234")
 # user1.add_new_product(115, "Giày xịn", 1000, "img_")
 
 # insertDB(user1.as_dict())
+

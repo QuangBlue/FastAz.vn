@@ -1,8 +1,10 @@
 import requests
 import main_pyqt5
-import loading
-class Network:
+import Backend.loading
 
+class Network:
+        
+    @Backend.loading.setWaitCursor
     def sign_in(self,username,password):
         try:
             data = {
@@ -16,29 +18,8 @@ class Network:
             raise Exception("Lỗi Server!!!")
         else:
             return x.json()
-        # if x.json()['success'] == True:
-        #     id_acc = x.json()['data']['id']
-        #     username = x.json()['data']['displayName']
-        #     print (f'Đã đăng nhập thành công user {username}. Id: {id_acc}' )
-        #
-        #     data_1 = {
-        #         'swpm_api_action' : 'query',
-        #         'key' : 'e3003c44deff96ebe7db442100f3b473',
-        #         'email' : x.json()['data']['email']
-        #     }
-        #     y = requests.get('http://www.fastaz.vn/', params=data_1)
-        #
-        #
-        #     # if y.json()['result'] == 'success':
-        #     #     if int(y.json()['member_data']['membership_level']) == 2:
-        #     #         print ('Đây là tài khoản Free')
-        #     #     if int(y.json()['member_data']['membership_level']) == 3:
-        #     #         print ('Đây là tài khoản Vip')
-        #     # elif y.json()['result'] == "failure":
-        #     #     print (y.json()['message'])
-        #
-        # if x.json()['success'] == False:
-        #     print (x.json()['message'])
+    
+    @Backend.loading.setWaitCursor
     def sign_up(self,user_name,password,name,phone,email):
         try:
             data = {'user_name': user_name,
@@ -61,7 +42,7 @@ class Network:
     # B1 : tạo yêu cầu vào hệ thống sẽ gửi 1 đoạn code 4 chữ số cho khách hàng qua email - Dùng hàm reset_password(email)
     # B2 : nhập email cũ + password mới + mật mã vừa gửi qua email - Dùng hàm set_new_password(email,password,code)
 
-    @loading.setWaitCursor
+    @Backend.loading.setWaitCursor
     def reset_password(self,email):
         try:
             data = {
@@ -76,7 +57,7 @@ class Network:
         else:
             return r.json()
 
-    @loading.setWaitCursor
+    @Backend.loading.setWaitCursor
     def set_new_password(self,email,password,code):
         try:
             data = {
