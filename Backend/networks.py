@@ -1,10 +1,10 @@
 import requests
 import main_pyqt5
-import Backend.loading
+import backend.loading
 
 class Network:
         
-    @Backend.loading.setWaitCursor
+    @backend.loading.setWaitCursor
     def sign_in(self,username,password):
         try:
             data = {
@@ -19,7 +19,7 @@ class Network:
         else:
             return x.json()
     
-    @Backend.loading.setWaitCursor
+    @backend.loading.setWaitCursor
     def sign_up(self,user_name,password,name,phone,email):
         try:
             data = {'user_name': user_name,
@@ -42,7 +42,7 @@ class Network:
     # B1 : tạo yêu cầu vào hệ thống sẽ gửi 1 đoạn code 4 chữ số cho khách hàng qua email - Dùng hàm reset_password(email)
     # B2 : nhập email cũ + password mới + mật mã vừa gửi qua email - Dùng hàm set_new_password(email,password,code)
 
-    @Backend.loading.setWaitCursor
+    @backend.loading.setWaitCursor
     def reset_password(self,email):
         try:
             data = {
@@ -57,7 +57,7 @@ class Network:
         else:
             return r.json()
 
-    @Backend.loading.setWaitCursor
+    @backend.loading.setWaitCursor
     def set_new_password(self,email,password,code):
         try:
             data = {

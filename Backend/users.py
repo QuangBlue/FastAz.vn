@@ -61,8 +61,8 @@ class Product:
 class User:
     def __init__(self, username=None, password=None, avatar=None,token=None):
         try:
-            self._username_fastaz = str(username)
-            self._password = str(password)
+            self._username_az = str(username)
+            self._password_az = str(password)
             self._avatar = str(avatar)
             self._token = token
             self._shopee = list()
@@ -73,13 +73,19 @@ class User:
     def __str__(self):
         """Print out user's object as str"""
         return "Username: " + str(self._username_fastaz) + "\n" + "Password: " + self._password + \
-               "\n" + "Avatar: " + self._avatar + "\n" + self._token + "\n"
-               + self._shopee
+               "\n" + "Avatar: " + self._avatar + "\n" + self._token + "\n" + self._shopee
             #    + json.dumps(self._list_data_push_product, indent=4)
 
     def as_dict(self):
-        dict1 = {"Username_fastAZ": self._username_fastaz, "Password": self._password,
-                 "Avatar": self._avatar,"Token":self._token,"Shopee": self._shopee}
+        dict1 = {
+
+            "username_az": self._username_az,
+            "password_az": self._password_az,
+            "avatar": self._avatar,
+            "token":self._token,
+            "shopee": self._shopee
+            
+            }
         # dict1.update(self._list_data_push_product)
         return dict1
 

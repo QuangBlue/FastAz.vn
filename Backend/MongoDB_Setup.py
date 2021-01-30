@@ -1,6 +1,6 @@
 import pymongo
 import datetime
-import Backend.users as userClass
+import backend.users as userClass
 # What does this mongoDB do?
 # update one document
 # update multiple documents
@@ -45,7 +45,7 @@ def update_one(old_data,
 
 
 def check_username_fastaz(username):
-    if registered_Users_Collection.count_documents({"Username_fastAZ":username}) != 0:
+    if registered_Users_Collection.count_documents({"username_az":username}) != 0:
         return True
     else:
         return False
@@ -54,8 +54,20 @@ def insert_new_user_mongodb(username, password, avatar,token):
     newUser = userClass.User(username,password,avatar,token)
     registered_Users_Collection.insert_one(newUser.as_dict())
 
-# data = {"_id": "ABC123", 'Name': 'Giày China', 'SKU': '4567', 'Image': 'URL'}
 
+def create_new_user(id_wp,username_az,password_az,token,avartar="",shopee=[]):
+    data={
+        "_id" : id_wp,
+        "username_az" : username_az,
+        "password_az" : password_az,
+        "token" : token,
+        "avatar" : avartar,
+        "shopee" : shopee,
+    }
+    registered_Users_Collection.insert_one(data)
+
+# data = {"_id": "ABC123", 'Name': 'Giày China', 'SKU': '4567', 'Image': 'URL'}
+# create_new_user("ABC123","quangblue1603","thangkhung123","234234234234")
 # user1 = User(username="Huy", password="yes", avatar="img1234")
 # user1.add_new_product(115, "Giày xịn", 1000, "img_")
 

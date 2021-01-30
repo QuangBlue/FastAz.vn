@@ -16,9 +16,9 @@ from dashboard.Dashboard import Dashboard
 
 
 ## Database
-import Backend.networks
-import Backend.MongoDB_Setup as db
-import Backend.loading
+import backend.networks
+import backend.MongoDB_Setup as db
+import backend.loading
 
 # MANAGER SCREEN ---- WELCOME ----
 class WelcomeScreen(QMainWindow):
@@ -72,15 +72,20 @@ class SignInScreen(QMainWindow):
             self.frame_error.show()
             self.text_error.setText(message)
 
-        re = Backend.networks.Network.sign_in(self,self.username.text(),self.password.text())
+        re = backend.networks.Network.sign_in(self,self.username.text(),self.password.text())
         if re['success']:
             print (f'Đã đăng nhập thành công user {self.username.text()}. Id: {self.password.text()}' )
             # Push len database, phai check xem da co username chua
             # Check if username already in mongodb if not => create new user
             #                                       else => skip
+
+            print ('Đang check tài khoản')
             if db.check_username_fastaz(self.username.text()) == False:
                 # username, password, avatar,token,shopee
-                db.insert_new_user_mongodb(self.username.text(),self.password.text(),None,re['data']['token'])
+                print ('Đang thêm data lên MongoDB')
+                db.create_new_user(re['data']['id'],self.username.text(),self.password.text(),re['data']['token'])
+                print ('Đã thêm data lên MongoDB')
+
             self.ui = Dashboard()
             widget.close()
 
@@ -136,7 +141,7 @@ class SignUpScreen(QMainWindow):
         if not (all(input_field)):
             showMessage("Thiếu dữ liệu đăng ký! Bạn hãy thử lại nhé.")
         else:    
-            sign_up_result = Backend.networks.Network.sign_up(self,us,pw,fn,ph,em)
+            sign_up_result = backend.networks.Network.sign_up(self,us,pw,fn,ph,em)
             # print(sign_up_result)
             if sign_up_result['result'] == 'success':
                 print("Create account successfully")
@@ -187,11 +192,11 @@ class ResetPasswordScreen(QMainWindow):
             text = 'Vui lòng nhập Email đăng ký'
             showMessage(text)
         else:
-            request_result = Backend.networks.Network.reset_password(self,self.email_reset.text())
+            request_result = backend.networks.Network.reset_password(self,self.email_reset.text())
             # print(request_result)
             showMessage(request_result["message"])
             if request_result['data']['status'] == 200:
-                Backend.loading.appWait(2000) #Can phai tim ra cach toi uu hon, bo vao trong network def
+                backend.loading.appWait(2000) #Can phai tim ra cach toi uu hon, bo vao trong network def
                 set_new_password_screen = SetNewPasswordScreen()
                 widget.addWidget(set_new_password_screen)
                 widget.setCurrentIndex(widget.currentIndex()+1)
@@ -248,11 +253,11 @@ class SetNewPasswordScreen(QMainWindow):
             self.text_error.setText('Mật khẩu xác nhận không chính xác')
             self.frame_error.show()
         else:
-            request_result = Backend.networks.Network.set_new_password(self,self.email_set.text(),self.password_set.text(),self.code_set.text())
+            request_result = backend.networks.Network.set_new_password(self,self.email_set.text(),self.password_set.text(),self.code_set.text())
             # print(request_result)            
             showMessage(request_result['message'])
             if request_result['data']['status'] == 200:
-                Backend.loading.appWait(2000) # Can phai tim ra cach toi uu hon.
+                backend.loading.appWait(2000) # Can phai tim ra cach toi uu hon.
                 self.sign_in_screen()
                 
 
