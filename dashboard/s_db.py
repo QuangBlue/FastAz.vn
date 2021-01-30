@@ -83,11 +83,11 @@ class UIFunctions:
             self.layout_menu_bottom.addWidget(button)
 
     def selectMenu(self, getStyle):
-        select = getStyle + ("QPushButton { border-right: 7px solid rgb(44, 49, 60); }")
+        select = getStyle + ("QPushButton { border-right: 7px solid rgb(85, 170, 255); }")
         return select
 
     def deselectMenu(self, getStyle):
-        deselect = getStyle.replace("QPushButton { border-right: 7px solid rgb(44, 49, 60); }", "")
+        deselect = getStyle.replace("QPushButton { border-right: 7px solid rgb(85, 170, 255); }", "")
         return deselect
 
     def selectStandardMenu(self, widget):
@@ -182,7 +182,7 @@ class Style:
         background-repeat: no-repeat;
         border: none;
         border-left: 28px solid rgb(27, 29, 35);
-        border-right: 5px solid rgb(44, 49, 60);
+        border-right: 5px solid rgb(85, 170, 255);
         background-color: rgb(27, 29, 35);
         text-align: left;
         padding-left: 50px;

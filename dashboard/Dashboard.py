@@ -35,16 +35,41 @@ class Dashboard(QMainWindow):
         ## HIỂN THỊ DANH SÁCH TÀI KHOẢN SHOPEE
         # ########################################################################
 
-        people = [{"name" : "Quang", "ten_shop" : "1", "shop_id" : "2", "san_pham" : "3" ,"don_hang" : "4"},{"name" : "Huy", "ten_shop" : "1", "shop_id" : "2", "san_pham" : "3" ,"don_hang" : "4"},{"name" : "QuangHuy", "ten_shop" : "1", "shop_id" : "2", "san_pham" : "3" ,"don_hang" : "4"}]
+        data_example = [
+
+            {"id_sp" : "123456", "shop_name" : "Naxa Shop", "shop_id" : "456456456", "total_product" : "354" ,"total_order" : "345","status_cookie" : True},
+            {"id_sp" : "234234", "shop_name" : "Chuột May Mắn", "shop_id" : "34343434", "total_product" : "234" ,"total_order" : "6565", "status_cookie" : True},
+            {"id_sp" : "456456", "shop_name" : "Fortune Mouse", "shop_id" : "67868678", "total_product" : "367" ,"total_order" : "4676", "status_cookie" : True},
+            {"id_sp" : "434663", "shop_name" : "Quang Shop", "shop_id" : "446565767", "total_product" : "4546" ,"total_order" : "2356", "status_cookie" : True},
+            {"id_sp" : "565656", "shop_name" : "Huy Shop", "shop_id" : "34545454", "total_product" : "676" ,"total_order" : "787", "status_cookie" : False},
+            {"id_sp" : "343436", "shop_name" : "Quang Huy Shop", "shop_id" : "5657556", "total_product" : "334" ,"total_order" : "7875", "status_cookie" : False}
+
+            ]
+
+        # btn_giahan= QPushButton(self.tableWidget)
+        # btn_giahan.setText('Gia Hạn')
+        # self.tableWidget.setCellWidget(5,5,btn_giahan)
         row = 0
-        self.tableWidget.setRowCount(len(people) if len(people) >25 else 25)
-        for p in people:
-            self.tableWidget.setItem(row, 0,QtWidgets.QTableWidgetItem(p['name']))
-            self.tableWidget.setItem(row, 1,QtWidgets.QTableWidgetItem(p['ten_shop']))
-            self.tableWidget.setItem(row, 2,QtWidgets.QTableWidgetItem(p['shop_id']))
-            self.tableWidget.setItem(row, 3,QtWidgets.QTableWidgetItem(p['san_pham']))
-            self.tableWidget.setItem(row, 4,QtWidgets.QTableWidgetItem(p['don_hang']))
+        self.tableWidget.setRowCount(len(data_example) if len(data_example) >25 else 25)
+        for data in data_example:
+            self.tableWidget.setItem(row, 0,QtWidgets.QTableWidgetItem(data['id_sp']))
+            self.tableWidget.setItem(row, 1,QtWidgets.QTableWidgetItem(data['shop_name']))
+            self.tableWidget.setItem(row, 2,QtWidgets.QTableWidgetItem(data['shop_id']))
+            self.tableWidget.setItem(row, 3,QtWidgets.QTableWidgetItem(data['total_product']))
+            self.tableWidget.setItem(row, 4,QtWidgets.QTableWidgetItem(data['total_order']))
+            self.tableWidget.setItem(row, 5,QtWidgets.QTableWidgetItem('Còn Hiệu Lực') if data['status_cookie'] == True else QtWidgets.QTableWidgetItem('Hết Hiệu Lực'))
+            self.tableWidget.item(row, 5).setForeground(QtGui.QColor(73, 165, 43) if data['status_cookie'] == True else QtGui.QColor(201, 5, 22))
+            font = QtGui.QFont()
+            font.setBold(True)
+            self.tableWidget.item(row, 5).setFont(font)
             row = row + 1
+        if len(data_example) > 0:
+            self.comboBox_user.removeItem(0)
+            for x in range(len(data_example)):
+                self.comboBox_user.addItem(data_example[x]['shop_name'])
+
+        self.comboBox_user.currentTextChanged.connect(lambda: print(self.comboBox_user.currentText()))
+
 
 
         # ########################################################################

@@ -1250,7 +1250,7 @@ QPushButton:pressed {
                  </widget>
                 </item>
                 <item>
-                 <widget class="QComboBox" name="comboBox">
+                 <widget class="QComboBox" name="comboBox_user">
                   <property name="maximumSize">
                    <size>
                     <width>240</width>
@@ -1260,7 +1260,7 @@ QPushButton:pressed {
                   <property name="font">
                    <font>
                     <family>Nunito</family>
-                    <pointsize>22</pointsize>
+                    <pointsize>20</pointsize>
                     <bold>true</bold>
                    </font>
                   </property>
@@ -1281,6 +1281,9 @@ QPushButton:pressed {
                   <property name="editable">
                    <bool>false</bool>
                   </property>
+                  <property name="currentText">
+                   <string notr="true">Chưa có tài khoản</string>
+                  </property>
                   <property name="insertPolicy">
                    <enum>QComboBox::NoInsert</enum>
                   </property>
@@ -1292,52 +1295,7 @@ QPushButton:pressed {
                   </property>
                   <item>
                    <property name="text">
-                    <string>Tài khoản số 1</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Tài khoản số 2</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Tài khoản số 3</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Tài khoản số 4</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Tài khoản số 5</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Tài khoản số 6</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Tài khoản số 7</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Tài khoản số 8</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Tài khoản số 9</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Tài khoản số 10</string>
+                    <string>Chưa có tài khoản</string>
                    </property>
                   </item>
                  </widget>
@@ -1712,7 +1670,7 @@ QPushButton:pressed {
                       <property name="font">
                        <font>
                         <family>Nunito</family>
-                        <pointsize>17</pointsize>
+                        <pointsize>15</pointsize>
                        </font>
                       </property>
                       <property name="styleSheet">
@@ -1797,7 +1755,7 @@ QHeaderView::section:vertical
                        <number>0</number>
                       </property>
                       <property name="columnCount">
-                       <number>5</number>
+                       <number>6</number>
                       </property>
                       <attribute name="horizontalHeaderCascadingSectionResizes">
                        <bool>true</bool>
@@ -1824,25 +1782,66 @@ QHeaderView::section:vertical
                        <property name="text">
                         <string>ID</string>
                        </property>
+                       <property name="font">
+                        <font>
+                         <family>Nunito</family>
+                         <pointsize>16</pointsize>
+                        </font>
+                       </property>
                       </column>
                       <column>
                        <property name="text">
                         <string>Tên Shop</string>
+                       </property>
+                       <property name="font">
+                        <font>
+                         <family>Nunito</family>
+                         <pointsize>16</pointsize>
+                        </font>
                        </property>
                       </column>
                       <column>
                        <property name="text">
                         <string>Shop ID</string>
                        </property>
-                      </column>
-                      <column>
-                       <property name="text">
-                        <string>New Column</string>
+                       <property name="font">
+                        <font>
+                         <family>Nunito</family>
+                         <pointsize>16</pointsize>
+                        </font>
                        </property>
                       </column>
                       <column>
                        <property name="text">
-                        <string>Đơn hàng</string>
+                        <string>Số lượng sản phẩm</string>
+                       </property>
+                       <property name="font">
+                        <font>
+                         <family>Nunito</family>
+                         <pointsize>16</pointsize>
+                        </font>
+                       </property>
+                      </column>
+                      <column>
+                       <property name="text">
+                        <string>Đơn hàng cần xử lý</string>
+                       </property>
+                       <property name="font">
+                        <font>
+                         <family>Nunito</family>
+                         <pointsize>16</pointsize>
+                        </font>
+                       </property>
+                      </column>
+                      <column>
+                       <property name="text">
+                        <string>Trạng thái</string>
+                       </property>
+                       <property name="font">
+                        <font>
+                         <family>Nunito</family>
+                         <pointsize>16</pointsize>
+                        </font>
                        </property>
                       </column>
                      </widget>
