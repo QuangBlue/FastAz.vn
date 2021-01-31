@@ -16,7 +16,6 @@ import backend.users as userClass
 # db = client.get_database("shopee_db")
 # registered_Users_Collection = db.get_collection("user_db")
 
-
 client = pymongo.MongoClient(
     "mongodb+srv://huy8208:741456963@shopeemastertoolcluster.n4haz.mongodb.net/Shopee_Master_Tool_Database?retryWrites=true&w=majority")
 with client:
@@ -65,6 +64,8 @@ def create_new_user(id_wp,username_az,password_az,token,avartar="",shopee=[]):
         "shopee" : shopee,
     }
     registered_Users_Collection.insert_one(data)
+
+check_username_fastaz('')
 
 # data = {"_id": "ABC123", 'Name': 'Giày China', 'SKU': '4567', 'Image': 'URL'}
 # create_new_user("ABC123","quangblue1603","thangkhung123","234234234234")

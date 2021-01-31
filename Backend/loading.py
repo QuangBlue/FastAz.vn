@@ -11,7 +11,7 @@ def setWaitCursor(funct):
         QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
         try:
             result = funct(*args,**kwargs)
-            appWait(1000)
+            # appWait(1)
             return result
         finally:
             QApplication.restoreOverrideCursor()
