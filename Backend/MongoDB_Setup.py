@@ -1,11 +1,6 @@
 import pymongo
 import datetime
-import backend.users as userClass
-# What does this mongoDB do?
-# update one document
-# update multiple documents
-# insert one document
-# insert multiple documents
+import backend.users
 
 # client = pymongo.MongoClient("mongodb+srv://quang_db:Thangkhung123@cluster0.cv2te.mongodb.net/shopee_db?retryWrites=true&w=majority")
 # db = client['Shopee_Master_Tool_Database'] Create a database, if it already exists, skips
@@ -16,61 +11,45 @@ import backend.users as userClass
 # db = client.get_database("shopee_db")
 # registered_Users_Collection = db.get_collection("user_db")
 
-client = pymongo.MongoClient(
-    "mongodb+srv://huy8208:741456963@shopeemastertoolcluster.n4haz.mongodb.net/Shopee_Master_Tool_Database?retryWrites=true&w=majority")
-with client:
-    db = client.get_database("Shopee_Master_Tool_Database")
-    registered_Users_Collection = db.get_collection("Shopee__Registered_Users")
+class Database_mongoDB:
+    def __init__(self):
+        self.client = None
+        self.db = None
+        self.registered_Users_Collection = None
 
+    def connect(self):
+        self.client = pymongo.MongoClient(
+        "mongodb+srv://huy8208:741456963@shopeemastertoolcluster.n4haz.mongodb.net/Shopee_Master_Tool_Database?retryWrites=true&w=majority")
+        try: 
+            self.db = self.client.get_database("Shopee_Master_Tool_Database")
+            self.registered_Users_Collection = self.db.get_collection("Shopee__Registered_Users")
+        except pymongo.errors.ConnectionFailure as error:
+            print(str(error))
+            exit()
+        
+    def find_and_updateDB(self,ids, data):
+        self.registered_Users_Collection.find_one_and_update(
+            {"_id": ids},
+            {"$set": data},
+            upsert=True  # Set True se tao moi khi khong co du lieu
+        )
 
+    def update_one(self,old_data, new_data):  # Hàm này để update theo logic và áp dụng cho update hàng loạt qua hàm for. Từ old_data sẽ tìm và đổi thành giá trị new_data cho kết quả find đầu tiên.
 
+        self.registered_Users_Collection.update_one(
+            {old_data}, {"$set":
+                            {new_data}
+                        }
+        )
 
-def find_and_updateDB(ids, data):
-    registered_Users_Collection.find_one_and_update(
-        {"_id": ids},
-        {"$set": data},
-        upsert=True  # Set True se tao moi khi khong co du lieu
-    )
+    def check_username_fastaz(self,username):
+        if self.registered_Users_Collection.count_documents({"username_az":username}) != 0:
+            return True
+        else:
+            return False
 
+    def insert_new_user_mongodb(self,username, password, avatar,token):
+        newUser = backend.users.User(username,password,avatar,token)
+        self.registered_Users_Collection.insert_one(newUser.as_dict())
 
-def update_one(old_data,
-               new_data):  # Hàm này để update theo logic và áp dụng cho update hàng loạt qua hàm for. Từ old_data sẽ tìm và đổi thành giá trị new_data cho kết quả find đầu tiên.
-
-    registered_Users_Collection.update_one(
-        {old_data}, {"$set":
-                         {new_data}
-                     }
-    )
-
-
-def check_username_fastaz(username):
-    if registered_Users_Collection.count_documents({"username_az":username}) != 0:
-        return True
-    else:
-        return False
-
-def insert_new_user_mongodb(username, password, avatar,token):
-    newUser = userClass.User(username,password,avatar,token)
-    registered_Users_Collection.insert_one(newUser.as_dict())
-
-
-def create_new_user(id_wp,username_az,password_az,token,avartar="",shopee=[]):
-    data={
-        "_id" : id_wp,
-        "username_az" : username_az,
-        "password_az" : password_az,
-        "token" : token,
-        "avatar" : avartar,
-        "shopee" : shopee,
-    }
-    registered_Users_Collection.insert_one(data)
-
-check_username_fastaz('')
-
-# data = {"_id": "ABC123", 'Name': 'Giày China', 'SKU': '4567', 'Image': 'URL'}
-# create_new_user("ABC123","quangblue1603","thangkhung123","234234234234")
-# user1 = User(username="Huy", password="yes", avatar="img1234")
-# user1.add_new_product(115, "Giày xịn", 1000, "img_")
-
-# insertDB(user1.as_dict())
 

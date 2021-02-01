@@ -10,18 +10,13 @@ import webbrowser
 import time
 
 
-
 ## IMPORT SCREEN
 from dashboard.Dashboard import Dashboard
-
 
 ## Database
 import backend.networks
 import backend.MongoDB_Setup as db
 import backend.loading
-
-## GLOBALS
-
 
 # MANAGER SCREEN ---- WELCOME ----
 class WelcomeScreen(QMainWindow):
@@ -347,12 +342,11 @@ class LoadingScreen(QMainWindow):
             self.label_description.setText("<strong>TẢI</strong> THÔNG TIN NGƯỜI DÙNG")
 
         if self.counter == 24:
-            print ('Đang check tài khoản')        
-            if db.check_username_fastaz(SignInScreen.username_az) == False:
-                # username, password, avatar,token,shopee
+            print ('Đang check tài khoản')     
+            if mongo_db.check_username_fastaz(SignInScreen.username_az) == False:
                 print ('Đang thêm data lên MongoDB')
-                db.create_new_user(SignInScreen.id_wp,SignInScreen.username_az,SignInScreen.password_az,SignInScreen.token)
-                print ('Đã thêm data lên MongoDB')            
+                mongo_db.insert_new_user_mongodb(SignInScreen.id_wp,SignInScreen.username_az,SignInScreen.password_az,SignInScreen.token)
+                print ('Đã thêm data lên MongoDB')
 
             self.counter += 12
 
@@ -381,7 +375,10 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     widget = QtWidgets.QStackedWidget()
     welcome_screen = WelcomeScreen()
+    mongo_db = db.Database_mongoDB()
+    mongo_db.connect()
     widget.addWidget(welcome_screen)
     widget.resize(1920, 1080)
     widget.show()
     app.exec_()
+    mongo_db.client.close()
