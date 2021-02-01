@@ -41,7 +41,7 @@ class Product:
             self._product_name = str(productName)
             self._product_quantity = int(productQuantity)
             self._product_img = str(productImage)
-
+            
         except ValueError as e:
             print(e)
 
@@ -59,13 +59,14 @@ class Product:
 
 
 class User:
-    def __init__(self, username=None, password=None, avatar=None,token=None):
+    def __init__(self, _id=None, username="", password="",token="", avatar=""):
         try:
+            self._id = int(_id)
             self._username_az = str(username)
             self._password_az = str(password)
             self._avatar = str(avatar)
             self._token = token
-            self._shopee = list()
+            self._shopee = []
             # self._list_data_push_product = dict()
         except ValueError as e:
             print(e)
@@ -78,11 +79,11 @@ class User:
 
     def as_dict(self):
         dict1 = {
-
+            "_id": self._id,
             "username_az": self._username_az,
             "password_az": self._password_az,
-            "avatar": self._avatar,
             "token":self._token,
+            "avatar": self._avatar,
             "shopee": self._shopee
             
             }
