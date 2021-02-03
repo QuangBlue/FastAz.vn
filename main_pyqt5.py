@@ -62,7 +62,7 @@ class SignInScreen(QMainWindow):
     # SETTING FRAME ERROR HIDE
         self.bt_x.clicked.connect(lambda : self.frame_error.hide())
         self.frame_error.hide()
-     
+
 
     # SETTING BUTTON
         self.bt_back.clicked.connect(self.back_to_welcome)
@@ -106,7 +106,7 @@ class SignInScreen(QMainWindow):
 
         elif re['success'] == False:
             showMessage(re['message'])
-        
+
 
     def back_to_welcome(self):
         welcome_screen = WelcomeScreen()
@@ -151,22 +151,22 @@ class SignUpScreen(QMainWindow):
         em = self.email_create.text()
         fn = self.name_create.text()
         ph = self.phone_create.text()
-        
+
         input_field = [us,pw,em,fn,ph]
-        
+
         if not (all(input_field)):
             showMessage("Thiếu dữ liệu đăng ký! Bạn hãy thử lại nhé.")
-        else:    
+        else:
             sign_up_result = backend.networks.Network.sign_up(self,us,pw,fn,ph,em)
             # print(sign_up_result)
             if sign_up_result['result'] == 'success':
                 print("Create account successfully")
-                self.sign_in_screen()    
+                self.sign_in_screen()
             elif sign_up_result['result'] == 'failure' and 'email' in sign_up_result[
-                'errors']:  
+                'errors']:
                 print("Sign up error!. Both username and email already existed error!")
                 showMessage("Username hoặc email đã được đăng ký.  Bạn hãy thử đăng ký lại nhé.")
-            elif sign_up_result['result'] == 'failure': 
+            elif sign_up_result['result'] == 'failure':
                 print("Sign up error!. email already existed error!")
                 showMessage("Username hoặc email đã được đăng ký.  Bạn hãy thử đăng ký lại nhé.")
 
@@ -216,7 +216,7 @@ class ResetPasswordScreen(QMainWindow):
                 set_new_password_screen = SetNewPasswordScreen()
                 widget.addWidget(set_new_password_screen)
                 widget.setCurrentIndex(widget.currentIndex()+1)
-                
+
             # if result == False: ##################### <------ Làm hàm điều kiện
 
     def show_popup(self):
@@ -270,14 +270,14 @@ class SetNewPasswordScreen(QMainWindow):
             self.frame_error.show()
         else:
             request_result = backend.networks.Network.set_new_password(self,self.email_set.text(),self.password_set.text(),self.code_set.text())
-            # print(request_result)            
+            # print(request_result)
             showMessage(request_result['message'])
             if request_result['data']['status'] == 200:
                 backend.loading.appWait(2000) # Can phai tim ra cach toi uu hon.
                 self.sign_in_screen()
-                
 
-            
+
+
 
     def back_to_welcome(self):
         welcome_screen = WelcomeScreen()
@@ -342,7 +342,7 @@ class LoadingScreen(QMainWindow):
             self.label_description.setText("<strong>TẢI</strong> THÔNG TIN NGƯỜI DÙNG")
 
         if self.counter == 24:
-            print ('Đang check tài khoản')     
+            print ('Đang check tài khoản')
             # Checking for the first time if this is a new user, if so, insert user info to mongodb database.
             if mongo_db.check_username_fastaz(SignInScreen.username_az) == False:
                 print ('Đang thêm data lên MongoDB')
@@ -354,7 +354,7 @@ class LoadingScreen(QMainWindow):
         if self.counter == 50:
             self.label_description.setText("<strong>TẢI</strong> TÀI NGUYÊN ỨNG DỤNG")
 
-        if self.counter == 50:
+        if self.counter == 75:
             self.label_description.setText("<strong>TẢI</strong> THÔNG TIN KHUYẾN MÃI")
 
         # CLOSE SPLASH SCREE AND OPEN APP
@@ -377,9 +377,8 @@ if __name__ == '__main__':
     widget = QtWidgets.QStackedWidget()
     welcome_screen = WelcomeScreen()
     mongo_db = db.Database_mongoDB()
-    # mongo_db.connect()
+    mongo_db.connect_to_mongoDB() # Connecting to database.
     widget.addWidget(welcome_screen)
     widget.resize(1920, 1080)
     widget.show()
     app.exec_()
-    # mongo_db.client.close() FIXXXXX

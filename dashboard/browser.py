@@ -3,7 +3,7 @@ from PyQt5.QtCore import QUrl, QByteArray
 from PyQt5.QtWebEngineWidgets import QWebEngineView, QWebEngineProfile, QWebEnginePage
 from PyQt5.QtWidgets import *
 from PyQt5.QtNetwork import *
-from backend.MongoDB_Setup import *
+from backend.MongoDB_Setup import Database_mongoDB
 import pickle
 
 
@@ -35,18 +35,7 @@ class Browser(QMainWindow):
             pickle.dump(requests_cookiejar, f)
 
     def closeEvent(self, event):
-        # self.mongo_db = db.Database_mongoDB()
-
-        Database_mongoDB.find_and_updateDB(self,10,{"avatar":"banana"})
-        # self.mongo_db.update_all({"avatar":""},{"avatar":"Aplle"})
-
-
-        # reply = QMessageBox.question(self, 'Window Close', 'Are you sure you want to close the window?',QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
-        # if reply == QMessageBox.Yes:
-        #     event.accept()
-        #     print('Window closed')
-        # else:
-        #     event.ignore()
+        Database_mongoDB.find_and_updateDB(self,10,{"avatar":"chuoi $10"})
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

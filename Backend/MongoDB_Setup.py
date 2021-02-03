@@ -12,34 +12,29 @@ import backend.users
 # registered_Users_Collection = db.get_collection("user_db")
 
 class Database_mongoDB:
-    registered_Users_Collection = None
     def __init__(self):
-        # self.client = None
-        # self.db = None
-        # self.registered_Users_Collection = None
-        self.client = pymongo.MongoClient(
+        # Instantianiate all static variables for the purpose of using shared database instances accross multiple files.
+        Database_mongoDB.client = None
+        Database_mongoDB.db = None
+        Database_mongoDB.registered_Users_Collection = None
+
+    def connect_to_mongoDB(self):
+        Database_mongoDB.client = pymongo.MongoClient(
         "mongodb+srv://huy8208:741456963@shopeemastertoolcluster.n4haz.mongodb.net/Shopee_Master_Tool_Database?retryWrites=true&w=majority")
-        try: 
-            self.db = self.client.get_database("Shopee_Master_Tool_Database")
-            Database_mongoDB.registered_Users_Collection = self.db.get_collection("Shopee__Registered_Users")
+        try:
+            Database_mongoDB.db = Database_mongoDB.client.get_database("Shopee_Master_Tool_Database")
+            Database_mongoDB.registered_Users_Collection = Database_mongoDB.db.get_collection("Shopee__Registered_Users")
         except pymongo.errors.ConnectionFailure as error:
             print(str(error))
             exit()
         finally:
-            print("Connecting to database sucessfully !!!")  
-            
-    # def connect(self):
-    #     self.client = pymongo.MongoClient(
-    #     "mongodb+srv://huy8208:741456963@shopeemastertoolcluster.n4haz.mongodb.net/Shopee_Master_Tool_Database?retryWrites=true&w=majority")
-    #     try: 
-    #         self.db = self.client.get_database("Shopee_Master_Tool_Database")
-    #         self.registered_Users_Collection = self.db.get_collection("Shopee__Registered_Users")
-    #     except pymongo.errors.ConnectionFailure as error:
-    #         print(str(error))
-    #         exit()
-    #     finally:
-    #         print("Connecting to database sucessfully !!!")  
-            
+            print("Connecting to database sucessfully !!!")
+
+    def close_db_connection(self):
+        Database_mongoDB.client.close()
+        print("sucessfully closing mongodb connection !!!")
+
+
     def find_and_updateDB(self,ids, data):
         Database_mongoDB.registered_Users_Collection.find_one_and_update(
             {"_id": ids},
@@ -62,5 +57,3 @@ class Database_mongoDB:
     def insert_new_user_mongodb(self,username, password, avatar,token):
         newUser = backend.users.User(username,password,avatar,token)
         Database_mongoDB.registered_Users_Collection.insert_one(newUser.as_dict())
-
-

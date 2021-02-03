@@ -1,5 +1,6 @@
 from dashboard.Dashboard import *
 from dashboard.browser import Browser
+from backend.MongoDB_Setup import Database_mongoDB
 
 GLOBAL_STATE = 0
 GLOBAL_TITLE_BAR = True
@@ -56,8 +57,8 @@ class UIFunctions:
             self.animation.setStartValue(width)
             self.animation.setEndValue(widthExtended)
             self.animation.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
-            self.animation.start()   
-    
+            self.animation.start()
+
     def addNewMenu(self, name, objName, icon, isTopMenu):
         font = QFont()
         font.setFamily(u"Nunito")
@@ -160,11 +161,12 @@ class UIFunctions:
         self.btn_maximize_restore.clicked.connect(lambda: UIFunctions.maximize_restore(self))
 
         ## SHOW ==> CLOSE APPLICATION
-        self.btn_close.clicked.connect(lambda: self.close())
-    
-    def closeMainWindow(self):
+        self.btn_close.clicked.connect(UIFunctions.close_App(self))
+
+    def close_App(self):
+        Database_mongoDB.close_db_connection(self)
         self.close()
-        
+
 class Style:
 
     style_bt_standard = (
