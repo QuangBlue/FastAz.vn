@@ -377,7 +377,7 @@ if __name__ == '__main__':
     widget = QtWidgets.QStackedWidget()
     welcome_screen = WelcomeScreen()
     mongo_db = db.Database_mongoDB()
-    mongo_db.connect()
+    # mongo_db.connect()
     widget.addWidget(welcome_screen)
     widget.resize(1920, 1080)
     widget.show()
