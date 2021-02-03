@@ -35,7 +35,7 @@ class Browser(QMainWindow):
             pickle.dump(requests_cookiejar, f)
 
     def closeEvent(self, event):
-        Database_mongoDB.find_and_updateDB(self,10,{"avatar":"chuoi $10"})
+        Database_mongoDB.find_and_updateDB(self,10,{"avatar":"chuoi 324234"})
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

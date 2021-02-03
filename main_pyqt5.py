@@ -17,6 +17,7 @@ from dashboard.Dashboard import Dashboard
 import backend.networks
 import backend.MongoDB_Setup as db
 import backend.loading
+from backend.MongoDB_Setup import Database_mongoDB
 
 # MANAGER SCREEN ---- WELCOME ----
 class WelcomeScreen(QMainWindow):
@@ -45,20 +46,13 @@ class WelcomeScreen(QMainWindow):
     def open_webbrowser(self):
         webbrowser.open('http://fastaz.vn/')
 
-
 # MANAGER SCREEN ---- SIGN IN ----
 
 class SignInScreen(QMainWindow):
-
-    # KHAI BÁO BIẾN CHO CLASS
-    id_wp = ''
-    username_az = ''
-    password_az = ''
-    token = ''
-
     def __init__(self):
         super(SignInScreen,self).__init__()
         loadUi("ui//sign_in_screen.ui",self)
+        mongo_db.connect_to_mongoDB() 
     # SETTING FRAME ERROR HIDE
         self.bt_x.clicked.connect(lambda : self.frame_error.hide())
         self.frame_error.hide()
@@ -70,6 +64,11 @@ class SignInScreen(QMainWindow):
         self.pushButton_login.clicked.connect(self.check_login)
         self.bt_reset_password.clicked.connect(self.reset_password_screen)
         self.password.returnPressed.connect(self.check_login)
+
+        widget.closeEvent = self.closeEvent
+
+    def closeEvent(self,event):
+        Database_mongoDB.close_db_connection(self)
 
     def check_login(self):
 
@@ -344,9 +343,9 @@ class LoadingScreen(QMainWindow):
         if self.counter == 24:
             print ('Đang check tài khoản')
             # Checking for the first time if this is a new user, if so, insert user info to mongodb database.
-            if mongo_db.check_username_fastaz(SignInScreen.username_az) == False:
+            if Database_mongoDB.check_username_fastaz(self,SignInScreen.username_az) == False:
                 print ('Đang thêm data lên MongoDB')
-                mongo_db.insert_new_user_mongodb(SignInScreen.id_wp,SignInScreen.username_az,SignInScreen.password_az,SignInScreen.token)
+                Database_mongoDB.insert_new_user_mongodb(self,SignInScreen.id_wp,SignInScreen.username_az,SignInScreen.password_az,SignInScreen.token)
                 print ('Đã thêm data lên MongoDB')
 
             self.counter += 12
@@ -377,7 +376,7 @@ if __name__ == '__main__':
     widget = QtWidgets.QStackedWidget()
     welcome_screen = WelcomeScreen()
     mongo_db = db.Database_mongoDB()
-    mongo_db.connect_to_mongoDB() # Connecting to database.
+    # mongo_db.connect_to_mongoDB() # Connecting to database.
     widget.addWidget(welcome_screen)
     widget.resize(1920, 1080)
     widget.show()

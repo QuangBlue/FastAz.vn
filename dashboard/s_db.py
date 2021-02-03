@@ -161,7 +161,7 @@ class UIFunctions:
         self.btn_maximize_restore.clicked.connect(lambda: UIFunctions.maximize_restore(self))
 
         ## SHOW ==> CLOSE APPLICATION
-        self.btn_close.clicked.connect(UIFunctions.close_App(self))
+        self.btn_close.clicked.connect(lambda: UIFunctions.close_App(self))
 
     def close_App(self):
         Database_mongoDB.close_db_connection(self)

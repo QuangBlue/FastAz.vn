@@ -185,8 +185,8 @@ class Popup_Ratting(QMainWindow):
 
     def send_info(self):
         print(self.comboBox_ratting.currentText())
-        x = self.plainTextEdit_ratting.toPlainText().replace("\n"," ")
-    
+        x = self.plainTextEdit_ratting.toPlainText().replace("\n",". ")
+        print(x)
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     QtGui.QFontDatabase.addApplicationFont('font/Nunito/Nunito-Regular.ttf')

@@ -32,7 +32,7 @@ class Database_mongoDB:
 
     def close_db_connection(self):
         Database_mongoDB.client.close()
-        print("sucessfully closing mongodb connection !!!")
+        print("Sucessfully closing mongodb connection !!!")
 
 
     def find_and_updateDB(self,ids, data):
