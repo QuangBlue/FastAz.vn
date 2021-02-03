@@ -3,7 +3,7 @@ import main_pyqt5
 import backend.loading
 
 class Network:
-        
+
     @backend.loading.setWaitCursor
     def sign_in(self,username,password):
         try:
@@ -18,7 +18,7 @@ class Network:
             raise Exception("Lỗi Server!!!")
         else:
             return x.json()
-    
+
     @backend.loading.setWaitCursor
     def sign_up(self,user_name,password,name,phone,email):
         try:
