@@ -3,7 +3,7 @@ from PyQt5.QtCore import QUrl, QByteArray
 from PyQt5.QtWebEngineWidgets import QWebEngineView, QWebEngineProfile, QWebEnginePage
 from PyQt5.QtWidgets import *
 from PyQt5.QtNetwork import *
-from dashboard.main_pyqt5 import mongo_db
+from backend.MongoDB_Setup import *
 import pickle
 class Browser(QMainWindow):
     def __init__(self, *args, **kwargs):
@@ -35,7 +35,7 @@ class Browser(QMainWindow):
     def closeEvent(self, event):
         # self.mongo_db = db.Database_mongoDB()
         
-        mongo_db.find_and_updateDB(self,10,{"avatar":"banana"})
+        Database_mongoDB.find_and_updateDB(self,10,{"avatar":"banana"})
         # self.mongo_db.update_all({"avatar":""},{"avatar":"Aplle"})
 
 
