@@ -3,6 +3,7 @@ from PyQt5.QtCore import QUrl, QByteArray
 from PyQt5.QtWebEngineWidgets import QWebEngineView, QWebEngineProfile, QWebEnginePage
 from PyQt5.QtWidgets import *
 from PyQt5.QtNetwork import *
+from dashboard.main_pyqt5 import mongo_db
 import pickle
 class Browser(QMainWindow):
     def __init__(self, *args, **kwargs):
@@ -13,7 +14,6 @@ class Browser(QMainWindow):
         self.webview.load(QUrl("https://shopee.vn/"))
         self.setCentralWidget(self.webview)
         self.webview.page().loadFinished.connect(self.__getCookieRunJs)
-
 
     def __getCookieRunJs(self):
         runJs = '''
@@ -31,6 +31,20 @@ class Browser(QMainWindow):
     def save_cookies(self,requests_cookiejar, filename):
         with open(filename, 'wb') as f:
             pickle.dump(requests_cookiejar, f)
+
+    def closeEvent(self, event):
+        # self.mongo_db = db.Database_mongoDB()
+        
+        mongo_db.find_and_updateDB(self,10,{"avatar":"banana"})
+        # self.mongo_db.update_all({"avatar":""},{"avatar":"Aplle"})
+
+
+        # reply = QMessageBox.question(self, 'Window Close', 'Are you sure you want to close the window?',QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+        # if reply == QMessageBox.Yes:
+        #     event.accept()
+        #     print('Window closed')
+        # else:
+        #     event.ignore()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
