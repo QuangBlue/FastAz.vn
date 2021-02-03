@@ -26,7 +26,9 @@ class Database_mongoDB:
         except pymongo.errors.ConnectionFailure as error:
             print(str(error))
             exit()
-        
+        finally:
+            print("Connecting to database sucessfully !!!")  
+            
     def find_and_updateDB(self,ids, data):
         self.registered_Users_Collection.find_one_and_update(
             {"_id": ids},
@@ -34,12 +36,10 @@ class Database_mongoDB:
             upsert=True  # Set True se tao moi khi khong co du lieu
         )
 
-    def update_one(self,old_data, new_data):  # Hàm này để update theo logic và áp dụng cho update hàng loạt qua hàm for. Từ old_data sẽ tìm và đổi thành giá trị new_data cho kết quả find đầu tiên.
+    def update_all(self,old_data, new_data):  # Hàm này để update theo logic và áp dụng cho update hàng loạt qua hàm for. Từ old_data sẽ tìm và đổi thành giá trị new_data cho kết quả find đầu tiên.
 
         self.registered_Users_Collection.update_one(
-            {old_data}, {"$set":
-                            {new_data}
-                        }
+            old_data, {"$set":new_data}
         )
 
     def check_username_fastaz(self,username):

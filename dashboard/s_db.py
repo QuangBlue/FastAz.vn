@@ -161,7 +161,10 @@ class UIFunctions:
 
         ## SHOW ==> CLOSE APPLICATION
         self.btn_close.clicked.connect(lambda: self.close())
-
+    
+    def closeMainWindow(self):
+        self.close()
+        
 class Style:
 
     style_bt_standard = (

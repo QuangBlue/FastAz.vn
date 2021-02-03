@@ -343,6 +343,7 @@ class LoadingScreen(QMainWindow):
 
         if self.counter == 24:
             print ('Đang check tài khoản')     
+            # Checking for the first time if this is a new user, if so, insert user info to mongodb database.
             if mongo_db.check_username_fastaz(SignInScreen.username_az) == False:
                 print ('Đang thêm data lên MongoDB')
                 mongo_db.insert_new_user_mongodb(SignInScreen.id_wp,SignInScreen.username_az,SignInScreen.password_az,SignInScreen.token)
@@ -381,4 +382,4 @@ if __name__ == '__main__':
     widget.resize(1920, 1080)
     widget.show()
     app.exec_()
-    mongo_db.client.close()
+    # mongo_db.client.close() FIXXXXX
