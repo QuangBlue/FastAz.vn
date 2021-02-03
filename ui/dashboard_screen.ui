@@ -7,14 +7,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1475</width>
+    <width>1411</width>
     <height>1005</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>1000</width>
-    <height>720</height>
+    <height>946</height>
    </size>
   </property>
   <property name="sizeIncrement">
@@ -1587,12 +1587,18 @@ QPushButton:pressed {
                   <widget class="QWidget" name="page_reply_ratting">
                    <layout class="QVBoxLayout" name="verticalLayout_7">
                     <item>
-                     <widget class="QTableWidget" name="tableWidget_2">
+                     <widget class="QTableWidget" name="tw_ratting1">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                         <horstretch>0</horstretch>
                         <verstretch>0</verstretch>
                        </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>150</height>
+                       </size>
                       </property>
                       <property name="font">
                        <font>
@@ -1659,6 +1665,9 @@ QHeaderView::section:vertical
                       </property>
                       <property name="frameShape">
                        <enum>QFrame::NoFrame</enum>
+                      </property>
+                      <property name="lineWidth">
+                       <number>1</number>
                       </property>
                       <property name="verticalScrollBarPolicy">
                        <enum>Qt::ScrollBarAlwaysOn</enum>
@@ -1693,6 +1702,9 @@ QHeaderView::section:vertical
                       <attribute name="horizontalHeaderDefaultSectionSize">
                        <number>100</number>
                       </attribute>
+                      <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+                       <bool>false</bool>
+                      </attribute>
                       <attribute name="horizontalHeaderStretchLastSection">
                        <bool>true</bool>
                       </attribute>
@@ -1701,6 +1713,9 @@ QHeaderView::section:vertical
                       </attribute>
                       <attribute name="verticalHeaderCascadingSectionResizes">
                        <bool>false</bool>
+                      </attribute>
+                      <attribute name="verticalHeaderDefaultSectionSize">
+                       <number>30</number>
                       </attribute>
                       <attribute name="verticalHeaderHighlightSections">
                        <bool>false</bool>
@@ -1733,12 +1748,18 @@ QHeaderView::section:vertical
                      </widget>
                     </item>
                     <item>
-                     <widget class="QTableWidget" name="tableWidget_3">
+                     <widget class="QTableWidget" name="tw_ratting2">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                         <horstretch>0</horstretch>
                         <verstretch>0</verstretch>
                        </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>150</height>
+                       </size>
                       </property>
                       <property name="font">
                        <font>
@@ -1806,6 +1827,9 @@ QHeaderView::section:vertical
                       <property name="frameShape">
                        <enum>QFrame::NoFrame</enum>
                       </property>
+                      <property name="lineWidth">
+                       <number>1</number>
+                      </property>
                       <property name="verticalScrollBarPolicy">
                        <enum>Qt::ScrollBarAlwaysOn</enum>
                       </property>
@@ -1823,6 +1847,9 @@ QHeaderView::section:vertical
                       </property>
                       <property name="selectionBehavior">
                        <enum>QAbstractItemView::SelectRows</enum>
+                      </property>
+                      <property name="showGrid">
+                       <bool>true</bool>
                       </property>
                       <property name="rowCount">
                        <number>0</number>
@@ -1844,6 +1871,12 @@ QHeaderView::section:vertical
                       </attribute>
                       <attribute name="verticalHeaderCascadingSectionResizes">
                        <bool>false</bool>
+                      </attribute>
+                      <attribute name="verticalHeaderMinimumSectionSize">
+                       <number>21</number>
+                      </attribute>
+                      <attribute name="verticalHeaderDefaultSectionSize">
+                       <number>30</number>
                       </attribute>
                       <attribute name="verticalHeaderHighlightSections">
                        <bool>false</bool>
@@ -1876,12 +1909,18 @@ QHeaderView::section:vertical
                      </widget>
                     </item>
                     <item>
-                     <widget class="QTableWidget" name="tableWidget_4">
+                     <widget class="QTableWidget" name="tw_ratting3">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                         <horstretch>0</horstretch>
                         <verstretch>0</verstretch>
                        </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>150</height>
+                       </size>
                       </property>
                       <property name="font">
                        <font>
@@ -2019,12 +2058,18 @@ QHeaderView::section:vertical
                      </widget>
                     </item>
                     <item>
-                     <widget class="QTableWidget" name="tableWidget_5">
+                     <widget class="QTableWidget" name="tw_ratting4">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                         <horstretch>0</horstretch>
                         <verstretch>0</verstretch>
                        </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>150</height>
+                       </size>
                       </property>
                       <property name="font">
                        <font>
@@ -2165,12 +2210,18 @@ QHeaderView::section:vertical
                      </widget>
                     </item>
                     <item>
-                     <widget class="QTableWidget" name="tableWidget_6">
+                     <widget class="QTableWidget" name="tw_ratting5">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                         <horstretch>0</horstretch>
                         <verstretch>0</verstretch>
                        </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>150</height>
+                       </size>
                       </property>
                       <property name="font">
                        <font>
@@ -2403,7 +2454,7 @@ QHeaderView::section:vertical
 }</string>
                          </property>
                          <property name="text">
-                          <string>CẬP NHẬT </string>
+                          <string>THÊM CÂU TRẢ LỜI</string>
                          </property>
                         </widget>
                        </item>
@@ -2413,25 +2464,175 @@ QHeaderView::section:vertical
                    </layout>
                   </widget>
                   <widget class="QWidget" name="page_push_product">
-                   <widget class="QLabel" name="label_2">
-                    <property name="geometry">
-                     <rect>
-                      <x>430</x>
-                      <y>260</y>
-                      <width>601</width>
-                      <height>381</height>
-                     </rect>
-                    </property>
-                    <property name="font">
-                     <font>
-                      <family>Nunito</family>
-                      <pointsize>53</pointsize>
-                     </font>
-                    </property>
-                    <property name="text">
-                     <string>PUSH PRODUCT</string>
-                    </property>
-                   </widget>
+                   <layout class="QVBoxLayout" name="verticalLayout_8">
+                    <item>
+                     <widget class="QTabWidget" name="tabWidget">
+                      <property name="currentIndex">
+                       <number>0</number>
+                      </property>
+                      <widget class="QWidget" name="tab">
+                       <attribute name="title">
+                        <string>Tab 1</string>
+                       </attribute>
+                       <layout class="QVBoxLayout" name="verticalLayout_10">
+                        <item>
+                         <widget class="QScrollArea" name="scrollArea">
+                          <property name="minimumSize">
+                           <size>
+                            <width>0</width>
+                            <height>0</height>
+                           </size>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true"/>
+                          </property>
+                          <property name="widgetResizable">
+                           <bool>true</bool>
+                          </property>
+                          <widget class="QWidget" name="scrollAreaWidgetContents">
+                           <property name="geometry">
+                            <rect>
+                             <x>0</x>
+                             <y>0</y>
+                             <width>334</width>
+                             <height>176</height>
+                            </rect>
+                           </property>
+                           <layout class="QVBoxLayout" name="verticalLayout_11">
+                            <item>
+                             <widget class="QFrame" name="frame_2">
+                              <property name="minimumSize">
+                               <size>
+                                <width>0</width>
+                                <height>0</height>
+                               </size>
+                              </property>
+                              <property name="styleSheet">
+                               <string notr="true">QPlainTextEdit{background-color: rgb(51, 67, 24);}</string>
+                              </property>
+                              <property name="frameShape">
+                               <enum>QFrame::StyledPanel</enum>
+                              </property>
+                              <property name="frameShadow">
+                               <enum>QFrame::Raised</enum>
+                              </property>
+                              <layout class="QVBoxLayout" name="verticalLayout_12">
+                               <property name="leftMargin">
+                                <number>0</number>
+                               </property>
+                               <property name="topMargin">
+                                <number>0</number>
+                               </property>
+                               <property name="rightMargin">
+                                <number>0</number>
+                               </property>
+                               <property name="bottomMargin">
+                                <number>0</number>
+                               </property>
+                               <item>
+                                <layout class="QGridLayout" name="gridLayout">
+                                 <item row="1" column="2">
+                                  <widget class="QPlainTextEdit" name="plainTextEdit_4">
+                                   <property name="maximumSize">
+                                    <size>
+                                     <width>500</width>
+                                     <height>300</height>
+                                    </size>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item row="0" column="1">
+                                  <widget class="QPlainTextEdit" name="plainTextEdit_5">
+                                   <property name="maximumSize">
+                                    <size>
+                                     <width>500</width>
+                                     <height>300</height>
+                                    </size>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item row="0" column="2">
+                                  <widget class="QPlainTextEdit" name="plainTextEdit_3">
+                                   <property name="maximumSize">
+                                    <size>
+                                     <width>500</width>
+                                     <height>300</height>
+                                    </size>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item row="1" column="0">
+                                  <widget class="QPlainTextEdit" name="plainTextEdit_2">
+                                   <property name="maximumSize">
+                                    <size>
+                                     <width>500</width>
+                                     <height>300</height>
+                                    </size>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item row="0" column="0">
+                                  <widget class="QPlainTextEdit" name="plainTextEdit">
+                                   <property name="maximumSize">
+                                    <size>
+                                     <width>500</width>
+                                     <height>300</height>
+                                    </size>
+                                   </property>
+                                   <property name="styleSheet">
+                                    <string notr="true"/>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item row="1" column="1">
+                                  <widget class="QPlainTextEdit" name="plainTextEdit_6">
+                                   <property name="maximumSize">
+                                    <size>
+                                     <width>500</width>
+                                     <height>300</height>
+                                    </size>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item row="1" column="3">
+                                  <widget class="QPlainTextEdit" name="plainTextEdit_8">
+                                   <property name="maximumSize">
+                                    <size>
+                                     <width>500</width>
+                                     <height>300</height>
+                                    </size>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item row="0" column="3">
+                                  <widget class="QPlainTextEdit" name="plainTextEdit_7">
+                                   <property name="maximumSize">
+                                    <size>
+                                     <width>500</width>
+                                     <height>300</height>
+                                    </size>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                </layout>
+                               </item>
+                              </layout>
+                             </widget>
+                            </item>
+                           </layout>
+                          </widget>
+                         </widget>
+                        </item>
+                       </layout>
+                      </widget>
+                      <widget class="QWidget" name="tab_2">
+                       <attribute name="title">
+                        <string>Tab 2</string>
+                       </attribute>
+                      </widget>
+                     </widget>
+                    </item>
+                   </layout>
                   </widget>
                   <widget class="QWidget" name="page_chat_bot">
                    <widget class="QLabel" name="label">

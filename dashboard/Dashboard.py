@@ -8,6 +8,8 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from dashboard.s_db import *
 from dashboard.browser import Browser
+
+from data_example import *
   
 
 class Dashboard(QMainWindow):
@@ -35,41 +37,9 @@ class Dashboard(QMainWindow):
         ## HIỂN THỊ DANH SÁCH TÀI KHOẢN SHOPEE
         # ########################################################################
 
-        data_example = [
+        self.set_data_user_shopee()
 
-            {"id_sp" : "123456", "shop_name" : "Naxa Shop", "shop_id" : "456456456", "total_product" : "354" ,"total_order" : "345","status_cookie" : True},
-            {"id_sp" : "234234", "shop_name" : "Chuột May Mắn", "shop_id" : "34343434", "total_product" : "234" ,"total_order" : "6565", "status_cookie" : True},
-            {"id_sp" : "456456", "shop_name" : "Fortune Mouse", "shop_id" : "67868678", "total_product" : "367" ,"total_order" : "4676", "status_cookie" : True},
-            {"id_sp" : "434663", "shop_name" : "Quang Shop", "shop_id" : "446565767", "total_product" : "4546" ,"total_order" : "2356", "status_cookie" : True},
-            {"id_sp" : "565656", "shop_name" : "Huy Shop", "shop_id" : "34545454", "total_product" : "676" ,"total_order" : "787", "status_cookie" : False},
-            {"id_sp" : "343436", "shop_name" : "Quang Huy Shop", "shop_id" : "5657556", "total_product" : "334" ,"total_order" : "7875", "status_cookie" : False}
-
-            ]
-
-        # btn_giahan= QPushButton(self.tableWidget)
-        # btn_giahan.setText('Gia Hạn')
-        # self.setCellWidget(5,5,btn_giahan)
-        row = 0
-        self.tableWidget.setRowCount(len(data_example) if len(data_example) >25 else 25)
-        for data in data_example:
-            self.tableWidget.setItem(row, 0,QtWidgets.QTableWidgetItem(data['id_sp']))
-            self.tableWidget.setItem(row, 1,QtWidgets.QTableWidgetItem(data['shop_name']))
-            self.tableWidget.setItem(row, 2,QtWidgets.QTableWidgetItem(data['shop_id']))
-            self.tableWidget.setItem(row, 3,QtWidgets.QTableWidgetItem(data['total_product']))
-            self.tableWidget.setItem(row, 4,QtWidgets.QTableWidgetItem(data['total_order']))
-            self.tableWidget.setItem(row, 5,QtWidgets.QTableWidgetItem('Còn Hiệu Lực') if data['status_cookie'] == True else QtWidgets.QTableWidgetItem('Hết Hiệu Lực'))
-            self.tableWidget.item(row, 5).setForeground(QtGui.QColor(73, 165, 43) if data['status_cookie'] == True else QtGui.QColor(201, 5, 22))
-            font = QtGui.QFont()
-            font.setBold(True)
-            self.tableWidget.item(row, 5).setFont(font)
-            row = row + 1
-        if len(data_example) > 0:
-            self.comboBox_user.removeItem(0)
-            for x in range(len(data_example)):
-                self.comboBox_user.addItem(data_example[x]['shop_name'])
-
-        self.comboBox_user.currentTextChanged.connect(lambda: print(self.comboBox_user.currentText()))
-
+        self.btn_save_ratting.clicked.connect(self.pop_up_ratting)
 
 
         # ########################################################################
@@ -126,6 +96,33 @@ class Dashboard(QMainWindow):
         # ########################################################################
         UIFunctions.uiDefinitions(self)
         self.show()
+        
+
+    def set_data_user_shopee(self):
+        row = 0
+        self.tableWidget.setRowCount(len(shopee) if len(shopee) >25 else 25)
+        for data in shopee:
+            self.tableWidget.setItem(row, 0,QtWidgets.QTableWidgetItem(data['id_sp']))
+            self.tableWidget.setItem(row, 1,QtWidgets.QTableWidgetItem(data['shop_name']))
+            self.tableWidget.setItem(row, 2,QtWidgets.QTableWidgetItem(data['shop_id']))
+            self.tableWidget.setItem(row, 3,QtWidgets.QTableWidgetItem(data['total_product']))
+            self.tableWidget.setItem(row, 4,QtWidgets.QTableWidgetItem(data['total_order']))
+            self.tableWidget.setItem(row, 5,QtWidgets.QTableWidgetItem('Còn Hiệu Lực') if data['status_cookie'] == True else QtWidgets.QTableWidgetItem('Hết Hiệu Lực'))
+            self.tableWidget.item(row, 5).setForeground(QtGui.QColor(73, 165, 43) if data['status_cookie'] == True else QtGui.QColor(201, 5, 22))
+            font = QtGui.QFont()
+            font.setBold(True)
+            self.tableWidget.item(row, 5).setFont(font)
+            row = row + 1
+        if len(shopee) > 0:
+            self.comboBox_user.removeItem(0)
+            for x in range(len(shopee)):
+                self.comboBox_user.addItem(shopee[x]['shop_name'])
+
+        self.comboBox_user.currentTextChanged.connect(lambda: print(self.comboBox_user.currentText()))
+
+    def pop_up_ratting(self):
+        self.ui = Popup_Ratting()
+        self.ui.show()
 
     def customMenuEvent(self, eventPosition, child):
         child = self.childAt(self.sender().mapTo(self, eventPosition))
@@ -177,6 +174,18 @@ class Dashboard(QMainWindow):
             UIFunctions.resetStyle(self, "btn_settings")
             UIFunctions.labelPage(self, "Setting")
             btnWidget.setStyleSheet(UIFunctions.selectMenu(self,btnWidget.styleSheet()))
+
+
+class Popup_Ratting(QMainWindow):
+    def __init__(self):
+        super(Popup_Ratting,self).__init__()
+        loadUi("ui//popup_ratting.ui",self)
+
+        self.btn_send.clicked.connect(self.send_info)
+
+    def send_info(self):
+        print(self.comboBox_ratting.currentText())
+        x = self.plainTextEdit_ratting.toPlainText().replace("\n"," ")
     
 if __name__ == '__main__':
     app = QApplication(sys.argv)
