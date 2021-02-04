@@ -140,6 +140,9 @@ QComboBox QAbstractItemView {
          <property name="inputMethodHints">
           <set>Qt::ImhNone</set>
          </property>
+         <property name="maximumBlockCount">
+          <number>500</number>
+         </property>
         </widget>
        </item>
        <item>

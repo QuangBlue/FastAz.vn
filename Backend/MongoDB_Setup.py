@@ -2,6 +2,7 @@ import pymongo
 import datetime
 import backend.users
 
+
 # client = pymongo.MongoClient("mongodb+srv://quang_db:Thangkhung123@cluster0.cv2te.mongodb.net/shopee_db?retryWrites=true&w=majority")
 # db = client['Shopee_Master_Tool_Database'] Create a database, if it already exists, skips
 # Collection == table
@@ -53,6 +54,7 @@ class Database_mongoDB:
             return True
         else:
             return False
+
 
     def insert_new_user_mongodb(self,username, password, avatar,token):
         newUser = backend.users.User(username,password,avatar,token)

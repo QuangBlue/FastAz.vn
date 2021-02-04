@@ -13,7 +13,7 @@ class Browser(QMainWindow):
         self.resize(1280, 720)
         self.webview = QWebEngineView()
         self.webview.page().profile().cookieStore().deleteAllCookies()
-        self.webview.load(QUrl("https://shopee.vn/"))
+        self.webview.load(QUrl("https://shopee.vn/buyer/login"))
         self.setCentralWidget(self.webview)
         self.webview.page().loadFinished.connect(self.__getCookieRunJs)
 
@@ -35,6 +35,10 @@ class Browser(QMainWindow):
             pickle.dump(requests_cookiejar, f)
 
     def closeEvent(self, event):
+        
+        
+
+
         Database_mongoDB.find_and_updateDB(self,10,{"avatar":"chuoi 324234"})
 
 if __name__ == '__main__':

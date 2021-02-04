@@ -1,4 +1,4 @@
-import sys
+import sys, webbrowser, time, json
 import PyQt5
 from PyQt5 import QtWidgets, QtGui, QtCore
 from PyQt5.uic import loadUi
@@ -6,12 +6,10 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 import qrc.file_img_rc
-import webbrowser
-import time
 
 
 ## IMPORT SCREEN
-from dashboard.Dashboard import Dashboard
+from dashboard.Dashboard import *
 
 ## Database
 import backend.networks
@@ -78,15 +76,15 @@ class SignInScreen(QMainWindow):
 
         re = backend.networks.Network.sign_in(self,self.username.text(),self.password.text())
         if re['success']:
-
             # KHAI BÁO BIẾN CHO CLASS
             SignInScreen.id_wp = re['data']['id']
             SignInScreen.username_az = self.username.text()
             SignInScreen.password_az = self.password.text()
             SignInScreen.token = re['data']['token']
+            SignInScreen.email = re['data']['email']
 
 
-            print (f'Đã đăng nhập thành công user {self.username.text()}. Id: {self.password.text()}' )
+            print (f'Đã đăng nhập thành công user {self.username.text()}. Password: {self.password.text()}' )
             # Push len database, phai check xem da co username chua
             # Check if username already in mongodb if not => create new user
             #                                       else => skip
@@ -193,7 +191,7 @@ class ResetPasswordScreen(QMainWindow):
     # SETTING BUTTON
         self.bt_back.clicked.connect(self.back_to_welcome)
         self.bt_dangnhap.clicked.connect(self.sign_in_screen)
-        self.bt_dangky.clicked.connect(self.show_popup) #sign_up_screen)
+        self.bt_dangky.clicked.connect(self.sign_up_screen) 
         self.bt_reset_password.clicked.connect(self.send_code_reset)
 
     def send_code_reset(self):
@@ -330,12 +328,19 @@ class LoadingScreen(QMainWindow):
     ########################################################################
     def progress(self):
 
-
         # SET VALUE TO PROGRESS BAR
         self.progressBar.setValue(self.counter)
 
         if self.counter == 10:
             self.label_description.setText("<strong>KIỂM TRA</strong> PHIÊN BẢN")
+            self.data ={}
+
+            self.data['id_wp'] = SignInScreen.id_wp
+            self.data['username_az'] = SignInScreen.username_az
+            self.data['password_az'] = SignInScreen.password_az
+            self.data['email'] = SignInScreen.email
+            self.data['token'] = SignInScreen.token
+            
 
         if self.counter == 22:
             self.label_description.setText("<strong>TẢI</strong> THÔNG TIN NGƯỜI DÙNG")
@@ -347,15 +352,23 @@ class LoadingScreen(QMainWindow):
                 print ('Đang thêm data lên MongoDB')
                 Database_mongoDB.insert_new_user_mongodb(self,SignInScreen.id_wp,SignInScreen.username_az,SignInScreen.password_az,SignInScreen.token)
                 print ('Đã thêm data lên MongoDB')
-
+            else:
+                x = Database_mongoDB.registered_Users_Collection.find({'_id': SignInScreen.id_wp})
+                for y in x:
+                    self.data['shopee'] = y['shopee']
             self.counter += 12
 
         if self.counter == 50:
             self.label_description.setText("<strong>TẢI</strong> TÀI NGUYÊN ỨNG DỤNG")
 
+
         if self.counter == 75:
             self.label_description.setText("<strong>TẢI</strong> THÔNG TIN KHUYẾN MÃI")
 
+        
+        if self.counter == 99:
+            with open('temp//data.json', 'w') as f:
+                json.dump(self.data, f)
         # CLOSE SPLASH SCREE AND OPEN APP
         if self.counter > 100:
             # STOP TIMER
