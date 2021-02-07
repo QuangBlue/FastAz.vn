@@ -159,6 +159,7 @@ class SignUpScreen(QMainWindow):
         def showMessage(message):
             self.frame_error.show()
             self.text_error.setText(message)
+
         us = self.username_create.text()
         pw = self.pass_create.text()
         em = self.email_create.text()
@@ -171,7 +172,6 @@ class SignUpScreen(QMainWindow):
             showMessage("Thiếu dữ liệu đăng ký! Bạn hãy thử lại nhé.")
         else:
             sign_up_result = backend.networks.Network.sign_up(self,us,pw,fn,ph,em)
-            # print(sign_up_result)
             if sign_up_result['result'] == 'success':
                 print("Create account successfully")
                 self.sign_in_screen()
@@ -222,15 +222,12 @@ class ResetPasswordScreen(QMainWindow):
             showMessage(text)
         else:
             request_result = backend.networks.Network.reset_password(self,self.email_reset.text())
-            # print(request_result)
             showMessage(request_result["message"])
             if request_result['data']['status'] == 200:
-                backend.loading.appWait(2000) #Can phai tim ra cach toi uu hon, bo vao trong network def
                 set_new_password_screen = SetNewPasswordScreen()
                 MainWindow.widget.addWidget(set_new_password_screen)
                 MainWindow.widget.setCurrentIndex(MainWindow.widget.currentIndex()+1)
 
-            # if result == False: ##################### <------ Làm hàm điều kiện
 
     def show_popup(self):
         msg = QMessageBox()
