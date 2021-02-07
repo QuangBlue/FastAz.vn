@@ -471,7 +471,7 @@ QLineEdit:hover{
 </string>
                   </property>
                   <property name="text">
-                   <string>Nhớ mất khẩu</string>
+                   <string>Nhớ mật khẩu</string>
                   </property>
                   <property name="iconSize">
                    <size>

@@ -42,7 +42,7 @@ class Dashboard(QMainWindow):
         ## ICON HOẶC AVARTA CỦA USER
         # ########################################################################
 
-        UIFunctions.userIcon(self, "QH", "", True)
+        UIFunctions.userIcon(self, "QH")
         self.label_user_icon.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.label_user_icon.mousePressEvent = self.show_popup_user
         # self.label_user_icon.customContextMenuRequested.connect(lambda pos, child=self.label_user_icon: self.customMenuEvent(pos, child))
@@ -120,7 +120,6 @@ class Dashboard(QMainWindow):
             self.btn_delete1.clicked.connect(self.delete1)
             self.tw_ratting1.setCellWidget(row,0,self.btn_delete1)
             self.btn_delete1.setStyleSheet('QPushButton { image: url(img//remove.png);}QPushButton:hover { image: url(img//remove_red.png);}')
-            # self.btn_delete1.setIcon(QIcon('img//remove.png'))
             row = row + 1
         row = 0
         for data_2 in s2:                   

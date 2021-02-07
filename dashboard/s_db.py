@@ -109,13 +109,13 @@ class UIFunctions:
         self.ui = Browser()
         self.ui.show()
 
-    def userIcon(self, initialsTooltip, icon, showHide):
+    def userIcon(self, initialsTooltip, icon = 'url(img//teamwork.png)', showHide = True):
         if showHide:
             self.label_user_icon.setText(initialsTooltip)
 
             if icon:
                 style = self.label_user_icon.styleSheet()
-                setIcon = "QLabel { background-image: " + icon + "; }"
+                setIcon = "QLabel { border-image: " + icon + "; }"
                 self.label_user_icon.setStyleSheet(style + setIcon)
                 self.label_user_icon.setText('')
                 self.label_user_icon.setToolTip(initialsTooltip)
