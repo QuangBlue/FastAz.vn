@@ -165,7 +165,8 @@ class UIFunctions:
 
     def close_App(self):
         Database_mongoDB.close_db_connection(self)
-        self.close()
+        app = QApplication.instance()
+        app.closeAllWindows()
 
 class Style:
 
