@@ -59,3 +59,10 @@ class Database_mongoDB:
     def insert_new_user_mongodb(self,username, password, avatar,token):
         newUser = backend.users.User(username,password,avatar,token)
         Database_mongoDB.registered_Users_Collection.insert_one(newUser.as_dict())
+
+# x = Database_mongoDB()
+# x.connect_to_mongoDB()
+# x.registered_Users_Collection.update_one(
+#   { '_id': 1 },
+#   { '$pull': { 'shopee.0.reply_rating.rating_1star': 'dfsdfsdfsdfsdfdsfsdfsdf'  } }
+# )

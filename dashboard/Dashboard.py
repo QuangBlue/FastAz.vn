@@ -1,14 +1,6 @@
-import sys
-from PyQt5 import QtWidgets, QtGui, QtCore
-from PyQt5.uic import loadUi
-import qrc.file_img_rc
-import webbrowser
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5.QtWidgets import *
+from main_pyqt5 import *
 from dashboard.s_db import *
 from dashboard.browser import Browser
-from main_pyqt5 import *
 from data_example import *
 from backend.MongoDB_Setup import * 
 
@@ -19,6 +11,8 @@ class Dashboard(QMainWindow):
         super(Dashboard,self).__init__()
         loadUi("ui//dashboard_screen.ui",self)
         self.resize(1920, 1080)
+        QtGui.QFontDatabase.addApplicationFont('font/Nunito/Nunito-Regular.ttf')
+        QtGui.QFontDatabase.addApplicationFont('font/Nunito/Nunito-Regular.ttf')
         # ########################################################################
         ## THÊM NUT MENU TẠI ĐÂY
         # ########################################################################
@@ -48,9 +42,10 @@ class Dashboard(QMainWindow):
         ## ICON HOẶC AVARTA CỦA USER
         # ########################################################################
 
-        UIFunctions.userIcon(self, "QH", "", True)
+        UIFunctions.userIcon(self, "QH")
         self.label_user_icon.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
-        self.label_user_icon.customContextMenuRequested.connect(lambda pos, child=self.label_user_icon: self.customMenuEvent(pos, child))
+        self.label_user_icon.mousePressEvent = self.show_popup_user
+        # self.label_user_icon.customContextMenuRequested.connect(lambda pos, child=self.label_user_icon: self.customMenuEvent(pos, child))
         # ########################################################################
         ## ẨN CỬA SỔ MẶC ĐỊNH
         # ########################################################################
@@ -111,11 +106,11 @@ class Dashboard(QMainWindow):
         s3 = data['shopee'][shop_c]['reply_rating']['rating_3star']
         s4 = data['shopee'][shop_c]['reply_rating']['rating_4star']
         s5 = data['shopee'][shop_c]['reply_rating']['rating_5star']
-        self.tw_ratting1.setRowCount(len(s1) if len(s1) >3 else 3)
-        self.tw_ratting2.setRowCount(len(s2) if len(s2) >3 else 3)
-        self.tw_ratting3.setRowCount(len(s3) if len(s3) >3 else 3)
-        self.tw_ratting4.setRowCount(len(s4) if len(s4) >3 else 3)
-        self.tw_ratting5.setRowCount(len(s5) if len(s5) >3 else 3)
+        self.tw_ratting1.setRowCount(len(s1))
+        self.tw_ratting2.setRowCount(len(s2))
+        self.tw_ratting3.setRowCount(len(s3))
+        self.tw_ratting4.setRowCount(len(s4))
+        self.tw_ratting5.setRowCount(len(s5))
   
         row = 0
         for data in s1:                   
@@ -124,7 +119,7 @@ class Dashboard(QMainWindow):
             self.btn_delete1 = QPushButton('')
             self.btn_delete1.clicked.connect(self.delete1)
             self.tw_ratting1.setCellWidget(row,0,self.btn_delete1)
-            self.btn_delete1.setIcon(QIcon('img//remove.png'))
+            self.btn_delete1.setStyleSheet('QPushButton { image: url(img//remove.png);}QPushButton:hover { image: url(img//remove_red.png);}')
             row = row + 1
         row = 0
         for data_2 in s2:                   
@@ -133,7 +128,7 @@ class Dashboard(QMainWindow):
             self.btn_delete2 = QPushButton('')
             self.btn_delete2.clicked.connect(self.delete2)
             self.tw_ratting2.setCellWidget(row,0,self.btn_delete2)
-            self.btn_delete2.setIcon(QIcon('img//remove.png'))           
+            self.btn_delete2.setStyleSheet('QPushButton { image: url(img//remove.png);}QPushButton:hover { image: url(img//remove_red.png);}')          
             row = row + 1
         row = 0
         for data_3 in s3:                   
@@ -142,7 +137,7 @@ class Dashboard(QMainWindow):
             self.btn_delete3 = QPushButton('')
             self.btn_delete3.clicked.connect(self.delete3)
             self.tw_ratting3.setCellWidget(row,0,self.btn_delete3)
-            self.btn_delete3.setIcon(QIcon('img//remove.png'))
+            self.btn_delete3.setStyleSheet('QPushButton { image: url(img//remove.png);}QPushButton:hover { image: url(img//remove_red.png);}')
             row = row + 1
         row = 0
         for data_4 in s4:                   
@@ -151,7 +146,7 @@ class Dashboard(QMainWindow):
             self.btn_delete4 = QPushButton('')
             self.btn_delete4.clicked.connect(self.delete4)
             self.tw_ratting4.setCellWidget(row,0,self.btn_delete4)
-            self.btn_delete4.setIcon(QIcon('img//remove.png'))
+            self.btn_delete4.setStyleSheet('QPushButton { image: url(img//remove.png);}QPushButton:hover { image: url(img//remove_red.png);}')
             row = row + 1
         row = 0
         for data_5 in s5:                   
@@ -160,8 +155,10 @@ class Dashboard(QMainWindow):
             self.btn_delete5 = QPushButton('')
             self.btn_delete5.clicked.connect(self.delete5)
             self.tw_ratting5.setCellWidget(row,0,self.btn_delete5)
-            self.btn_delete5.setIcon(QIcon('img//remove.png'))
+            self.btn_delete5.setStyleSheet('QPushButton { image: url(img//remove.png);}QPushButton:hover { image: url(img//remove_red.png);}')
             row = row + 1   
+
+        QTimer.singleShot(500,self.set_data_rating_shopee)
     def set_data_user_shopee(self):
         with open('temp//data.json') as f:
             data = json.load(f)
@@ -194,38 +191,77 @@ class Dashboard(QMainWindow):
         self.ui.show()
 
     def delete1(self):
-        button = self.sender()
-        index = self.tw_ratting1.indexAt(button.pos())
-        print('Đánh giá 1 sao', index.row(), index.column())
+        self.pos_table = self.tw_ratting1
+        self.table_name = 'rating_1star'
+        self.delete_ratings()
+
     def delete2(self):
-        button = self.sender()
-        index = self.tw_ratting1.indexAt(button.pos())
-        print('Đánh giá 2 sao', index.row(), index.column())
+        self.pos_table = self.tw_ratting2
+        self.table_name = 'rating_2star'
+        self.delete_ratings()
+
     def delete3(self):
-        button = self.sender()
-        index = self.tw_ratting1.indexAt(button.pos())
-        print('Đánh giá 3 sao', index.row(), index.column())
+        self.pos_table = self.tw_ratting3
+        self.table_name = 'rating_3star'
+        self.delete_ratings()        
+
     def delete4(self):
-        button = self.sender()
-        index = self.tw_ratting1.indexAt(button.pos())
-        print('Đánh giá 4 sao',index.row(), index.column())
+        self.pos_table = self.tw_ratting4
+        self.table_name = 'rating_4star'
+        self.delete_ratings()
+
     def delete5(self):
+        self.pos_table = self.tw_ratting5
+        self.table_name = 'rating_5star'
+        self.delete_ratings()
+
+    def delete_ratings(self):
         button = self.sender()
-        index = self.tw_ratting1.indexAt(button.pos())
-        print('Đánh giá 5 sao', index.row(), index.column())
+        index = self.pos_table.indexAt(button.pos())
 
+        with open('temp//data.json') as f:
+            data = json.load(f)
+            shopee = data['shopee']
+        shop_c = 0
+        for x in range(len(data['shopee'])):
+                if data['shopee'][x]['shop_name'] == self.comboBox_user.currentText():
+                    shop_c = x  
+        k = data['shopee'][shop_c]['reply_rating'][self.table_name][index.row()]
+        del data['shopee'][shop_c]['reply_rating'][self.table_name][index.row()]
+        with open('temp//data.json', 'w') as f:
+            json.dump(data, f)
+        Database_mongoDB.registered_Users_Collection.update_one(
+            { '_id': data['id_wp'] },
+            { '$pull': { f'shopee.{shop_c}.reply_rating.{self.table_name}': k } }
+            )
+        
+    def show_popup_user(self,event):
+        msg = QMessageBox()
+        msg.setWindowTitle('Thông tin tài khoản')
+        msg.setText('Tài khoản của bạn là <strong>VIP 1</strong> \n Còn thời hạn đến 16/03/2022')
+        logout_btn = msg.addButton('Đăng Xuất' , QtWidgets.QMessageBox.RejectRole)
+        logout_btn.clicked.connect(self.logout_screen)
+        extend_vip = msg.addButton('Gia Hạn' , QtWidgets.QMessageBox.YesRole)
+        extend_vip.clicked.connect(self.open_webbrowser)
+        msg.exec_()
+        
+    def logout_screen(self):
+        # f = open("temp//data.json", "w")
+        # data = json.load(f)
+        # data['savepass'] = "False"
+        # json.dump(data,f)
+        # f.close()
+        with open('temp//data.json') as f:
+            data = json.load(f)
+        data['savepass'] = "False"
+        with open('temp//data.json', 'w') as f:
+            json.dump(data, f)
+        MainWindow()
+        self.close()
 
-    def customMenuEvent(self, eventPosition, child):
-        child = self.childAt(self.sender().mapTo(self, eventPosition))
-        contextMenu = QMenu(self)
-        getText = contextMenu.addAction("Text")
-        getName = contextMenu.addAction("Name")
-        quitAct = contextMenu.addAction("Quit")
-        action = contextMenu.exec_(child.mapToGlobal(eventPosition))
+    def open_webbrowser(self):
+        webbrowser.open('http://fastaz.vn/')
 
-
-        if action == quitAct:
-            self.close()
 
     def mousePressEvent(self, event):
         self.dragPos = event.globalPos()
@@ -277,9 +313,6 @@ class Popup_Rating(QMainWindow):
         self.dashboard_screen = Dashboard()
         self.dashboard_screen.close()
 
-        self.closeEvent = self.closeEvent
-        # n = self.dashboard_screen.tw_ratting1.rowCount()
-        # print (n)
     def send_info_ratting(self):
         with open('temp//data.json') as f:
             data = json.load(f)
@@ -306,11 +339,6 @@ class Popup_Rating(QMainWindow):
             table = 'tw_ratting5'
             delete_bt = self.dashboard_screen.delete5
 
-        # print (self.dashboard_screen.tw_ratting1.rowCount())
-        # k = None
-        # exec(f'k = self.dashboard_screen.{table}.rowCount()')
-        # print(k)
-
 
         if len(new_rating) > 10 and len(new_rating) < 500 :
             for x in range(len(data['shopee'])):
@@ -322,15 +350,6 @@ class Popup_Rating(QMainWindow):
                         json.dump(data, f)
                     Database_mongoDB.registered_Users_Collection.replace_one({'_id':id_db},k,upsert = True)
                     self.show_popup('Thành công',f'Đã thêm thành công nội dụng trả lời cho {self.comboBox_ratting.currentText()}')
-        #             print (table)
-        #             n = table.rowCount()
-        #             print (n)
-        #             table.setItem(n-1,1,QtWidgets.QTableWidgetItem(n))
-        #             table.setItem(n-1,2,QtWidgets.QTableWidgetItem(new_rating))
-        #             self.d = QPushButton('')
-        #             self.d.clicked.connect(delete_bt)
-        #             table.setCellWidget(n-1,0,self.d)
-        #             self.d.setIcon(QIcon('img//remove.png'))
                     self.close()
         else:
             self.show_popup('Lỗi', 'Câu trả lời phải hơn 10 ký tự và nhỏ hơn 500 ký tự')
@@ -343,14 +362,3 @@ class Popup_Rating(QMainWindow):
         msg.setStandardButtons(QMessageBox.Ok)
         msg.exec_()
 
-    # def closeEvent(self, event):
-    #     print('ĐÓNG')
-    #     self.dashboard_screen.set_data_rating_shopee()
-
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    QtGui.QFontDatabase.addApplicationFont('font/Nunito/Nunito-Regular.ttf')
-    QtGui.QFontDatabase.addApplicationFont('font/Nunito/Nunito-Regular.ttf')
-    dashboard = Dashboard()
-    dashboard.installEventFilter(dashboard)
-    app.exec_() 

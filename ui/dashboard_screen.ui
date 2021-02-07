@@ -1500,9 +1500,11 @@ QPushButton:pressed {
                   </property>
                   <property name="styleSheet">
                    <string notr="true">QLabel {
+	border-image: url(:/img/teamwork.png);
+
 	border-radius: 30px;
 	background-color: rgb(44, 49, 60);
-	border: 5px solid rgb(39, 44, 54);
+
 }</string>
                   </property>
                   <property name="text">
@@ -1682,7 +1684,7 @@ QHeaderView::section:vertical
                        <bool>false</bool>
                       </property>
                       <property name="selectionMode">
-                       <enum>QAbstractItemView::SingleSelection</enum>
+                       <enum>QAbstractItemView::NoSelection</enum>
                       </property>
                       <property name="selectionBehavior">
                        <enum>QAbstractItemView::SelectRows</enum>
@@ -1851,7 +1853,7 @@ QHeaderView::section:vertical
                        <bool>false</bool>
                       </property>
                       <property name="selectionMode">
-                       <enum>QAbstractItemView::SingleSelection</enum>
+                       <enum>QAbstractItemView::NoSelection</enum>
                       </property>
                       <property name="selectionBehavior">
                        <enum>QAbstractItemView::SelectRows</enum>
@@ -2017,7 +2019,7 @@ QHeaderView::section:vertical
                        <bool>false</bool>
                       </property>
                       <property name="selectionMode">
-                       <enum>QAbstractItemView::SingleSelection</enum>
+                       <enum>QAbstractItemView::NoSelection</enum>
                       </property>
                       <property name="selectionBehavior">
                        <enum>QAbstractItemView::SelectRows</enum>
@@ -2174,7 +2176,7 @@ QHeaderView::section:vertical
                        <bool>false</bool>
                       </property>
                       <property name="selectionMode">
-                       <enum>QAbstractItemView::SingleSelection</enum>
+                       <enum>QAbstractItemView::NoSelection</enum>
                       </property>
                       <property name="selectionBehavior">
                        <enum>QAbstractItemView::SelectRows</enum>
@@ -2334,7 +2336,7 @@ QHeaderView::section:vertical
                        <bool>false</bool>
                       </property>
                       <property name="selectionMode">
-                       <enum>QAbstractItemView::SingleSelection</enum>
+                       <enum>QAbstractItemView::NoSelection</enum>
                       </property>
                       <property name="selectionBehavior">
                        <enum>QAbstractItemView::SelectRows</enum>
@@ -2534,8 +2536,8 @@ QHeaderView::section:vertical
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>1439</width>
-                             <height>854</height>
+                             <width>334</width>
+                             <height>176</height>
                             </rect>
                            </property>
                            <layout class="QVBoxLayout" name="verticalLayout_11">

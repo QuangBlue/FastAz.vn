@@ -20,6 +20,20 @@ class Network:
             return x.json()
 
     @backend.loading.setWaitCursor
+    def sign_in_token(self,token):
+        try:
+            headers = {
+                'Authorization' : 'Bearer '+ token
+            }
+            x = requests.post('http://fastaz.vn/wp-json/jwt-auth/v1/token/validate', headers=headers)
+        except (requests.exceptions.HTTPError,requests.exceptions.ConnectionError,requests.exceptions.Timeout,requests.exceptions.RequestException) as err:
+            print(str(err))
+            main_pyqt5.ResetPasswordScreen.show_popup(self)
+            raise Exception("Lỗi Server!!!")
+        else:
+            return x.json()
+
+    @backend.loading.setWaitCursor
     def sign_up(self,user_name,password,name,phone,email):
         try:
             data = {'user_name': user_name,

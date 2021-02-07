@@ -5,12 +5,10 @@ from PyQt5.uic import loadUi
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
-import qrc.file_img_rc
-
 
 ## IMPORT SCREEN
 from dashboard.Dashboard import *
-
+import qrc.file_img_rc
 ## Database
 import backend.networks
 import backend.MongoDB_Setup as db
@@ -22,7 +20,6 @@ class WelcomeScreen(QMainWindow):
     def __init__(self):
         super(WelcomeScreen,self).__init__()
         loadUi("ui//welcome.ui",self)
-
     # SETTING BUTTON
         self.pushButton_trangchu.clicked.connect(self.open_webbrowser)
         self.pushButton_banggia.clicked.connect(self.open_webbrowser)
@@ -31,14 +28,42 @@ class WelcomeScreen(QMainWindow):
         self.pushButton_dangky.clicked.connect(self.sign_up_screen)
 
     def sign_in_screen(self):
-        sign_in_screen = SignInScreen()
-        widget.addWidget(sign_in_screen)
-        widget.setCurrentIndex(widget.currentIndex()+1)
+        WelcomeScreen.savepass = "False"
+        try:
+            with open('temp//data.json') as f:
+                data = json.load(f)
+                
+        except:
+            sign_in_screen = SignInScreen()
+            MainWindow.widget.addWidget(sign_in_screen)
+            MainWindow.widget.setCurrentIndex(MainWindow.widget.currentIndex()+1)
+        # if os.path.isfile('temp//data.json'):
+        #     with open('temp//data.json') as f:
+        #         data = json.load(f)
+        else:
+            WelcomeScreen.savepass = data['savepass']
+            if data['savepass'] == "True":
+                re = backend.networks.Network.sign_in_token(self,data['token'])
+                if re['success'] == True:
+                    print('Đăng nhập tự động')
+                    MainWindow.mongo_db.connect_to_mongoDB() 
+                    self.ui = LoadingScreen()
+                    MainWindow.widget.hide()
+                else:
+                    WelcomeScreen.savepass = "False"
+                    sign_in_screen = SignInScreen()
+                    MainWindow.widget.addWidget(sign_in_screen)
+                    MainWindow.widget.setCurrentIndex(MainWindow.widget.currentIndex()+1) 
+                    
+            else:        
+                sign_in_screen = SignInScreen()
+                MainWindow.widget.addWidget(sign_in_screen)
+                MainWindow.widget.setCurrentIndex(MainWindow.widget.currentIndex()+1)
 
     def sign_up_screen(self):
         sign_up_screen = SignUpScreen()
-        widget.addWidget(sign_up_screen)
-        widget.setCurrentIndex(widget.currentIndex()+1)
+        MainWindow.widget.addWidget(sign_up_screen)
+        MainWindow.widget.setCurrentIndex(MainWindow.widget.currentIndex()+1)
 
 
     def open_webbrowser(self):
@@ -50,7 +75,7 @@ class SignInScreen(QMainWindow):
     def __init__(self):
         super(SignInScreen,self).__init__()
         loadUi("ui//sign_in_screen.ui",self)
-        mongo_db.connect_to_mongoDB() 
+        MainWindow.mongo_db.connect_to_mongoDB() 
     # SETTING FRAME ERROR HIDE
         self.bt_x.clicked.connect(lambda : self.frame_error.hide())
         self.frame_error.hide()
@@ -63,7 +88,7 @@ class SignInScreen(QMainWindow):
         self.bt_reset_password.clicked.connect(self.reset_password_screen)
         self.password.returnPressed.connect(self.check_login)
 
-        widget.closeEvent = self.closeEvent
+        MainWindow.widget.closeEvent = self.closeEvent
 
     def closeEvent(self,event):
         Database_mongoDB.close_db_connection(self)
@@ -82,24 +107,15 @@ class SignInScreen(QMainWindow):
             SignInScreen.password_az = self.password.text()
             SignInScreen.token = re['data']['token']
             SignInScreen.email = re['data']['email']
-
+            if self.checkBox_savepass.isChecked():
+                SignInScreen.savepass = "True"
+            else:
+                SignInScreen.savepass = "False"
 
             print (f'Đã đăng nhập thành công user {self.username.text()}. Password: {self.password.text()}' )
-            # Push len database, phai check xem da co username chua
-            # Check if username already in mongodb if not => create new user
-            #                                       else => skip
-
-            # print ('Đang check tài khoản')
-            # if db.check_username_fastaz(self.username.text()) == False:
-            #     # username, password, avatar,token,shopee
-            #     print ('Đang thêm data lên MongoDB')
-            #     db.create_new_user(re['data']['id'],self.username.text(),self.password.text(),re['data']['token'])
-            #     print ('Đã thêm data lên MongoDB')
-
             self.ui = LoadingScreen()
-            widget.close()
+            MainWindow.widget.hide()
 
-            # return [re['data']['id'],self.username.text(),self.password.text(),re['data']['token']]
 
         elif re['success'] == False:
             showMessage(re['message'])
@@ -107,18 +123,18 @@ class SignInScreen(QMainWindow):
 
     def back_to_welcome(self):
         welcome_screen = WelcomeScreen()
-        widget.addWidget(welcome_screen)
-        widget.setCurrentIndex(widget.currentIndex()+1)
+        MainWindow.widget.addWidget(welcome_screen)
+        MainWindow.widget.setCurrentIndex(MainWindow.widget.currentIndex()+1)
 
     def sign_up_screen(self):
         sign_up_screen = SignUpScreen()
-        widget.addWidget(sign_up_screen)
-        widget.setCurrentIndex(widget.currentIndex()+1)
+        MainWindow.widget.addWidget(sign_up_screen)
+        MainWindow.widget.setCurrentIndex(MainWindow.widget.currentIndex()+1)
 
     def reset_password_screen(self):
         reset_password_screen = ResetPasswordScreen()
-        widget.addWidget(reset_password_screen)
-        widget.setCurrentIndex(widget.currentIndex()+1)
+        MainWindow.widget.addWidget(reset_password_screen)
+        MainWindow.widget.setCurrentIndex(MainWindow.widget.currentIndex()+1)
 
 
 # MANAGER SCREEN ---- SIGN UP ----
@@ -169,13 +185,13 @@ class SignUpScreen(QMainWindow):
 
     def back_to_welcome(self):
         welcome_screen = WelcomeScreen()
-        widget.addWidget(welcome_screen)
-        widget.setCurrentIndex(widget.currentIndex()+1)
+        MainWindow.widget.addWidget(welcome_screen)
+        MainWindow.widget.setCurrentIndex(MainWindow.widget.currentIndex()+1)
 
     def sign_in_screen(self):
         sign_in_screen = SignInScreen()
-        widget.addWidget(sign_in_screen)
-        widget.setCurrentIndex(widget.currentIndex()+1)
+        MainWindow.widget.addWidget(sign_in_screen)
+        MainWindow.widget.setCurrentIndex(MainWindow.widget.currentIndex()+1)
 
 # MANAGER SCREEN ---- RESET PASSWORD ----
 
@@ -211,8 +227,8 @@ class ResetPasswordScreen(QMainWindow):
             if request_result['data']['status'] == 200:
                 backend.loading.appWait(2000) #Can phai tim ra cach toi uu hon, bo vao trong network def
                 set_new_password_screen = SetNewPasswordScreen()
-                widget.addWidget(set_new_password_screen)
-                widget.setCurrentIndex(widget.currentIndex()+1)
+                MainWindow.widget.addWidget(set_new_password_screen)
+                MainWindow.widget.setCurrentIndex(MainWindow.widget.currentIndex()+1)
 
             # if result == False: ##################### <------ Làm hàm điều kiện
 
@@ -226,18 +242,18 @@ class ResetPasswordScreen(QMainWindow):
 
     def back_to_welcome(self):
         welcome_screen = WelcomeScreen()
-        widget.addWidget(welcome_screen)
-        widget.setCurrentIndex(widget.currentIndex()+1)
+        MainWindow.widget.addWidget(welcome_screen)
+        MainWindow.widget.setCurrentIndex(MainWindow.widget.currentIndex()+1)
 
     def sign_in_screen(self):
         sign_in_screen = SignInScreen()
-        widget.addWidget(sign_in_screen)
-        widget.setCurrentIndex(widget.currentIndex()+1)
+        MainWindow.widget.addWidget(sign_in_screen)
+        MainWindow.widget.setCurrentIndex(MainWindow.widget.currentIndex()+1)
 
     def sign_up_screen(self):
         sign_up_screen = SignUpScreen()
-        widget.addWidget(sign_up_screen)
-        widget.setCurrentIndex(widget.currentIndex()+1)
+        MainWindow.widget.addWidget(sign_up_screen)
+        MainWindow.widget.setCurrentIndex(MainWindow.widget.currentIndex()+1)
 
 # MANAGER SCREEN ---- SET NEW PASSWORD ----
 
@@ -275,16 +291,15 @@ class SetNewPasswordScreen(QMainWindow):
 
 
 
-
     def back_to_welcome(self):
         welcome_screen = WelcomeScreen()
-        widget.addWidget(welcome_screen)
-        widget.setCurrentIndex(widget.currentIndex()+1)
+        MainWindow.widget.addWidget(welcome_screen)
+        MainWindow.widget.setCurrentIndex(MainWindow.widget.currentIndex()+1)
 
     def sign_in_screen(self):
         sign_in_screen = SignInScreen()
-        widget.addWidget(sign_in_screen)
-        widget.setCurrentIndex(widget.currentIndex()+1)
+        MainWindow.widget.addWidget(sign_in_screen)
+        MainWindow.widget.setCurrentIndex(MainWindow.widget.currentIndex()+1)
 
 class LoadingScreen(QMainWindow):
     def __init__(self):
@@ -314,11 +329,6 @@ class LoadingScreen(QMainWindow):
         # Initial Text
         self.label_description.setText("<strong>CHÀO BẠN</strong> ĐẾN VỚI ỨNG DỤNG")
 
-        # Change Texts
-        # QtCore.QTimer.singleShot(1500, lambda: self.label_description.setText("<strong>LOADING</strong> DATABASE"))
-        # QtCore.QTimer.singleShot(3000, lambda: self.label_description.setText("<strong>LOADING</strong> USER INTERFACE"))
-
-
         ## SHOW ==> MAIN WINDOW
         ########################################################################
         self.show()
@@ -333,30 +343,32 @@ class LoadingScreen(QMainWindow):
 
         if self.counter == 10:
             self.label_description.setText("<strong>KIỂM TRA</strong> PHIÊN BẢN")
-            self.data ={}
-
-            self.data['id_wp'] = SignInScreen.id_wp
-            self.data['username_az'] = SignInScreen.username_az
-            self.data['password_az'] = SignInScreen.password_az
-            self.data['email'] = SignInScreen.email
-            self.data['token'] = SignInScreen.token
-            
+            if WelcomeScreen.savepass != "True":
+                self.data ={}
+                self.data['id_wp'] = SignInScreen.id_wp
+                self.data['username_az'] = SignInScreen.username_az
+                self.data['password_az'] = SignInScreen.password_az
+                self.data['email'] = SignInScreen.email
+                self.data['token'] = SignInScreen.token
+                self.data['savepass'] = SignInScreen.savepass
 
         if self.counter == 22:
             self.label_description.setText("<strong>TẢI</strong> THÔNG TIN NGƯỜI DÙNG")
 
         if self.counter == 24:
-            print ('Đang check tài khoản')
+            
             # Checking for the first time if this is a new user, if so, insert user info to mongodb database.
-            if Database_mongoDB.check_username_fastaz(self,SignInScreen.username_az) == False:
-                print ('Đang thêm data lên MongoDB')
-                Database_mongoDB.insert_new_user_mongodb(self,SignInScreen.id_wp,SignInScreen.username_az,SignInScreen.password_az,SignInScreen.token)
-                print ('Đã thêm data lên MongoDB')
-            else:
-                x = Database_mongoDB.registered_Users_Collection.find({'_id': SignInScreen.id_wp})
-                for y in x:
-                    self.data['shopee'] = y['shopee']
-            self.counter += 12
+            if WelcomeScreen.savepass != "True":
+                print ('Đang check tài khoản')
+                if Database_mongoDB.check_username_fastaz(self,SignInScreen.username_az) == False:
+                    print ('Đang thêm data lên MongoDB')
+                    Database_mongoDB.insert_new_user_mongodb(self,SignInScreen.id_wp,SignInScreen.username_az,SignInScreen.password_az,SignInScreen.token)
+                    print ('Đã thêm data lên MongoDB')
+                else:
+                    x = Database_mongoDB.registered_Users_Collection.find({'_id': SignInScreen.id_wp})
+                    for y in x:
+                        self.data['shopee'] = y['shopee']
+                self.counter += 12
 
         if self.counter == 50:
             self.label_description.setText("<strong>TẢI</strong> TÀI NGUYÊN ỨNG DỤNG")
@@ -367,30 +379,34 @@ class LoadingScreen(QMainWindow):
 
         
         if self.counter == 99:
-            with open('temp//data.json', 'w') as f:
-                json.dump(self.data, f)
+            if WelcomeScreen.savepass != "True":
+                with open('temp//data.json', 'w') as f:
+                    json.dump(self.data, f)
         # CLOSE SPLASH SCREE AND OPEN APP
         if self.counter > 100:
             # STOP TIMER
             self.timer.stop()
 
             # SHOW MAIN WINDOW
+            from dashboard.Dashboard import Dashboard
             self.main = Dashboard()
-            self.main.show()
 
             # CLOSE SPLASH SCREEN
-            self.close()
+            self.hide()
 
         # INCREASE COUNTER
         self.counter += 1
 
-if __name__ == '__main__':
+class MainWindow():
+    def __init__(self):       
+        MainWindow.widget = QtWidgets.QStackedWidget()
+        welcome_screen = WelcomeScreen()
+        MainWindow.mongo_db = db.Database_mongoDB()
+        MainWindow.widget.addWidget(welcome_screen)
+        MainWindow.widget.resize(1920, 1080)
+        MainWindow.widget.show()       
+
+if __name__ == '__main__': 
     app = QApplication(sys.argv)
-    widget = QtWidgets.QStackedWidget()
-    welcome_screen = WelcomeScreen()
-    mongo_db = db.Database_mongoDB()
-    # mongo_db.connect_to_mongoDB() # Connecting to database.
-    widget.addWidget(welcome_screen)
-    widget.resize(1920, 1080)
-    widget.show()
+    MainWindow()
     app.exec_()
