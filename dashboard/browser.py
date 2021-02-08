@@ -48,8 +48,9 @@ class Browser(QWidget):
 
         url = 'https://banhang.shopee.vn/api/v2/login'
         r = requests.post(url, cookies=cookie)
-        self.close()
-        print (r.text)
+        # self.close()
+        # print (r.text)
+        if MongoDB_Setup.check_shopee_username   r.text['shopid']
 
 class MyWebEngineView(QWebEngineView):
     def __init__(self, *args, **kwargs):
