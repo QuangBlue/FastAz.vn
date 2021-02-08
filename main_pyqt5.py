@@ -401,6 +401,8 @@ class MainWindow():
         MainWindow.mongo_db = db.Database_mongoDB()
         MainWindow.widget.addWidget(welcome_screen)
         MainWindow.widget.resize(1920, 1080)
+        QtGui.QFontDatabase.addApplicationFont('font/Nunito/Nunito-Regular.ttf')
+        QtGui.QFontDatabase.addApplicationFont('font/Nunito/Nunito-Regular.ttf')
         MainWindow.widget.show()       
 
 if __name__ == '__main__': 

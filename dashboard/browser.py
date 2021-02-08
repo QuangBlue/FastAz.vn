@@ -1,47 +1,76 @@
-import sys
-from PyQt5.QtCore import QUrl, QByteArray
+import sys,requests,pickle
+from PyQt5.QtCore import QUrl, QByteArray, QSize, Qt
 from PyQt5.QtWebEngineWidgets import QWebEngineView, QWebEngineProfile, QWebEnginePage
 from PyQt5.QtWidgets import *
 from PyQt5.QtNetwork import *
-from backend.MongoDB_Setup import Database_mongoDB
-import pickle
+from PyQt5.QtGui import QFont
+from http.cookies import SimpleCookie
+# from backend.MongoDB_Setup import Database_mongoDB
 
+class Browser(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setup()
 
-class Browser(QMainWindow):
+    def setup(self):
+        self.box = QVBoxLayout(self)
+        self.btn_get = QPushButton('THÊM TÀI KHOẢN')
+        self.btn_get.clicked.connect(self.get_cookie)
+        self.btn_get.setObjectName(u"btn_get")
+        self.btn_get.setMinimumSize(QSize(0, 40))
+        self.btn_get.setStyleSheet(u"#btn_get{border-radius: 20px;padding:8px 25px 7px 25px;background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));color: rgb(255, 255, 255);}#btn_get:hover{background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(15, 181, 253, 255), stop:1 rgba(89, 64, 231, 255));}#btn_get:pressed{background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));}")
+        font = QFont()
+        font.setFamily(u"Nunito")
+        font.setPointSize(18)
+        font.setBold(True)
+        self.btn_get.setFont(font)
+        self.label_browser = QLabel('Sau khi đăng nhập THÀNH CÔNG vui lòng bấm vào nút THÊM TÀI KHOẢN phía trên')
+        self.label_browser.setObjectName(u"label")
+        self.label_browser.setMaximumSize(QSize(16777215, 40))
+        font1 = QFont()
+        font1.setFamily(u"Nunito")
+        font1.setPointSize(16)
+        font1.setBold(True)
+        self.label_browser.setFont(font1)
+        self.label_browser.setStyleSheet(u"color: rgb(27, 63, 216);")
+        self.label_browser.setAlignment(Qt.AlignCenter)
+        
+        self.web = MyWebEngineView()
+        self.web.resize(1280, 720)
+        self.web.load(QUrl("https://banhang.shopee.vn/"))
+        self.box.addWidget(self.btn_get)
+        self.box.addWidget(self.label_browser)
+        self.box.addWidget(self.web)
+        self.web.show()
+
+    def get_cookie(self):
+        cookie = self.web.get_cookie()
+        
+        url = 'https://banhang.shopee.vn/api/v2/login'
+        r = requests.post(url, cookies=cookie)
+
+        print (r.text)
+
+class MyWebEngineView(QWebEngineView):
     def __init__(self, *args, **kwargs):
-        QMainWindow.__init__(self, *args, **kwargs)
-        self.resize(1280, 720)
-        self.webview = QWebEngineView()
-        self.webview.page().profile().cookieStore().deleteAllCookies()
-        self.webview.load(QUrl("https://shopee.vn/buyer/login"))
-        self.setCentralWidget(self.webview)
-        self.webview.page().loadFinished.connect(self.__getCookieRunJs)
+        super(MyWebEngineView, self).__init__(*args, **kwargs)
 
-    def __getCookieRunJs(self):
-        runJs = '''
-        function getCookie(){return document.cookie}
-        getCookie();
-        '''
-        self.webview.page().runJavaScript(runJs, self.__getCookieByJs)
+        QWebEngineProfile.defaultProfile().cookieStore().deleteAllCookies()
+        QWebEngineProfile.defaultProfile().cookieStore().cookieAdded.connect(self.onCookieAdd)
+        self.cookies = {}       
 
-    def __getCookieByJs(self, result):
-        print (result)
-        print ('Bắt đầu lưu')
-        self.save_cookies(result,'temp//cookie.txt')
-        print ('Đã đầu lưu')
+    def onCookieAdd(self, cookie):
+        name = cookie.name().data().decode('utf-8')     
+        value = cookie.value().data().decode('utf-8')  
+        self.cookies[name] = value                       
 
-    def save_cookies(self,requests_cookiejar, filename):
-        with open(filename, 'wb') as f:
-            pickle.dump(requests_cookiejar, f)
 
-    def closeEvent(self, event):
-        with open('temp//cookie.txt', 'rb') as infile:
-            text = infile.read()
-        print(text)
-        # Database_mongoDB.find_and_updateDB(self,10,{"shopee":"chuoi 324234"})
+    def get_cookie(self):
+        return self.cookies
+        
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app = QApplication(sys.argv)
     w = Browser()
     w.show()
-    app.exec_()
+    sys.exit(app.exec_())
