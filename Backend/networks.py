@@ -1,6 +1,7 @@
-import requests
+import requests, json, pickle
 import main_pyqt5
 import backend.loading
+from http.cookies import SimpleCookie
 
 class Network:
 
@@ -87,6 +88,16 @@ class Network:
             raise Exception("Lỗi Server!!!")
         else:
             return r.json()
+
+    @backend.loading.setWaitCursor
+    def get_info_account_shopee(self):
+        c = SimpleCookie()
+
+
+
+
+
+
 
 if __name__ == '__main__':
     pass

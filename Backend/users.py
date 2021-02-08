@@ -34,6 +34,30 @@ import json
 
 # Sau này khi có nhiều khách hàng:
 # Chỉ update product ID (dựa vào account nào) khi nó khác nhau giữa shopee và mongodb thì mới update.
+
+class Shopee:
+    def __init__(self,cookie = "",id_sp = "",shop_name = ""):
+        self.data = {"cookie":"",
+            "id_sp":"",
+            "shop_name":"",
+            "shop_id":"",
+            "total_product":"",
+            "total_order":"",
+            "status_cookie":"",
+            "reply_rating":{
+                "rating_1star":[]
+                ,"rating_2star":[]
+                ,"rating_3star":[]
+                ,"rating_4star":[]
+                ,"rating_5star":[]}
+                }
+ 
+    def edit_reply_rating(self,rating_number,array):
+        self.data['reply_rating'][rating_star_number] = array
+
+    def append_to_rating_number(self,rating_number,content):
+        self.data['reply_rating'][rating_number].append(content)
+
 class Product:
     def __init__(self, productID=None, productName=None, productQuantity=None, productImage=None):
         try:
@@ -41,7 +65,7 @@ class Product:
             self._product_name = str(productName)
             self._product_quantity = int(productQuantity)
             self._product_img = str(productImage)
-            
+
         except ValueError as e:
             print(e)
 
@@ -85,7 +109,7 @@ class User:
             "token":self._token,
             "avatar": self._avatar,
             "shopee": self._shopee
-            
+
             }
         # dict1.update(self._list_data_push_product)
         return dict1
@@ -102,21 +126,3 @@ class User:
              "Product_name": self._new_product.get_product_name(),
              "Product_quantity": self._new_product.get_product_quantity(),
              "Product_img": self._new_product.get_product_img()}
-
-
-# user1 = User(username="Huy", password="yes", avatar="img1234")
-# user1.add_new_product("114", "Balo Nike", 100, "Image URL")
-# print(user1)
-
-# Username: Huy
-# Password: yes
-# Avatar: img1234
-# {"token": {"": ""}}
-# {
-#     "Product": {
-#         "Product_ID": 114,
-#         "Product_name": "Balo Nike",
-#         "Product_quantity": 100,
-#         "Product_img": "Image URL
-#     }
-# }
