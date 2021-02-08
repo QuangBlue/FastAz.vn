@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtNetwork import *
 from PyQt5.QtGui import QFont
 from http.cookies import SimpleCookie
-# from backend.MongoDB_Setup import Database_mongoDB
+from backend.MongoDB_Setup import Database_mongoDB
 
 class Browser(QWidget):
     def __init__(self):
@@ -34,7 +34,7 @@ class Browser(QWidget):
         self.label_browser.setFont(font1)
         self.label_browser.setStyleSheet(u"color: rgb(27, 63, 216);")
         self.label_browser.setAlignment(Qt.AlignCenter)
-        
+
         self.web = MyWebEngineView()
         self.web.resize(1280, 720)
         self.web.load(QUrl("https://banhang.shopee.vn/"))
@@ -45,10 +45,10 @@ class Browser(QWidget):
 
     def get_cookie(self):
         cookie = self.web.get_cookie()
-        
+
         url = 'https://banhang.shopee.vn/api/v2/login'
         r = requests.post(url, cookies=cookie)
-
+        self.close()
         print (r.text)
 
 class MyWebEngineView(QWebEngineView):
@@ -57,17 +57,17 @@ class MyWebEngineView(QWebEngineView):
 
         QWebEngineProfile.defaultProfile().cookieStore().deleteAllCookies()
         QWebEngineProfile.defaultProfile().cookieStore().cookieAdded.connect(self.onCookieAdd)
-        self.cookies = {}       
+        self.cookies = {}
 
     def onCookieAdd(self, cookie):
-        name = cookie.name().data().decode('utf-8')     
-        value = cookie.value().data().decode('utf-8')  
-        self.cookies[name] = value                       
+        name = cookie.name().data().decode('utf-8')
+        value = cookie.value().data().decode('utf-8')
+        self.cookies[name] = value
 
 
     def get_cookie(self):
         return self.cookies
-        
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

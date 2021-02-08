@@ -55,6 +55,14 @@ class Database_mongoDB:
         else:
             return False
 
+    def check_shopee_username(self,shopee_username):
+        if Database_mongoDB.registered_Users_Collection.count_documents({"id_sp":shopee_username}) != 0:
+            return True
+        else:
+            return False
+
+
+
 
     def insert_new_user_mongodb(self,username, password, avatar,token):
         newUser = backend.users.User(username,password,avatar,token)
