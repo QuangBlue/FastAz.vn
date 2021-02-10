@@ -55,17 +55,19 @@ class Database_mongoDB:
         else:
             return False
 
-    def check_shopee_username(self,shopee_username):
-        if Database_mongoDB.registered_Users_Collection.count_documents({"id_sp":shopee_username}) != 0:
+    def check_shopee_username(self,shopee_username,id_sp):
+        """Check shopee username by unique id_sp"""
+        if Database_mongoDB.registered_Users_Collection.count_documents({"username_az" : str(shopee_username) ,"shopee.shop_id" :str(id_sp)}) != 0:
             return True
         else:
             return False
 
 
-
-
-    def insert_new_user_mongodb(self,username, password, avatar,token):
-        newUser = backend.users.User(username,password,avatar,token)
+    def insert_new_user_mongodb(self,username,password,avatar,token,shop_cookies,shop_id,shop_name):
+        #SAI CANNOT CREATE NEW USER, MUST LOCATE username_az and insert new shopee to the shopee list
+        newUser = backend.users.User(self,username,password,avatar,token) # Create a blank user firstName
+        # Then add shopee information
+        newUser.add_new_shopee_shop(shop_cookies,shop_id,shop_name)
         Database_mongoDB.registered_Users_Collection.insert_one(newUser.as_dict())
 
 # x = Database_mongoDB()

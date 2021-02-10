@@ -36,11 +36,10 @@ import json
 # Chỉ update product ID (dựa vào account nào) khi nó khác nhau giữa shopee và mongodb thì mới update.
 
 class Shopee:
-    def __init__(self,cookie = "",id_sp = "",shop_name = ""):
-        self.data = {"cookie":"",
-            "id_sp":"",
-            "shop_name":"",
-            "shop_id":"",
+    def __init__(self,shop_cookie = "",shop_id = "",shop_name = ""):
+        self.data = {"cookie":shop_cookie,
+            "id_sp":shop_id,
+            "shop_name":shop_name,
             "total_product":"",
             "total_order":"",
             "status_cookie":"",
@@ -51,7 +50,9 @@ class Shopee:
                 ,"rating_4star":[]
                 ,"rating_5star":[]}
                 }
- 
+    def as_dict(self):
+        return self.data
+
     def edit_reply_rating(self,rating_number,array):
         self.data['reply_rating'][rating_star_number] = array
 
@@ -83,9 +84,9 @@ class Product:
 
 
 class User:
-    def __init__(self, _id=None, username="", password="",token="", avatar=""):
+    def __init__(self, _id=None, username="", password="",token="", avatar="", cookies="",id_sp="",shop_name=""):
         try:
-            self._id = int(_id)
+            self._id = str(_id) #Double check
             self._username_az = str(username)
             self._password_az = str(password)
             self._avatar = str(avatar)
@@ -109,10 +110,13 @@ class User:
             "token":self._token,
             "avatar": self._avatar,
             "shopee": self._shopee
-
             }
         # dict1.update(self._list_data_push_product)
         return dict1
+
+    def add_new_shopee_shop(self,shop_cookies,shop_id,shop_name):
+        newShop = Shopee(shop_cookies,shop_id,shop_name)
+        self._shopee.append(newShop.as_dict())
 
     def add_new_product(self, productID, productName, productQuantity, productImage):
         """ Add sản phẩm mới vào user

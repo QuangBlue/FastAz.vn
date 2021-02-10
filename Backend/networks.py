@@ -98,20 +98,10 @@ class Network:
         return ''.join((random.choice(character) for i in range(8))) + '-' + ''.join((random.choice(character) for i in range(4))) + '-' + ''.join((random.choice(character) for i in range(4))) + '-' + ''.join((random.choice(character) for i in range(4))) + '-' + ''.join((random.choice(character) for i in range(12)))
 
     @backend.loading.setWaitCursor
-    def get_info_account_shopee(self):
-        c = SimpleCookie()
-        c.load(load_cookies('cookie.txt'))
-
-        x = {}
-        for key, morsel in c.items():
-            x[key] = morsel.value
+    def get_info_account_shopee(self,cookie):
+        url = 'https://banhang.shopee.vn/api/v2/login'
         try:
-            r = requests.get('https://banhang.shopee.vn/webchat/api/v1.2/mini/login', cookies=x)
-            if r.status_code == 200:
-                print (f'Đăng nhập tài khoản còn hiệu lực.')
-                print(r.text)
-            else:
-                print ('Đăng nhập hết hạn hoặc có lỗi. Đang thử đăng nhập lại..')
+            r = requests.post(url, cookies=cookie)
         except (requests.exceptions.HTTPError,requests.exceptions.ConnectionError,requests.exceptions.Timeout,requests.exceptions.RequestException) as err:
             print(str(err))
             main_pyqt5.ResetPasswordScreen.show_popup(self)
