@@ -63,12 +63,41 @@ class Database_mongoDB:
             return False
 
 
-    def insert_new_user_mongodb(self,username,password,avatar,token,shop_cookies,shop_id,shop_name):
+    def insert_new_shopee_mongodb(self,username_az,shop_cookies,id_sp,shop_id,shop_name):
         #SAI CANNOT CREATE NEW USER, MUST LOCATE username_az and insert new shopee to the shopee list
-        newUser = backend.users.User(self,username,password,avatar,token) # Create a blank user firstName
-        # Then add shopee information
-        newUser.add_new_shopee_shop(shop_cookies,shop_id,shop_name)
-        Database_mongoDB.registered_Users_Collection.insert_one(newUser.as_dict())
+        Database_mongoDB.registered_Users_Collection.update(
+            {"username_az": str(username_az)},
+            {"$push":
+                {"shopee":{"$each":[
+                                { "cookie":str(shop_cookies),
+                                    "id_sp": str(id_sp),
+                                    "shop_name": str(shop_name),
+                                    "shop_id": str(shop_id),
+                                    "total_product": "",
+                                    "total_order": "",
+                                    "status_cookie": "",
+                                    "total_order": "",
+                                    "reply_rating": {
+                                            "rating_1star": [],
+                                            "rating_2star": [],
+                                            "rating_3star": [],
+                                            "rating_4star": [],
+                                            "rating_5star": []
+                                        }},
+                                    ]}
+                            }},
+            upsert=True)
+
+
+        #
+        #
+        # # Then add shopee information
+        # newUser.add_new_shopee_shop(shop_cookies,shop_id,shop_name)
+        # Database_mongoDB.registered_Users_Collection.insert_one(newUser.as_dict())
+
+    def insert_new_user_mongodb(username, password, avatar,token):
+        newUser = userClass.User(username,password,avatar,token)
+        registered_Users_Collection.insert_one(newUser.as_dict())
 
 # x = Database_mongoDB()
 # x.connect_to_mongoDB()

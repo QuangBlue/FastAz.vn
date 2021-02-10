@@ -49,29 +49,15 @@ class Browser(QWidget):
         cookie = self.web.get_cookie()
         shopee_info_json = Network.get_info_account_shopee(self,cookie)
         print(shopee_info_json)
-        self.data = {"cookie":"",
-            "id_sp":"",
-            "shop_name":"",
-            "shop_id":"",
-            "total_product":"",
-            "total_order":"",
-            "status_cookie":"",
-            "reply_rating":{
-                "rating_1star":[]
-                ,"rating_2star":[]
-                ,"rating_3star":[]
-                ,"rating_4star":[]
-                ,"rating_5star":[]}
-                }
         with open("temp//data.json") as json_file:  #Get username_az
             data = json.load(json_file)
         # Check for duplicates shopee id_sp on mongodb, if not, create a new shop with blank info.
         if not Database_mongoDB.check_shopee_username(self,data['username_az'],shopee_info_json['shopid']):
-            Database_mongoDB.insert_new_user_mongodb(self,data['username_az'], "password", "avatar", "token", "shop_cookies",shopee_info_json['shopid'],"shopname")
-
-        # print(Database_mongoDB.check_shopee_username(self,data['username_az'],shopee_info_json['shopid']))
-
-
+            Database_mongoDB.insert_new_shopee_mongodb(self,data['username_az'],cookie,shopee_info_json['id'],shopee_info_json['shopid'],shopee_info_json['username'])
+            #Tạo pop up message nếu thành công
+        else:
+            #Tạo pop up message không thành công
+            print("Shop này đã có trên database")
         self.close()
 
 class MyWebEngineView(QWebEngineView):
