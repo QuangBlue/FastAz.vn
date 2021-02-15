@@ -4,7 +4,7 @@ from PyQt5 import QtWidgets, QtGui, QtCore
 from PyQt5.uic import loadUi
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
-from PyQt5.QtWidgets import *
+from PyQt5.QtWidgets import QMainWindow, QApplication, QGraphicsDropShadowEffect, QPushButton, QSizePolicy, QSizeGrip, QMessageBox
 
 ## IMPORT SCREEN
 from dashboard.Dashboard import *
@@ -348,6 +348,7 @@ class LoadingScreen(QMainWindow):
                 self.data['email'] = SignInScreen.email
                 self.data['token'] = SignInScreen.token
                 self.data['savepass'] = SignInScreen.savepass
+                self.data['shopee'] = []
 
         if self.counter == 22:
             self.label_description.setText("<strong>TẢI</strong> THÔNG TIN NGƯỜI DÙNG")

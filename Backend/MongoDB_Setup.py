@@ -1,5 +1,4 @@
-import pymongo
-import datetime
+import pymongo, json
 import backend.users
 
 
@@ -88,16 +87,24 @@ class Database_mongoDB:
                             }},
             upsert=True)
 
-
+        with open('temp//data.json') as f:
+                data = json.load(f)
+        x = Database_mongoDB.registered_Users_Collection.find({'username_az': str(username_az)})
+        for y in x:
+            data['shopee'] = y['shopee']
+        with open('temp//data.json', 'w') as f:
+                    json.dump(data, f)
         #
         #
         # # Then add shopee information
         # newUser.add_new_shopee_shop(shop_cookies,shop_id,shop_name)
         # Database_mongoDB.registered_Users_Collection.insert_one(newUser.as_dict())
+    # def find_user(self,id_wp):
+    #     Database_mongoDB.registered_Users_Collection.find({'_id': id_wp)
 
-    def insert_new_user_mongodb(username, password, avatar,token):
-        newUser = userClass.User(username,password,avatar,token)
-        registered_Users_Collection.insert_one(newUser.as_dict())
+    def insert_new_user_mongodb(self,_id,username, password,token):
+        newUser = backend.users.User(_id,username,password,token)
+        Database_mongoDB.registered_Users_Collection.insert_one(newUser.as_dict())
 
 # x = Database_mongoDB()
 # x.connect_to_mongoDB()

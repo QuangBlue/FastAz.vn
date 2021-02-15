@@ -98,9 +98,7 @@ class Dashboard(QMainWindow):
             data = json.load(f)
             shopee = data['shopee']
         shop_c = 0
-        if len(shopee) == 0: 
-            print('Bạn chưa thêm tài khoản')
-        else:
+        if len(shopee) != 0: 
             for x in range(len(data['shopee'])):
                 if data['shopee'][x]['shop_name'] == self.comboBox_user.currentText():
                     shop_c = x           
@@ -161,16 +159,14 @@ class Dashboard(QMainWindow):
                 self.btn_delete5.setStyleSheet('QPushButton { image: url(img//remove.png);}QPushButton:hover { image: url(img//remove_red.png);}')
                 row = row + 1   
 
-            QTimer.singleShot(500,self.set_data_rating_shopee)
+        QTimer.singleShot(500,self.set_data_rating_shopee)
     def set_data_user_shopee(self):
         with open('temp//data.json') as f:
             data = json.load(f)
             shopee = data['shopee']
         row = 0
         self.tableWidget.setRowCount(len(shopee) if len(shopee) >25 else 25)
-        if len(shopee) == 0: 
-            print('Bạn chưa thêm tài khoản')
-        else:
+        if len(shopee) != 0: 
             for data in shopee:
                 self.tableWidget.setItem(row, 0,QtWidgets.QTableWidgetItem(data['id_sp']))
                 self.tableWidget.setItem(row, 1,QtWidgets.QTableWidgetItem(data['shop_name']))
@@ -188,10 +184,10 @@ class Dashboard(QMainWindow):
                 for x in range(len(shopee)):
                     self.comboBox_user.addItem(shopee[x]['shop_name'])
 
-            self.comboBox_user.currentTextChanged.connect(lambda: print(self.comboBox_user.currentText()))
+            # self.comboBox_user.currentTextChanged.connect(lambda: print(self.comboBox_user.currentText()))
 
             Dashboard.comboBox_user_text = self.comboBox_user.currentText()
-
+        QTimer.singleShot(500,self.set_data_user_shopee)
     def pop_up_rating(self):
         self.ui = Popup_Rating()
         self.ui.show()
