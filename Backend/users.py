@@ -86,7 +86,7 @@ class Product:
 class User:
     def __init__(self, _id=None, username="", password="",token="", avatar="", cookies="",id_sp="",shop_name=""):
         try:
-            self._id = str(_id) #Double check
+            self._id = _id #Double check
             self._username_az = str(username)
             self._password_az = str(password)
             self._avatar = str(avatar)

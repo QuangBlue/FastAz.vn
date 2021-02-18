@@ -7,7 +7,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import QMainWindow, QApplication, QGraphicsDropShadowEffect, QPushButton, QSizePolicy, QSizeGrip, QMessageBox
 
 ## IMPORT SCREEN
-from dashboard.Dashboard import *
+from dashboard.dashboard import *
 import qrc.file_img_rc
 ## Database
 import backend.networks
@@ -31,19 +31,17 @@ class WelcomeScreen(QMainWindow):
         WelcomeScreen.savepass = "False"
         try:
             with open('temp//data.json') as f:
-                data = json.load(f)
+                WelcomeScreen.data = json.load(f)
                 
         except:
             sign_in_screen = SignInScreen()
             MainWindow.widget.addWidget(sign_in_screen)
             MainWindow.widget.setCurrentIndex(MainWindow.widget.currentIndex()+1)
-        # if os.path.isfile('temp//data.json'):
-        #     with open('temp//data.json') as f:
-        #         data = json.load(f)
+
         else:
-            WelcomeScreen.savepass = data['savepass']
-            if data['savepass'] == "True":
-                re = backend.networks.Network.sign_in_token(self,data['token'])
+            WelcomeScreen.savepass = WelcomeScreen.data['savepass']
+            if WelcomeScreen.data['savepass'] == "True":
+                re = backend.networks.Network.sign_in_token(self,WelcomeScreen.data['token'])
                 if re['success'] == True:
                     print('Đăng nhập tự động')
                     MainWindow.mongo_db.connect_to_mongoDB() 
@@ -102,7 +100,7 @@ class SignInScreen(QMainWindow):
         re = backend.networks.Network.sign_in(self,self.username.text(),self.password.text())
         if re['success']:
             # KHAI BÁO BIẾN CHO CLASS
-            SignInScreen.id_wp = re['data']['id']
+            SignInScreen.id_wp = int(re['data']['id'])
             SignInScreen.username_az = self.username.text()
             SignInScreen.password_az = self.password.text()
             SignInScreen.token = re['data']['token']
@@ -340,7 +338,7 @@ class LoadingScreen(QMainWindow):
 
         if self.counter == 10:
             self.label_description.setText("<strong>KIỂM TRA</strong> PHIÊN BẢN")
-            if WelcomeScreen.savepass != "True":
+            if WelcomeScreen.savepass == "False":
                 self.data ={}
                 self.data['id_wp'] = SignInScreen.id_wp
                 self.data['username_az'] = SignInScreen.username_az
@@ -356,7 +354,7 @@ class LoadingScreen(QMainWindow):
         if self.counter == 24:
             
             # Checking for the first time if this is a new user, if so, insert user info to mongodb database.
-            if WelcomeScreen.savepass != "True":
+            if WelcomeScreen.savepass == "False":
                 print ('Đang check tài khoản')
                 if Database_mongoDB.check_username_fastaz(self,SignInScreen.username_az) == False:
                     print ('Đang thêm data lên MongoDB')
@@ -367,6 +365,14 @@ class LoadingScreen(QMainWindow):
                     for y in x:
                         self.data['shopee'] = y['shopee']
                 self.counter += 12
+            if WelcomeScreen.savepass == "True":
+
+                data_t = WelcomeScreen.data
+                x = Database_mongoDB.registered_Users_Collection.find({'_id':  data_t['id_wp']})
+                for y in x:
+                    data_t['shopee'] = y['shopee']
+                with open('temp//data.json', 'w') as f:
+                    json.dump(data_t, f)
 
         if self.counter == 50:
             self.label_description.setText("<strong>TẢI</strong> TÀI NGUYÊN ỨNG DỤNG")
@@ -377,7 +383,7 @@ class LoadingScreen(QMainWindow):
 
         
         if self.counter == 99:
-            if WelcomeScreen.savepass != "True":
+            if WelcomeScreen.savepass == "False":
                 with open('temp//data.json', 'w') as f:
                     json.dump(self.data, f)
         # CLOSE SPLASH SCREE AND OPEN APP
@@ -386,7 +392,7 @@ class LoadingScreen(QMainWindow):
             self.timer.stop()
 
             # SHOW MAIN WINDOW
-            from dashboard.Dashboard import Dashboard
+            from dashboard.dashboard import Dashboard
             self.main = Dashboard()
 
             # CLOSE SPLASH SCREEN
