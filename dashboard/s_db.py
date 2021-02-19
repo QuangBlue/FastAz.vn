@@ -129,29 +129,68 @@ class UIFunctions:
             shopee = data['shopee']
         row = 0
         self.tableWidget.setRowCount(len(shopee) if len(shopee) >25 else 25)
+        self.tableWidget.setColumnWidth(0, 70)
+        self.tableWidget.setColumnWidth(1, 180)
+        self.tableWidget.setColumnWidth(2, 280)
+        self.tableWidget.setColumnWidth(3, 180)
+        self.tableWidget.setColumnWidth(4, 200)
+        self.tableWidget.setColumnWidth(5, 200)
+
         if len(shopee) != 0: 
+            
             for data in shopee:
-                self.tableWidget.setItem(row, 0,QtWidgets.QTableWidgetItem(data['id_sp']))
-                self.tableWidget.setItem(row, 1,QtWidgets.QTableWidgetItem(data['shop_name']))
-                self.tableWidget.setItem(row, 2,QtWidgets.QTableWidgetItem(data['shop_id']))
-                self.tableWidget.setItem(row, 3,QtWidgets.QTableWidgetItem(data['total_product']))
-                self.tableWidget.setItem(row, 4,QtWidgets.QTableWidgetItem(data['total_order']))
-                self.tableWidget.setItem(row, 5,QtWidgets.QTableWidgetItem('Còn Hiệu Lực') if data['status_cookie'] == 'True' else QtWidgets.QTableWidgetItem('Hết Hiệu Lực'))
-                self.tableWidget.item(row, 5).setForeground(QtGui.QColor(73, 165, 43) if data['status_cookie'] == 'True' else QtGui.QColor(201, 5, 22))
+                self.btn_del_user = QPushButton('')
+                self.btn_del_user.clicked.connect(lambda: UIFunctions.btn_del_user(self))
+                self.tableWidget.setCellWidget(row,0,self.btn_del_user)
+                self.btn_del_user.setStyleSheet('QPushButton { image: url(img//remove.png);}QPushButton:hover { image: url(img//remove_red.png);}')
+                self.tableWidget.setItem(row, 1,QtWidgets.QTableWidgetItem(data['id_sp']))
+                self.tableWidget.setItem(row, 2,QtWidgets.QTableWidgetItem(data['shop_name']))
+                self.tableWidget.setItem(row, 3,QtWidgets.QTableWidgetItem(data['shop_id']))
+                self.tableWidget.setItem(row, 4,QtWidgets.QTableWidgetItem(data['total_product']))
+                self.tableWidget.setItem(row, 5,QtWidgets.QTableWidgetItem(data['total_order']))
+                self.tableWidget.setItem(row, 6,QtWidgets.QTableWidgetItem('Còn Hiệu Lực') if data['status_cookie'] == 'True' else QtWidgets.QTableWidgetItem('Hết Hiệu Lực'))
+                self.tableWidget.item(row, 6).setForeground(QtGui.QColor(73, 165, 43) if data['status_cookie'] == 'True' else QtGui.QColor(201, 5, 22))
                 font = QtGui.QFont()
                 font.setBold(True)
-                self.tableWidget.item(row, 5).setFont(font)
+                self.tableWidget.item(row, 6).setFont(font)
                 row = row + 1
-            if len(shopee) > 0:
-                self.comboBox_user.removeItem(0)
-                for x in range(len(shopee)):
+            self.comboBox_user.removeItem(0)
+            for x in range(len(shopee)):
+                if shopee[x]['status_cookie'] == "True":
                     self.comboBox_user.addItem(shopee[x]['shop_name'])
-            
+                    # if x == 0:
+                        
+        elif len(shopee) ==0 :
+
+            self.comboBox_user.addItem("Chưa có tài khoản") 
+
+    def btn_del_user(self):
+        button = self.sender()
+        index = self.tableWidget.indexAt(button.pos())
+        with open('temp//data.json') as f:
+            data = json.load(f)
+
+        Database_mongoDB.registered_Users_Collection.update({"_id": data['id_wp']}, {"$unset": {f"shopee.{index.row()}": 1}})
+        Database_mongoDB.registered_Users_Collection.update({"_id": data['id_wp']}, {"$pull": {"shopee": None}})
+
+        del data['shopee'][index.row()]
+        with open('temp//data.json', 'w') as f:
+            json.dump(data, f)
+
+        for i in reversed(range(self.tableWidget.rowCount())):
+            self.tableWidget.removeRow(i)  
+
+        self.comboBox_user.clear()
+
+        UIFunctions.set_data_user_shopee(self)
+
     def set_data_rating_shopee(self):
         with open('temp//data.json') as f:
             data = json.load(f)
             shopee = data['shopee']
         shop_c = 0
+
+        
         if len(shopee) != 0: 
             for x in range(len(data['shopee'])):
                 if data['shopee'][x]['shop_name'] == self.comboBox_user.currentText():
@@ -161,14 +200,19 @@ class UIFunctions:
             s3 = data['shopee'][shop_c]['reply_rating']['rating_3star']
             s4 = data['shopee'][shop_c]['reply_rating']['rating_4star']
             s5 = data['shopee'][shop_c]['reply_rating']['rating_5star']
-            self.tw_ratting1.setRowCount(len(s1))
-            self.tw_ratting2.setRowCount(len(s2))
-            self.tw_ratting3.setRowCount(len(s3))
-            self.tw_ratting4.setRowCount(len(s4))
-            self.tw_ratting5.setRowCount(len(s5))
-    
+            # self.tw_ratting1.setRowCount(len(s1))
+            # self.tw_ratting2.setRowCount(len(s2))
+            # self.tw_ratting3.setRowCount(len(s3))
+            # self.tw_ratting4.setRowCount(len(s4))
+            # self.tw_ratting5.setRowCount(len(s5))
+            self.tw_ratting1.setRowCount(len(s1) if len(s1) >3 else 3)  
+            self.tw_ratting2.setRowCount(len(s2) if len(s2) >3 else 3)   
+            self.tw_ratting3.setRowCount(len(s3) if len(s3) >3 else 3)
+            self.tw_ratting4.setRowCount(len(s4) if len(s4) >3 else 3)
+            self.tw_ratting5.setRowCount(len(s5) if len(s5) >3 else 3)
             row = 0
-            for data in s1:                 
+            for data in s1:
+                               
                 self.tw_ratting1.setItem(row, 1,QtWidgets.QTableWidgetItem(str(row+1)))
                 self.tw_ratting1.setItem(row, 2,QtWidgets.QTableWidgetItem(data))
                 self.btn_delete1 = QPushButton('')
@@ -177,7 +221,8 @@ class UIFunctions:
                 self.btn_delete1.setStyleSheet('QPushButton { image: url(img//remove.png);}QPushButton:hover { image: url(img//remove_red.png);}')
                 row = row + 1
             row = 0
-            for data_2 in s2:                   
+            for data_2 in s2: 
+                                     
                 self.tw_ratting2.setItem(row, 1,QtWidgets.QTableWidgetItem(str(row+1)))
                 self.tw_ratting2.setItem(row, 2,QtWidgets.QTableWidgetItem(data_2))
                 self.btn_delete2 = QPushButton('')
@@ -186,7 +231,8 @@ class UIFunctions:
                 self.btn_delete2.setStyleSheet('QPushButton { image: url(img//remove.png);}QPushButton:hover { image: url(img//remove_red.png);}')          
                 row = row + 1
             row = 0
-            for data_3 in s3:                   
+            for data_3 in s3:   
+                             
                 self.tw_ratting3.setItem(row, 1,QtWidgets.QTableWidgetItem(str(row+1)))
                 self.tw_ratting3.setItem(row, 2,QtWidgets.QTableWidgetItem(data_3))
                 self.btn_delete3 = QPushButton('')
@@ -195,7 +241,8 @@ class UIFunctions:
                 self.btn_delete3.setStyleSheet('QPushButton { image: url(img//remove.png);}QPushButton:hover { image: url(img//remove_red.png);}')
                 row = row + 1
             row = 0
-            for data_4 in s4:                   
+            for data_4 in s4:
+                                    
                 self.tw_ratting4.setItem(row, 1,QtWidgets.QTableWidgetItem(str(row+1)))
                 self.tw_ratting4.setItem(row, 2,QtWidgets.QTableWidgetItem(data_4))
                 self.btn_delete4 = QPushButton('')
@@ -204,7 +251,8 @@ class UIFunctions:
                 self.btn_delete4.setStyleSheet('QPushButton { image: url(img//remove.png);}QPushButton:hover { image: url(img//remove_red.png);}')
                 row = row + 1
             row = 0
-            for data_5 in s5:                   
+            for data_5 in s5:  
+                                 
                 self.tw_ratting5.setItem(row, 1,QtWidgets.QTableWidgetItem(str(row+1)))
                 self.tw_ratting5.setItem(row, 2,QtWidgets.QTableWidgetItem(data_5))
                 self.btn_delete5 = QPushButton('')
@@ -212,6 +260,14 @@ class UIFunctions:
                 self.tw_ratting5.setCellWidget(row,0,self.btn_delete5)
                 self.btn_delete5.setStyleSheet('QPushButton { image: url(img//remove.png);}QPushButton:hover { image: url(img//remove_red.png);}')
                 row = row + 1
+
+        elif len(shopee) == 0:
+            self.tw_ratting1.setRowCount(3)
+            self.tw_ratting2.setRowCount(3)
+            self.tw_ratting3.setRowCount(3)
+            self.tw_ratting4.setRowCount(3)
+            self.tw_ratting5.setRowCount(3)
+
                 
     def pop_up_rating(self):
         from dashboard.dashboard import Popup_Rating
@@ -263,6 +319,9 @@ class UIFunctions:
             { '_id': data['id_wp'] },
             { '$pull': { f'shopee.{shop_c}.reply_rating.{self.table_name}': k } }
             )
+        for i in reversed(range(self.tableWidget.rowCount())):
+            self.pos_table.removeRow(i) 
+        
         UIFunctions.set_data_rating_shopee(self)    
 
 

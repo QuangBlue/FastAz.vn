@@ -68,13 +68,13 @@ class Database_mongoDB:
             {"username_az": str(username_az)},
             {"$push":
                 {"shopee":{"$each":[
-                                { "cookie":str(shop_cookies),
+                                { "cookie": shop_cookies,
                                     "id_sp": str(id_sp),
                                     "shop_name": str(shop_name),
                                     "shop_id": str(shop_id),
                                     "total_product": "",
                                     "total_order": "",
-                                    "status_cookie": "",
+                                    "status_cookie": "True",
                                     "total_order": "",
                                     "reply_rating": {
                                             "rating_1star": [],

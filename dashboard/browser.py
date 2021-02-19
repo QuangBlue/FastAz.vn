@@ -16,6 +16,7 @@ class Browser(QWidget):
         self.setup()
         self.get_cookie()
         self.msg = QMessageBox()
+        self.center()
     def setup(self):
         self.box = QVBoxLayout(self)
         # self.btn_get = QPushButton('THÊM TÀI KHOẢN')
@@ -67,7 +68,6 @@ class Browser(QWidget):
         if status == 1:        
             cookie = self.web.get_cookie()
             shopee_info_json = Network.get_info_account_shopee(self,cookie)
-            print(shopee_info_json)
             with open("temp//data.json") as json_file:  #Get username_az
                 data = json.load(json_file)
             # Check for duplicates shopee id_sp on mongodb, if not, create a new shop with blank info.
@@ -99,6 +99,13 @@ class Browser(QWidget):
     def closeEvent(self,event):
         global status
         status = 2
+
+    def center(self):
+        frameGm = self.frameGeometry()
+        screen = QApplication.desktop().screenNumber(QApplication.desktop().cursor().pos())
+        centerPoint = QApplication.desktop().screenGeometry(screen).center()
+        frameGm.moveCenter(centerPoint)
+        self.move(frameGm.topLeft())
         
 class MyWebEngineView(QWebEngineView):
     def __init__(self, *args, **kwargs):

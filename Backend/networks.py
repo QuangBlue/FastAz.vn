@@ -109,6 +109,18 @@ class Network:
         else:
             return r.json()
 
+    @backend.loading.setWaitCursor
+    def check_cookie(self,cookie):
+        url = 'https://banhang.shopee.vn/api/v2/login'
+        try:
+            r = requests.post(url, cookies=cookie)
+        except (requests.exceptions.HTTPError,requests.exceptions.ConnectionError,requests.exceptions.Timeout,requests.exceptions.RequestException) as err:
+            print(str(err))
+            main_pyqt5.ResetPasswordScreen.show_popup(self)
+            raise Exception("Lỗi Server!!!")
+        else:
+            return r.status_code
+
 
 if __name__ == '__main__':
     pass

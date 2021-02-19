@@ -357,7 +357,6 @@ class LoadingScreen(QMainWindow):
             if WelcomeScreen.savepass == "False":
                 print ('Đang check tài khoản')
                 if Database_mongoDB.check_username_fastaz(self,SignInScreen.username_az) == False:
-                    print ('Đang thêm data lên MongoDB')
                     Database_mongoDB.insert_new_user_mongodb(self,SignInScreen.id_wp,SignInScreen.username_az,SignInScreen.password_az,SignInScreen.token)
                     print ('Đã thêm data lên MongoDB')
                 else:
@@ -366,7 +365,6 @@ class LoadingScreen(QMainWindow):
                         self.data['shopee'] = y['shopee']
                 self.counter += 12
             if WelcomeScreen.savepass == "True":
-
                 data_t = WelcomeScreen.data
                 x = Database_mongoDB.registered_Users_Collection.find({'_id':  data_t['id_wp']})
                 for y in x:
@@ -375,17 +373,33 @@ class LoadingScreen(QMainWindow):
                     json.dump(data_t, f)
 
         if self.counter == 50:
-            self.label_description.setText("<strong>TẢI</strong> TÀI NGUYÊN ỨNG DỤNG")
-
-
-        if self.counter == 75:
-            self.label_description.setText("<strong>TẢI</strong> THÔNG TIN KHUYẾN MÃI")
-
-        
-        if self.counter == 99:
             if WelcomeScreen.savepass == "False":
                 with open('temp//data.json', 'w') as f:
                     json.dump(self.data, f)
+            self.label_description.setText("<strong>TẢI</strong> TÀI NGUYÊN ỨNG DỤNG")
+            
+        if self.counter == 75:           
+            with open('temp//data.json') as f:
+                d = json.load(f)
+                k = d['shopee']
+                if len(k) != 0:
+                    for i in range(len(k)):
+                        cookie = k[i]['cookie']
+                        r = backend.networks.Network.check_cookie(self,cookie)
+                        if r == 200:
+                            d['shopee'][i]['status_cookie'] = "True"
+                            with open('temp//data.json', 'w') as f:
+                                json.dump(d,f)
+                            Database_mongoDB.find_and_updateDB(self,d['id_wp'],{f"shopee.{i}.status_cookie" : "True"})
+                        elif r != 200:
+                            d['shopee'][i]['status_cookie'] = "False"
+                            with open('temp//data.json', 'w') as f:
+                                json.dump(d,f)
+                            Database_mongoDB.find_and_updateDB(self,d['id_wp'],{f"shopee.{i}.status_cookie" : "False"})
+        
+        if self.counter == 99:
+            self.label_description.setText("<strong>TẢI</strong> THÔNG TIN KHUYẾN MÃI")
+            
         # CLOSE SPLASH SCREE AND OPEN APP
         if self.counter > 100:
             # STOP TIMER
