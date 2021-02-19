@@ -129,6 +129,7 @@ class UIFunctions:
             shopee = data['shopee']
         row = 0
         self.tableWidget.setRowCount(len(shopee) if len(shopee) >25 else 25)
+
         self.tableWidget.setColumnWidth(0, 70)
         self.tableWidget.setColumnWidth(1, 180)
         self.tableWidget.setColumnWidth(2, 280)
@@ -150,22 +151,66 @@ class UIFunctions:
                 self.tableWidget.setItem(row, 3,QtWidgets.QTableWidgetItem(data['shop_id']))
                 self.tableWidget.setItem(row, 4,QtWidgets.QTableWidgetItem(data['total_product']))
                 self.tableWidget.setItem(row, 5,QtWidgets.QTableWidgetItem(data['total_order']))
-                self.tableWidget.setItem(row, 6,QtWidgets.QTableWidgetItem('Còn Hiệu Lực') if data['status_cookie'] == 'True' else QtWidgets.QTableWidgetItem('Hết Hiệu Lực'))
-                self.tableWidget.item(row, 6).setForeground(QtGui.QColor(73, 165, 43) if data['status_cookie'] == 'True' else QtGui.QColor(201, 5, 22))
-                font = QtGui.QFont()
-                font.setBold(True)
-                self.tableWidget.item(row, 6).setFont(font)
+                # self.tableWidget.setItem(row, 6,QtWidgets.QTableWidgetItem('Còn Hiệu Lực') if data['status_cookie'] == 'True' else QtWidgets.QTableWidgetItem('Hết Hiệu Lực'))
+               
+
+                if data['status_cookie'] == 'True':
+                    layout = QHBoxLayout()
+                    label = QLabel('Còn Hiệu Lực')
+                    font = QtGui.QFont()
+                    font.setBold(True)
+                    font.setFamily(u"Nunito")
+                    font.setPointSize(16)
+                    label.setStyleSheet(u"color: rgb(73, 165, 43);")
+                    label.setMaximumSize(QSize(110, 16777215))
+                    label.setFont(font)
+                    layout.addWidget(label)
+                    layout.setContentsMargins(10, 0, 0, 0)
+                    cellWidget = QWidget()
+                    cellWidget.setLayout(layout)                   
+                    self.tableWidget.setCellWidget(row, 6, cellWidget)               
+
+                else:
+                    layout = QHBoxLayout()
+                    label = QLabel('Hết Hiệu Lực')
+                    font = QtGui.QFont()
+                    font.setBold(True)
+                    font.setFamily(u"Nunito")
+                    font.setPointSize(16)
+                    label.setStyleSheet(u"color: rgb(201, 5, 22);")
+                    label.setMaximumSize(QSize(110, 16777215))
+                    label.setMinimumSize(QSize(110, 0))
+                    label.setFont(font)
+                    btn_gh = QPushButton('Gia Hạn')
+                    btn_gh.setFont(font)
+                    btn_gh.setMinimumSize(QSize(100, 0))
+                    btn_gh.setMaximumSize(QSize(100, 16777215))
+                    btn_gh.setStyleSheet("QPushButton { border-radius: 10px; background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));color: rgb(255, 255, 255);} QPushButton:hover { background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(15, 181, 253, 255), stop:1 rgba(89, 64, 231, 255));}QPushButton:pressed{background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));}")
+                    f = QFrame()
+                    f1 = QFrame()
+                    layout.addWidget(f1)
+                    layout.addWidget(label)
+                    layout.addWidget(btn_gh)
+                    layout.addWidget(f)
+                    layout.setContentsMargins(0, 0, 0, 0)
+                    cellWidget = QWidget()
+                    cellWidget.setLayout(layout)                   
+                    self.tableWidget.setCellWidget(row, 6, cellWidget)
+               
+               
+                # self.tableWidget.item(row, 6).setForeground(QtGui.QColor(73, 165, 43) if data['status_cookie'] == 'True' else QtGui.QColor(201, 5, 22))
+                
                 row = row + 1
-            # self.comboBox_user.removeItem(0)
             for x in range(len(shopee)):
                 if shopee[x]['status_cookie'] == "True":
                     self.comboBox_user.addItem(shopee[x]['shop_name'])
-                    # if x == 0:
                         
         if self.comboBox_user.count() == 0 :
 
             self.comboBox_user.addItem("Chưa có tài khoản") 
 
+        for row in range(self.tableWidget.rowCount()):
+            self.tableWidget.setRowHeight(row, 50)
     def btn_del_user(self):
         button = self.sender()
         index = self.tableWidget.indexAt(button.pos())
@@ -180,9 +225,7 @@ class UIFunctions:
             json.dump(data, f)
 
         for i in reversed(range(self.tableWidget.rowCount())):
-            self.tableWidget.removeRow(i)  
-
-        
+            self.tableWidget.removeRow(i)    
 
         UIFunctions.set_data_user_shopee(self)
 
@@ -191,7 +234,6 @@ class UIFunctions:
             data = json.load(f)
             shopee = data['shopee']
         shop_c = 0
-
         
         if len(shopee) != 0: 
             for x in range(len(data['shopee'])):
@@ -202,11 +244,7 @@ class UIFunctions:
             s3 = data['shopee'][shop_c]['reply_rating']['rating_3star']
             s4 = data['shopee'][shop_c]['reply_rating']['rating_4star']
             s5 = data['shopee'][shop_c]['reply_rating']['rating_5star']
-            # self.tw_ratting1.setRowCount(len(s1))
-            # self.tw_ratting2.setRowCount(len(s2))
-            # self.tw_ratting3.setRowCount(len(s3))
-            # self.tw_ratting4.setRowCount(len(s4))
-            # self.tw_ratting5.setRowCount(len(s5))
+
             self.tw_ratting1.setRowCount(len(s1) if len(s1) >3 else 3)  
             self.tw_ratting2.setRowCount(len(s2) if len(s2) >3 else 3)   
             self.tw_ratting3.setRowCount(len(s3) if len(s3) >3 else 3)

@@ -7,13 +7,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1500</width>
+    <width>1560</width>
     <height>1000</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>1500</width>
+    <width>1560</width>
     <height>1000</height>
    </size>
   </property>
@@ -1579,7 +1579,7 @@ QPushButton:pressed {
                    <string notr="true">background: transparent;</string>
                   </property>
                   <property name="currentIndex">
-                   <number>0</number>
+                   <number>3</number>
                   </property>
                   <widget class="QWidget" name="page_reply_ratting">
                    <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -3309,7 +3309,7 @@ QHeaderView::section:vertical
                       <property name="font">
                        <font>
                         <family>Nunito</family>
-                        <pointsize>15</pointsize>
+                        <pointsize>16</pointsize>
                        </font>
                       </property>
                       <property name="styleSheet">
