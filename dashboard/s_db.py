@@ -136,6 +136,8 @@ class UIFunctions:
         self.tableWidget.setColumnWidth(4, 200)
         self.tableWidget.setColumnWidth(5, 200)
 
+        self.comboBox_user.clear()
+
         if len(shopee) != 0: 
             
             for data in shopee:
@@ -154,13 +156,13 @@ class UIFunctions:
                 font.setBold(True)
                 self.tableWidget.item(row, 6).setFont(font)
                 row = row + 1
-            self.comboBox_user.removeItem(0)
+            # self.comboBox_user.removeItem(0)
             for x in range(len(shopee)):
                 if shopee[x]['status_cookie'] == "True":
                     self.comboBox_user.addItem(shopee[x]['shop_name'])
                     # if x == 0:
                         
-        elif len(shopee) ==0 :
+        if self.comboBox_user.count() == 0 :
 
             self.comboBox_user.addItem("Chưa có tài khoản") 
 
@@ -180,7 +182,7 @@ class UIFunctions:
         for i in reversed(range(self.tableWidget.rowCount())):
             self.tableWidget.removeRow(i)  
 
-        self.comboBox_user.clear()
+        
 
         UIFunctions.set_data_user_shopee(self)
 

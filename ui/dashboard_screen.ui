@@ -1253,7 +1253,7 @@ QPushButton:pressed {
                  <widget class="QComboBox" name="comboBox_user">
                   <property name="maximumSize">
                    <size>
-                    <width>240</width>
+                    <width>280</width>
                     <height>36</height>
                    </size>
                   </property>
@@ -1282,7 +1282,7 @@ QPushButton:pressed {
                    <bool>false</bool>
                   </property>
                   <property name="currentText">
-                   <string notr="true">Chưa có tài khoản</string>
+                   <string notr="true"/>
                   </property>
                   <property name="insertPolicy">
                    <enum>QComboBox::NoInsert</enum>
@@ -1293,11 +1293,6 @@ QPushButton:pressed {
                   <property name="duplicatesEnabled">
                    <bool>false</bool>
                   </property>
-                  <item>
-                   <property name="text">
-                    <string>Chưa có tài khoản</string>
-                   </property>
-                  </item>
                  </widget>
                 </item>
                 <item>
@@ -1584,7 +1579,7 @@ QPushButton:pressed {
                    <string notr="true">background: transparent;</string>
                   </property>
                   <property name="currentIndex">
-                   <number>3</number>
+                   <number>0</number>
                   </property>
                   <widget class="QWidget" name="page_reply_ratting">
                    <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -1693,7 +1688,7 @@ QHeaderView::section:vertical
                        <bool>false</bool>
                       </property>
                       <property name="rowCount">
-                       <number>0</number>
+                       <number>3</number>
                       </property>
                       <property name="columnCount">
                        <number>3</number>
@@ -1728,6 +1723,21 @@ QHeaderView::section:vertical
                       <attribute name="verticalHeaderStretchLastSection">
                        <bool>true</bool>
                       </attribute>
+                      <row>
+                       <property name="text">
+                        <string>New Row</string>
+                       </property>
+                      </row>
+                      <row>
+                       <property name="text">
+                        <string>New Row</string>
+                       </property>
+                      </row>
+                      <row>
+                       <property name="text">
+                        <string>New Row</string>
+                       </property>
+                      </row>
                       <column>
                        <property name="text">
                         <string/>

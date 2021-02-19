@@ -13,10 +13,12 @@ status = 0
 class Browser(QWidget):
     def __init__(self):
         super().__init__()
+        global status
+        status = 0
         self.setup()
         self.get_cookie()
         self.msg = QMessageBox()
-        self.center()
+        self.center()        
     def setup(self):
         self.box = QVBoxLayout(self)
         # self.btn_get = QPushButton('THÊM TÀI KHOẢN')
