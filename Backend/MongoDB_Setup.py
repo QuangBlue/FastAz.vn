@@ -54,13 +54,28 @@ class Database_mongoDB:
         else:
             return False
 
-    def check_shopee_username(self,shopee_username,id_sp):
+    def check_shopee_username(self,username_az,id_sp):
         """Check shopee username by unique id_sp"""
-        if Database_mongoDB.registered_Users_Collection.count_documents({"username_az" : str(shopee_username) ,"shopee.shop_id" :str(id_sp)}) != 0:
+        if Database_mongoDB.registered_Users_Collection.count_documents({"username_az" : str(username_az) ,"shopee.shop_id" :str(id_sp)}) != 0:
             return True
         else:
             return False
 
+    def extend_cookie(self,_id,index,new_cookie ):
+        Database_mongoDB.registered_Users_Collection.update(
+            { "_id": _id },
+            { "$set": { 
+                f'shopee.{index}.cookie' : new_cookie,
+                f'shopee.{index}.status_cookie' : 'True' 
+            }}
+            )
+        with open('temp//data.json') as f:
+                data = json.load(f)
+        x = Database_mongoDB.registered_Users_Collection.find({'_id': _id})
+        for y in x:
+            data['shopee'] = y['shopee']
+        with open('temp//data.json', 'w') as f:
+                    json.dump(data, f)
 
     def insert_new_shopee_mongodb(self,username_az,shop_cookies,id_sp,shop_id,shop_name):
         #SAI CANNOT CREATE NEW USER, MUST LOCATE username_az and insert new shopee to the shopee list

@@ -72,16 +72,21 @@ class Browser(QWidget):
             shopee_info_json = Network.get_info_account_shopee(self,cookie)
             with open("temp//data.json") as json_file:  #Get username_az
                 data = json.load(json_file)
+
+
+
             # Check for duplicates shopee id_sp on mongodb, if not, create a new shop with blank info.
             if not Database_mongoDB.check_shopee_username(self,data['username_az'],shopee_info_json['shopid']):
                 Database_mongoDB.insert_new_shopee_mongodb(self,data['username_az'],cookie,shopee_info_json['id'],shopee_info_json['shopid'],shopee_info_json['username'])
-                #Tạo pop up message nếu thành công
-                print("Đã thêm tài khoản shopee vào danh sách")
                 self.show_popup('Thành Công','Thành Công',f'Bạn đã thêm thành công tài khoản {shopee_info_json["username"]}.',True)
             else:
-                #Tạo pop up message không thành công
-                self.show_popup('Cảnh Báo','Cảnh Báo',f'Tài khoản {shopee_info_json["username"]} đã có. Thời gian đăng nhập sẽ được gia hạn',False)
-                print("Shop này đã có trên database")
+
+                for x in range(len(data['shopee'])):
+                    if data['shopee'][x]['shop_name'] == shopee_info_json["username"]:
+                        shop_c = x
+
+                Database_mongoDB.extend_cookie(self,data['id_wp'],shop_c,cookie)
+                self.show_popup('Cảnh Báo','Gia Hạn Thành Công',f'Tài khoản {shopee_info_json["username"]} đã có.\nĐã GIA HẠN thành công',False)
             self.close()
         elif status == 0:      
             time = QTimer.singleShot(1000,self.get_cookie)

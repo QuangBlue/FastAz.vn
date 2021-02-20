@@ -45,9 +45,9 @@ class Dashboard(QMainWindow):
         ## ICON HOẶC AVARTA CỦA USER
         # ########################################################################
 
-        UIFunctions.userIcon(self, "QH")
-        self.label_user_icon.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
-        self.label_user_icon.mousePressEvent = self.show_popup_user
+        UIFunctions.userIcon(self)
+        # self.label_user_icon.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
+        # self.label_user_icon.mousePressEvent = self.show_popup_user
         # self.label_user_icon.customContextMenuRequested.connect(lambda pos, child=self.label_user_icon: self.customMenuEvent(pos, child))
         # ########################################################################
         ## ẨN CỬA SỔ MẶC ĐỊNH
@@ -98,28 +98,6 @@ class Dashboard(QMainWindow):
         self.show()
  
     
-        
-    def show_popup_user(self,event):
-        msg = QMessageBox()
-        msg.setWindowTitle('Thông tin tài khoản')
-        msg.setText('Tài khoản của bạn là <strong>VIP 1</strong> \n Còn thời hạn đến 16/03/2022')
-        logout_btn = msg.addButton('Đăng Xuất' , QtWidgets.QMessageBox.RejectRole)
-        logout_btn.clicked.connect(self.logout_screen)
-        extend_vip = msg.addButton('Gia Hạn' , QtWidgets.QMessageBox.YesRole)
-        extend_vip.clicked.connect(self.open_webbrowser)
-        msg.exec_()
-        
-    def logout_screen(self):
-        with open('temp//data.json') as f:
-            data = json.load(f)
-        data['savepass'] = "False"
-        with open('temp//data.json', 'w') as f:
-            json.dump(data, f)
-        MainWindow()
-        self.close()
-
-    def open_webbrowser(self):
-        webbrowser.open('http://fastaz.vn/')
 
 
     def mousePressEvent(self, event):
@@ -137,23 +115,32 @@ class Dashboard(QMainWindow):
             UIFunctions.labelPage(self, "Tài khoản Shopee")
             btnWidget.setStyleSheet(UIFunctions.selectMenu(self,btnWidget.styleSheet()))
 
-        if btnWidget.objectName() == "btn_reply_ratting":
-            self.stackedWidget.setCurrentWidget(self.page_reply_ratting)
-            UIFunctions.resetStyle(self, "btn_reply_ratting")
-            UIFunctions.labelPage(self, "Trả lời Đánh giá")
-            btnWidget.setStyleSheet(UIFunctions.selectMenu(self, btnWidget.styleSheet()))
+        if btnWidget.objectName() == "btn_reply_ratting":          
+            if self.comboBox_user.count() == 0 or self.comboBox_user.currentText() == "Chưa có tài khoản":
+                r = QMessageBox.warning(self, 'MessageBox', "BẠN CHƯA THÊM TÀI KHOẢN.\nVui lòng thêm ít nhất 1 tài khoản để sử dụng", QMessageBox.Ok, QMessageBox.Ok)
+            else:        
+                self.stackedWidget.setCurrentWidget(self.page_reply_ratting)
+                UIFunctions.resetStyle(self, "btn_reply_ratting")
+                UIFunctions.labelPage(self, "Trả lời Đánh giá")
+                btnWidget.setStyleSheet(UIFunctions.selectMenu(self, btnWidget.styleSheet()))
 
         if btnWidget.objectName() == "btn_push_product":
-            self.stackedWidget.setCurrentWidget(self.page_push_product)
-            UIFunctions.resetStyle(self, "btn_push_product")
-            UIFunctions.labelPage(self, "Đẩy sản phẩm")
-            btnWidget.setStyleSheet(UIFunctions.selectMenu(self,btnWidget.styleSheet()))
+            if self.comboBox_user.count() == 0 or self.comboBox_user.currentText() == "Chưa có tài khoản":
+                r = QMessageBox.warning(self, 'MessageBox', "BẠN CHƯA THÊM TÀI KHOẢN.\nVui lòng thêm ít nhất 1 tài khoản để sử dụng", QMessageBox.Ok, QMessageBox.Ok)
+            else: 
+                self.stackedWidget.setCurrentWidget(self.page_push_product)
+                UIFunctions.resetStyle(self, "btn_push_product")
+                UIFunctions.labelPage(self, "Đẩy sản phẩm")
+                btnWidget.setStyleSheet(UIFunctions.selectMenu(self,btnWidget.styleSheet()))
 
         if btnWidget.objectName() == "btn_chat_bot":
-            self.stackedWidget.setCurrentWidget(self.page_chat_bot)
-            UIFunctions.resetStyle(self, "btn_chat_bot")
-            UIFunctions.labelPage(self, "Chat bot")
-            btnWidget.setStyleSheet(UIFunctions.selectMenu(self,btnWidget.styleSheet()))
+            if self.comboBox_user.count() == 0 or self.comboBox_user.currentText() == "Chưa có tài khoản":
+                r = QMessageBox.warning(self, 'MessageBox', "BẠN CHƯA THÊM TÀI KHOẢN.\nVui lòng thêm ít nhất 1 tài khoản để sử dụng", QMessageBox.Ok, QMessageBox.Ok)
+            else:
+                self.stackedWidget.setCurrentWidget(self.page_chat_bot)
+                UIFunctions.resetStyle(self, "btn_chat_bot")
+                UIFunctions.labelPage(self, "Chat bot")
+                btnWidget.setStyleSheet(UIFunctions.selectMenu(self,btnWidget.styleSheet()))
 
         if btnWidget.objectName() == "btn_settings":
             self.stackedWidget.setCurrentWidget(self.page_settings)

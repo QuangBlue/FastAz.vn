@@ -744,6 +744,7 @@ QComboBox{
 	border: 2px solid rgb(27, 29, 35);
 	padding: 5px;
 	padding-left: 40px;
+	text-align: center;
 }
 QComboBox:hover{
 	border: 2px solid rgb(64, 71, 88);
@@ -763,6 +764,7 @@ QComboBox::drop-down {
 	background-repeat: no-reperat;*/
  }
 QComboBox QAbstractItemView {
+	text-align: center;
 	background-image : none;
 	color: rgb(85, 170, 255);	
 	background-color: rgb(27, 29, 35);
@@ -818,6 +820,7 @@ QSlider::handle:vertical:hover {
 QSlider::handle:vertical:pressed {
     background-color: rgb(65, 130, 195);
 }
+
 
 </string>
       </property>
@@ -1032,6 +1035,24 @@ QPushButton:pressed {
                     <number>0</number>
                    </property>
                    <item>
+                    <widget class="QLabel" name="label_title_bar_top">
+                     <property name="font">
+                      <font>
+                       <family>Nunito</family>
+                       <pointsize>14</pointsize>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">background: transparent;
+margin-left: 5px;</string>
+                     </property>
+                     <property name="text">
+                      <string>Main Window - Base</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
                     <widget class="QFrame" name="frame_icon_top_bar">
                      <property name="maximumSize">
                       <size>
@@ -1050,24 +1071,6 @@ background-repeat: no-repeat;</string>
                      </property>
                      <property name="frameShadow">
                       <enum>QFrame::Raised</enum>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QLabel" name="label_title_bar_top">
-                     <property name="font">
-                      <font>
-                       <family>Nunito</family>
-                       <pointsize>14</pointsize>
-                       <bold>true</bold>
-                      </font>
-                     </property>
-                     <property name="styleSheet">
-                      <string notr="true">background: transparent;
-margin-left: 5px;</string>
-                     </property>
-                     <property name="text">
-                      <string>Main Window - Base</string>
                      </property>
                     </widget>
                    </item>
@@ -1467,8 +1470,8 @@ QPushButton:pressed {
                 <property name="bottomMargin">
                  <number>25</number>
                 </property>
-                <item alignment="Qt::AlignHCenter">
-                 <widget class="QLabel" name="label_user_icon">
+                <item>
+                 <widget class="QPushButton" name="label_user_icon">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
                     <horstretch>0</horstretch>
@@ -1477,36 +1480,27 @@ QPushButton:pressed {
                   </property>
                   <property name="minimumSize">
                    <size>
-                    <width>60</width>
-                    <height>60</height>
+                    <width>75</width>
+                    <height>75</height>
                    </size>
                   </property>
                   <property name="maximumSize">
                    <size>
+                    <width>75</width>
+                    <height>75</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">border-radius: 10px</string>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="iconSize">
+                   <size>
                     <width>60</width>
                     <height>60</height>
                    </size>
-                  </property>
-                  <property name="font">
-                   <font>
-                    <family>Nunito</family>
-                    <pointsize>15</pointsize>
-                   </font>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">QLabel {
-	border-image: url(:/img/teamwork.png);
-
-	border-radius: 30px;
-	background-color: rgb(44, 49, 60);
-
-}</string>
-                  </property>
-                  <property name="text">
-                   <string>WM</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignCenter</set>
                   </property>
                  </widget>
                 </item>
@@ -1579,7 +1573,7 @@ QPushButton:pressed {
                    <string notr="true">background: transparent;</string>
                   </property>
                   <property name="currentIndex">
-                   <number>3</number>
+                   <number>1</number>
                   </property>
                   <widget class="QWidget" name="page_reply_ratting">
                    <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -2516,35 +2510,97 @@ QHeaderView::section:vertical
                    </layout>
                   </widget>
                   <widget class="QWidget" name="page_push_product">
-                   <widget class="QTableWidget" name="tw_ratting1_2">
-                    <property name="geometry">
-                     <rect>
-                      <x>20</x>
-                      <y>70</y>
-                      <width>651</width>
-                      <height>831</height>
-                     </rect>
-                    </property>
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="minimumSize">
-                     <size>
-                      <width>0</width>
-                      <height>150</height>
-                     </size>
-                    </property>
-                    <property name="font">
-                     <font>
-                      <family>Nunito</family>
-                      <pointsize>15</pointsize>
-                     </font>
-                    </property>
-                    <property name="styleSheet">
-                     <string notr="true">QTableWidget {	
+                   <layout class="QVBoxLayout" name="verticalLayout_10">
+                    <item>
+                     <widget class="QFrame" name="frame_6">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>115</height>
+                       </size>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true"/>
+                      </property>
+                      <property name="frameShape">
+                       <enum>QFrame::StyledPanel</enum>
+                      </property>
+                      <property name="frameShadow">
+                       <enum>QFrame::Raised</enum>
+                      </property>
+                      <layout class="QHBoxLayout" name="horizontalLayout_13">
+                       <item>
+                        <widget class="QLabel" name="label_2">
+                         <property name="font">
+                          <font>
+                           <family>Nunito</family>
+                           <pointsize>44</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>Nội dung hướng dẫn</string>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QFrame" name="frame_5">
+                      <property name="frameShape">
+                       <enum>QFrame::StyledPanel</enum>
+                      </property>
+                      <property name="frameShadow">
+                       <enum>QFrame::Raised</enum>
+                      </property>
+                      <layout class="QHBoxLayout" name="horizontalLayout_14">
+                       <item>
+                        <widget class="QFrame" name="frame_7">
+                         <property name="styleSheet">
+                          <string notr="true">QPushButton {
+	border-radius: 10px;
+    padding:8px 25px 7px 25px;
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));
+	color: rgb(255, 255, 255);
+}
+
+QPushButton:hover {
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(15, 181, 253, 255), stop:1 rgba(89, 64, 231, 255));
+}
+
+QPushButton:pressed {
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));
+}</string>
+                         </property>
+                         <property name="frameShape">
+                          <enum>QFrame::StyledPanel</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_11">
+                          <item>
+                           <widget class="QTableWidget" name="product_list_shopee">
+                            <property name="sizePolicy">
+                             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                             </sizepolicy>
+                            </property>
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>150</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>Nunito</family>
+                              <pointsize>15</pointsize>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">QTableWidget {	
 	background-color: rgb(39, 44, 54);
 	padding: 10px;
 	border-radius: 5px;
@@ -2599,382 +2655,280 @@ QHeaderView::section:vertical
 }
 
 </string>
-                    </property>
-                    <property name="frameShape">
-                     <enum>QFrame::NoFrame</enum>
-                    </property>
-                    <property name="lineWidth">
-                     <number>1</number>
-                    </property>
-                    <property name="verticalScrollBarPolicy">
-                     <enum>Qt::ScrollBarAlwaysOn</enum>
-                    </property>
-                    <property name="sizeAdjustPolicy">
-                     <enum>QAbstractScrollArea::AdjustToContents</enum>
-                    </property>
-                    <property name="editTriggers">
-                     <set>QAbstractItemView::NoEditTriggers</set>
-                    </property>
-                    <property name="dragEnabled">
-                     <bool>true</bool>
-                    </property>
-                    <property name="dragDropMode">
-                     <enum>QAbstractItemView::DragDrop</enum>
-                    </property>
-                    <property name="defaultDropAction">
-                     <enum>Qt::TargetMoveAction</enum>
-                    </property>
-                    <property name="alternatingRowColors">
-                     <bool>false</bool>
-                    </property>
-                    <property name="selectionMode">
-                     <enum>QAbstractItemView::SingleSelection</enum>
-                    </property>
-                    <property name="selectionBehavior">
-                     <enum>QAbstractItemView::SelectRows</enum>
-                    </property>
-                    <property name="textElideMode">
-                     <enum>Qt::ElideRight</enum>
-                    </property>
-                    <property name="sortingEnabled">
-                     <bool>true</bool>
-                    </property>
-                    <property name="wordWrap">
-                     <bool>false</bool>
-                    </property>
-                    <property name="rowCount">
-                     <number>12</number>
-                    </property>
-                    <property name="columnCount">
-                     <number>3</number>
-                    </property>
-                    <attribute name="horizontalHeaderCascadingSectionResizes">
-                     <bool>true</bool>
-                    </attribute>
-                    <attribute name="horizontalHeaderMinimumSectionSize">
-                     <number>19</number>
-                    </attribute>
-                    <attribute name="horizontalHeaderDefaultSectionSize">
-                     <number>60</number>
-                    </attribute>
-                    <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
-                     <bool>true</bool>
-                    </attribute>
-                    <attribute name="horizontalHeaderStretchLastSection">
-                     <bool>true</bool>
-                    </attribute>
-                    <attribute name="verticalHeaderVisible">
-                     <bool>false</bool>
-                    </attribute>
-                    <attribute name="verticalHeaderCascadingSectionResizes">
-                     <bool>false</bool>
-                    </attribute>
-                    <attribute name="verticalHeaderDefaultSectionSize">
-                     <number>30</number>
-                    </attribute>
-                    <attribute name="verticalHeaderHighlightSections">
-                     <bool>false</bool>
-                    </attribute>
-                    <attribute name="verticalHeaderStretchLastSection">
-                     <bool>true</bool>
-                    </attribute>
-                    <row>
-                     <property name="text">
-                      <string>New Row</string>
-                     </property>
-                    </row>
-                    <row>
-                     <property name="text">
-                      <string>New Row</string>
-                     </property>
-                    </row>
-                    <row>
-                     <property name="text">
-                      <string>New Row</string>
-                     </property>
-                    </row>
-                    <row>
-                     <property name="text">
-                      <string>New Row</string>
-                     </property>
-                    </row>
-                    <row>
-                     <property name="text">
-                      <string>New Row</string>
-                     </property>
-                    </row>
-                    <row>
-                     <property name="text">
-                      <string>New Row</string>
-                     </property>
-                    </row>
-                    <row>
-                     <property name="text">
-                      <string>New Row</string>
-                     </property>
-                    </row>
-                    <row>
-                     <property name="text">
-                      <string>New Row</string>
-                     </property>
-                    </row>
-                    <row>
-                     <property name="text">
-                      <string>New Row</string>
-                     </property>
-                    </row>
-                    <row>
-                     <property name="text">
-                      <string>New Row</string>
-                     </property>
-                    </row>
-                    <row>
-                     <property name="text">
-                      <string>New Row</string>
-                     </property>
-                    </row>
-                    <row>
-                     <property name="text">
-                      <string>New Row</string>
-                     </property>
-                    </row>
-                    <column>
-                     <property name="text">
-                      <string/>
-                     </property>
-                    </column>
-                    <column>
-                     <property name="text">
-                      <string>STT</string>
-                     </property>
-                     <property name="font">
-                      <font>
-                       <family>Nunito</family>
-                       <pointsize>16</pointsize>
-                      </font>
-                     </property>
-                    </column>
-                    <column>
-                     <property name="text">
-                      <string>Đánh giá Shopee 1 Sao</string>
-                     </property>
-                     <property name="font">
-                      <font>
-                       <family>Nunito</family>
-                       <pointsize>16</pointsize>
-                      </font>
-                     </property>
-                    </column>
-                    <item row="0" column="0">
-                     <property name="text">
-                      <string>45675</string>
-                     </property>
-                    </item>
-                    <item row="0" column="1">
-                     <property name="text">
-                      <string>7546</string>
-                     </property>
-                    </item>
-                    <item row="0" column="2">
-                     <property name="text">
-                      <string>754675</string>
-                     </property>
-                    </item>
-                    <item row="1" column="0">
-                     <property name="text">
-                      <string>5467</string>
-                     </property>
-                    </item>
-                    <item row="1" column="1">
-                     <property name="text">
-                      <string>546</string>
-                     </property>
-                    </item>
-                    <item row="1" column="2">
-                     <property name="text">
-                      <string>75467</string>
-                     </property>
-                    </item>
-                    <item row="2" column="0">
-                     <property name="text">
-                      <string>5467</string>
-                     </property>
-                    </item>
-                    <item row="2" column="1">
-                     <property name="text">
-                      <string>4567</string>
-                     </property>
-                    </item>
-                    <item row="2" column="2">
-                     <property name="text">
-                      <string>67</string>
-                     </property>
-                    </item>
-                    <item row="3" column="0">
-                     <property name="text">
-                      <string>4567</string>
-                     </property>
-                    </item>
-                    <item row="3" column="1">
-                     <property name="text">
-                      <string>56757</string>
-                     </property>
-                    </item>
-                    <item row="3" column="2">
-                     <property name="text">
-                      <string>756</string>
-                     </property>
-                    </item>
-                    <item row="4" column="0">
-                     <property name="text">
-                      <string>567</string>
-                     </property>
-                    </item>
-                    <item row="4" column="1">
-                     <property name="text">
-                      <string>567</string>
-                     </property>
-                    </item>
-                    <item row="4" column="2">
-                     <property name="text">
-                      <string>56756</string>
-                     </property>
-                    </item>
-                    <item row="5" column="0">
-                     <property name="text">
-                      <string>56745</string>
-                     </property>
-                    </item>
-                    <item row="5" column="1">
-                     <property name="text">
-                      <string>67</string>
-                     </property>
-                    </item>
-                    <item row="5" column="2">
-                     <property name="text">
-                      <string>5467546</string>
-                     </property>
-                    </item>
-                    <item row="6" column="0">
-                     <property name="text">
-                      <string>4556767</string>
-                     </property>
-                    </item>
-                    <item row="6" column="1">
-                     <property name="text">
-                      <string>567</string>
-                     </property>
-                    </item>
-                    <item row="6" column="2">
-                     <property name="text">
-                      <string>74</string>
-                     </property>
-                    </item>
-                    <item row="7" column="0">
-                     <property name="text">
-                      <string>123</string>
-                     </property>
-                    </item>
-                    <item row="7" column="1">
-                     <property name="text">
-                      <string>1233243</string>
-                     </property>
-                    </item>
-                    <item row="7" column="2">
-                     <property name="text">
-                      <string>54325234645</string>
-                     </property>
-                    </item>
-                    <item row="8" column="0">
-                     <property name="text">
-                      <string>6354634</string>
-                     </property>
-                    </item>
-                    <item row="8" column="1">
-                     <property name="text">
-                      <string>5</string>
-                     </property>
-                    </item>
-                    <item row="8" column="2">
-                     <property name="text">
-                      <string>563754674567</string>
-                     </property>
-                    </item>
-                    <item row="9" column="0">
-                     <property name="text">
-                      <string>6475467</string>
-                     </property>
-                    </item>
-                    <item row="9" column="1">
-                     <property name="text">
-                      <string>564</string>
-                     </property>
-                    </item>
-                    <item row="9" column="2">
-                     <property name="text">
-                      <string>5675</string>
-                     </property>
-                    </item>
-                    <item row="10" column="0">
-                     <property name="text">
-                      <string>54675</string>
-                     </property>
-                    </item>
-                    <item row="10" column="1">
-                     <property name="text">
-                      <string>754675467</string>
-                     </property>
-                    </item>
-                    <item row="10" column="2">
-                     <property name="text">
-                      <string>5467567</string>
-                     </property>
-                    </item>
-                    <item row="11" column="0">
-                     <property name="text">
-                      <string>54675467</string>
-                     </property>
-                    </item>
-                    <item row="11" column="1">
-                     <property name="text">
-                      <string>5675467</string>
-                     </property>
-                    </item>
-                    <item row="11" column="2">
-                     <property name="text">
-                      <string>675467</string>
-                     </property>
-                    </item>
-                   </widget>
-                   <widget class="QTableWidget" name="tw_ratting1_3">
-                    <property name="geometry">
-                     <rect>
-                      <x>870</x>
-                      <y>50</y>
-                      <width>621</width>
-                      <height>831</height>
-                     </rect>
-                    </property>
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="minimumSize">
-                     <size>
-                      <width>0</width>
-                      <height>150</height>
-                     </size>
-                    </property>
-                    <property name="font">
-                     <font>
-                      <family>Nunito</family>
-                      <pointsize>15</pointsize>
-                     </font>
-                    </property>
-                    <property name="styleSheet">
-                     <string notr="true">QTableWidget {	
+                            </property>
+                            <property name="frameShape">
+                             <enum>QFrame::NoFrame</enum>
+                            </property>
+                            <property name="lineWidth">
+                             <number>1</number>
+                            </property>
+                            <property name="verticalScrollBarPolicy">
+                             <enum>Qt::ScrollBarAlwaysOn</enum>
+                            </property>
+                            <property name="sizeAdjustPolicy">
+                             <enum>QAbstractScrollArea::AdjustToContents</enum>
+                            </property>
+                            <property name="editTriggers">
+                             <set>QAbstractItemView::NoEditTriggers</set>
+                            </property>
+                            <property name="dragEnabled">
+                             <bool>true</bool>
+                            </property>
+                            <property name="dragDropMode">
+                             <enum>QAbstractItemView::DragDrop</enum>
+                            </property>
+                            <property name="defaultDropAction">
+                             <enum>Qt::TargetMoveAction</enum>
+                            </property>
+                            <property name="alternatingRowColors">
+                             <bool>false</bool>
+                            </property>
+                            <property name="selectionMode">
+                             <enum>QAbstractItemView::SingleSelection</enum>
+                            </property>
+                            <property name="selectionBehavior">
+                             <enum>QAbstractItemView::SelectRows</enum>
+                            </property>
+                            <property name="textElideMode">
+                             <enum>Qt::ElideRight</enum>
+                            </property>
+                            <property name="sortingEnabled">
+                             <bool>true</bool>
+                            </property>
+                            <property name="wordWrap">
+                             <bool>false</bool>
+                            </property>
+                            <property name="rowCount">
+                             <number>0</number>
+                            </property>
+                            <property name="columnCount">
+                             <number>2</number>
+                            </property>
+                            <attribute name="horizontalHeaderCascadingSectionResizes">
+                             <bool>true</bool>
+                            </attribute>
+                            <attribute name="horizontalHeaderMinimumSectionSize">
+                             <number>19</number>
+                            </attribute>
+                            <attribute name="horizontalHeaderDefaultSectionSize">
+                             <number>90</number>
+                            </attribute>
+                            <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+                             <bool>true</bool>
+                            </attribute>
+                            <attribute name="horizontalHeaderStretchLastSection">
+                             <bool>true</bool>
+                            </attribute>
+                            <attribute name="verticalHeaderVisible">
+                             <bool>false</bool>
+                            </attribute>
+                            <attribute name="verticalHeaderCascadingSectionResizes">
+                             <bool>false</bool>
+                            </attribute>
+                            <attribute name="verticalHeaderDefaultSectionSize">
+                             <number>30</number>
+                            </attribute>
+                            <attribute name="verticalHeaderHighlightSections">
+                             <bool>false</bool>
+                            </attribute>
+                            <attribute name="verticalHeaderStretchLastSection">
+                             <bool>true</bool>
+                            </attribute>
+                            <column>
+                             <property name="text">
+                              <string>Hình Ảnh</string>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <family>Nunito</family>
+                               <pointsize>16</pointsize>
+                              </font>
+                             </property>
+                            </column>
+                            <column>
+                             <property name="text">
+                              <string>Tên sản phẩm</string>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <family>Nunito</family>
+                               <pointsize>16</pointsize>
+                              </font>
+                             </property>
+                            </column>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QFrame" name="button_page">
+                            <property name="frameShape">
+                             <enum>QFrame::StyledPanel</enum>
+                            </property>
+                            <property name="frameShadow">
+                             <enum>QFrame::Raised</enum>
+                            </property>
+                            <layout class="QHBoxLayout" name="horizontalLayout_12">
+                             <item>
+                              <widget class="QPushButton" name="btn_back">
+                               <property name="font">
+                                <font>
+                                 <family>Nunito</family>
+                                 <pointsize>13</pointsize>
+                                 <bold>true</bold>
+                                </font>
+                               </property>
+                               <property name="text">
+                                <string>TRANG TRƯỚC</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item>
+                              <widget class="QPushButton" name="btn_forward">
+                               <property name="font">
+                                <font>
+                                 <family>Nunito</family>
+                                 <bold>true</bold>
+                                </font>
+                               </property>
+                               <property name="text">
+                                <string>TRANG TIẾP  THEO</string>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QFrame" name="frame_2">
+                         <property name="minimumSize">
+                          <size>
+                           <width>120</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="frameShape">
+                          <enum>QFrame::StyledPanel</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_8">
+                          <property name="leftMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>12</number>
+                          </property>
+                          <item>
+                           <widget class="QFrame" name="frame_4">
+                            <property name="frameShape">
+                             <enum>QFrame::StyledPanel</enum>
+                            </property>
+                            <property name="frameShadow">
+                             <enum>QFrame::Raised</enum>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QPushButton" name="btn_remove">
+                            <property name="font">
+                             <font>
+                              <family>Nunito</family>
+                              <pointsize>28</pointsize>
+                              <bold>true</bold>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">#btn_remove{
+	border-radius: 10px;
+    padding:6px 10px 6px 10px;
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));
+	color: rgb(255, 255, 255);
+}
+#btn_remove:hover{
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(15, 181, 253, 255), stop:1 rgba(89, 64, 231, 255));
+}
+
+#btn_remove:pressed
+{
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));
+}</string>
+                            </property>
+                            <property name="text">
+                             <string>&lt;</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QPushButton" name="btn_add">
+                            <property name="font">
+                             <font>
+                              <family>Nunito</family>
+                              <pointsize>28</pointsize>
+                              <bold>true</bold>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">#btn_add{
+	border-radius: 10px;
+    padding:6px 10px 6px 10px;
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));
+	color: rgb(255, 255, 255);
+}
+#btn_add:hover{
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(15, 181, 253, 255), stop:1 rgba(89, 64, 231, 255));
+}
+
+#btn_add:pressed
+{
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));
+}</string>
+                            </property>
+                            <property name="text">
+                             <string>&gt;</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QFrame" name="frame_3">
+                            <property name="frameShape">
+                             <enum>QFrame::StyledPanel</enum>
+                            </property>
+                            <property name="frameShadow">
+                             <enum>QFrame::Raised</enum>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QTableWidget" name="product_list_user">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="minimumSize">
+                          <size>
+                           <width>0</width>
+                           <height>150</height>
+                          </size>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>Nunito</family>
+                           <pointsize>15</pointsize>
+                          </font>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">QTableWidget {	
 	background-color: rgb(39, 44, 54);
 	padding: 10px;
 	border-radius: 5px;
@@ -3029,235 +2983,113 @@ QHeaderView::section:vertical
 }
 
 </string>
-                    </property>
-                    <property name="frameShape">
-                     <enum>QFrame::NoFrame</enum>
-                    </property>
-                    <property name="lineWidth">
-                     <number>1</number>
-                    </property>
-                    <property name="verticalScrollBarPolicy">
-                     <enum>Qt::ScrollBarAlwaysOn</enum>
-                    </property>
-                    <property name="sizeAdjustPolicy">
-                     <enum>QAbstractScrollArea::AdjustToContents</enum>
-                    </property>
-                    <property name="editTriggers">
-                     <set>QAbstractItemView::NoEditTriggers</set>
-                    </property>
-                    <property name="dragDropMode">
-                     <enum>QAbstractItemView::DragDrop</enum>
-                    </property>
-                    <property name="defaultDropAction">
-                     <enum>Qt::CopyAction</enum>
-                    </property>
-                    <property name="alternatingRowColors">
-                     <bool>false</bool>
-                    </property>
-                    <property name="selectionMode">
-                     <enum>QAbstractItemView::SingleSelection</enum>
-                    </property>
-                    <property name="selectionBehavior">
-                     <enum>QAbstractItemView::SelectRows</enum>
-                    </property>
-                    <property name="sortingEnabled">
-                     <bool>true</bool>
-                    </property>
-                    <property name="wordWrap">
-                     <bool>false</bool>
-                    </property>
-                    <property name="rowCount">
-                     <number>16</number>
-                    </property>
-                    <property name="columnCount">
-                     <number>3</number>
-                    </property>
-                    <attribute name="horizontalHeaderCascadingSectionResizes">
-                     <bool>true</bool>
-                    </attribute>
-                    <attribute name="horizontalHeaderMinimumSectionSize">
-                     <number>19</number>
-                    </attribute>
-                    <attribute name="horizontalHeaderDefaultSectionSize">
-                     <number>60</number>
-                    </attribute>
-                    <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
-                     <bool>true</bool>
-                    </attribute>
-                    <attribute name="horizontalHeaderStretchLastSection">
-                     <bool>true</bool>
-                    </attribute>
-                    <attribute name="verticalHeaderVisible">
-                     <bool>false</bool>
-                    </attribute>
-                    <attribute name="verticalHeaderCascadingSectionResizes">
-                     <bool>false</bool>
-                    </attribute>
-                    <attribute name="verticalHeaderDefaultSectionSize">
-                     <number>30</number>
-                    </attribute>
-                    <attribute name="verticalHeaderHighlightSections">
-                     <bool>false</bool>
-                    </attribute>
-                    <attribute name="verticalHeaderStretchLastSection">
-                     <bool>true</bool>
-                    </attribute>
-                    <row>
-                     <property name="text">
-                      <string>New Row</string>
-                     </property>
-                    </row>
-                    <row>
-                     <property name="text">
-                      <string>New Row</string>
-                     </property>
-                    </row>
-                    <row>
-                     <property name="text">
-                      <string>New Row</string>
-                     </property>
-                    </row>
-                    <row>
-                     <property name="text">
-                      <string>New Row</string>
-                     </property>
-                    </row>
-                    <row>
-                     <property name="text">
-                      <string>New Row</string>
-                     </property>
-                    </row>
-                    <row>
-                     <property name="text">
-                      <string>New Row</string>
-                     </property>
-                    </row>
-                    <row>
-                     <property name="text">
-                      <string>New Row</string>
-                     </property>
-                    </row>
-                    <row>
-                     <property name="text">
-                      <string>New Row</string>
-                     </property>
-                    </row>
-                    <row>
-                     <property name="text">
-                      <string>New Row</string>
-                     </property>
-                    </row>
-                    <row>
-                     <property name="text">
-                      <string>New Row</string>
-                     </property>
-                    </row>
-                    <row>
-                     <property name="text">
-                      <string>New Row</string>
-                     </property>
-                    </row>
-                    <row>
-                     <property name="text">
-                      <string>New Row</string>
-                     </property>
-                    </row>
-                    <row>
-                     <property name="text">
-                      <string>New Row</string>
-                     </property>
-                    </row>
-                    <row>
-                     <property name="text">
-                      <string>New Row</string>
-                     </property>
-                    </row>
-                    <row>
-                     <property name="text">
-                      <string>New Row</string>
-                     </property>
-                    </row>
-                    <row>
-                     <property name="text">
-                      <string>New Row</string>
-                     </property>
-                    </row>
-                    <column>
-                     <property name="text">
-                      <string/>
-                     </property>
-                    </column>
-                    <column>
-                     <property name="text">
-                      <string>STT</string>
-                     </property>
-                     <property name="font">
-                      <font>
-                       <family>Nunito</family>
-                       <pointsize>16</pointsize>
-                      </font>
-                     </property>
-                    </column>
-                    <column>
-                     <property name="text">
-                      <string>Đánh giá Shopee 1 Sao</string>
-                     </property>
-                     <property name="font">
-                      <font>
-                       <family>Nunito</family>
-                       <pointsize>16</pointsize>
-                      </font>
-                     </property>
-                    </column>
-                   </widget>
-                   <widget class="QPushButton" name="pushButton">
-                    <property name="geometry">
-                     <rect>
-                      <x>720</x>
-                      <y>420</y>
-                      <width>100</width>
-                      <height>32</height>
-                     </rect>
-                    </property>
-                    <property name="styleSheet">
-                     <string notr="true">background-color: rgb(137, 194, 227);</string>
-                    </property>
-                    <property name="text">
-                     <string>&lt;</string>
-                    </property>
-                   </widget>
-                   <widget class="QPushButton" name="pushButton_2">
-                    <property name="geometry">
-                     <rect>
-                      <x>1290</x>
-                      <y>850</y>
-                      <width>100</width>
-                      <height>32</height>
-                     </rect>
-                    </property>
-                    <property name="styleSheet">
-                     <string notr="true">background-color: rgb(137, 194, 227);</string>
-                    </property>
-                    <property name="text">
-                     <string>PushButton</string>
-                    </property>
-                   </widget>
-                   <widget class="QPushButton" name="pushButton_3">
-                    <property name="geometry">
-                     <rect>
-                      <x>720</x>
-                      <y>490</y>
-                      <width>100</width>
-                      <height>32</height>
-                     </rect>
-                    </property>
-                    <property name="styleSheet">
-                     <string notr="true">background-color: rgb(137, 194, 227);</string>
-                    </property>
-                    <property name="text">
-                     <string>&gt;</string>
-                    </property>
-                   </widget>
+                         </property>
+                         <property name="frameShape">
+                          <enum>QFrame::NoFrame</enum>
+                         </property>
+                         <property name="lineWidth">
+                          <number>1</number>
+                         </property>
+                         <property name="verticalScrollBarPolicy">
+                          <enum>Qt::ScrollBarAlwaysOn</enum>
+                         </property>
+                         <property name="sizeAdjustPolicy">
+                          <enum>QAbstractScrollArea::AdjustToContents</enum>
+                         </property>
+                         <property name="editTriggers">
+                          <set>QAbstractItemView::NoEditTriggers</set>
+                         </property>
+                         <property name="dragEnabled">
+                          <bool>true</bool>
+                         </property>
+                         <property name="dragDropMode">
+                          <enum>QAbstractItemView::DragDrop</enum>
+                         </property>
+                         <property name="defaultDropAction">
+                          <enum>Qt::TargetMoveAction</enum>
+                         </property>
+                         <property name="alternatingRowColors">
+                          <bool>false</bool>
+                         </property>
+                         <property name="selectionMode">
+                          <enum>QAbstractItemView::SingleSelection</enum>
+                         </property>
+                         <property name="selectionBehavior">
+                          <enum>QAbstractItemView::SelectRows</enum>
+                         </property>
+                         <property name="textElideMode">
+                          <enum>Qt::ElideRight</enum>
+                         </property>
+                         <property name="sortingEnabled">
+                          <bool>true</bool>
+                         </property>
+                         <property name="wordWrap">
+                          <bool>false</bool>
+                         </property>
+                         <property name="rowCount">
+                          <number>0</number>
+                         </property>
+                         <property name="columnCount">
+                          <number>2</number>
+                         </property>
+                         <attribute name="horizontalHeaderCascadingSectionResizes">
+                          <bool>true</bool>
+                         </attribute>
+                         <attribute name="horizontalHeaderMinimumSectionSize">
+                          <number>19</number>
+                         </attribute>
+                         <attribute name="horizontalHeaderDefaultSectionSize">
+                          <number>90</number>
+                         </attribute>
+                         <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+                          <bool>true</bool>
+                         </attribute>
+                         <attribute name="horizontalHeaderStretchLastSection">
+                          <bool>true</bool>
+                         </attribute>
+                         <attribute name="verticalHeaderVisible">
+                          <bool>false</bool>
+                         </attribute>
+                         <attribute name="verticalHeaderCascadingSectionResizes">
+                          <bool>false</bool>
+                         </attribute>
+                         <attribute name="verticalHeaderDefaultSectionSize">
+                          <number>30</number>
+                         </attribute>
+                         <attribute name="verticalHeaderHighlightSections">
+                          <bool>false</bool>
+                         </attribute>
+                         <attribute name="verticalHeaderStretchLastSection">
+                          <bool>true</bool>
+                         </attribute>
+                         <column>
+                          <property name="text">
+                           <string>Hình Ảnh</string>
+                          </property>
+                          <property name="font">
+                           <font>
+                            <family>Nunito</family>
+                            <pointsize>16</pointsize>
+                           </font>
+                          </property>
+                         </column>
+                         <column>
+                          <property name="text">
+                           <string>Tên sản phẩm</string>
+                          </property>
+                          <property name="font">
+                           <font>
+                            <family>Nunito</family>
+                            <pointsize>16</pointsize>
+                           </font>
+                          </property>
+                         </column>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                   </layout>
                   </widget>
                   <widget class="QWidget" name="page_chat_bot">
                    <widget class="QLabel" name="label">

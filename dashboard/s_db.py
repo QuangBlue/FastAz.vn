@@ -110,18 +110,34 @@ class UIFunctions:
         self.ui.show()
         self.ui.msg.buttonClicked.connect(lambda: UIFunctions.set_data_user_shopee(self))
 
-    def userIcon(self, initialsTooltip, icon = 'url(img//teamwork.png)', showHide = True):
-        if showHide:
-            self.label_user_icon.setText(initialsTooltip)
+    def userIcon(self, icon = 'img//teamwork.png'):
+        self.label_user_icon.setIcon(QtGui.QIcon(icon))
+        self.label_user_icon.setIconSize(QtCore.QSize(60,60))
 
-            if icon:
-                style = self.label_user_icon.styleSheet()
-                setIcon = "QLabel { border-image: " + icon + "; }"
-                self.label_user_icon.setStyleSheet(style + setIcon)
-                self.label_user_icon.setText('')
-                self.label_user_icon.setToolTip(initialsTooltip)
-        else:
-            self.label_user_icon.hide()
+        self.label_user_icon.clicked.connect(lambda: UIFunctions.show_popup_user(self))
+
+    def show_popup_user(self):
+        msg = QMessageBox()
+        msg.setWindowTitle('Thông tin tài khoản')
+        msg.setText('Tài khoản của bạn là <strong>VIP 1</strong> \n Còn thời hạn đến 16/03/2022')
+        logout_btn = msg.addButton('Đăng Xuất' , QtWidgets.QMessageBox.RejectRole)
+        logout_btn.clicked.connect(lambda: UIFunctions.logout_screen(self))
+        extend_vip = msg.addButton('Gia Hạn' , QtWidgets.QMessageBox.YesRole)
+        extend_vip.clicked.connect(lambda: UIFunctions.open_webbrowser(self))
+        msg.exec_()
+        
+    def logout_screen(self):
+        with open('temp//data.json') as f:
+            data = json.load(f)
+        data['savepass'] = "False"
+        with open('temp//data.json', 'w') as f:
+            json.dump(data, f)
+        MainWindow()
+        self.close()
+
+    def open_webbrowser(self):
+        webbrowser.open('http://fastaz.vn/')
+
 
     def set_data_user_shopee(self):
         with open('temp//data.json') as f:
@@ -186,6 +202,8 @@ class UIFunctions:
                     btn_gh.setMinimumSize(QSize(100, 0))
                     btn_gh.setMaximumSize(QSize(100, 16777215))
                     btn_gh.setStyleSheet("QPushButton { border-radius: 10px; background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));color: rgb(255, 255, 255);} QPushButton:hover { background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(15, 181, 253, 255), stop:1 rgba(89, 64, 231, 255));}QPushButton:pressed{background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));}")
+                    btn_gh.clicked.connect(lambda: UIFunctions.open_browser(self))
+                    
                     f = QFrame()
                     f1 = QFrame()
                     layout.addWidget(f1)
