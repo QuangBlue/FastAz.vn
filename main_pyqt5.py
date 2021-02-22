@@ -1,10 +1,10 @@
 import sys, webbrowser, time, json, requests
-import PyQt5
-from PyQt5 import QtWidgets, QtGui, QtCore
+# import PyQt5
+# from PyQt5 import QtWidgets, QtGui, QtCore
 from PyQt5.uic import loadUi
-from PyQt5.QtGui import *
-from PyQt5.QtCore import QSize, Qt, QUrl, QEventLoop, QPropertyAnimation
-from PyQt5.QtWidgets import QMainWindow, QApplication, QGraphicsDropShadowEffect, QPushButton, QSizePolicy, QSizeGrip, QMessageBox, QHBoxLayout, QLabel, QWidget, QFrame
+from PyQt5.QtGui import QColor, QFont, QImage, QPixmap, QFontDatabase, QIcon
+from PyQt5.QtCore import QSize, Qt, QUrl, QEventLoop, QPropertyAnimation, QTimer, QEvent, QEasingCurve
+from PyQt5.QtWidgets import QMainWindow, QApplication, QGraphicsDropShadowEffect, QPushButton, QSizePolicy, QSizeGrip, QMessageBox, QHBoxLayout, QLabel, QWidget, QFrame, QStackedWidget, QTableWidgetItem
 from PyQt5.QtNetwork import QNetworkAccessManager, QNetworkReply, QNetworkRequest
 ## IMPORT SCREEN
 from dashboard.dashboard import *
@@ -302,8 +302,8 @@ class LoadingScreen(QMainWindow):
         loadUi("ui//loading_screen.ui",self)
         self.counter = 0
         ## REMOVE TITLE BAR
-        self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
-        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+        self.setWindowFlag(Qt.FramelessWindowHint)
+        self.setAttribute(Qt.WA_TranslucentBackground)
 
         ## DROP SHADOW EFFECT
         self.shadow = QGraphicsDropShadowEffect(self)
@@ -314,7 +314,7 @@ class LoadingScreen(QMainWindow):
         self.dropShadowFrame.setGraphicsEffect(self.shadow)
 
         ## QTIMER ==> START
-        self.timer = QtCore.QTimer()
+        self.timer = QTimer()
         self.timer.timeout.connect(self.progress)
         # TIMER IN MILLISECONDS
         self.timer.start(35)
@@ -419,13 +419,13 @@ class LoadingScreen(QMainWindow):
 
 class MainWindow():
     def __init__(self):       
-        MainWindow.widget = QtWidgets.QStackedWidget()
+        MainWindow.widget = QStackedWidget()
         welcome_screen = WelcomeScreen()
         MainWindow.mongo_db = db.Database_mongoDB()
         MainWindow.widget.addWidget(welcome_screen)
         MainWindow.widget.resize(1920, 1080)
-        QtGui.QFontDatabase.addApplicationFont('font/Nunito/Nunito-Regular.ttf')
-        QtGui.QFontDatabase.addApplicationFont('font/Nunito/Nunito-Regular.ttf')
+        QFontDatabase.addApplicationFont('font/Nunito/Nunito-Regular.ttf')
+        QFontDatabase.addApplicationFont('font/Nunito/Nunito-Regular.ttf')
         MainWindow.widget.show()       
 
 if __name__ == '__main__': 

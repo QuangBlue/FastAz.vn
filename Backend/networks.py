@@ -1,7 +1,6 @@
-import requests, json, pickle, random
-import main_pyqt5
+from main_pyqt5 import *
 import backend.loading
-from http.cookies import SimpleCookie
+
 
 class Network:
 
@@ -88,10 +87,6 @@ class Network:
             raise Exception("Lỗi Server!!!")
         else:
             return r.json()
-
-    def load_cookies(self,filename):
-        with open(filename, 'rb') as f:
-            return pickle.load(f)
 
     def csrftoken(self,length=32):
         character='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'

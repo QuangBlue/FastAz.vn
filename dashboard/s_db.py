@@ -19,7 +19,7 @@ class UIFunctions:
             GLOBAL_STATE = 1
             self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
             self.btn_maximize_restore.setToolTip("Restore")
-            self.btn_maximize_restore.setIcon(QtGui.QIcon(u":/icon/cil-window-restore.png"))
+            self.btn_maximize_restore.setIcon(QIcon(u":/icon/cil-window-restore.png"))
             self.frame_size_grip.hide()
         else:
             GLOBAL_STATE = 0
@@ -27,7 +27,7 @@ class UIFunctions:
             self.resize(self.width()+1, self.height()+1)
             self.horizontalLayout.setContentsMargins(10, 10, 10, 10)
             self.btn_maximize_restore.setToolTip("Maximize")
-            self.btn_maximize_restore.setIcon(QtGui.QIcon(u":/icon/cil-window-maximize.png"))
+            self.btn_maximize_restore.setIcon(QIcon(u":/icon/cil-window-maximize.png"))
             self.frame_size_grip.show()
 
     def removeTitleBar(self, status):
@@ -56,7 +56,7 @@ class UIFunctions:
             self.animation.setDuration(300)
             self.animation.setStartValue(width)
             self.animation.setEndValue(widthExtended)
-            self.animation.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
+            self.animation.setEasingCurve(QEasingCurve.InOutQuart)
             self.animation.start()
 
     def addNewMenu(self, name, objName, icon, isTopMenu):
@@ -111,8 +111,8 @@ class UIFunctions:
         self.ui.msg.buttonClicked.connect(lambda: UIFunctions.set_data_user_shopee(self))
 
     def userIcon(self, icon = 'img//teamwork.png'):
-        self.label_user_icon.setIcon(QtGui.QIcon(icon))
-        self.label_user_icon.setIconSize(QtCore.QSize(60,60))
+        self.label_user_icon.setIcon(QIcon(icon))
+        self.label_user_icon.setIconSize(QSize(60,60))
 
         self.label_user_icon.clicked.connect(lambda: UIFunctions.show_popup_user(self))
 
@@ -120,9 +120,9 @@ class UIFunctions:
         msg = QMessageBox()
         msg.setWindowTitle('Thông tin tài khoản')
         msg.setText('Tài khoản của bạn là <strong>VIP 1</strong> \n Còn thời hạn đến 16/03/2022')
-        logout_btn = msg.addButton('Đăng Xuất' , QtWidgets.QMessageBox.RejectRole)
+        logout_btn = msg.addButton('Đăng Xuất' , QMessageBox.RejectRole)
         logout_btn.clicked.connect(lambda: UIFunctions.logout_screen(self))
-        extend_vip = msg.addButton('Gia Hạn' , QtWidgets.QMessageBox.YesRole)
+        extend_vip = msg.addButton('Gia Hạn' , QMessageBox.YesRole)
         extend_vip.clicked.connect(lambda: UIFunctions.open_webbrowser(self))
         msg.exec_()
         
@@ -168,7 +168,7 @@ class UIFunctions:
                 self.product_list_shopee.setRowHeight(k, 90)
 
             for row ,data_name in enumerate(name):                
-                self.product_list_shopee.setItem(row, 1,QtWidgets.QTableWidgetItem(data_name))
+                self.product_list_shopee.setItem(row, 1,QTableWidgetItem(data_name))
 
             for row , data_img in enumerate(img):
                 url = f'https://cf.shopee.vn/file/{data_img}_tn'
@@ -236,18 +236,18 @@ class UIFunctions:
                 self.btn_del_user.clicked.connect(lambda: UIFunctions.btn_del_user(self))
                 self.tableWidget.setCellWidget(row,0,self.btn_del_user)
                 self.btn_del_user.setStyleSheet('QPushButton { image: url(img//remove.png);}QPushButton:hover { image: url(img//remove_red.png);}')
-                self.tableWidget.setItem(row, 1,QtWidgets.QTableWidgetItem(data['id_sp']))
-                self.tableWidget.setItem(row, 2,QtWidgets.QTableWidgetItem(data['shop_name']))
-                self.tableWidget.setItem(row, 3,QtWidgets.QTableWidgetItem(data['shop_id']))
-                self.tableWidget.setItem(row, 4,QtWidgets.QTableWidgetItem(data['total_product']))
-                self.tableWidget.setItem(row, 5,QtWidgets.QTableWidgetItem(data['total_order']))
+                self.tableWidget.setItem(row, 1,QTableWidgetItem(data['id_sp']))
+                self.tableWidget.setItem(row, 2,QTableWidgetItem(data['shop_name']))
+                self.tableWidget.setItem(row, 3,QTableWidgetItem(data['shop_id']))
+                self.tableWidget.setItem(row, 4,QTableWidgetItem(data['total_product']))
+                self.tableWidget.setItem(row, 5,QTableWidgetItem(data['total_order']))
                 # self.tableWidget.setItem(row, 6,QtWidgets.QTableWidgetItem('Còn Hiệu Lực') if data['status_cookie'] == 'True' else QtWidgets.QTableWidgetItem('Hết Hiệu Lực'))
                
 
                 if data['status_cookie'] == 'True':
                     layout = QHBoxLayout()
                     label = QLabel('Còn Hiệu Lực')
-                    font = QtGui.QFont()
+                    font = QFont()
                     font.setBold(True)
                     font.setFamily(u"Nunito")
                     font.setPointSize(16)
@@ -263,7 +263,7 @@ class UIFunctions:
                 else:
                     layout = QHBoxLayout()
                     label = QLabel('Hết Hiệu Lực')
-                    font = QtGui.QFont()
+                    font = QFont()
                     font.setBold(True)
                     font.setFamily(u"Nunito")
                     font.setPointSize(16)
@@ -344,40 +344,40 @@ class UIFunctions:
             self.tw_ratting5.setRowCount(len(s5) if len(s5) >3 else 3)
 
             for row, data in enumerate (s1):                               
-                self.tw_ratting1.setItem(row, 1,QtWidgets.QTableWidgetItem(str(row+1)))
-                self.tw_ratting1.setItem(row, 2,QtWidgets.QTableWidgetItem(data))
+                self.tw_ratting1.setItem(row, 1,QTableWidgetItem(str(row+1)))
+                self.tw_ratting1.setItem(row, 2,QTableWidgetItem(data))
                 self.btn_delete1 = QPushButton('')
                 self.btn_delete1.clicked.connect(lambda: UIFunctions.delete1(self))
                 self.tw_ratting1.setCellWidget(row,0,self.btn_delete1)
                 self.btn_delete1.setStyleSheet('QPushButton { image: url(img//remove.png);}QPushButton:hover { image: url(img//remove_red.png);}')
 
             for row, data_2 in enumerate(s2):                                  
-                self.tw_ratting2.setItem(row, 1,QtWidgets.QTableWidgetItem(str(row+1)))
-                self.tw_ratting2.setItem(row, 2,QtWidgets.QTableWidgetItem(data_2))
+                self.tw_ratting2.setItem(row, 1,QTableWidgetItem(str(row+1)))
+                self.tw_ratting2.setItem(row, 2,QTableWidgetItem(data_2))
                 self.btn_delete2 = QPushButton('')
                 self.btn_delete2.clicked.connect(lambda: UIFunctions.delete2(self))
                 self.tw_ratting2.setCellWidget(row,0,self.btn_delete2)
                 self.btn_delete2.setStyleSheet('QPushButton { image: url(img//remove.png);}QPushButton:hover { image: url(img//remove_red.png);}')          
 
             for row, data_3 in enumerate(s3):                             
-                self.tw_ratting3.setItem(row, 1,QtWidgets.QTableWidgetItem(str(row+1)))
-                self.tw_ratting3.setItem(row, 2,QtWidgets.QTableWidgetItem(data_3))
+                self.tw_ratting3.setItem(row, 1,QTableWidgetItem(str(row+1)))
+                self.tw_ratting3.setItem(row, 2,QTableWidgetItem(data_3))
                 self.btn_delete3 = QPushButton('')
                 self.btn_delete3.clicked.connect(lambda: UIFunctions.delete3(self))
                 self.tw_ratting3.setCellWidget(row,0,self.btn_delete3)
                 self.btn_delete3.setStyleSheet('QPushButton { image: url(img//remove.png);}QPushButton:hover { image: url(img//remove_red.png);}')
 
             for row, data_4 in enumerate(s4):                              
-                self.tw_ratting4.setItem(row, 1,QtWidgets.QTableWidgetItem(str(row+1)))
-                self.tw_ratting4.setItem(row, 2,QtWidgets.QTableWidgetItem(data_4))
+                self.tw_ratting4.setItem(row, 1,QTableWidgetItem(str(row+1)))
+                self.tw_ratting4.setItem(row, 2,QTableWidgetItem(data_4))
                 self.btn_delete4 = QPushButton('')
                 self.btn_delete4.clicked.connect(lambda: UIFunctions.delete4(self))
                 self.tw_ratting4.setCellWidget(row,0,self.btn_delete4)
                 self.btn_delete4.setStyleSheet('QPushButton { image: url(img//remove.png);}QPushButton:hover { image: url(img//remove_red.png);}')
 
             for row, data_5 in enumerate(s5):                               
-                self.tw_ratting5.setItem(row, 1,QtWidgets.QTableWidgetItem(str(row+1)))
-                self.tw_ratting5.setItem(row, 2,QtWidgets.QTableWidgetItem(data_5))
+                self.tw_ratting5.setItem(row, 1,QTableWidgetItem(str(row+1)))
+                self.tw_ratting5.setItem(row, 2,QTableWidgetItem(data_5))
                 self.btn_delete5 = QPushButton('')
                 self.btn_delete5.clicked.connect(lambda: UIFunctions.delete5(self))
                 self.tw_ratting5.setCellWidget(row,0,self.btn_delete5)
@@ -450,13 +450,13 @@ class UIFunctions:
     def uiDefinitions(self):
         def dobleClickMaximizeRestore(event):
             # IF DOUBLE CLICK CHANGE STATUS
-            if event.type() == QtCore.QEvent.MouseButtonDblClick:
-                QtCore.QTimer.singleShot(250, lambda: UIFunctions.maximize_restore(self))
+            if event.type() == QEvent.MouseButtonDblClick:
+                QTimer.singleShot(250, lambda: UIFunctions.maximize_restore(self))
 
         ## REMOVE ==> STANDARD TITLE BAR
         if GLOBAL_TITLE_BAR:
-            self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
-            self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+            self.setWindowFlags(Qt.FramelessWindowHint)
+            self.setAttribute(Qt.WA_TranslucentBackground)
             self.frame_label_top_btns.mouseDoubleClickEvent = dobleClickMaximizeRestore
         else:
             self.horizontalLayout.setContentsMargins(0, 0, 0, 0)

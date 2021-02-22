@@ -1,5 +1,5 @@
-import sys,requests,pickle
-from PyQt5.QtCore import QUrl, QByteArray, QSize, Qt ,QTimer
+import sys,requests, json
+from PyQt5.QtCore import QUrl, Qt ,QTimer
 from PyQt5.QtWebEngineWidgets import QWebEngineView, QWebEngineProfile, QWebEnginePage
 from PyQt5.QtWidgets import *
 from PyQt5.QtNetwork import *
@@ -21,33 +21,10 @@ class Browser(QWidget):
         self.center()        
     def setup(self):
         self.box = QVBoxLayout(self)
-        # self.btn_get = QPushButton('THÊM TÀI KHOẢN')
-        # self.btn_get.clicked.connect(self.get_cookie)
-        # self.btn_get.setObjectName(u"btn_get")
-        # self.btn_get.setMinimumSize(QSize(0, 40))
-        # self.btn_get.setStyleSheet(u"#btn_get{border-radius: 20px;padding:8px 25px 7px 25px;background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));color: rgb(255, 255, 255);}#btn_get:hover{background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(15, 181, 253, 255), stop:1 rgba(89, 64, 231, 255));}#btn_get:pressed{background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));}")
-        # font = QFont()
-        # font.setFamily(u"Nunito")
-        # font.setPointSize(18)
-        # font.setBold(True)
-        # self.btn_get.setFont(font)
-        # self.label_browser = QLabel('Sau khi đăng nhập THÀNH CÔNG vui lòng bấm vào nút THÊM TÀI KHOẢN phía trên')
-        # self.label_browser.setObjectName(u"label")
-        # self.label_browser.setMaximumSize(QSize(16777215, 40))
-        # font1 = QFont()
-        # font1.setFamily(u"Nunito")
-        # font1.setPointSize(16)
-        # font1.setBold(True)
-        # self.label_browser.setFont(font1)
-        # self.label_browser.setStyleSheet(u"color: rgb(27, 63, 216);")
-        # self.label_browser.setAlignment(Qt.AlignCenter)
-
         self.web = MyWebEngineView()
         self.web.resize(1280, 720)
         self.web.load(QUrl("https://banhang.shopee.vn/"))
         self.web.loadFinished.connect(self.on_load_finished)
-        # self.box.addWidget(self.btn_get)
-        # self.box.addWidget(self.label_browser)
         self.box.addWidget(self.web)
         self.web.show()
 

@@ -12,8 +12,8 @@ class Dashboard(QMainWindow):
         super(Dashboard,self).__init__()
         loadUi("ui//dashboard_screen.ui",self)
         self.resize(1920, 1080)
-        QtGui.QFontDatabase.addApplicationFont('font/Nunito/Nunito-Regular.ttf')
-        QtGui.QFontDatabase.addApplicationFont('font/Nunito/Nunito-Regular.ttf')
+        QFontDatabase.addApplicationFont('font/Nunito/Nunito-Regular.ttf')
+        QFontDatabase.addApplicationFont('font/Nunito/Nunito-Regular.ttf')
         # ########################################################################
         ## THÊM NUT MENU TẠI ĐÂY
         # ########################################################################
@@ -39,7 +39,7 @@ class Dashboard(QMainWindow):
         self.comboBox_user.currentTextChanged.connect(lambda: UIFunctions.set_data_rating_shopee(self))
         self.btn_add_rating.clicked.connect(lambda: UIFunctions.pop_up_rating(self))
         self.btn_apply_all_rating.clicked.connect(lambda: UIFunctions.set_data_rating_shopee(self))
-        QtCore.QTimer.singleShot(10, lambda: UIFunctions.get_list_products_shopee(self))
+        QTimer.singleShot(10, lambda: UIFunctions.get_list_products_shopee(self))
 
         Dashboard.comboBox_user_text = self.comboBox_user.currentText()
 
