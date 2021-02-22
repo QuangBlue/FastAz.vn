@@ -2570,6 +2570,11 @@ QPushButton:hover {
 
 QPushButton:pressed {
 	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));
+}
+
+QPushButton:disabled{
+	
+	background-color: rgb(128, 128, 128);
 }</string>
                          </property>
                          <property name="frameShape">
@@ -2675,7 +2680,7 @@ QHeaderView::section:vertical
                              <bool>true</bool>
                             </property>
                             <property name="dragDropMode">
-                             <enum>QAbstractItemView::DragDrop</enum>
+                             <enum>QAbstractItemView::NoDragDrop</enum>
                             </property>
                             <property name="defaultDropAction">
                              <enum>Qt::TargetMoveAction</enum>
@@ -2684,7 +2689,7 @@ QHeaderView::section:vertical
                              <bool>false</bool>
                             </property>
                             <property name="selectionMode">
-                             <enum>QAbstractItemView::SingleSelection</enum>
+                             <enum>QAbstractItemView::MultiSelection</enum>
                             </property>
                             <property name="selectionBehavior">
                              <enum>QAbstractItemView::SelectRows</enum>
@@ -2711,7 +2716,10 @@ QHeaderView::section:vertical
                              <number>19</number>
                             </attribute>
                             <attribute name="horizontalHeaderDefaultSectionSize">
-                             <number>90</number>
+                             <number>100</number>
+                            </attribute>
+                            <attribute name="horizontalHeaderHighlightSections">
+                             <bool>true</bool>
                             </attribute>
                             <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
                              <bool>true</bool>
@@ -2747,7 +2755,7 @@ QHeaderView::section:vertical
                             </column>
                             <column>
                              <property name="text">
-                              <string>Tên sản phẩm</string>
+                              <string>Sản Phẩm Lấy Từ Shopee</string>
                              </property>
                              <property name="font">
                               <font>
@@ -2769,6 +2777,9 @@ QHeaderView::section:vertical
                             <layout class="QHBoxLayout" name="horizontalLayout_12">
                              <item>
                               <widget class="QPushButton" name="btn_back">
+                               <property name="enabled">
+                                <bool>true</bool>
+                               </property>
                                <property name="font">
                                 <font>
                                  <family>Nunito</family>
@@ -2778,6 +2789,9 @@ QHeaderView::section:vertical
                                </property>
                                <property name="text">
                                 <string>TRANG TRƯỚC</string>
+                               </property>
+                               <property name="checkable">
+                                <bool>false</bool>
                                </property>
                               </widget>
                              </item>
@@ -3003,7 +3017,7 @@ QHeaderView::section:vertical
                           <bool>true</bool>
                          </property>
                          <property name="dragDropMode">
-                          <enum>QAbstractItemView::DragDrop</enum>
+                          <enum>QAbstractItemView::NoDragDrop</enum>
                          </property>
                          <property name="defaultDropAction">
                           <enum>Qt::TargetMoveAction</enum>
@@ -3012,7 +3026,7 @@ QHeaderView::section:vertical
                           <bool>false</bool>
                          </property>
                          <property name="selectionMode">
-                          <enum>QAbstractItemView::SingleSelection</enum>
+                          <enum>QAbstractItemView::MultiSelection</enum>
                          </property>
                          <property name="selectionBehavior">
                           <enum>QAbstractItemView::SelectRows</enum>
@@ -3075,7 +3089,7 @@ QHeaderView::section:vertical
                          </column>
                          <column>
                           <property name="text">
-                           <string>Tên sản phẩm</string>
+                           <string>Sản Phẩm Đã Chọn Để Đẩy</string>
                           </property>
                           <property name="font">
                            <font>

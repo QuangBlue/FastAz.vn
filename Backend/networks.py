@@ -121,6 +121,18 @@ class Network:
         else:
             return r.status_code
 
+    @backend.loading.setWaitCursor
+    def list_products_shopee(self,cookie,page_number):
+        url = f'https://banhang.shopee.vn/api/v3/product/page_product_list/?page_number={page_number}&page_size=24'
+        try:
+            r = requests.get(url, cookies=cookie)
+        except (requests.exceptions.HTTPError,requests.exceptions.ConnectionError,requests.exceptions.Timeout,requests.exceptions.RequestException) as err:
+            print(str(err))
+            main_pyqt5.ResetPasswordScreen.show_popup(self)
+            raise Exception("Lỗi Server!!!")
+        else:
+            return r.json()
+
 
 if __name__ == '__main__':
     pass

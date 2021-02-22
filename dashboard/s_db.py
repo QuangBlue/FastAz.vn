@@ -6,7 +6,7 @@ GLOBAL_STATE = 0
 GLOBAL_TITLE_BAR = True
 
 count = 1
-
+page_number = 1
 class UIFunctions:
     GLOBAL_STATE = 0
     GLOBAL_TITLE_BAR = True
@@ -139,6 +139,80 @@ class UIFunctions:
         webbrowser.open('http://fastaz.vn/')
 
 
+    def get_list_products_shopee(self):
+        global page_number
+        with open('temp//data.json') as f:
+            data = json.load(f)
+
+        for x in range(len(data['shopee'])):
+                if data['shopee'][x]['shop_name'] == self.comboBox_user.currentText():
+                    shop_c = x
+
+        cookie = data['shopee'][shop_c]['cookie']
+        r = backend.networks.Network.list_products_shopee(self,cookie,page_number)
+
+        a = r['data']['page_info']['total']
+
+        page_size = 1 if a <= 24 else (a // 24) +1
+        self.btn_back.setEnabled(False) if page_number == 1 else self.btn_back.setEnabled(True)
+        self.btn_forward.setEnabled(False) if page_number == page_size else self.btn_forward.setEnabled(True)
+
+        if len(r['data']['list']) != 0:
+            name = []
+            img = []    
+            for x in range(24):
+                name.append(r['data']['list'][x]['name'])
+                img.append(r['data']['list'][x]['images'][0])
+            self.product_list_shopee.setRowCount(len(name) if len(name) >24 else 24)
+            for k in range(self.product_list_shopee.rowCount()):
+                self.product_list_shopee.setRowHeight(k, 90)
+
+            for row ,data_name in enumerate(name):                
+                self.product_list_shopee.setItem(row, 1,QtWidgets.QTableWidgetItem(data_name))
+
+            for row , data_img in enumerate(img):
+                url = f'https://cf.shopee.vn/file/{data_img}_tn'
+                img = UIFunctions.getImageLabel(self,url)
+                self.product_list_shopee.setCellWidget(row,0,img)
+                # row += 1
+    def getImageLabel(self,url):
+
+        req = QNetworkRequest(QUrl(url))
+        nam = QNetworkAccessManager()        
+        loop = QEventLoop()
+        x = nam.get(req)
+        nam.finished.connect(loop.quit)
+        loop.exec_()
+        i = QImage()
+        i.loadFromData(x.readAll()) 
+        imgLabel = QLabel(self.centralwidget)
+        imgLabel.setText('')
+        imgLabel.setScaledContents(True)    
+        imgLabel.setPixmap(QPixmap(i))
+        return imgLabel
+
+    def next_page(self):
+        global page_number
+        page_number += 1
+        for i in reversed(range(self.product_list_shopee.rowCount())):
+            self.product_list_shopee.removeRow(i)   
+        UIFunctions.get_list_products_shopee(self)
+
+    def back_page(self):
+        global page_number
+
+        if page_number <= 1:
+            page_number = 1
+        elif page_number > 1:
+            page_number -= 1
+
+            for i in reversed(range(self.product_list_shopee.rowCount())):
+                self.product_list_shopee.removeRow(i) 
+
+            UIFunctions.get_list_products_shopee(self)
+
+    
+
     def set_data_user_shopee(self):
         with open('temp//data.json') as f:
             data = json.load(f)
@@ -268,56 +342,46 @@ class UIFunctions:
             self.tw_ratting3.setRowCount(len(s3) if len(s3) >3 else 3)
             self.tw_ratting4.setRowCount(len(s4) if len(s4) >3 else 3)
             self.tw_ratting5.setRowCount(len(s5) if len(s5) >3 else 3)
-            row = 0
-            for data in s1:
-                               
+
+            for row, data in enumerate (s1):                               
                 self.tw_ratting1.setItem(row, 1,QtWidgets.QTableWidgetItem(str(row+1)))
                 self.tw_ratting1.setItem(row, 2,QtWidgets.QTableWidgetItem(data))
                 self.btn_delete1 = QPushButton('')
                 self.btn_delete1.clicked.connect(lambda: UIFunctions.delete1(self))
                 self.tw_ratting1.setCellWidget(row,0,self.btn_delete1)
                 self.btn_delete1.setStyleSheet('QPushButton { image: url(img//remove.png);}QPushButton:hover { image: url(img//remove_red.png);}')
-                row = row + 1
-            row = 0
-            for data_2 in s2: 
-                                     
+
+            for row, data_2 in enumerate(s2):                                  
                 self.tw_ratting2.setItem(row, 1,QtWidgets.QTableWidgetItem(str(row+1)))
                 self.tw_ratting2.setItem(row, 2,QtWidgets.QTableWidgetItem(data_2))
                 self.btn_delete2 = QPushButton('')
                 self.btn_delete2.clicked.connect(lambda: UIFunctions.delete2(self))
                 self.tw_ratting2.setCellWidget(row,0,self.btn_delete2)
                 self.btn_delete2.setStyleSheet('QPushButton { image: url(img//remove.png);}QPushButton:hover { image: url(img//remove_red.png);}')          
-                row = row + 1
-            row = 0
-            for data_3 in s3:   
-                             
+
+            for row, data_3 in enumerate(s3):                             
                 self.tw_ratting3.setItem(row, 1,QtWidgets.QTableWidgetItem(str(row+1)))
                 self.tw_ratting3.setItem(row, 2,QtWidgets.QTableWidgetItem(data_3))
                 self.btn_delete3 = QPushButton('')
                 self.btn_delete3.clicked.connect(lambda: UIFunctions.delete3(self))
                 self.tw_ratting3.setCellWidget(row,0,self.btn_delete3)
                 self.btn_delete3.setStyleSheet('QPushButton { image: url(img//remove.png);}QPushButton:hover { image: url(img//remove_red.png);}')
-                row = row + 1
-            row = 0
-            for data_4 in s4:
-                                    
+
+            for row, data_4 in enumerate(s4):                              
                 self.tw_ratting4.setItem(row, 1,QtWidgets.QTableWidgetItem(str(row+1)))
                 self.tw_ratting4.setItem(row, 2,QtWidgets.QTableWidgetItem(data_4))
                 self.btn_delete4 = QPushButton('')
                 self.btn_delete4.clicked.connect(lambda: UIFunctions.delete4(self))
                 self.tw_ratting4.setCellWidget(row,0,self.btn_delete4)
                 self.btn_delete4.setStyleSheet('QPushButton { image: url(img//remove.png);}QPushButton:hover { image: url(img//remove_red.png);}')
-                row = row + 1
-            row = 0
-            for data_5 in s5:  
-                                 
+
+            for row, data_5 in enumerate(s5):                               
                 self.tw_ratting5.setItem(row, 1,QtWidgets.QTableWidgetItem(str(row+1)))
                 self.tw_ratting5.setItem(row, 2,QtWidgets.QTableWidgetItem(data_5))
                 self.btn_delete5 = QPushButton('')
                 self.btn_delete5.clicked.connect(lambda: UIFunctions.delete5(self))
                 self.tw_ratting5.setCellWidget(row,0,self.btn_delete5)
                 self.btn_delete5.setStyleSheet('QPushButton { image: url(img//remove.png);}QPushButton:hover { image: url(img//remove_red.png);}')
-                row = row + 1
 
         elif len(shopee) == 0:
             self.tw_ratting1.setRowCount(3)

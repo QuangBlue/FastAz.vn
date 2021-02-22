@@ -1,15 +1,15 @@
-import sys, webbrowser, time, json
+import sys, webbrowser, time, json, requests
 import PyQt5
 from PyQt5 import QtWidgets, QtGui, QtCore
 from PyQt5.uic import loadUi
 from PyQt5.QtGui import *
-from PyQt5.QtCore import *
+from PyQt5.QtCore import QSize, Qt, QUrl, QEventLoop, QPropertyAnimation
 from PyQt5.QtWidgets import QMainWindow, QApplication, QGraphicsDropShadowEffect, QPushButton, QSizePolicy, QSizeGrip, QMessageBox, QHBoxLayout, QLabel, QWidget, QFrame
-
+from PyQt5.QtNetwork import QNetworkAccessManager, QNetworkReply, QNetworkRequest
 ## IMPORT SCREEN
 from dashboard.dashboard import *
 import qrc.file_img_rc
-## Database
+## Databaseexiet
 import backend.networks
 import backend.MongoDB_Setup as db
 import backend.loading
@@ -387,10 +387,12 @@ class LoadingScreen(QMainWindow):
                         cookie = k[i]['cookie']
                         r = backend.networks.Network.check_cookie(self,cookie)
                         if r == 200:
+                            a = backend.networks.Network.list_products_shopee(self,cookie,1)
                             d['shopee'][i]['status_cookie'] = "True"
+                            d['shopee'][i]['total_product'] = str(a['data']['page_info']['total'])
                             with open('temp//data.json', 'w') as f:
                                 json.dump(d,f)
-                            Database_mongoDB.find_and_updateDB(self,d['id_wp'],{f"shopee.{i}.status_cookie" : "True"})
+                            Database_mongoDB.find_and_updateDB(self,d['id_wp'],{f"shopee.{i}.status_cookie" : "True",f"shopee.{i}.total_product" : d['shopee'][i]['total_product']})
                         elif r != 200:
                             d['shopee'][i]['status_cookie'] = "False"
                             with open('temp//data.json', 'w') as f:

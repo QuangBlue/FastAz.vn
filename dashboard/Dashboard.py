@@ -34,10 +34,12 @@ class Dashboard(QMainWindow):
 
         UIFunctions.set_data_user_shopee(self)
         UIFunctions.set_data_rating_shopee(self)
+        self.btn_forward.clicked.connect(lambda : UIFunctions.next_page(self))
+        self.btn_back.clicked.connect(lambda : UIFunctions.back_page(self))
         self.comboBox_user.currentTextChanged.connect(lambda: UIFunctions.set_data_rating_shopee(self))
         self.btn_add_rating.clicked.connect(lambda: UIFunctions.pop_up_rating(self))
         self.btn_apply_all_rating.clicked.connect(lambda: UIFunctions.set_data_rating_shopee(self))
-
+        QtCore.QTimer.singleShot(10, lambda: UIFunctions.get_list_products_shopee(self))
 
         Dashboard.comboBox_user_text = self.comboBox_user.currentText()
 
@@ -128,11 +130,14 @@ class Dashboard(QMainWindow):
             if self.comboBox_user.count() == 0 or self.comboBox_user.currentText() == "Chưa có tài khoản":
                 r = QMessageBox.warning(self, 'MessageBox', "BẠN CHƯA THÊM TÀI KHOẢN.\nVui lòng thêm ít nhất 1 tài khoản để sử dụng", QMessageBox.Ok, QMessageBox.Ok)
             else: 
+                
                 self.stackedWidget.setCurrentWidget(self.page_push_product)
                 UIFunctions.resetStyle(self, "btn_push_product")
                 UIFunctions.labelPage(self, "Đẩy sản phẩm")
                 btnWidget.setStyleSheet(UIFunctions.selectMenu(self,btnWidget.styleSheet()))
 
+                
+                
         if btnWidget.objectName() == "btn_chat_bot":
             if self.comboBox_user.count() == 0 or self.comboBox_user.currentText() == "Chưa có tài khoản":
                 r = QMessageBox.warning(self, 'MessageBox', "BẠN CHƯA THÊM TÀI KHOẢN.\nVui lòng thêm ít nhất 1 tài khoản để sử dụng", QMessageBox.Ok, QMessageBox.Ok)
