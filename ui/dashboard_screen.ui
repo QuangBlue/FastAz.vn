@@ -1486,8 +1486,8 @@ QPushButton:pressed {
                   </property>
                   <property name="maximumSize">
                    <size>
-                    <width>75</width>
-                    <height>75</height>
+                    <width>99999</width>
+                    <height>99999</height>
                    </size>
                   </property>
                   <property name="styleSheet">

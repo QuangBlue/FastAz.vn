@@ -7,6 +7,7 @@ GLOBAL_TITLE_BAR = True
 
 count = 1
 page_number = 1
+shop_choose = 0
 class UIFunctions:
     GLOBAL_STATE = 0
     GLOBAL_TITLE_BAR = True
@@ -109,9 +110,11 @@ class UIFunctions:
         self.ui = Browser()
         self.ui.show()
         self.ui.msg.buttonClicked.connect(lambda: UIFunctions.set_data_user_shopee(self))
+        self.ui.msg.buttonClicked.connect(lambda: UIFunctions.set_comboBox_user(self))
         self.ui.msg.buttonClicked.connect(lambda: self.ui.close())
-        self.ui.msg.buttonClicked.connect(lambda: QTimer.singleShot(500, lambda: UIFunctions.get_list_products_shopee(self)))
+        self.ui.msg.buttonClicked.connect(lambda: QTimer.singleShot(10, lambda: UIFunctions.get_list_products_shopee(self)))
 
+        
     def userIcon(self, icon = 'img//teamwork.png'):
         self.label_user_icon.setIcon(QIcon(icon))
         self.label_user_icon.setIconSize(QSize(60,60))
@@ -139,69 +142,41 @@ class UIFunctions:
 
     def open_webbrowser(self):
         webbrowser.open('http://fastaz.vn/')
+    
+    def check_shop_choose(self):
+        global shop_choose
+        if self.comboBox_user.currentText() != 'Chưa có tài khoản':
+            with open('temp//data.json') as f:
+                data = json.load(f)
+            for x in range(len(data['shopee'])):
+                if data['shopee'][x]['shop_name'] == self.comboBox_user.currentText():
+                    shop_choose = x
 
 
     def get_list_products_shopee(self):
+        print('Dang Get List Product Shopee')
+        self.product_list_shopee.setRowCount(24)
+        for k in range(self.product_list_shopee.rowCount()):
+            self.product_list_shopee.setRowHeight(k, 90)
+        self.product_list_shopee.setItem(0, 1,QTableWidgetItem("Đang tải dữ liệu ...."))
         if self.comboBox_user.currentText() != 'Chưa có tài khoản':
-
             global page_number
             with open('temp//data.json') as f:
                 data = json.load(f)
                 self.id_wp = data['id_wp']
-
-            for x in range(len(data['shopee'])):
-                    if data['shopee'][x]['shop_name'] == self.comboBox_user.currentText():
-                        self.shop_c = x
-
-            cookie = data['shopee'][self.shop_c]['cookie']
-            self.r = backend.networks.Network.list_products_shopee(self,cookie,page_number)
-
-            a = self.r['data']['page_info']['total']
-
-            page_size = 1 if a <= 24 else (a // 24) +1
-            self.btn_back.setEnabled(False) if page_number == 1 else self.btn_back.setEnabled(True)
-            self.btn_forward.setEnabled(False) if page_number == page_size else self.btn_forward.setEnabled(True)
-
-            if len(self.r['data']['list']) != 0:
-                self.name = []
-                self.img = []  
-                self.ids = []  
-                for x in range(24):
-                    self.name.append(self.r['data']['list'][x]['name'])
-                    self.img.append(self.r['data']['list'][x]['images'][0])
-                    self.ids.append(self.r['data']['list'][x]['id'])
-                self.product_list_shopee.setRowCount(len(self.name) if len(self.name) > 10 else 10)
-                for k in range(self.product_list_shopee.rowCount()):
-                    self.product_list_shopee.setRowHeight(k, 90)
-
-                for row ,data_name in enumerate(self.name):                
-                    self.product_list_shopee.setItem(row, 1,QTableWidgetItem(data_name))
-
-                for row , data_img in enumerate(self.img):
-                    url = f'https://cf.shopee.vn/file/{data_img}_tn'
-                    img = UIFunctions.getImageLabel(self,url)
-                    self.product_list_shopee.setCellWidget(row,0,img)
-    def getImageLabel(self,url):
-
-        req = QNetworkRequest(QUrl(url))
-        nam = QNetworkAccessManager()        
-        loop = QEventLoop()
-        x = nam.get(req)
-        nam.finished.connect(loop.quit)
-        loop.exec_()
-        i = QImage()
-        i.loadFromData(x.readAll()) 
-        imgLabel = QLabel(self.centralwidget)
-        imgLabel.setText('')
-        imgLabel.setScaledContents(True)    
-        imgLabel.setPixmap(QPixmap(i))
-        return imgLabel
+            
+            if len(data['shopee']) != 0:
+                UIFunctions.check_shop_choose(self)
+                c = data['shopee'][shop_choose]['cookie']
+                self.worker_product = ThreadGetListProduct(c,page_number)
+                self.worker_product.start()
+                self.worker_product.r_json.connect(self.update_list_products_shopee)
 
     def next_page(self):
         global page_number
         page_number += 1
         for i in reversed(range(self.product_list_shopee.rowCount())):
-            self.product_list_shopee.removeRow(i)   
+            self.product_list_shopee.removeRow(i) 
         UIFunctions.get_list_products_shopee(self)
 
     def back_page(self):
@@ -226,19 +201,20 @@ class UIFunctions:
             o['name_product'] = self.name[p]
             o['id_product'] = self.ids[p]
             data.append(o)
-
-        Database_mongoDB.add_protuct_push(self,self.id_wp,self.shop_c,data)
+        UIFunctions.check_shop_choose(self)
+        Database_mongoDB.add_protuct_push(self,self.id_wp,shop_choose,data)
         UIFunctions.set_data_product_push(self)
 
     def del_from_product_push(self):
+        UIFunctions.check_shop_choose(self)
         x = self.product_list_user.selectedItems()  
         l = []
         for i in x:
             l.append(i.row())
             self.product_list_user.removeRow(i.row())
         for k in l:
-            Database_mongoDB.registered_Users_Collection.update({"_id": self.id_wp}, {"$unset": {f"shopee.{self.shop_c}.list_push_product.{k}": 1}})
-            Database_mongoDB.registered_Users_Collection.update({"_id": self.id_wp}, {"$pull": {f"shopee.{self.shop_c}.list_push_product": None}})
+            Database_mongoDB.registered_Users_Collection.update({"_id": self.id_wp}, {"$unset": {f"shopee.{shop_choose}.list_push_product.{k}": 1}})
+            Database_mongoDB.registered_Users_Collection.update({"_id": self.id_wp}, {"$pull": {f"shopee.{shop_choose}.list_push_product": None}})
         
         with open('temp//data.json') as f:
                 data = json.load(f)
@@ -247,36 +223,33 @@ class UIFunctions:
             data['shopee'] = y['shopee']
         with open('temp//data.json', 'w') as f:
                     json.dump(data, f)
-        # # for i in reversed(range(self.product_list_user.rowCount())):
-        # #     self.product_list_user.removeRow(i)
-        # for
-        # # UIFunctions.set_data_product_push(self)  
         
 
     def set_data_product_push(self):
+        print('Dang Set List Product Shopee')
+        self.product_list_user.setRowCount(24)
+        for k in range(self.product_list_user.rowCount()):
+            self.product_list_user.setRowHeight(k, 90)
         if self.comboBox_user.currentText() != 'Chưa có tài khoản':
             with open('temp//data.json') as f:
                 data = json.load(f)
-
-            if len(data['shopee']) != 0: 
-                for x in range(len(data['shopee'])):
-                    if data['shopee'][x]['shop_name'] == self.comboBox_user.currentText():
-                        shop_c = x 
-            if len(data['shopee'][shop_c]['list_push_product']) !=0:
-                s1 = data['shopee'][shop_c]['list_push_product']
-                self.product_list_user.setRowCount(len(s1) if len(s1) > 10 else 10)
-                for k in range(self.product_list_user.rowCount()):
-                    self.product_list_user.setRowHeight(k, 90)
+            UIFunctions.check_shop_choose(self)
+            if len(data['shopee'][shop_choose]['list_push_product']) !=0:
+                s1 = data['shopee'][shop_choose]['list_push_product']
+                img = []
                 for row, x in enumerate(s1):
                     self.product_list_user.setItem(row, 1,QTableWidgetItem(x['name_product']))
 
-                for row , x in enumerate(s1):
-                    url = f"https://cf.shopee.vn/file/{x['image']}_tn"
-                    img = UIFunctions.getImageLabel(self,url)
-                    self.product_list_user.setCellWidget(row,0,img)
-            
+                for x in s1:
+                    img.append(x['image'])
+
+                self.workerthread1 = WorkerThread(img,'product_list_user')
+                self.workerthread1.start()
+                self.workerthread1.img_complete.connect(self.update_img)
+        
 
     def set_data_user_shopee(self):
+        print('Dang set user shopee')
         with open('temp//data.json') as f:
             data = json.load(f)
             shopee = data['shopee']
@@ -290,7 +263,6 @@ class UIFunctions:
         self.tableWidget.setColumnWidth(4, 200)
         self.tableWidget.setColumnWidth(5, 200)
 
-        self.comboBox_user.clear()
 
         if len(shopee) != 0: 
             
@@ -351,21 +323,25 @@ class UIFunctions:
                     cellWidget = QWidget()
                     cellWidget.setLayout(layout)                   
                     self.tableWidget.setCellWidget(row, 6, cellWidget)
-               
-               
-                # self.tableWidget.item(row, 6).setForeground(QtGui.QColor(73, 165, 43) if data['status_cookie'] == 'True' else QtGui.QColor(201, 5, 22))
-                
+                               
                 row = row + 1
-            for x in range(len(shopee)):
-                if shopee[x]['status_cookie'] == "True":
-                    self.comboBox_user.addItem(shopee[x]['shop_name'])
-                        
-        if self.comboBox_user.count() == 0 :
-
-            self.comboBox_user.addItem("Chưa có tài khoản") 
 
         for row in range(self.tableWidget.rowCount()):
             self.tableWidget.setRowHeight(row, 50)
+
+    def set_comboBox_user(self):
+        with open('temp//data.json') as f:
+            data = json.load(f)
+
+        self.comboBox_user.clear()    
+        for x in range(len(data['shopee'])):
+            if data['shopee'][x]['status_cookie'] == "True":
+                self.comboBox_user.addItem(data['shopee'][x]['shop_name'])
+                        
+        if self.comboBox_user.count() == 0 :
+            self.comboBox_user.addItem("Chưa có tài khoản") 
+
+
     def btn_del_user(self):
         button = self.sender()
         index = self.tableWidget.indexAt(button.pos())
@@ -380,25 +356,26 @@ class UIFunctions:
             json.dump(data, f)
 
         for i in reversed(range(self.tableWidget.rowCount())):
-            self.tableWidget.removeRow(i)    
-
+            self.tableWidget.removeRow(i)  
+              
+        self.comboBox_user.addItem("Chưa có tài khoản") 
+        UIFunctions.set_comboBox_user(self)
         UIFunctions.set_data_user_shopee(self)
 
     def set_data_rating_shopee(self):
+        print('Dang set rating')
+        UIFunctions.check_shop_choose(self)
         with open('temp//data.json') as f:
             data = json.load(f)
             shopee = data['shopee']
-        shop_c = 0
-        
+
         if len(shopee) != 0: 
-            for x in range(len(data['shopee'])):
-                if data['shopee'][x]['shop_name'] == self.comboBox_user.currentText():
-                    shop_c = x           
-            s1 = data['shopee'][shop_c]['reply_rating']['rating_1star']
-            s2 = data['shopee'][shop_c]['reply_rating']['rating_2star']
-            s3 = data['shopee'][shop_c]['reply_rating']['rating_3star']
-            s4 = data['shopee'][shop_c]['reply_rating']['rating_4star']
-            s5 = data['shopee'][shop_c]['reply_rating']['rating_5star']
+  
+            s1 = data['shopee'][shop_choose]['reply_rating']['rating_1star']
+            s2 = data['shopee'][shop_choose]['reply_rating']['rating_2star']
+            s3 = data['shopee'][shop_choose]['reply_rating']['rating_3star']
+            s4 = data['shopee'][shop_choose]['reply_rating']['rating_4star']
+            s5 = data['shopee'][shop_choose]['reply_rating']['rating_5star']
 
             self.tw_ratting1.setRowCount(len(s1) if len(s1) >3 else 3)  
             self.tw_ratting2.setRowCount(len(s2) if len(s2) >3 else 3)   
@@ -488,21 +465,21 @@ class UIFunctions:
     def delete_ratings(self):
         button = self.sender()
         index = self.pos_table.indexAt(button.pos())
-
+        UIFunctions.check_shop_choose(self)
         with open('temp//data.json') as f:
             data = json.load(f)
             shopee = data['shopee']
-        shop_c = 0
-        for x in range(len(data['shopee'])):
-                if data['shopee'][x]['shop_name'] == self.comboBox_user.currentText():
-                    shop_c = x  
-        k = data['shopee'][shop_c]['reply_rating'][self.table_name][index.row()]
-        del data['shopee'][shop_c]['reply_rating'][self.table_name][index.row()]
+        # shop_c = 0
+        # for x in range(len(data['shopee'])):
+        #         if data['shopee'][x]['shop_name'] == self.comboBox_user.currentText():
+        #             shop_c = x  
+        k = data['shopee'][shop_choose]['reply_rating'][self.table_name][index.row()]
+        del data['shopee'][shop_choose]['reply_rating'][self.table_name][index.row()]
         with open('temp//data.json', 'w') as f:
             json.dump(data, f)
         Database_mongoDB.registered_Users_Collection.update_one(
             { '_id': data['id_wp'] },
-            { '$pull': { f'shopee.{shop_c}.reply_rating.{self.table_name}': k } }
+            { '$pull': { f'shopee.{shop_choose}.reply_rating.{self.table_name}': k } }
             )
         for i in reversed(range(self.tableWidget.rowCount())):
             self.pos_table.removeRow(i) 
@@ -591,3 +568,58 @@ class Style:
     }
     """
     )
+
+class WorkerThread(QThread):
+    img_complete = pyqtSignal(list)
+
+    def __init__(self,img,index):
+        super().__init__()
+        self.img = img
+        self.index = index
+    def run(self):
+        print('dang set img')
+        for row , data_img in enumerate(self.img):
+            url = f'https://cf.shopee.vn/file/{data_img}_tn'
+            img = urllib.request.urlopen(url).read()
+            l = [row,img,self.index]
+            self.img_complete.emit(l)
+
+class ThreadGetInfo(QThread):
+    
+    def __init__(self):
+        super().__init__()
+
+    def run(self):
+        with open('temp//data.json') as f:
+            d = json.load(f)
+            k = d['shopee']
+            if len(k) != 0:
+                for i in range(len(k)):
+                    cookie = k[i]['cookie']
+                    r = backend.networks.Network.list_products_shopee(self,cookie,1)
+                    if r['message'] == "success":
+                        d['shopee'][i]['status_cookie'] = "True"
+                        d['shopee'][i]['total_product'] = str(r['data']['page_info']['total'])
+                        with open('temp//data.json', 'w') as f:
+                            json.dump(d,f)
+                        Database_mongoDB.find_and_updateDB(self,d['id_wp'],{f"shopee.{i}.status_cookie" : "True",f"shopee.{i}.total_product" : d['shopee'][i]['total_product']})
+                    else:
+                        d['shopee'][i]['status_cookie'] = "False"
+                        with open('temp//data.json', 'w') as f:
+                            json.dump(d,f)
+                        Database_mongoDB.find_and_updateDB(self,d['id_wp'],{f"shopee.{i}.status_cookie" : "False"})
+
+class ThreadGetListProduct(QThread):
+
+    r_json = pyqtSignal(list)
+
+    def __init__(self, cookie, page_number):
+        super().__init__()
+        self.c = cookie
+        self.p = page_number
+
+    def run(self):
+        r = backend.networks.Network.list_products_shopee(self,self.c,self.p)
+        l = [r,self.p]
+        self.r_json.emit(l)
+

@@ -1,9 +1,9 @@
-import sys, webbrowser, time, json, requests
-# import PyQt5
-# from PyQt5 import QtWidgets, QtGui, QtCore
+import sys, webbrowser, time, json, requests , urllib.request
+
+from functools import partial
 from PyQt5.uic import loadUi
 from PyQt5.QtGui import QColor, QFont, QImage, QPixmap, QFontDatabase, QIcon
-from PyQt5.QtCore import QSize, Qt, QUrl, QEventLoop, QPropertyAnimation, QTimer, QEvent, QEasingCurve
+from PyQt5.QtCore import QSize, Qt, QUrl, QEventLoop, QPropertyAnimation, QTimer, QEvent, QEasingCurve, QByteArray, QThread, pyqtSignal,QObject
 from PyQt5.QtWidgets import QMainWindow, QApplication, QGraphicsDropShadowEffect, QPushButton, QSizePolicy, QSizeGrip, QMessageBox, QHBoxLayout, QLabel, QWidget, QFrame, QStackedWidget, QTableWidgetItem
 from PyQt5.QtNetwork import QNetworkAccessManager, QNetworkReply, QNetworkRequest
 ## IMPORT SCREEN
@@ -379,26 +379,7 @@ class LoadingScreen(QMainWindow):
             self.label_description.setText("<strong>TẢI</strong> TÀI NGUYÊN ỨNG DỤNG")
             
         if self.counter == 75:           
-            with open('temp//data.json') as f:
-                d = json.load(f)
-                k = d['shopee']
-                if len(k) != 0:
-                    for i in range(len(k)):
-                        cookie = k[i]['cookie']
-                        r = backend.networks.Network.check_cookie(self,cookie)
-                        if r == 200:
-                            a = backend.networks.Network.list_products_shopee(self,cookie,1)
-                            d['shopee'][i]['status_cookie'] = "True"
-                            d['shopee'][i]['total_product'] = str(a['data']['page_info']['total'])
-                            with open('temp//data.json', 'w') as f:
-                                json.dump(d,f)
-                            Database_mongoDB.find_and_updateDB(self,d['id_wp'],{f"shopee.{i}.status_cookie" : "True",f"shopee.{i}.total_product" : d['shopee'][i]['total_product']})
-                        elif r != 200:
-                            d['shopee'][i]['status_cookie'] = "False"
-                            with open('temp//data.json', 'w') as f:
-                                json.dump(d,f)
-                            Database_mongoDB.find_and_updateDB(self,d['id_wp'],{f"shopee.{i}.status_cookie" : "False"})
-        
+            self.label_description.setText("<strong>TẢI</strong> THÔNG TIN TÀI KHOẢN")
         if self.counter == 99:
             self.label_description.setText("<strong>TẢI</strong> THÔNG TIN KHUYẾN MÃI")
             
@@ -412,7 +393,7 @@ class LoadingScreen(QMainWindow):
             self.main = Dashboard()
 
             # CLOSE SPLASH SCREEN
-            self.hide()
+            self.close()
 
         # INCREASE COUNTER
         self.counter += 1

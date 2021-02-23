@@ -8,7 +8,7 @@ def appWait(milliseconds=3000):
 
 def setWaitCursor(funct):
     def wrapper(*args,**kwargs):
-        QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
+        QApplication.setOverrideCursor(QtCore.Qt.BusyCursor)
         try:
             result = funct(*args,**kwargs)
             # appWait(1)

@@ -36,17 +36,31 @@ class Dashboard(QMainWindow):
         self.btn_remove.clicked.connect(lambda: UIFunctions.del_from_product_push(self))
 
         UIFunctions.set_data_user_shopee(self)
+        UIFunctions.set_comboBox_user(self)
         UIFunctions.set_data_rating_shopee(self)
         
         self.btn_forward.clicked.connect(lambda : UIFunctions.next_page(self))
         self.btn_back.clicked.connect(lambda : UIFunctions.back_page(self))
-        self.comboBox_user.currentTextChanged.connect(lambda: UIFunctions.set_data_rating_shopee(self))
+        
         self.btn_add_rating.clicked.connect(lambda: UIFunctions.pop_up_rating(self))
         self.btn_apply_all_rating.clicked.connect(lambda: UIFunctions.set_data_rating_shopee(self))
-        QTimer.singleShot(10, lambda: UIFunctions.get_list_products_shopee(self))
-        QTimer.singleShot(10, lambda: UIFunctions.set_data_product_push(self))
-
+        UIFunctions.get_list_products_shopee(self)
+        UIFunctions.set_data_product_push(self)
         Dashboard.comboBox_user_text = self.comboBox_user.currentText()
+
+        self.threadgetinfo = ThreadGetInfo()
+        self.threadgetinfo.start()
+        self.threadgetinfo.finished.connect(lambda: UIFunctions.set_data_user_shopee(self))
+
+
+        # ########################################################################
+        ## SET UPDATE WHEN COMBOX CHANGE
+        # ########################################################################
+        self.comboBox_user.currentIndexChanged.connect(lambda: self.change_comboBox() )
+        # self.comboBox_user.currentTextChanged.connect(lambda: UIFunctions.set_data_rating_shopee(self))
+        # self.comboBox_user.currentTextChanged.connect(lambda: UIFunctions.set_data_product_push(self))
+        # self.comboBox_user.currentTextChanged.connect(lambda: UIFunctions.get_list_products_shopee(self))
+
 
         # ########################################################################
         ## ONLY SELECT TABLE ROW SAME TIME
@@ -112,9 +126,70 @@ class Dashboard(QMainWindow):
         # ########################################################################
         UIFunctions.uiDefinitions(self)
         self.show()
- 
-    
 
+    def update_list_products_shopee(self, l):
+        self.r = l[0]
+        self.page_number = l[1]
+
+        a = self.r['data']['page_info']['total']
+
+        page_size = 1 if a <= 24 else (a // 24) +1
+        self.btn_back.setEnabled(False) if self.page_number == 1 else self.btn_back.setEnabled(True)
+        self.btn_forward.setEnabled(False) if self.page_number == page_size else self.btn_forward.setEnabled(True)
+
+        if len(self.r['data']['list']) != 0:
+            self.name = []
+            self.img = []  
+            self.ids = []  
+            for x in range(len(self.r['data']['list'])):
+                self.name.append(self.r['data']['list'][x]['name'])
+                self.img.append(self.r['data']['list'][x]['images'][0])
+                self.ids.append(self.r['data']['list'][x]['id'])
+            for row ,data_name in enumerate(self.name):                
+                self.product_list_shopee.setItem(row, 1,QTableWidgetItem(data_name))
+
+            self.workerthread = WorkerThread(self.img,'product_list_shopee')
+            self.workerthread.start()
+            self.workerthread.img_complete.connect(self.update_img)
+
+
+    def update_img(self,l):
+        i = QImage()
+        i.loadFromData(l[1]) 
+        imgLabel = QLabel()
+        imgLabel.setText('')
+        imgLabel.setScaledContents(True)    
+        imgLabel.setPixmap(QPixmap(i))
+
+        if l[2] == "product_list_shopee":
+            self.product_list_shopee.setCellWidget(l[0],0,imgLabel)
+        elif l[2] == 'product_list_user':
+            self.product_list_user.setCellWidget(l[0],0,imgLabel)
+
+ 
+    def change_comboBox(self):
+        Dashboard.comboBox_user_text = self.comboBox_user.currentText()
+
+        for i in reversed(range(self.tw_ratting1.rowCount())):
+            self.tw_ratting1.removeRow(i)
+        for i in reversed(range(self.tw_ratting2.rowCount())):
+            self.tw_ratting2.removeRow(i) 
+        for i in reversed(range(self.tw_ratting3.rowCount())):
+            self.tw_ratting3.removeRow(i)
+        for i in reversed(range(self.tw_ratting4.rowCount())):
+            self.tw_ratting4.removeRow(i)
+        for i in reversed(range(self.tw_ratting5.rowCount())):
+            self.tw_ratting5.removeRow(i)
+        for i in reversed(range(self.product_list_shopee.rowCount())):
+            self.product_list_shopee.removeRow(i) 
+        for i in reversed(range(self.product_list_user.rowCount())):
+            self.product_list_user.removeRow(i) 
+              
+        # UIFunctions.set_comboBox_user(self)
+        QTimer.singleShot(100, lambda: UIFunctions.set_data_rating_shopee(self))
+        QTimer.singleShot(100, lambda: UIFunctions.set_data_product_push(self))
+        QTimer.singleShot(100, lambda:UIFunctions.get_list_products_shopee(self))
+ 
 
     def mousePressEvent(self, event):
         self.dragPos = event.globalPos()
@@ -166,6 +241,7 @@ class Dashboard(QMainWindow):
             UIFunctions.resetStyle(self, "btn_settings")
             UIFunctions.labelPage(self, "Setting")
             btnWidget.setStyleSheet(UIFunctions.selectMenu(self,btnWidget.styleSheet()))
+            
 
 
 class Popup_Rating(QMainWindow):

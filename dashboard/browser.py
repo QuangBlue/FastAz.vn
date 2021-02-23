@@ -8,6 +8,8 @@ from backend.MongoDB_Setup import Database_mongoDB
 from backend.networks import Network
 import json
 
+sys.setrecursionlimit(100000)
+
 status = 0
 
 class Browser(QWidget):

@@ -116,20 +116,35 @@ class Network:
         else:
             return r.status_code
 
-    @backend.loading.setWaitCursor
+    # @backend.loading.setWaitCursor
     def list_products_shopee(self,cookie,page_number):
         url = f'https://banhang.shopee.vn/api/v3/product/page_product_list/?page_number={page_number}&page_size=24'
         try:
+            
+            # c = ';'.join(['='.join(i) for i in cookie.items()])
+            # req = QNetworkRequest(QUrl(url))
+            # req.setUrl(QUrl(url))
+            # req.setRawHeader(b'Cookie',QByteArray(c.encode()))
+
+            # nam = QNetworkAccessManager()
+            # loop = QEventLoop()
+            # r = nam.get(req)
+            # nam.finished.connect(loop.quit)
+            # loop.exec_()
+            # y = r.readAll()
+            # d = json.loads(y.data().decode('utf8'))
+
             r = requests.get(url, cookies=cookie)
+
+
         except (requests.exceptions.HTTPError,requests.exceptions.ConnectionError,requests.exceptions.Timeout,requests.exceptions.RequestException) as err:
             print(str(err))
             main_pyqt5.ResetPasswordScreen.show_popup(self)
             raise Exception("Lỗi Server!!!")
         else:
+            # return d
             return r.json()
 
 
 if __name__ == '__main__':
     pass
-    # reset_password('quangblue2401@gmail.com')
-    # set_new_password('quangblue2401@gmail.com','Quang123456',9405)
