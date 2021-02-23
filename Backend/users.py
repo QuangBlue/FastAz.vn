@@ -48,7 +48,8 @@ class Shopee:
                 ,"rating_2star":[]
                 ,"rating_3star":[]
                 ,"rating_4star":[]
-                ,"rating_5star":[]}
+                ,"rating_5star":[]},
+            "list_push_product" : []               
                 }
     def as_dict(self):
         return self.data

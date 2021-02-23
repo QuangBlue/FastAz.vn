@@ -77,6 +77,22 @@ class Database_mongoDB:
         with open('temp//data.json', 'w') as f:
                     json.dump(data, f)
 
+    def add_protuct_push(self,_id,index,data):
+        Database_mongoDB.registered_Users_Collection.update(
+            { "_id": _id },
+            { "$addToSet": { 
+                f'shopee.{index}.list_push_product' :
+                { '$each': data
+            }}}
+            )
+        with open('temp//data.json') as f:
+                data = json.load(f)
+        x = Database_mongoDB.registered_Users_Collection.find({'_id': _id})
+        for y in x:
+            data['shopee'] = y['shopee']
+        with open('temp//data.json', 'w') as f:
+                    json.dump(data, f)
+
     def insert_new_shopee_mongodb(self,username_az,shop_cookies,id_sp,shop_id,shop_name):
         #SAI CANNOT CREATE NEW USER, MUST LOCATE username_az and insert new shopee to the shopee list
         Database_mongoDB.registered_Users_Collection.update(
@@ -97,7 +113,10 @@ class Database_mongoDB:
                                             "rating_3star": [],
                                             "rating_4star": [],
                                             "rating_5star": []
-                                        }},
+                                                    },
+                                    "list_push_product" : []   
+                                        
+                                        },
                                     ]}
                             }},
             upsert=True)
@@ -109,21 +128,7 @@ class Database_mongoDB:
             data['shopee'] = y['shopee']
         with open('temp//data.json', 'w') as f:
                     json.dump(data, f)
-        #
-        #
-        # # Then add shopee information
-        # newUser.add_new_shopee_shop(shop_cookies,shop_id,shop_name)
-        # Database_mongoDB.registered_Users_Collection.insert_one(newUser.as_dict())
-    # def find_user(self,id_wp):
-    #     Database_mongoDB.registered_Users_Collection.find({'_id': id_wp)
 
     def insert_new_user_mongodb(self,_id,username, password,token):
         newUser = backend.users.User(_id,username,password,token)
         Database_mongoDB.registered_Users_Collection.insert_one(newUser.as_dict())
-
-# x = Database_mongoDB()
-# x.connect_to_mongoDB()
-# x.registered_Users_Collection.update_one(
-#   { '_id': 1 },
-#   { '$pull': { 'shopee.0.reply_rating.rating_1star': 'dfsdfsdfsdfsdfdsfsdfsdf'  } }
-# )

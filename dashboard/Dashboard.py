@@ -32,18 +32,32 @@ class Dashboard(QMainWindow):
         ## HIỂN THỊ SHOPEE
         # ########################################################################
 
+        self.btn_add.clicked.connect(lambda: UIFunctions.add_to_product_push(self))
+        self.btn_remove.clicked.connect(lambda: UIFunctions.del_from_product_push(self))
+
         UIFunctions.set_data_user_shopee(self)
         UIFunctions.set_data_rating_shopee(self)
+        
         self.btn_forward.clicked.connect(lambda : UIFunctions.next_page(self))
         self.btn_back.clicked.connect(lambda : UIFunctions.back_page(self))
         self.comboBox_user.currentTextChanged.connect(lambda: UIFunctions.set_data_rating_shopee(self))
         self.btn_add_rating.clicked.connect(lambda: UIFunctions.pop_up_rating(self))
         self.btn_apply_all_rating.clicked.connect(lambda: UIFunctions.set_data_rating_shopee(self))
         QTimer.singleShot(10, lambda: UIFunctions.get_list_products_shopee(self))
+        QTimer.singleShot(10, lambda: UIFunctions.set_data_product_push(self))
 
         Dashboard.comboBox_user_text = self.comboBox_user.currentText()
 
         # ########################################################################
+        ## ONLY SELECT TABLE ROW SAME TIME
+        # ########################################################################
+
+        self.product_list_shopee.selectionModel().selectionChanged.connect(lambda: self.product_list_user.clearSelection())
+
+        self.product_list_user.selectionModel().selectionChanged.connect(lambda: self.product_list_shopee.clearSelection())
+
+
+        #############################################################
         ## ICON HOẶC AVARTA CỦA USER
         # ########################################################################
 

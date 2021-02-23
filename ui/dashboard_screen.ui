@@ -8,7 +8,7 @@
     <x>0</x>
     <y>0</y>
     <width>1560</width>
-    <height>1000</height>
+    <height>1004</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -2853,14 +2853,14 @@ QHeaderView::section:vertical
                             <property name="font">
                              <font>
                               <family>Nunito</family>
-                              <pointsize>28</pointsize>
+                              <pointsize>24</pointsize>
                               <bold>true</bold>
                              </font>
                             </property>
                             <property name="styleSheet">
                              <string notr="true">#btn_remove{
 	border-radius: 10px;
-    padding:6px 10px 6px 10px;
+    padding:8px 10px 6px 10px;
 	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));
 	color: rgb(255, 255, 255);
 }
@@ -2874,7 +2874,7 @@ QHeaderView::section:vertical
 }</string>
                             </property>
                             <property name="text">
-                             <string>&lt;</string>
+                             <string>XÓA</string>
                             </property>
                            </widget>
                           </item>
@@ -2883,14 +2883,14 @@ QHeaderView::section:vertical
                             <property name="font">
                              <font>
                               <family>Nunito</family>
-                              <pointsize>28</pointsize>
+                              <pointsize>24</pointsize>
                               <bold>true</bold>
                              </font>
                             </property>
                             <property name="styleSheet">
                              <string notr="true">#btn_add{
 	border-radius: 10px;
-    padding:6px 10px 6px 10px;
+    padding:8px 10px 6px 10px;
 	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));
 	color: rgb(255, 255, 255);
 }
@@ -2904,7 +2904,7 @@ QHeaderView::section:vertical
 }</string>
                             </property>
                             <property name="text">
-                             <string>&gt;</string>
+                             <string>THÊM</string>
                             </property>
                            </widget>
                           </item>
@@ -3053,7 +3053,7 @@ QHeaderView::section:vertical
                           <number>19</number>
                          </attribute>
                          <attribute name="horizontalHeaderDefaultSectionSize">
-                          <number>90</number>
+                          <number>100</number>
                          </attribute>
                          <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
                           <bool>true</bool>
