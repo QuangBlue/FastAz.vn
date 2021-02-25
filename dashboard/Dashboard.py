@@ -10,7 +10,15 @@ status_rating = 1
 class Dashboard(QMainWindow):
     def __init__(self):
         super(Dashboard,self).__init__()
-        loadUi("ui//dashboard_screen.ui",self)
+        try:
+            with open('temp//data.json') as f:
+                data = json.load(f)
+            if data['theme'] == 'light':
+                loadUi("ui//dashboard_screen_light.ui",self)
+            else:
+                loadUi("ui//dashboard_screen.ui",self)
+        except:
+            loadUi("ui//dashboard_screen.ui",self)
         self.resize(1920, 1080)
         QFontDatabase.addApplicationFont('font/Nunito/Nunito-Regular.ttf')
         QFontDatabase.addApplicationFont('font/Nunito/Nunito-Regular.ttf')
@@ -29,24 +37,45 @@ class Dashboard(QMainWindow):
 
 
         # ########################################################################
-        ## HIỂN THỊ SHOPEE
+        ## SHOPEE SHOW-OFF
         # ########################################################################
 
-        self.btn_add.clicked.connect(lambda: UIFunctions.add_to_product_push(self))
-        self.btn_remove.clicked.connect(lambda: UIFunctions.del_from_product_push(self))
+        # ########################################################################
+        ## FIRST LAUNCH APP - START FUNCTION FOR UPDATE DATA MAIN WINDOW
+        # ########################################################################
 
         UIFunctions.set_data_user_shopee(self)
         UIFunctions.set_comboBox_user(self)
         UIFunctions.set_data_rating_shopee(self)
+        UIFunctions.get_list_products_shopee(self)
+        UIFunctions.set_data_product_push(self)
+
+        # ########################################################################
+        ## SETUP SIGNAL BUTTON
+        # ########################################################################
+
+
+        self.btn_add.clicked.connect(lambda: UIFunctions.add_to_product_push(self))
+        self.btn_remove.clicked.connect(lambda: UIFunctions.del_from_product_push(self))
         
         self.btn_forward.clicked.connect(lambda : UIFunctions.next_page(self))
         self.btn_back.clicked.connect(lambda : UIFunctions.back_page(self))
         
         self.btn_add_rating.clicked.connect(lambda: UIFunctions.pop_up_rating(self))
         self.btn_apply_all_rating.clicked.connect(lambda: UIFunctions.set_data_rating_shopee(self))
-        UIFunctions.get_list_products_shopee(self)
-        UIFunctions.set_data_product_push(self)
+        
         Dashboard.comboBox_user_text = self.comboBox_user.currentText()
+
+
+        # ########################################################################
+        ## BUTTON CHANGE THEME
+        # ########################################################################
+
+        self.btn_theme.clicked.connect(lambda: UIFunctions.change_theme(self))
+
+        # ########################################################################
+        ## SETUP NEW THREAD FOR UPDATE ACCOUNT SHOPEE INFO
+        # ########################################################################
 
         self.threadgetinfo = ThreadGetInfo()
         self.threadgetinfo.start()
@@ -57,9 +86,6 @@ class Dashboard(QMainWindow):
         ## SET UPDATE WHEN COMBOX CHANGE
         # ########################################################################
         self.comboBox_user.currentIndexChanged.connect(lambda: self.change_comboBox() )
-        # self.comboBox_user.currentTextChanged.connect(lambda: UIFunctions.set_data_rating_shopee(self))
-        # self.comboBox_user.currentTextChanged.connect(lambda: UIFunctions.set_data_product_push(self))
-        # self.comboBox_user.currentTextChanged.connect(lambda: UIFunctions.get_list_products_shopee(self))
 
 
         # ########################################################################
@@ -67,20 +93,17 @@ class Dashboard(QMainWindow):
         # ########################################################################
 
         self.product_list_shopee.selectionModel().selectionChanged.connect(lambda: self.product_list_user.clearSelection())
-
         self.product_list_user.selectionModel().selectionChanged.connect(lambda: self.product_list_shopee.clearSelection())
 
 
         #############################################################
-        ## ICON HOẶC AVARTA CỦA USER
+        ## ICON OR AVARTA OF USER
         # ########################################################################
 
         UIFunctions.userIcon(self)
-        # self.label_user_icon.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
-        # self.label_user_icon.mousePressEvent = self.show_popup_user
-        # self.label_user_icon.customContextMenuRequested.connect(lambda pos, child=self.label_user_icon: self.customMenuEvent(pos, child))
+
         # ########################################################################
-        ## ẨN CỬA SỔ MẶC ĐỊNH
+        ## HIDE TITLEBAR
         # ########################################################################
         UIFunctions.removeTitleBar(self,True)
 
@@ -92,7 +115,7 @@ class Dashboard(QMainWindow):
         UIFunctions.labelDescription(self, 'Mọi câu hỏi hoặc khó khăn vui lòng liên hệ Fanpage FastAz.Vn - Ứng dụng hỗ trợ bán hàng chuyên nghiệp')
 
         # ########################################################################
-        ## DI CHUYỂN CỬA SỔ
+        ## MOVE WINDOW
         # ########################################################################
         def moveWindow(event):
             if self.isMaximized() == False:
@@ -103,26 +126,26 @@ class Dashboard(QMainWindow):
         self.frame_label_top_btns.mouseMoveEvent = moveWindow
 
         # ########################################################################
-        ## NÚT TOGGLE
+        ## BUTTON TOGGLE
         # ########################################################################
         self.btn_toggle_menu.clicked.connect(lambda: UIFunctions.toggleMenu(self, 220, True))
 
         
         # ########################################################################
-        ## NÚT MỞ BROWER --> ADD USER SHOPEE
+        ## BUTTON OPEN BROWER --> ADD USER SHOPEE
         # ########################################################################
 
         self.btn_add_user.clicked.connect(lambda: UIFunctions.open_browser(self))
 
         # ########################################################################
-        ## LỰA CHỌN MENU MẶC ĐỊNH
+        ## SELECT DEFAULT MENU
         # ########################################################################
         
         UIFunctions.selectStandardMenu(self, "btn_new_user_shopee")
         self.stackedWidget.setCurrentWidget(self.page_new_user_shopee)
 
         # ########################################################################
-        ## HÀM CHẠY CÁC CHỨC NĂNG CỦA CỬA SỔ
+        ## FUNCTION OF MAIN WINDOW
         # ########################################################################
         UIFunctions.uiDefinitions(self)
         self.show()
@@ -169,28 +192,14 @@ class Dashboard(QMainWindow):
  
     def change_comboBox(self):
         Dashboard.comboBox_user_text = self.comboBox_user.currentText()
-
-        for i in reversed(range(self.tw_ratting1.rowCount())):
-            self.tw_ratting1.removeRow(i)
-        for i in reversed(range(self.tw_ratting2.rowCount())):
-            self.tw_ratting2.removeRow(i) 
-        for i in reversed(range(self.tw_ratting3.rowCount())):
-            self.tw_ratting3.removeRow(i)
-        for i in reversed(range(self.tw_ratting4.rowCount())):
-            self.tw_ratting4.removeRow(i)
-        for i in reversed(range(self.tw_ratting5.rowCount())):
-            self.tw_ratting5.removeRow(i)
-        for i in reversed(range(self.product_list_shopee.rowCount())):
-            self.product_list_shopee.removeRow(i) 
-        for i in reversed(range(self.product_list_user.rowCount())):
-            self.product_list_user.removeRow(i) 
-              
-        # UIFunctions.set_comboBox_user(self)
+        l = [ self.tw_ratting1, self.tw_ratting1,self.tw_ratting3,self.tw_ratting4,self.tw_ratting5,self.product_list_shopee,self.product_list_user]
+        for x in l:
+            for i in reversed(range(x.rowCount())):
+                x.removeRow(i)
         QTimer.singleShot(100, lambda: UIFunctions.set_data_rating_shopee(self))
         QTimer.singleShot(100, lambda: UIFunctions.set_data_product_push(self))
         QTimer.singleShot(100, lambda:UIFunctions.get_list_products_shopee(self))
  
-
     def mousePressEvent(self, event):
         self.dragPos = event.globalPos()
 
@@ -199,7 +208,7 @@ class Dashboard(QMainWindow):
 
     def Button(self):
         btnWidget = self.sender()
-
+        
         if btnWidget.objectName() == "btn_new_user_shopee":
             self.stackedWidget.setCurrentWidget(self.page_new_user_shopee)
             UIFunctions.resetStyle(self, "btn_new_user_shopee")
@@ -248,9 +257,7 @@ class Popup_Rating(QMainWindow):
     def __init__(self):
         super(Popup_Rating,self).__init__()
         loadUi("ui//popup_ratting.ui",self)
-
         self.btn_send.clicked.connect(self.send_info_ratting)
-
 
     def send_info_ratting(self):
         with open('temp//data.json') as f:
@@ -259,19 +266,14 @@ class Popup_Rating(QMainWindow):
         new_rating = self.plainTextEdit_ratting.toPlainText().replace("\n",". ")
         if self.comboBox_ratting.currentText() == "Đánh giá 1 sao":
             select = 'rating_1star'
-
         elif self.comboBox_ratting.currentText() == "Đánh giá 2 sao":
-            select = 'rating_2star'
-    
+            select = 'rating_2star' 
         elif self.comboBox_ratting.currentText() == "Đánh giá 3 sao":
             select = 'rating_3star'
-
         elif self.comboBox_ratting.currentText() == "Đánh giá 4 sao":
-            select = 'rating_4star'
-   
+            select = 'rating_4star'  
         elif self.comboBox_ratting.currentText() == "Đánh giá 5 sao":
             select = 'rating_5star'
-
 
         if len(new_rating) > 10 and len(new_rating) < 500 :
             for x in range(len(data['shopee'])):

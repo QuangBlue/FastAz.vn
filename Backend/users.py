@@ -85,12 +85,13 @@ class Product:
 
 
 class User:
-    def __init__(self, _id=None, username="", password="",token="", avatar="", cookies="",id_sp="",shop_name=""):
+    def __init__(self, _id=None, username="", password="",token="", avatar="", theme="dark",cookies="",id_sp="",shop_name=""):
         try:
             self._id = _id #Double check
             self._username_az = str(username)
             self._password_az = str(password)
             self._avatar = str(avatar)
+            self._theme = str(theme)
             self._token = token
             self._shopee = []
             # self._list_data_push_product = dict()
@@ -110,6 +111,7 @@ class User:
             "password_az": self._password_az,
             "token":self._token,
             "avatar": self._avatar,
+            "theme" : self._theme,
             "shopee": self._shopee
             }
         # dict1.update(self._list_data_push_product)

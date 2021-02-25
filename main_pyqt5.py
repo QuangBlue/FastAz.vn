@@ -346,6 +346,7 @@ class LoadingScreen(QMainWindow):
                 self.data['email'] = SignInScreen.email
                 self.data['token'] = SignInScreen.token
                 self.data['savepass'] = SignInScreen.savepass
+                self.data['theme'] = 'dark'
                 self.data['shopee'] = []
 
         if self.counter == 22:

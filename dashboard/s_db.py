@@ -8,6 +8,7 @@ GLOBAL_TITLE_BAR = True
 count = 1
 page_number = 1
 shop_choose = 0
+theme_style = 'dark'
 class UIFunctions:
     GLOBAL_STATE = 0
     GLOBAL_TITLE_BAR = True
@@ -64,25 +65,33 @@ class UIFunctions:
         font = QFont()
         font.setFamily(u"Nunito")
         font.setPointSize(16)
-        button = QPushButton(str(count),self)
-        button.setObjectName(objName)
+        self.button = QPushButton(str(count),self)
+        self.button.setObjectName(objName)
         sizePolicy3 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         sizePolicy3.setHorizontalStretch(0)
         sizePolicy3.setVerticalStretch(0)
-        sizePolicy3.setHeightForWidth(button.sizePolicy().hasHeightForWidth())
-        button.setSizePolicy(sizePolicy3)
-        button.setMinimumSize(QSize(0, 75))
-        button.setLayoutDirection(Qt.LeftToRight)
-        button.setFont(font)
-        button.setStyleSheet(Style.style_bt_standard.replace('ICON_REPLACE', icon))
-        button.setText(name)
-        button.setToolTip(name)
-        button.clicked.connect(self.Button)
+        sizePolicy3.setHeightForWidth(self.button.sizePolicy().hasHeightForWidth())
+        self.button.setSizePolicy(sizePolicy3)
+        self.button.setMinimumSize(QSize(0, 75))
+        self.button.setLayoutDirection(Qt.LeftToRight)
+        self.button.setFont(font)
+        try:
+            with open('temp//data.json') as f:
+                data = json.load(f)
+            if data['theme'] == 'light':
+                self.button.setStyleSheet(Style.style_bt_light.replace('ICON_REPLACE', icon))
+            else:
+                self.button.setStyleSheet(Style.style_bt_dark.replace('ICON_REPLACE', icon))    
+        except:
+            self.button.setStyleSheet(Style.style_bt_dark.replace('ICON_REPLACE', icon))    
+        self.button.setText(name)
+        self.button.setToolTip(name)
+        self.button.clicked.connect(self.Button)
 
         if isTopMenu:
-            self.layout_menus.addWidget(button)
+            self.layout_menus.addWidget(self.button)
         else:
-            self.layout_menu_bottom.addWidget(button)
+            self.layout_menu_bottom.addWidget(self.button)
 
     def selectMenu(self, getStyle):
         select = getStyle + ("QPushButton { border-right: 7px solid rgb(85, 170, 255); }")
@@ -152,9 +161,7 @@ class UIFunctions:
                 if data['shopee'][x]['shop_name'] == self.comboBox_user.currentText():
                     shop_choose = x
 
-
     def get_list_products_shopee(self):
-        print('Dang Get List Product Shopee')
         self.product_list_shopee.setRowCount(24)
         for k in range(self.product_list_shopee.rowCount()):
             self.product_list_shopee.setRowHeight(k, 90)
@@ -226,7 +233,6 @@ class UIFunctions:
         
 
     def set_data_product_push(self):
-        print('Dang Set List Product Shopee')
         self.product_list_user.setRowCount(24)
         for k in range(self.product_list_user.rowCount()):
             self.product_list_user.setRowHeight(k, 90)
@@ -239,17 +245,14 @@ class UIFunctions:
                 img = []
                 for row, x in enumerate(s1):
                     self.product_list_user.setItem(row, 1,QTableWidgetItem(x['name_product']))
-
                 for x in s1:
                     img.append(x['image'])
 
                 self.workerthread1 = WorkerThread(img,'product_list_user')
                 self.workerthread1.start()
-                self.workerthread1.img_complete.connect(self.update_img)
-        
+                self.workerthread1.img_complete.connect(self.update_img)  
 
     def set_data_user_shopee(self):
-        print('Dang set user shopee')
         with open('temp//data.json') as f:
             data = json.load(f)
             shopee = data['shopee']
@@ -263,22 +266,18 @@ class UIFunctions:
         self.tableWidget.setColumnWidth(4, 200)
         self.tableWidget.setColumnWidth(5, 200)
 
-
-        if len(shopee) != 0: 
-            
+        if len(shopee) != 0:            
             for data in shopee:
                 self.btn_del_user = QPushButton('')
                 self.btn_del_user.clicked.connect(lambda: UIFunctions.btn_del_user(self))
                 self.tableWidget.setCellWidget(row,0,self.btn_del_user)
-                self.btn_del_user.setStyleSheet('QPushButton { image: url(img//remove.png);}QPushButton:hover { image: url(img//remove_red.png);}')
+                self.btn_del_user.setStyleSheet('QPushButton { image: url(img//remove.png);background: transparent;}QPushButton:hover { image: url(img//remove_red.png);}')
                 self.tableWidget.setItem(row, 1,QTableWidgetItem(data['id_sp']))
                 self.tableWidget.setItem(row, 2,QTableWidgetItem(data['shop_name']))
                 self.tableWidget.setItem(row, 3,QTableWidgetItem(data['shop_id']))
                 self.tableWidget.setItem(row, 4,QTableWidgetItem(data['total_product']))
                 self.tableWidget.setItem(row, 5,QTableWidgetItem(data['total_order']))
-                # self.tableWidget.setItem(row, 6,QtWidgets.QTableWidgetItem('Còn Hiệu Lực') if data['status_cookie'] == 'True' else QtWidgets.QTableWidgetItem('Hết Hiệu Lực'))
                
-
                 if data['status_cookie'] == 'True':
                     layout = QHBoxLayout()
                     label = QLabel('Còn Hiệu Lực')
@@ -322,8 +321,7 @@ class UIFunctions:
                     layout.setContentsMargins(0, 0, 0, 0)
                     cellWidget = QWidget()
                     cellWidget.setLayout(layout)                   
-                    self.tableWidget.setCellWidget(row, 6, cellWidget)
-                               
+                    self.tableWidget.setCellWidget(row, 6, cellWidget)                             
                 row = row + 1
 
         for row in range(self.tableWidget.rowCount()):
@@ -341,29 +339,29 @@ class UIFunctions:
         if self.comboBox_user.count() == 0 :
             self.comboBox_user.addItem("Chưa có tài khoản") 
 
-
     def btn_del_user(self):
-        button = self.sender()
-        index = self.tableWidget.indexAt(button.pos())
-        with open('temp//data.json') as f:
-            data = json.load(f)
+        x = QMessageBox.warning(self, 'MessageBox', "TẤT CẢ DỮ LIỆU SẼ MẤT \nBạn có chắc chắn muốn xóa tài khoản này không ?", QMessageBox.No , QMessageBox.Yes)
+        if x == QMessageBox.Yes:
+            button = self.sender()
+            index = self.tableWidget.indexAt(button.pos())
+            with open('temp//data.json') as f:
+                data = json.load(f)
 
-        Database_mongoDB.registered_Users_Collection.update({"_id": data['id_wp']}, {"$unset": {f"shopee.{index.row()}": 1}})
-        Database_mongoDB.registered_Users_Collection.update({"_id": data['id_wp']}, {"$pull": {"shopee": None}})
+            Database_mongoDB.registered_Users_Collection.update({"_id": data['id_wp']}, {"$unset": {f"shopee.{index.row()}": 1}})
+            Database_mongoDB.registered_Users_Collection.update({"_id": data['id_wp']}, {"$pull": {"shopee": None}})
 
-        del data['shopee'][index.row()]
-        with open('temp//data.json', 'w') as f:
-            json.dump(data, f)
+            del data['shopee'][index.row()]
+            with open('temp//data.json', 'w') as f:
+                json.dump(data, f)
 
-        for i in reversed(range(self.tableWidget.rowCount())):
-            self.tableWidget.removeRow(i)  
-              
-        self.comboBox_user.addItem("Chưa có tài khoản") 
-        UIFunctions.set_comboBox_user(self)
-        UIFunctions.set_data_user_shopee(self)
+            for i in reversed(range(self.tableWidget.rowCount())):
+                self.tableWidget.removeRow(i)  
+                
+            self.comboBox_user.addItem("Chưa có tài khoản") 
+            UIFunctions.set_comboBox_user(self)
+            UIFunctions.set_data_user_shopee(self)
 
     def set_data_rating_shopee(self):
-        print('Dang set rating')
         UIFunctions.check_shop_choose(self)
         with open('temp//data.json') as f:
             data = json.load(f)
@@ -389,7 +387,7 @@ class UIFunctions:
                 self.btn_delete1 = QPushButton('')
                 self.btn_delete1.clicked.connect(lambda: UIFunctions.delete1(self))
                 self.tw_ratting1.setCellWidget(row,0,self.btn_delete1)
-                self.btn_delete1.setStyleSheet('QPushButton { image: url(img//remove.png);}QPushButton:hover { image: url(img//remove_red.png);}')
+                self.btn_delete1.setStyleSheet('QPushButton { image: url(img//remove.png);background: transparent;}QPushButton:hover { image: url(img//remove_red.png);}')
 
             for row, data_2 in enumerate(s2):                                  
                 self.tw_ratting2.setItem(row, 1,QTableWidgetItem(str(row+1)))
@@ -397,7 +395,7 @@ class UIFunctions:
                 self.btn_delete2 = QPushButton('')
                 self.btn_delete2.clicked.connect(lambda: UIFunctions.delete2(self))
                 self.tw_ratting2.setCellWidget(row,0,self.btn_delete2)
-                self.btn_delete2.setStyleSheet('QPushButton { image: url(img//remove.png);}QPushButton:hover { image: url(img//remove_red.png);}')          
+                self.btn_delete2.setStyleSheet('QPushButton { image: url(img//remove.png);background: transparent;}QPushButton:hover { image: url(img//remove_red.png);}')          
 
             for row, data_3 in enumerate(s3):                             
                 self.tw_ratting3.setItem(row, 1,QTableWidgetItem(str(row+1)))
@@ -405,7 +403,7 @@ class UIFunctions:
                 self.btn_delete3 = QPushButton('')
                 self.btn_delete3.clicked.connect(lambda: UIFunctions.delete3(self))
                 self.tw_ratting3.setCellWidget(row,0,self.btn_delete3)
-                self.btn_delete3.setStyleSheet('QPushButton { image: url(img//remove.png);}QPushButton:hover { image: url(img//remove_red.png);}')
+                self.btn_delete3.setStyleSheet('QPushButton { image: url(img//remove.png);background: transparent;}QPushButton:hover { image: url(img//remove_red.png);}')
 
             for row, data_4 in enumerate(s4):                              
                 self.tw_ratting4.setItem(row, 1,QTableWidgetItem(str(row+1)))
@@ -413,7 +411,7 @@ class UIFunctions:
                 self.btn_delete4 = QPushButton('')
                 self.btn_delete4.clicked.connect(lambda: UIFunctions.delete4(self))
                 self.tw_ratting4.setCellWidget(row,0,self.btn_delete4)
-                self.btn_delete4.setStyleSheet('QPushButton { image: url(img//remove.png);}QPushButton:hover { image: url(img//remove_red.png);}')
+                self.btn_delete4.setStyleSheet('QPushButton { image: url(img//remove.png);background: transparent;}QPushButton:hover { image: url(img//remove_red.png);}')
 
             for row, data_5 in enumerate(s5):                               
                 self.tw_ratting5.setItem(row, 1,QTableWidgetItem(str(row+1)))
@@ -421,7 +419,7 @@ class UIFunctions:
                 self.btn_delete5 = QPushButton('')
                 self.btn_delete5.clicked.connect(lambda: UIFunctions.delete5(self))
                 self.tw_ratting5.setCellWidget(row,0,self.btn_delete5)
-                self.btn_delete5.setStyleSheet('QPushButton { image: url(img//remove.png);}QPushButton:hover { image: url(img//remove_red.png);}')
+                self.btn_delete5.setStyleSheet('QPushButton { image: url(img//remove.png);background: transparent;}QPushButton:hover { image: url(img//remove_red.png);}')
 
         elif len(shopee) == 0:
             self.tw_ratting1.setRowCount(3)
@@ -438,41 +436,48 @@ class UIFunctions:
         self.ui.btn_send.clicked.connect(lambda: UIFunctions.set_data_rating_shopee(self))
 
     def delete1(self):
-        self.pos_table = self.tw_ratting1
-        self.table_name = 'rating_1star'
-        UIFunctions.delete_ratings(self)
+        x = QMessageBox.warning(self, 'MessageBox', "Bạn có chắc chắn muốn xóa nội dụng đánh giá này không", QMessageBox.No , QMessageBox.Yes)
+        if x == QMessageBox.Yes:
+            self.pos_table = self.tw_ratting1
+            self.table_name = 'rating_1star'
+            UIFunctions.delete_ratings(self)
 
     def delete2(self):
-        self.pos_table = self.tw_ratting2
-        self.table_name = 'rating_2star'
-        UIFunctions.delete_ratings(self)
+        x = QMessageBox.warning(self, 'MessageBox', "Bạn có chắc chắn muốn xóa nội dụng đánh giá này không", QMessageBox.No , QMessageBox.Yes)
+        if x == QMessageBox.Yes:
+            self.pos_table = self.tw_ratting2
+            self.table_name = 'rating_2star'
+            UIFunctions.delete_ratings(self)
 
     def delete3(self):
-        self.pos_table = self.tw_ratting3
-        self.table_name = 'rating_3star'
-        UIFunctions.delete_ratings(self)        
+        x = QMessageBox.warning(self, 'MessageBox', "Bạn có chắc chắn muốn xóa nội dụng đánh giá này không", QMessageBox.No , QMessageBox.Yes)
+        if x == QMessageBox.Yes:
+            self.pos_table = self.tw_ratting3
+            self.table_name = 'rating_3star'
+            UIFunctions.delete_ratings(self)        
 
     def delete4(self):
-        self.pos_table = self.tw_ratting4
-        self.table_name = 'rating_4star'
-        UIFunctions.delete_ratings(self)
+        x = QMessageBox.warning(self, 'MessageBox', "Bạn có chắc chắn muốn xóa nội dụng đánh giá này không", QMessageBox.No , QMessageBox.Yes)
+        if x == QMessageBox.Yes:
+            self.pos_table = self.tw_ratting4
+            self.table_name = 'rating_4star'
+            UIFunctions.delete_ratings(self)
 
     def delete5(self):
-        self.pos_table = self.tw_ratting5
-        self.table_name = 'rating_5star'
-        UIFunctions.delete_ratings(self)
+        x = QMessageBox.warning(self, 'MessageBox', "Bạn có chắc chắn muốn xóa nội dụng đánh giá này không", QMessageBox.No , QMessageBox.Yes)
+        if x == QMessageBox.Yes:
+            self.pos_table = self.tw_ratting5
+            self.table_name = 'rating_5star'
+            UIFunctions.delete_ratings(self)
 
-    def delete_ratings(self):
+    def delete_ratings(self):     
         button = self.sender()
         index = self.pos_table.indexAt(button.pos())
         UIFunctions.check_shop_choose(self)
         with open('temp//data.json') as f:
             data = json.load(f)
             shopee = data['shopee']
-        # shop_c = 0
-        # for x in range(len(data['shopee'])):
-        #         if data['shopee'][x]['shop_name'] == self.comboBox_user.currentText():
-        #             shop_c = x  
+
         k = data['shopee'][shop_choose]['reply_rating'][self.table_name][index.row()]
         del data['shopee'][shop_choose]['reply_rating'][self.table_name][index.row()]
         with open('temp//data.json', 'w') as f:
@@ -486,6 +491,19 @@ class UIFunctions:
         
         UIFunctions.set_data_rating_shopee(self)    
 
+
+    def change_theme(self):
+        with open('temp//data.json') as f:
+            data = json.load(f)
+        if data['theme'] == 'dark':
+            data['theme'] = 'light'
+        elif data['theme'] == 'light':
+            data['theme'] = 'dark'
+        with open('temp//data.json', 'w') as f:
+            json.dump(data,f)
+        from dashboard.dashboard import Dashboard
+        self.dashboard = Dashboard()
+        self.close()
 
     def uiDefinitions(self):
         def dobleClickMaximizeRestore(event):
@@ -535,7 +553,42 @@ class UIFunctions:
 
 class Style:
 
-    style_bt_standard = (
+    style_bt_light = (
+    """
+    QPushButton {
+        color: rgb(247, 247, 255); 
+        background-image: ICON_REPLACE;
+        background-position: left center;
+        background-repeat: no-repeat;
+        border: none;
+        border-left: 28px solid rgb(69, 65, 245);
+        background-color: rgb(69, 65, 245);
+        text-align: left;
+        padding-left: 50px;
+    }
+    QPushButton[Active=true] {
+        background-image: ICON_REPLACE;
+        background-position: left center;
+        background-repeat: no-repeat;
+        border: none;
+        border-left: 28px solid rgb(69, 65, 245);
+        border-right: 5px solid rgb(85, 170, 255);
+        background-color: rgb(69, 65, 245);
+        text-align: left;
+        padding-left: 50px;
+    }
+    QPushButton:hover {
+        background-color: rgb(69, 85, 245);
+        border-left: 28px solid rgb(69, 85, 245);
+    }
+    QPushButton:pressed {
+        background-color: rgb(85, 170, 255);
+        border-left: 28px solid rgb(85, 170, 255);
+    }
+    """
+    )
+
+    style_bt_dark = (
     """
     QPushButton {
         background-image: ICON_REPLACE;
@@ -577,7 +630,6 @@ class WorkerThread(QThread):
         self.img = img
         self.index = index
     def run(self):
-        print('dang set img')
         for row , data_img in enumerate(self.img):
             url = f'https://cf.shopee.vn/file/{data_img}_tn'
             img = urllib.request.urlopen(url).read()
