@@ -254,6 +254,7 @@ class Popup_Rating(QMainWindow):
         super(Popup_Rating,self).__init__()
         loadUi("ui//popup_ratting.ui",self)
         self.btn_send.clicked.connect(self.send_info_ratting)
+        self.check_theme()
 
     def send_info_ratting(self):
         with open('temp//data.json') as f:
@@ -298,5 +299,12 @@ class Popup_Rating(QMainWindow):
         self.msg.setStandardButtons(QMessageBox.Ok)
         self.msg.exec_()
 
-        
+    def check_theme(self):
+        with open('temp//data.json') as f:
+            data = json.load(f)
+        if data['theme'] == 'dark':
+            self.centralwidget.setStyleSheet(Style.rating_dark)
+        elif data['theme'] == 'light':
+            self.centralwidget.setStyleSheet(Style.rating_light)
+         
 

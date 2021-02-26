@@ -36,7 +36,7 @@ class Style:
     )
 
     main_light = """
-    /* LINE EDIT */
+        /* LINE EDIT */
     QLineEdit {
         background-color: rgb(27, 29, 35);
         border-radius: 5px;
@@ -276,12 +276,14 @@ class Style:
     }
     QHeaderView::section:horizontal
     {
-        border: 1px solid rgb(69, 105, 245);
-        background-color: rgb(89, 125, 245);
+		border: none;
+
+		border-bottom: 4px solid rgb(89, 125, 245);
+		background-color: rgb(230, 230, 230);
         padding: 3px;
         border-top-left-radius: 7px;
         border-top-right-radius: 7px;
-        color: rgb(247, 247, 255); 
+        color: rgb(84 84, 84);
     }
     QHeaderView::section:vertical
     {
@@ -336,7 +338,7 @@ class Style:
         background-color: rgb(89, 125, 245);
     }
 
-    #label_title_bar_top, #label_credits, #label_version{	
+    #label_title_bar_top{	
         color: rgb(247, 247, 255);
     }
 
@@ -348,8 +350,9 @@ class Style:
     }
 
     #frame_grip{
-        background-color: rgb(89, 125, 245);
-        color: rgb(247, 247, 255);
+	
+	background-color: rgb(212, 211, 213);
+
     }
 
     #btn_theme{
@@ -706,6 +709,136 @@ class Style:
     }
     #btn_minimize:hover, #btn_maximize_restore:hover, #btn_close:hover {
         background-color: rgb(109, 145, 245);
+    }
+
+    """
+
+    rating_dark = """
+    QWidget{
+    color: rgb(210, 210, 210);
+    background-color: rgb(40, 44, 52);
+    }
+    QPlainTextEdit {
+        background-color: rgb(39, 44, 54);
+        border-radius: 5px;
+        border: 2px solid rgb(27, 29, 35);
+        padding-left: 10px;
+    }
+    QPlainTextEdit:hover {
+        border: 2px solid rgb(64, 71, 88);
+    }
+    QPlainTextEdit:focus {
+        border: 2px solid rgb(91, 101, 124);
+    }
+
+    /* COMBOBOX */
+    QComboBox{
+        background-color: rgb(27, 29, 35);
+        border-radius: 5px;
+        border: 2px solid rgb(27, 29, 35);
+        padding: 5px;
+        padding-left: 10px;
+    }
+    QComboBox:hover{
+        border: 2px solid rgb(64, 71, 88);
+    }
+    QComboBox::drop-down {
+        subcontrol-origin: padding;
+        subcontrol-position: top right;
+        width: 40px; 
+        border-left-width: 3px;
+        border-left-color: rgba(39, 44, 54, 150);
+        border-left-style: solid;
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;	
+        background-image: url(:/icon/cil-chevron-bottom.png);
+        background-position: center;
+        background-repeat: no-reperat;
+    }
+    QComboBox QAbstractItemView {
+        color: rgb(85, 170, 255);	
+        background-color: rgb(27, 29, 35);
+        padding: 10px;
+        selection-background-color: rgb(39, 44, 54);
+    }
+    #btn_send{
+        border-radius: 25px;
+        padding:8px 25px 7px 25px;
+        background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));
+        color: rgb(255, 255, 255);
+    }
+
+    #btn_send:hover{
+        background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(15, 181, 253, 255), stop:1 rgba(89, 64, 231, 255));
+    }
+
+    #btn_send:pressed{
+        background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));
+    }
+    """
+
+    rating_light = """
+    QWidget{
+	color: rgb(75, 75, 75);
+    background-color: rgb(237, 236, 238);
+    }
+    QPlainTextEdit {
+        background-color: rgb(237, 236, 238);
+        border-radius: 5px;
+        border: 2px solid rrgb(64, 71, 88);
+        padding-left: 10px;
+    }
+    QPlainTextEdit:hover {
+        border: 2px solid rgb(64, 71, 88);
+    }
+    QPlainTextEdit:focus {
+        border: 2px solid rgb(89, 125, 245);
+    }
+
+    /* COMBOBOX */
+    QComboBox{
+        background-color: rgb(89, 125, 245);
+        border-radius: 5px;
+        border: 2px solid rgb(89, 105, 245);
+        padding: 5px;
+        padding-left: 10px;
+        color: rgb(247, 245, 248);
+    }
+    QComboBox:hover{
+        border: 2px solid rgb(69, 65, 245);
+    }
+    QComboBox::drop-down {
+        subcontrol-origin: padding;
+        subcontrol-position: top right;
+        width: 40px; 
+        border-left-width: 3px;
+        border-left-color: rgb(237, 236, 238);
+        border-left-style: solid;
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;	
+        background-image: url(:/icon/cil-chevron-bottom.png);
+        background-position: center;
+        background-repeat: no-reperat;
+    }
+    QComboBox QAbstractItemView {
+        color: rgb(75, 75, 75);
+        background-color: rgb(89, 125, 245);
+        padding: 10px;
+        selection-background-color: rgb(39, 44, 54);
+    }
+    #btn_send{
+        border-radius: 25px;
+        padding:8px 25px 7px 25px;
+        background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));
+        color: rgb(255, 255, 255);
+    }
+
+    #btn_send:hover{
+        background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(15, 181, 253, 255), stop:1 rgba(89, 64, 231, 255));
+    }
+
+    #btn_send:pressed{
+        background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));
     }
 
     """
