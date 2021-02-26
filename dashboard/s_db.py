@@ -1,4 +1,5 @@
 from dashboard.dashboard import *
+from dashboard.style import *
 from dashboard.browser import Browser
 from backend.MongoDB_Setup import Database_mongoDB
 
@@ -75,15 +76,7 @@ class UIFunctions:
         self.button.setMinimumSize(QSize(0, 75))
         self.button.setLayoutDirection(Qt.LeftToRight)
         self.button.setFont(font)
-        try:
-            with open('temp//data.json') as f:
-                data = json.load(f)
-            if data['theme'] == 'light':
-                self.button.setStyleSheet(Style.style_bt_light.replace('ICON_REPLACE', icon))
-            else:
-                self.button.setStyleSheet(Style.style_bt_dark.replace('ICON_REPLACE', icon))    
-        except:
-            self.button.setStyleSheet(Style.style_bt_dark.replace('ICON_REPLACE', icon))    
+        self.button.setStyleSheet(Style.style_bt.replace('ICON_REPLACE', icon))    
         self.button.setText(name)
         self.button.setToolTip(name)
         self.button.clicked.connect(self.Button)
@@ -497,13 +490,24 @@ class UIFunctions:
             data = json.load(f)
         if data['theme'] == 'dark':
             data['theme'] = 'light'
+            self.frame_main.setStyleSheet(Style.main_light)
+            self.btn_theme.setText('Dark Theme')
         elif data['theme'] == 'light':
             data['theme'] = 'dark'
+            self.frame_main.setStyleSheet(Style.main_dark)
+            self.btn_theme.setText('Light Theme')
         with open('temp//data.json', 'w') as f:
             json.dump(data,f)
-        from dashboard.dashboard import Dashboard
-        self.dashboard = Dashboard()
-        self.close()
+
+    def check_theme(self):
+        with open('temp//data.json') as f:
+            data = json.load(f)
+        if data['theme'] == 'dark':
+            self.frame_main.setStyleSheet(Style.main_dark)
+            self.btn_theme.setText('Light Theme')
+        elif data['theme'] == 'light':
+            self.frame_main.setStyleSheet(Style.main_light)
+            self.btn_theme.setText('Dark Theme')
 
     def uiDefinitions(self):
         def dobleClickMaximizeRestore(event):
@@ -551,76 +555,6 @@ class UIFunctions:
         app = QApplication.instance()
         app.closeAllWindows()
 
-class Style:
-
-    style_bt_light = (
-    """
-    QPushButton {
-        color: rgb(247, 247, 255); 
-        background-image: ICON_REPLACE;
-        background-position: left center;
-        background-repeat: no-repeat;
-        border: none;
-        border-left: 28px solid rgb(69, 65, 245);
-        background-color: rgb(69, 65, 245);
-        text-align: left;
-        padding-left: 50px;
-    }
-    QPushButton[Active=true] {
-        background-image: ICON_REPLACE;
-        background-position: left center;
-        background-repeat: no-repeat;
-        border: none;
-        border-left: 28px solid rgb(69, 65, 245);
-        border-right: 5px solid rgb(85, 170, 255);
-        background-color: rgb(69, 65, 245);
-        text-align: left;
-        padding-left: 50px;
-    }
-    QPushButton:hover {
-        background-color: rgb(69, 85, 245);
-        border-left: 28px solid rgb(69, 85, 245);
-    }
-    QPushButton:pressed {
-        background-color: rgb(85, 170, 255);
-        border-left: 28px solid rgb(85, 170, 255);
-    }
-    """
-    )
-
-    style_bt_dark = (
-    """
-    QPushButton {
-        background-image: ICON_REPLACE;
-        background-position: left center;
-        background-repeat: no-repeat;
-        border: none;
-        border-left: 28px solid rgb(27, 29, 35);
-        background-color: rgb(27, 29, 35);
-        text-align: left;
-        padding-left: 50px;
-    }
-    QPushButton[Active=true] {
-        background-image: ICON_REPLACE;
-        background-position: left center;
-        background-repeat: no-repeat;
-        border: none;
-        border-left: 28px solid rgb(27, 29, 35);
-        border-right: 5px solid rgb(85, 170, 255);
-        background-color: rgb(27, 29, 35);
-        text-align: left;
-        padding-left: 50px;
-    }
-    QPushButton:hover {
-        background-color: rgb(33, 37, 43);
-        border-left: 28px solid rgb(33, 37, 43);
-    }
-    QPushButton:pressed {
-        background-color: rgb(85, 170, 255);
-        border-left: 28px solid rgb(85, 170, 255);
-    }
-    """
-    )
 
 class WorkerThread(QThread):
     img_complete = pyqtSignal(list)

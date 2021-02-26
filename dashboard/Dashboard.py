@@ -1,5 +1,6 @@
 from main_pyqt5 import *
 from dashboard.s_db import *
+from dashboard.style import *
 from dashboard.browser import Browser
 from data_example import *
 from backend.MongoDB_Setup import * 
@@ -10,15 +11,8 @@ status_rating = 1
 class Dashboard(QMainWindow):
     def __init__(self):
         super(Dashboard,self).__init__()
-        try:
-            with open('temp//data.json') as f:
-                data = json.load(f)
-            if data['theme'] == 'light':
-                loadUi("ui//dashboard_screen_light.ui",self)
-            else:
-                loadUi("ui//dashboard_screen.ui",self)
-        except:
-            loadUi("ui//dashboard_screen.ui",self)
+        loadUi("ui//dashboard_screen_main.ui",self)
+        UIFunctions.check_theme(self)
         self.resize(1920, 1080)
         QFontDatabase.addApplicationFont('font/Nunito/Nunito-Regular.ttf')
         QFontDatabase.addApplicationFont('font/Nunito/Nunito-Regular.ttf')
@@ -44,11 +38,13 @@ class Dashboard(QMainWindow):
         ## FIRST LAUNCH APP - START FUNCTION FOR UPDATE DATA MAIN WINDOW
         # ########################################################################
 
-        UIFunctions.set_data_user_shopee(self)
+
+        QTimer.singleShot(100, lambda: UIFunctions.set_data_user_shopee(self))
         UIFunctions.set_comboBox_user(self)
-        UIFunctions.set_data_rating_shopee(self)
-        UIFunctions.get_list_products_shopee(self)
-        UIFunctions.set_data_product_push(self)
+        QTimer.singleShot(100, lambda: UIFunctions.set_data_rating_shopee(self))
+        QTimer.singleShot(100, lambda: UIFunctions.set_data_product_push(self))
+        QTimer.singleShot(100, lambda: UIFunctions.get_list_products_shopee(self))
+
 
         # ########################################################################
         ## SETUP SIGNAL BUTTON
