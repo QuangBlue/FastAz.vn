@@ -1,10 +1,10 @@
-import sys, webbrowser, time, json, requests , urllib.request
+import sys, webbrowser, json, requests , logging
 
 from functools import partial
 from PyQt5.uic import loadUi
 from PyQt5.QtGui import QColor, QFont, QImage, QPixmap, QFontDatabase, QIcon
-from PyQt5.QtCore import QSize, Qt, QUrl, QEventLoop, QPropertyAnimation, QTimer, QEvent, QEasingCurve, QByteArray, QThread, pyqtSignal,QObject
-from PyQt5.QtWidgets import QMainWindow, QApplication, QGraphicsDropShadowEffect, QPushButton, QSizePolicy, QSizeGrip, QMessageBox, QHBoxLayout, QLabel, QWidget, QFrame, QStackedWidget, QTableWidgetItem
+from PyQt5.QtCore import QSize, Qt, QUrl, QEventLoop, QPropertyAnimation, QTimer, QEvent, QEasingCurve, QByteArray, QThread, pyqtSignal,QObject, QModelIndex
+from PyQt5.QtWidgets import QMainWindow, QApplication, QGraphicsDropShadowEffect, QPushButton, QSizePolicy, QSizeGrip, QMessageBox, QHBoxLayout,QVBoxLayout, QLabel, QWidget, QFrame, QStackedWidget, QTableWidgetItem, QPlainTextEdit,QTableWidget,QAbstractItemView, QLayout
 from PyQt5.QtNetwork import QNetworkAccessManager, QNetworkReply, QNetworkRequest
 ## IMPORT SCREEN
 from dashboard.dashboard import *
@@ -157,7 +157,6 @@ class SignUpScreen(QMainWindow):
         def showMessage(message):
             self.frame_error.show()
             self.text_error.setText(message)
-
         us = self.username_create.text()
         pw = self.pass_create.text()
         em = self.email_create.text()

@@ -15,6 +15,8 @@ status = 0
 class Browser(QWidget):
     def __init__(self):
         super().__init__()
+
+        self.resize(1700, 1000)
         global status
         status = 0
         self.setup()

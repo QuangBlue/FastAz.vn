@@ -75,7 +75,7 @@ class Database_mongoDB:
         for y in x:
             data['shopee'] = y['shopee']
         with open('temp//data.json', 'w') as f:
-                    json.dump(data, f)
+            json.dump(data, f)
 
     def add_protuct_push(self,_id,index,data):
         Database_mongoDB.registered_Users_Collection.update(

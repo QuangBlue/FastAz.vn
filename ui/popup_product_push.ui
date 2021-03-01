@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1572</width>
+    <height>966</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">        background-color: transparent;</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">
+
+
+    /* SCROLL BARS */
+    QScrollBar:horizontal {
+        border: none;
+        background: rgb(52, 59, 72);
+        height: 14px;
+        margin: 0px 21px 0 21px;
+        border-radius: 0px;
+    }
+    QScrollBar::handle:horizontal {
+        background: rgb(15, 170, 255);
+        min-width: 25px;
+        border-radius: 7px
+    }
+    QScrollBar::add-line:horizontal {
+        border: none;
+        background: rgb(55, 63, 77);
+        width: 20px;
+        border-top-right-radius: 7px;
+        border-bottom-right-radius: 7px;
+        subcontrol-position: right;
+        subcontrol-origin: margin;
+    }
+    QScrollBar::sub-line:horizontal {
+        border: none;
+        background: rgb(55, 63, 77);
+        width: 20px;
+        border-top-left-radius: 7px;
+        border-bottom-left-radius: 7px;
+        subcontrol-position: left;
+        subcontrol-origin: margin;
+    }
+    QScrollBar::up-arrow:horizontal, QScrollBar::down-arrow:horizontal
+    {
+        background: none;
+    }
+    QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
+    {
+        background: none;
+    }
+    QScrollBar:vertical {
+        border: none;
+        background: rgb(55, 63, 77);
+        width: 24px;
+            margin: 21px 0 21px 8px;
+        border-radius: 0px;
+    }
+    QScrollBar::handle:vertical {	
+        background: rgb(85, 170, 255);
+        min-height: 25px;
+        border-radius: 7px
+    }
+    QScrollBar::add-line:vertical {
+        border: none;
+        background: rgb(55, 63, 77);
+        height: 20px;
+        margin-left:8px;
+        border-bottom-left-radius: 7px;
+        border-bottom-right-radius: 7px;
+        subcontrol-position: bottom;
+        subcontrol-origin: margin;
+    }
+    QScrollBar::sub-line:vertical {
+        border: none;
+        background: rgb(55, 63, 77);
+        height: 20px;
+        margin-left:8px;
+        border-top-left-radius: 7px;
+        border-top-right-radius: 7px;
+        subcontrol-position: top;
+        subcontrol-origin: margin;
+    }
+    QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
+        background: none;
+    }
+
+
+    QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+        background: none;
+    }
+
+
+    
+    QTableWidget {	
+        background-color: rgb(40, 44, 52);
+        padding: 10px;
+        border-radius: 18px;
+        gridline-color: rgb(44, 49, 60);
+        border-bottom: 1px solid rgb(44, 49, 60);
+    }
+    QTableWidget::item{
+        border-color: rgb(44, 49, 60);
+        padding-left: 5px;
+        padding-right: 5px;
+        gridline-color: rgb(44, 49, 60);
+    }
+    QTableWidget::item:selected{
+        background-color: rgb(85, 170, 255);
+    }
+    QHeaderView::section{
+        Background-color: rgb(39, 44, 54);
+        max-width: 30px;
+        border: 1px solid rgb(44, 49, 60);
+        border-style: none;
+        border-bottom: 1px solid rgb(44, 49, 60);
+        border-right: 1px solid rgb(44, 49, 60);
+    }
+    QTableWidget::horizontalHeader {	
+        background-color: rgb(81, 255, 0);
+    }
+    QHeaderView::section:horizontal
+    {
+        border: 1px solid rgb(32, 34, 42);
+        background-color: rgb(27, 29, 35);
+        padding: 3px;
+        border-top-left-radius: 7px;
+        border-top-right-radius: 7px;
+    }
+    QHeaderView::section:vertical
+    {
+        border: 1px solid rgb(44, 49, 60);
+    }
+
+
+    QPushButton {	
+        border: none;
+        background-color: transparent;
+    }
+    QPushButton:hover {
+        background-color: rgb(89, 125, 245);
+    }
+    QPushButton:pressed {	
+        background-color: rgb(85, 170, 255);
+    }
+
+
+    QFrame {
+        background-color: rgb(40, 44, 52);
+        color: rgb(210, 210, 210);
+    }
+QPushButton {
+	border-radius: 4px;
+    padding:8px 25px 7px 25px;
+background-color: rgb(64, 112, 244);
+	color: rgb(255, 255, 255);
+}
+QPushButton:hover{
+background-color: rgb(107, 145, 250);
+}
+QPushButton:pressed{
+background-color: rgb(48, 103, 255);
+}
+QPushButton:disabled{
+	background-color: rgb(128, 128, 128);
+}
+
+#btn_cancel{
+	background-color: rgb(249, 247, 250);
+	color: rgb(14, 14, 14);
+}
+
+#btn_cancel:hover{
+	background-color: rgb(212, 211, 213);
+}
+#btn_cancel:pressed{
+	background-color: rgb(48, 103, 255);
+}
+
+#btn_del{
+	background-color: rgba(232, 54, 28, 219);
+	color: rgb(255, 255, 255);
+}
+#btn_del:hover{
+	
+	background-color: rgba(232, 59, 28, 161);
+}
+#btn_del:pressed{
+	background-color: rgb(48, 103, 255);
+}
+
+
+
+
+</string>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QFrame" name="frame">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <property name="leftMargin">
+        <number>12</number>
+       </property>
+       <property name="topMargin">
+        <number>12</number>
+       </property>
+       <property name="rightMargin">
+        <number>12</number>
+       </property>
+       <property name="bottomMargin">
+        <number>12</number>
+       </property>
+       <item>
+        <widget class="QFrame" name="frame_2">
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="font">
+             <font>
+              <family>Nunito</family>
+              <pointsize>31</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Chọn Sản Phẩm</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame_3">
+            <property name="frameShape">
+             <enum>QFrame::NoFrame</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_back">
+            <property name="maximumSize">
+             <size>
+              <width>80</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Nunito</family>
+             </font>
+            </property>
+            <property name="text">
+             <string>&lt;</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_forward">
+            <property name="maximumSize">
+             <size>
+              <width>80</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Nunito</family>
+             </font>
+            </property>
+            <property name="text">
+             <string>&gt;</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTableWidget" name="tableWidget_product_push_shopee">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <family>Nunito</family>
+           <pointsize>16</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
+         </property>
+         <property name="verticalScrollBarPolicy">
+          <enum>Qt::ScrollBarAlwaysOn</enum>
+         </property>
+         <property name="sizeAdjustPolicy">
+          <enum>QAbstractScrollArea::AdjustToContents</enum>
+         </property>
+         <property name="editTriggers">
+          <set>QAbstractItemView::NoEditTriggers</set>
+         </property>
+         <property name="alternatingRowColors">
+          <bool>false</bool>
+         </property>
+         <property name="selectionMode">
+          <enum>QAbstractItemView::MultiSelection</enum>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
+         </property>
+         <property name="rowCount">
+          <number>0</number>
+         </property>
+         <property name="columnCount">
+          <number>8</number>
+         </property>
+         <attribute name="horizontalHeaderCascadingSectionResizes">
+          <bool>true</bool>
+         </attribute>
+         <attribute name="horizontalHeaderMinimumSectionSize">
+          <number>40</number>
+         </attribute>
+         <attribute name="horizontalHeaderDefaultSectionSize">
+          <number>200</number>
+         </attribute>
+         <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+          <bool>false</bool>
+         </attribute>
+         <attribute name="horizontalHeaderStretchLastSection">
+          <bool>true</bool>
+         </attribute>
+         <attribute name="verticalHeaderVisible">
+          <bool>false</bool>
+         </attribute>
+         <attribute name="verticalHeaderCascadingSectionResizes">
+          <bool>false</bool>
+         </attribute>
+         <attribute name="verticalHeaderHighlightSections">
+          <bool>false</bool>
+         </attribute>
+         <attribute name="verticalHeaderStretchLastSection">
+          <bool>true</bool>
+         </attribute>
+         <column>
+          <property name="text">
+           <string/>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Hình ảnh</string>
+          </property>
+          <property name="font">
+           <font>
+            <family>Nunito</family>
+            <pointsize>16</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Tên sản phẩm</string>
+          </property>
+          <property name="font">
+           <font>
+            <family>Nunito</family>
+            <pointsize>16</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>SKU</string>
+          </property>
+          <property name="font">
+           <font>
+            <family>Nunito</family>
+            <pointsize>16</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Số lượng</string>
+          </property>
+          <property name="font">
+           <font>
+            <family>Nunito</family>
+            <pointsize>16</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Giá thường</string>
+          </property>
+          <property name="font">
+           <font>
+            <family>Nunito</family>
+            <pointsize>16</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Giá SALE</string>
+          </property>
+          <property name="font">
+           <font>
+            <family>Nunito</family>
+            <pointsize>16</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Đã bán</string>
+          </property>
+          <property name="font">
+           <font>
+            <family>Nunito</family>
+            <pointsize>16</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
+         </column>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame_4">
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QFrame" name="frame_5">
+            <property name="frameShape">
+             <enum>QFrame::NoFrame</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_cancel">
+            <property name="maximumSize">
+             <size>
+              <width>120</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Nunito</family>
+              <pointsize>18</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Thoát</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_confirm">
+            <property name="maximumSize">
+             <size>
+              <width>140</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Nunito</family>
+              <pointsize>18</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Thêm</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

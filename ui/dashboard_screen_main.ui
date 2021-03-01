@@ -8,7 +8,7 @@
     <x>0</x>
     <y>0</y>
     <width>1560</width>
-    <height>1004</height>
+    <height>1064</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -629,9 +629,11 @@ background-repeat: no-repeat;</string>
                    <string notr="true">QComboBox{
 	color: rgb(255, 255, 255);
 	border: none;
-	border-radius: 18px;
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));
-}</string>
+	border-radius: 8px;
+	background-color: rgb(64, 112, 244);
+}
+
+</string>
                   </property>
                   <property name="editable">
                    <bool>false</bool>
@@ -925,10 +927,208 @@ background-repeat: no-repeat;</string>
                    <string notr="true"/>
                   </property>
                   <property name="currentIndex">
-                   <number>3</number>
+                   <number>2</number>
                   </property>
                   <widget class="QWidget" name="page_reply_ratting">
                    <layout class="QVBoxLayout" name="verticalLayout_7">
+                    <property name="topMargin">
+                     <number>12</number>
+                    </property>
+                    <item>
+                     <widget class="QFrame" name="frame">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>0</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>16777215</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
+                      <property name="frameShape">
+                       <enum>QFrame::NoFrame</enum>
+                      </property>
+                      <property name="frameShadow">
+                       <enum>QFrame::Raised</enum>
+                      </property>
+                      <layout class="QHBoxLayout" name="horizontalLayout_11">
+                       <property name="leftMargin">
+                        <number>20</number>
+                       </property>
+                       <property name="topMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="rightMargin">
+                        <number>20</number>
+                       </property>
+                       <property name="bottomMargin">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <widget class="QFrame" name="frame_8">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="frameShape">
+                          <enum>QFrame::StyledPanel</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_14">
+                          <property name="leftMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>0</number>
+                          </property>
+                          <item>
+                           <widget class="QLabel" name="label_8">
+                            <property name="sizePolicy">
+                             <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                             </sizepolicy>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>Nunito</family>
+                              <pointsize>28</pointsize>
+                             </font>
+                            </property>
+                            <property name="text">
+                             <string>Danh Sách Trả Lời Đánh Giá</string>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QPushButton" name="btn_apply_all_rating">
+                         <property name="minimumSize">
+                          <size>
+                           <width>0</width>
+                           <height>45</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>230</width>
+                           <height>45</height>
+                          </size>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>Nunito</family>
+                           <pointsize>16</pointsize>
+                           <bold>true</bold>
+                          </font>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">#btn_apply_all_rating{
+	border-radius: 8px;
+
+	background-color: rgb(64, 112, 244);
+	color: rgb(255, 255, 255);
+}
+
+#btn_apply_all_rating:hover{
+background-color: rgb(107, 145, 250);
+}
+
+#btn_apply_all_rating:pressed{
+background-color: rgb(48, 103, 255);
+}
+</string>
+                         </property>
+                         <property name="text">
+                          <string> ÁP DỤNG TẤT CẢ</string>
+                         </property>
+                         <property name="icon">
+                          <iconset resource="../qrc/file_img.qrc">
+                           <normaloff>:/img/checked.png</normaloff>:/img/checked.png</iconset>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QPushButton" name="btn_add_rating">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="minimumSize">
+                          <size>
+                           <width>0</width>
+                           <height>45</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>230</width>
+                           <height>45</height>
+                          </size>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>Nunito</family>
+                           <pointsize>16</pointsize>
+                           <bold>true</bold>
+                          </font>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">#btn_add_rating{
+	border-radius: 8px;
+
+	background-color: rgb(64, 112, 244);
+	color: rgb(255, 255, 255);
+}
+
+#btn_add_rating:hover{
+background-color: rgb(107, 145, 250);
+}
+
+#btn_add_rating:pressed{
+background-color: rgb(48, 103, 255);
+}
+
+</string>
+                         </property>
+                         <property name="text">
+                          <string> THÊM CÂU TRẢ LỜI</string>
+                         </property>
+                         <property name="icon">
+                          <iconset resource="../qrc/file_img.qrc">
+                           <normaloff>:/img/btn_add.png</normaloff>:/img/btn_add.png</iconset>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
                     <item>
                      <widget class="QTableWidget" name="tw_ratting1">
                       <property name="sizePolicy">
@@ -1471,120 +1671,86 @@ background-repeat: no-repeat;</string>
                       </column>
                      </widget>
                     </item>
+                   </layout>
+                  </widget>
+                  <widget class="QWidget" name="page_settings">
+                   <property name="styleSheet">
+                    <string notr="true">QPushButton{
+	border-radius: 10px;
+    padding:8px 25px 7px 25px;
+	background-color: rgb(64, 112, 244);
+	color: rgb(255, 255, 255);
+}
+
+QPushButton:hover{
+		background-color: rgb(107, 145, 250);
+}
+
+QPushButton:pressed{
+	background-color: rgb(48, 103, 255);
+}
+QPlainTextEdit{
+border: 2px solid  rgb(127, 126, 128);
+border-radius : 10px;
+padding : 12px;
+}</string>
+                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_10">
                     <item>
-                     <widget class="QFrame" name="frame">
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>79</height>
-                       </size>
+                     <widget class="QPushButton" name="addText">
+                      <property name="text">
+                       <string>THÊM TEXT</string>
                       </property>
-                      <property name="frameShape">
-                       <enum>QFrame::NoFrame</enum>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QScrollArea" name="scrollArea">
+                      <property name="widgetResizable">
+                       <bool>true</bool>
                       </property>
-                      <property name="frameShadow">
-                       <enum>QFrame::Raised</enum>
-                      </property>
-                      <layout class="QHBoxLayout" name="horizontalLayout_11">
-                       <item>
-                        <widget class="QPushButton" name="btn_apply_all_rating">
-                         <property name="minimumSize">
-                          <size>
-                           <width>0</width>
-                           <height>50</height>
-                          </size>
-                         </property>
-                         <property name="maximumSize">
-                          <size>
-                           <width>16777215</width>
-                           <height>50</height>
-                          </size>
-                         </property>
-                         <property name="font">
-                          <font>
-                           <family>Nunito</family>
-                           <pointsize>24</pointsize>
-                           <bold>true</bold>
-                          </font>
-                         </property>
-                         <property name="styleSheet">
-                          <string notr="true">#btn_apply_all_rating{
-	border-radius: 25px;
-    padding:8px 25px 7px 25px;
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));
-	color: rgb(255, 255, 255);
-
-}
-
-#btn_apply_all_rating:hover{
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(15, 181, 253, 255), stop:1 rgba(89, 64, 231, 255));
-}
-
-#btn_apply_all_rating:pressed{
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));
-}</string>
-                         </property>
-                         <property name="text">
-                          <string>ÁP DỤNG TẤT CẢ TÀI KHOẢN</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item>
-                        <widget class="QPushButton" name="btn_add_rating">
-                         <property name="minimumSize">
-                          <size>
-                           <width>0</width>
-                           <height>50</height>
-                          </size>
-                         </property>
-                         <property name="maximumSize">
-                          <size>
-                           <width>16777215</width>
-                           <height>50</height>
-                          </size>
-                         </property>
-                         <property name="font">
-                          <font>
-                           <family>Nunito</family>
-                           <pointsize>24</pointsize>
-                           <bold>true</bold>
-                          </font>
-                         </property>
-                         <property name="styleSheet">
-                          <string notr="true">#btn_add_rating{
-	border-radius: 25px;
-    padding:8px 25px 7px 25px;
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));
-	color: rgb(255, 255, 255);
-}
-#btn_add_rating:hover{
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(15, 181, 253, 255), stop:1 rgba(89, 64, 231, 255));
-}
-
-#btn_add_rating:pressed
-{
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));
-}</string>
-                         </property>
-                         <property name="text">
-                          <string>THÊM CÂU TRẢ LỜI</string>
-                         </property>
-                        </widget>
-                       </item>
-                      </layout>
+                      <widget class="QWidget" name="scrollAreaWidgetContents">
+                       <property name="geometry">
+                        <rect>
+                         <x>0</x>
+                         <y>0</y>
+                         <width>1449</width>
+                         <height>873</height>
+                        </rect>
+                       </property>
+                       <layout class="QVBoxLayout" name="verticalLayout_21"/>
+                      </widget>
                      </widget>
                     </item>
                    </layout>
                   </widget>
-                  <widget class="QWidget" name="page_push_product">
-                   <layout class="QVBoxLayout" name="verticalLayout_10">
+                  <widget class="QWidget" name="page_chat_bot">
+                   <property name="styleSheet">
+                    <string notr="true">QPushButton{
+	border-radius: 2px;
+    padding:8px 25px 7px 25px;
+	background-color: rgb(64, 112, 244);
+	color: rgb(255, 255, 255);
+}
+
+QPushButton:hover{
+		background-color: rgb(107, 145, 250);
+}
+
+QPushButton:pressed{
+	background-color: rgb(48, 103, 255);
+}</string>
+                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_8">
+                    <property name="leftMargin">
+                     <number>12</number>
+                    </property>
                     <item>
-                     <widget class="QFrame" name="frame_6">
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>115</height>
-                       </size>
+                     <widget class="QFrame" name="frameButtonChatBot">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
                       </property>
                       <property name="styleSheet">
                        <string notr="true"/>
@@ -1595,17 +1761,144 @@ background-repeat: no-repeat;</string>
                       <property name="frameShadow">
                        <enum>QFrame::Raised</enum>
                       </property>
-                      <layout class="QHBoxLayout" name="horizontalLayout_13">
+                      <property name="lineWidth">
+                       <number>5</number>
+                      </property>
+                      <property name="midLineWidth">
+                       <number>20</number>
+                      </property>
+                      <layout class="QHBoxLayout" name="horizontalLayout_12">
+                       <property name="leftMargin">
+                        <number>24</number>
+                       </property>
+                       <property name="topMargin">
+                        <number>24</number>
+                       </property>
+                       <property name="rightMargin">
+                        <number>24</number>
+                       </property>
+                       <property name="bottomMargin">
+                        <number>24</number>
+                       </property>
                        <item>
-                        <widget class="QLabel" name="label_2">
+                        <widget class="QPushButton" name="btnOrderNew">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
                          <property name="font">
                           <font>
                            <family>Nunito</family>
-                           <pointsize>44</pointsize>
+                           <pointsize>18</pointsize>
+                           <bold>true</bold>
+                          </font>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">background-color: rgb(200, 38, 0);</string>
+                         </property>
+                         <property name="text">
+                          <string>Đơn hàng Mới</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QPushButton" name="btnOrderReady">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>Nunito</family>
+                           <pointsize>18</pointsize>
+                           <bold>true</bold>
+                          </font>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true"/>
+                         </property>
+                         <property name="text">
+                          <string>Đơn hàng Đã Chuẩn Bị</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QPushButton" name="btnOrderShipping">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>Nunito</family>
+                           <pointsize>18</pointsize>
+                           <bold>true</bold>
+                          </font>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true"/>
+                         </property>
+                         <property name="text">
+                          <string>Đơn hàng Đang Giao</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QPushButton" name="btnOrderSuccess">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>Nunito</family>
+                           <pointsize>18</pointsize>
+                           <bold>true</bold>
                           </font>
                          </property>
                          <property name="text">
-                          <string>Nội dung hướng dẫn</string>
+                          <string>Đơn hàng Thành Công</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QPushButton" name="btnOrderCancel">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>Nunito</family>
+                           <pointsize>18</pointsize>
+                           <bold>true</bold>
+                          </font>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true"/>
+                         </property>
+                         <property name="text">
+                          <string>Đơn hàng Hủy</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QFrame" name="frame_4">
+                         <property name="frameShape">
+                          <enum>QFrame::NoFrame</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
                          </property>
                         </widget>
                        </item>
@@ -1613,477 +1906,1973 @@ background-repeat: no-repeat;</string>
                      </widget>
                     </item>
                     <item>
-                     <widget class="QFrame" name="frame_5">
-                      <property name="frameShape">
-                       <enum>QFrame::NoFrame</enum>
-                      </property>
-                      <property name="frameShadow">
-                       <enum>QFrame::Raised</enum>
-                      </property>
-                      <layout class="QHBoxLayout" name="horizontalLayout_14">
-                       <item>
-                        <widget class="QFrame" name="frame_7">
-                         <property name="styleSheet">
-                          <string notr="true">QPushButton {
-	border-radius: 10px;
+                     <widget class="QStackedWidget" name="stackedWidgetChatBot">
+                      <property name="styleSheet">
+                       <string notr="true">QPushButton{
+	border-radius: 2px;
     padding:8px 25px 7px 25px;
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));
+	background-color: rgb(64, 112, 244);
 	color: rgb(255, 255, 255);
 }
 
-QPushButton:hover {
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(15, 181, 253, 255), stop:1 rgba(89, 64, 231, 255));
+QPushButton:hover{
+		background-color: rgb(107, 145, 250);
 }
 
-QPushButton:pressed {
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));
+QPushButton:pressed{
+	background-color: rgb(48, 103, 255);
 }
-
-QPushButton:disabled{
-	
-	background-color: rgb(128, 128, 128);
-}</string>
-                         </property>
-                         <property name="frameShape">
-                          <enum>QFrame::NoFrame</enum>
-                         </property>
-                         <property name="frameShadow">
-                          <enum>QFrame::Raised</enum>
-                         </property>
-                         <layout class="QVBoxLayout" name="verticalLayout_11">
-                          <item>
-                           <widget class="QTableWidget" name="product_list_shopee">
-                            <property name="sizePolicy">
-                             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                              <horstretch>0</horstretch>
-                              <verstretch>0</verstretch>
-                             </sizepolicy>
+</string>
+                      </property>
+                      <property name="currentIndex">
+                       <number>4</number>
+                      </property>
+                      <widget class="QWidget" name="pageOrderNew">
+                       <layout class="QVBoxLayout" name="verticalLayout_11">
+                        <property name="leftMargin">
+                         <number>5</number>
+                        </property>
+                        <property name="topMargin">
+                         <number>5</number>
+                        </property>
+                        <property name="rightMargin">
+                         <number>5</number>
+                        </property>
+                        <property name="bottomMargin">
+                         <number>5</number>
+                        </property>
+                        <item alignment="Qt::AlignTop">
+                         <widget class="QFrame" name="frameTitleOrderNew">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true"/>
+                          </property>
+                          <property name="frameShape">
+                           <enum>QFrame::NoFrame</enum>
+                          </property>
+                          <property name="frameShadow">
+                           <enum>QFrame::Raised</enum>
+                          </property>
+                          <property name="lineWidth">
+                           <number>5</number>
+                          </property>
+                          <property name="midLineWidth">
+                           <number>20</number>
+                          </property>
+                          <layout class="QHBoxLayout" name="horizontalLayout_16">
+                           <property name="leftMargin">
+                            <number>24</number>
+                           </property>
+                           <property name="topMargin">
+                            <number>24</number>
+                           </property>
+                           <property name="rightMargin">
+                            <number>24</number>
+                           </property>
+                           <property name="bottomMargin">
+                            <number>24</number>
+                           </property>
+                           <item>
+                            <widget class="QLabel" name="label">
+                             <property name="font">
+                              <font>
+                               <family>Nunito</family>
+                               <pointsize>22</pointsize>
+                               <bold>false</bold>
+                              </font>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true"/>
+                             </property>
+                             <property name="text">
+                              <string>Nội dung tin nhắn - Đơn hàng mới</string>
+                             </property>
+                             <property name="alignment">
+                              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QPushButton" name="addTextOrderNew">
+                             <property name="maximumSize">
+                              <size>
+                               <width>200</width>
+                               <height>16777215</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <family>Nunito</family>
+                               <pointsize>18</pointsize>
+                               <bold>true</bold>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string> Thêm nội dung</string>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="../qrc/file_img.qrc">
+                               <normaloff>:/img/btn_add.png</normaloff>:/img/btn_add.png</iconset>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QPushButton" name="btnSaveOrderNew">
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>0</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>180</width>
+                               <height>16777215</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <family>Nunito</family>
+                               <pointsize>18</pointsize>
+                               <bold>true</bold>
+                              </font>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true"/>
+                             </property>
+                             <property name="text">
+                              <string> Lưu cài đặt</string>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="../qrc/file_img.qrc">
+                               <normaloff>:/icon/cil-save.png</normaloff>:/icon/cil-save.png</iconset>
+                             </property>
+                             <property name="iconSize">
+                              <size>
+                               <width>20</width>
+                               <height>20</height>
+                              </size>
+                             </property>
+                             <property name="checkable">
+                              <bool>false</bool>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QScrollArea" name="scrollAreaOrderNew">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true"/>
+                          </property>
+                          <property name="frameShape">
+                           <enum>QFrame::NoFrame</enum>
+                          </property>
+                          <property name="widgetResizable">
+                           <bool>true</bool>
+                          </property>
+                          <widget class="QWidget" name="scrollAreaWidgetContentsOrderNew">
+                           <property name="geometry">
+                            <rect>
+                             <x>0</x>
+                             <y>0</y>
+                             <width>1441</width>
+                             <height>702</height>
+                            </rect>
+                           </property>
+                           <layout class="QVBoxLayout" name="verticalLayout_19">
+                            <property name="leftMargin">
+                             <number>32</number>
                             </property>
-                            <property name="minimumSize">
-                             <size>
-                              <width>0</width>
-                              <height>150</height>
-                             </size>
-                            </property>
-                            <property name="font">
-                             <font>
-                              <family>Nunito</family>
-                              <pointsize>15</pointsize>
-                             </font>
-                            </property>
-                            <property name="styleSheet">
-                             <string notr="true"/>
-                            </property>
-                            <property name="frameShape">
-                             <enum>QFrame::NoFrame</enum>
-                            </property>
-                            <property name="lineWidth">
-                             <number>1</number>
-                            </property>
-                            <property name="verticalScrollBarPolicy">
-                             <enum>Qt::ScrollBarAlwaysOn</enum>
-                            </property>
-                            <property name="sizeAdjustPolicy">
-                             <enum>QAbstractScrollArea::AdjustToContents</enum>
-                            </property>
-                            <property name="editTriggers">
-                             <set>QAbstractItemView::NoEditTriggers</set>
-                            </property>
-                            <property name="dragEnabled">
-                             <bool>true</bool>
-                            </property>
-                            <property name="dragDropMode">
-                             <enum>QAbstractItemView::NoDragDrop</enum>
-                            </property>
-                            <property name="defaultDropAction">
-                             <enum>Qt::TargetMoveAction</enum>
-                            </property>
-                            <property name="alternatingRowColors">
-                             <bool>false</bool>
-                            </property>
-                            <property name="selectionMode">
-                             <enum>QAbstractItemView::MultiSelection</enum>
-                            </property>
-                            <property name="selectionBehavior">
-                             <enum>QAbstractItemView::SelectRows</enum>
-                            </property>
-                            <property name="textElideMode">
-                             <enum>Qt::ElideRight</enum>
-                            </property>
-                            <property name="sortingEnabled">
-                             <bool>true</bool>
-                            </property>
-                            <property name="wordWrap">
-                             <bool>false</bool>
-                            </property>
-                            <property name="rowCount">
+                            <property name="topMargin">
                              <number>0</number>
                             </property>
-                            <property name="columnCount">
-                             <number>2</number>
+                            <property name="rightMargin">
+                             <number>32</number>
                             </property>
-                            <attribute name="horizontalHeaderCascadingSectionResizes">
-                             <bool>true</bool>
-                            </attribute>
-                            <attribute name="horizontalHeaderMinimumSectionSize">
-                             <number>19</number>
-                            </attribute>
-                            <attribute name="horizontalHeaderDefaultSectionSize">
-                             <number>100</number>
-                            </attribute>
-                            <attribute name="horizontalHeaderHighlightSections">
-                             <bool>true</bool>
-                            </attribute>
-                            <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
-                             <bool>true</bool>
-                            </attribute>
-                            <attribute name="horizontalHeaderStretchLastSection">
-                             <bool>true</bool>
-                            </attribute>
-                            <attribute name="verticalHeaderVisible">
-                             <bool>false</bool>
-                            </attribute>
-                            <attribute name="verticalHeaderCascadingSectionResizes">
-                             <bool>false</bool>
-                            </attribute>
-                            <attribute name="verticalHeaderDefaultSectionSize">
-                             <number>30</number>
-                            </attribute>
-                            <attribute name="verticalHeaderHighlightSections">
-                             <bool>false</bool>
-                            </attribute>
-                            <attribute name="verticalHeaderStretchLastSection">
-                             <bool>true</bool>
-                            </attribute>
-                            <column>
+                            <item alignment="Qt::AlignTop">
+                             <widget class="QFrame" name="frameOrderNew_obj">
+                              <property name="minimumSize">
+                               <size>
+                                <width>0</width>
+                                <height>0</height>
+                               </size>
+                              </property>
+                              <property name="frameShape">
+                               <enum>QFrame::NoFrame</enum>
+                              </property>
+                              <property name="frameShadow">
+                               <enum>QFrame::Raised</enum>
+                              </property>
+                              <layout class="QVBoxLayout" name="frameOrderNew">
+                               <property name="leftMargin">
+                                <number>0</number>
+                               </property>
+                               <property name="topMargin">
+                                <number>24</number>
+                               </property>
+                               <property name="rightMargin">
+                                <number>0</number>
+                               </property>
+                               <property name="bottomMargin">
+                                <number>24</number>
+                               </property>
+                              </layout>
+                             </widget>
+                            </item>
+                            <item>
+                             <widget class="QFrame" name="frame_3">
+                              <property name="sizePolicy">
+                               <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                                <horstretch>0</horstretch>
+                                <verstretch>0</verstretch>
+                               </sizepolicy>
+                              </property>
+                              <property name="frameShape">
+                               <enum>QFrame::StyledPanel</enum>
+                              </property>
+                              <property name="frameShadow">
+                               <enum>QFrame::Raised</enum>
+                              </property>
+                              <layout class="QGridLayout" name="gridLayout">
+                               <item row="4" column="0">
+                                <widget class="QLabel" name="label_9">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[ORDER_ID] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Mã đơn hàng&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="3" column="0">
+                                <widget class="QLabel" name="label_5">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[SHOP_ADD] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Địa chỉ Shop&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="1" column="0" alignment="Qt::AlignTop">
+                                <widget class="QLabel" name="label_3">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="styleSheet">
+                                  <string notr="true"/>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[SHOP_NAME] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Tên Shop&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="2" column="0">
+                                <widget class="QLabel" name="label_4">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[SHOP_PHONE] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Số điện thoại Shop&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="1" column="1">
+                                <widget class="QLabel" name="label_13">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[CUSTOMER_NAME] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Tên Khách Hàng&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="2" column="1">
+                                <widget class="QLabel" name="label_16">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[CUSTOMER_PHONE] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Số điện thoại Khách Hàng&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="3" column="1">
+                                <widget class="QLabel" name="label_15">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[CUSTOMER_ADD] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Địa chỉ nhận hàng&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="1" column="2">
+                                <widget class="QLabel" name="label_14">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[ORDER_DATE] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Ngày đặt hàng&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="2" column="2">
+                                <widget class="QLabel" name="label_12">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[ORDER_DELIVERY] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Ngày giao hàng dự kiến&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="3" column="2">
+                                <widget class="QLabel" name="label_17">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[ORDER_ITEMS] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Số sản phẩm trong đơn hàng&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="4" column="1">
+                                <widget class="QLabel" name="label_2">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[LOGISTIC] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Đơn vị vận chuyển&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="4" column="2">
+                                <widget class="QLabel" name="label_11">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[TOTAL_PAYMENT] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Tổng tiền đơn hàng&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                              </layout>
+                             </widget>
+                            </item>
+                           </layout>
+                          </widget>
+                         </widget>
+                        </item>
+                       </layout>
+                      </widget>
+                      <widget class="QWidget" name="pageOrderCancel">
+                       <layout class="QVBoxLayout" name="verticalLayout_18">
+                        <property name="leftMargin">
+                         <number>5</number>
+                        </property>
+                        <property name="topMargin">
+                         <number>5</number>
+                        </property>
+                        <property name="rightMargin">
+                         <number>5</number>
+                        </property>
+                        <property name="bottomMargin">
+                         <number>5</number>
+                        </property>
+                        <item>
+                         <widget class="QFrame" name="frameTitleOrderCancel">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true"/>
+                          </property>
+                          <property name="frameShape">
+                           <enum>QFrame::NoFrame</enum>
+                          </property>
+                          <property name="frameShadow">
+                           <enum>QFrame::Raised</enum>
+                          </property>
+                          <property name="lineWidth">
+                           <number>5</number>
+                          </property>
+                          <property name="midLineWidth">
+                           <number>20</number>
+                          </property>
+                          <layout class="QHBoxLayout" name="horizontalLayout_20">
+                           <property name="leftMargin">
+                            <number>24</number>
+                           </property>
+                           <property name="topMargin">
+                            <number>24</number>
+                           </property>
+                           <property name="rightMargin">
+                            <number>24</number>
+                           </property>
+                           <property name="bottomMargin">
+                            <number>24</number>
+                           </property>
+                           <item>
+                            <widget class="QLabel" name="label_10">
+                             <property name="font">
+                              <font>
+                               <family>Nunito</family>
+                               <pointsize>22</pointsize>
+                               <bold>false</bold>
+                              </font>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true"/>
+                             </property>
                              <property name="text">
-                              <string>Hình Ảnh</string>
+                              <string>Nội dung tin nhắn - Đơn hàng Hủy</string>
+                             </property>
+                             <property name="alignment">
+                              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QPushButton" name="addTextOrderCancel">
+                             <property name="maximumSize">
+                              <size>
+                               <width>200</width>
+                               <height>16777215</height>
+                              </size>
                              </property>
                              <property name="font">
                               <font>
                                <family>Nunito</family>
-                               <pointsize>16</pointsize>
+                               <pointsize>18</pointsize>
+                               <bold>true</bold>
                               </font>
                              </property>
-                            </column>
-                            <column>
                              <property name="text">
-                              <string>Sản Phẩm Lấy Từ Shopee</string>
+                              <string> Thêm nội dung</string>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="../qrc/file_img.qrc">
+                               <normaloff>:/img/btn_add.png</normaloff>:/img/btn_add.png</iconset>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QPushButton" name="btnSaveOrderCancel">
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>0</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>180</width>
+                               <height>16777215</height>
+                              </size>
                              </property>
                              <property name="font">
                               <font>
                                <family>Nunito</family>
-                               <pointsize>16</pointsize>
+                               <pointsize>18</pointsize>
+                               <bold>true</bold>
                               </font>
                              </property>
-                            </column>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QFrame" name="button_page">
-                            <property name="frameShape">
-                             <enum>QFrame::NoFrame</enum>
+                             <property name="styleSheet">
+                              <string notr="true"/>
+                             </property>
+                             <property name="text">
+                              <string> Lưu cài đặt</string>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="../qrc/file_img.qrc">
+                               <normaloff>:/icon/cil-save.png</normaloff>:/icon/cil-save.png</iconset>
+                             </property>
+                             <property name="iconSize">
+                              <size>
+                               <width>20</width>
+                               <height>20</height>
+                              </size>
+                             </property>
+                             <property name="checkable">
+                              <bool>false</bool>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QScrollArea" name="scrollAreaOrderCancel">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true"/>
+                          </property>
+                          <property name="frameShape">
+                           <enum>QFrame::NoFrame</enum>
+                          </property>
+                          <property name="widgetResizable">
+                           <bool>true</bool>
+                          </property>
+                          <widget class="QWidget" name="scrollAreaWidgetContentsOrderCancel">
+                           <property name="geometry">
+                            <rect>
+                             <x>0</x>
+                             <y>0</y>
+                             <width>1441</width>
+                             <height>708</height>
+                            </rect>
+                           </property>
+                           <layout class="QVBoxLayout" name="verticalLayout_20">
+                            <property name="leftMargin">
+                             <number>32</number>
                             </property>
-                            <property name="frameShadow">
-                             <enum>QFrame::Raised</enum>
+                            <property name="topMargin">
+                             <number>0</number>
                             </property>
-                            <layout class="QHBoxLayout" name="horizontalLayout_12">
-                             <item>
-                              <widget class="QPushButton" name="btn_back">
-                               <property name="enabled">
-                                <bool>true</bool>
+                            <property name="rightMargin">
+                             <number>32</number>
+                            </property>
+                            <item alignment="Qt::AlignTop">
+                             <widget class="QFrame" name="frameOrderCancel_obj">
+                              <property name="minimumSize">
+                               <size>
+                                <width>0</width>
+                                <height>0</height>
+                               </size>
+                              </property>
+                              <property name="frameShape">
+                               <enum>QFrame::NoFrame</enum>
+                              </property>
+                              <property name="frameShadow">
+                               <enum>QFrame::Raised</enum>
+                              </property>
+                              <layout class="QVBoxLayout" name="frameOrderCancel">
+                               <property name="leftMargin">
+                                <number>0</number>
                                </property>
-                               <property name="font">
-                                <font>
-                                 <family>Nunito</family>
-                                 <pointsize>13</pointsize>
-                                 <bold>true</bold>
-                                </font>
+                               <property name="topMargin">
+                                <number>24</number>
                                </property>
-                               <property name="text">
-                                <string>TRANG TRƯỚC</string>
+                               <property name="rightMargin">
+                                <number>0</number>
                                </property>
-                               <property name="checkable">
-                                <bool>false</bool>
+                               <property name="bottomMargin">
+                                <number>24</number>
                                </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QPushButton" name="btn_forward">
-                               <property name="font">
-                                <font>
-                                 <family>Nunito</family>
-                                 <bold>true</bold>
-                                </font>
+                              </layout>
+                             </widget>
+                            </item>
+                            <item>
+                             <widget class="QFrame" name="frame_5">
+                              <property name="sizePolicy">
+                               <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                                <horstretch>0</horstretch>
+                                <verstretch>0</verstretch>
+                               </sizepolicy>
+                              </property>
+                              <property name="frameShape">
+                               <enum>QFrame::StyledPanel</enum>
+                              </property>
+                              <property name="frameShadow">
+                               <enum>QFrame::Raised</enum>
+                              </property>
+                              <layout class="QGridLayout" name="gridLayout_5">
+                               <item row="4" column="0">
+                                <widget class="QLabel" name="label_57">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[ORDER_ID] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Mã đơn hàng&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="3" column="0">
+                                <widget class="QLabel" name="label_58">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[SHOP_ADD] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Địa chỉ Shop&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="1" column="0" alignment="Qt::AlignTop">
+                                <widget class="QLabel" name="label_59">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="styleSheet">
+                                  <string notr="true"/>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[SHOP_NAME] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Tên Shop&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="2" column="0">
+                                <widget class="QLabel" name="label_60">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[SHOP_PHONE] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Số điện thoại Shop&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="1" column="1">
+                                <widget class="QLabel" name="label_61">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[CUSTOMER_NAME] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Tên Khách Hàng&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="2" column="1">
+                                <widget class="QLabel" name="label_62">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[CUSTOMER_PHONE] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Số điện thoại Khách Hàng&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="3" column="1">
+                                <widget class="QLabel" name="label_63">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[CUSTOMER_ADD] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Địa chỉ nhận hàng&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="1" column="2">
+                                <widget class="QLabel" name="label_64">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[ORDER_DATE] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Ngày đặt hàng&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="2" column="2">
+                                <widget class="QLabel" name="label_65">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[ORDER_DELIVERY] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Ngày giao hàng dự kiến&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="3" column="2">
+                                <widget class="QLabel" name="label_66">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[ORDER_ITEMS] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Số sản phẩm trong đơn hàng&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="4" column="1">
+                                <widget class="QLabel" name="label_67">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[LOGISTIC] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Đơn vị vận chuyển&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="4" column="2">
+                                <widget class="QLabel" name="label_68">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[TOTAL_PAYMENT] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Tổng tiền đơn hàng&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                              </layout>
+                             </widget>
+                            </item>
+                           </layout>
+                          </widget>
+                         </widget>
+                        </item>
+                       </layout>
+                      </widget>
+                      <widget class="QWidget" name="pageOrderSuccess">
+                       <layout class="QVBoxLayout" name="verticalLayout_17">
+                        <property name="leftMargin">
+                         <number>5</number>
+                        </property>
+                        <property name="topMargin">
+                         <number>5</number>
+                        </property>
+                        <property name="rightMargin">
+                         <number>5</number>
+                        </property>
+                        <property name="bottomMargin">
+                         <number>5</number>
+                        </property>
+                        <item>
+                         <widget class="QFrame" name="frameTitleOrderSuccess">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true"/>
+                          </property>
+                          <property name="frameShape">
+                           <enum>QFrame::NoFrame</enum>
+                          </property>
+                          <property name="frameShadow">
+                           <enum>QFrame::Raised</enum>
+                          </property>
+                          <property name="lineWidth">
+                           <number>5</number>
+                          </property>
+                          <property name="midLineWidth">
+                           <number>20</number>
+                          </property>
+                          <layout class="QHBoxLayout" name="horizontalLayout_19">
+                           <property name="leftMargin">
+                            <number>24</number>
+                           </property>
+                           <property name="topMargin">
+                            <number>24</number>
+                           </property>
+                           <property name="rightMargin">
+                            <number>24</number>
+                           </property>
+                           <property name="bottomMargin">
+                            <number>24</number>
+                           </property>
+                           <item>
+                            <widget class="QLabel" name="label_44">
+                             <property name="font">
+                              <font>
+                               <family>Nunito</family>
+                               <pointsize>22</pointsize>
+                               <bold>false</bold>
+                              </font>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true"/>
+                             </property>
+                             <property name="text">
+                              <string>Nội dung tin nhắn - Đơn hàng Thành Công</string>
+                             </property>
+                             <property name="alignment">
+                              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QPushButton" name="addTextOrderSuccess">
+                             <property name="maximumSize">
+                              <size>
+                               <width>200</width>
+                               <height>16777215</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <family>Nunito</family>
+                               <pointsize>18</pointsize>
+                               <bold>true</bold>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string> Thêm nội dung</string>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="../qrc/file_img.qrc">
+                               <normaloff>:/img/btn_add.png</normaloff>:/img/btn_add.png</iconset>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QPushButton" name="btnSaveOrderSuccess">
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>0</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>180</width>
+                               <height>16777215</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <family>Nunito</family>
+                               <pointsize>18</pointsize>
+                               <bold>true</bold>
+                              </font>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true"/>
+                             </property>
+                             <property name="text">
+                              <string> Lưu cài đặt</string>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="../qrc/file_img.qrc">
+                               <normaloff>:/icon/cil-save.png</normaloff>:/icon/cil-save.png</iconset>
+                             </property>
+                             <property name="iconSize">
+                              <size>
+                               <width>20</width>
+                               <height>20</height>
+                              </size>
+                             </property>
+                             <property name="checkable">
+                              <bool>false</bool>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QScrollArea" name="scrollAreaOrderSuccess">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true"/>
+                          </property>
+                          <property name="frameShape">
+                           <enum>QFrame::NoFrame</enum>
+                          </property>
+                          <property name="widgetResizable">
+                           <bool>true</bool>
+                          </property>
+                          <widget class="QWidget" name="scrollAreaWidgetContentsOrderSuccess">
+                           <property name="geometry">
+                            <rect>
+                             <x>0</x>
+                             <y>0</y>
+                             <width>1441</width>
+                             <height>708</height>
+                            </rect>
+                           </property>
+                           <layout class="QVBoxLayout" name="verticalLayout_22">
+                            <property name="leftMargin">
+                             <number>32</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>32</number>
+                            </property>
+                            <item alignment="Qt::AlignTop">
+                             <widget class="QFrame" name="frameOrderSuccess_obj">
+                              <property name="minimumSize">
+                               <size>
+                                <width>0</width>
+                                <height>0</height>
+                               </size>
+                              </property>
+                              <property name="frameShape">
+                               <enum>QFrame::NoFrame</enum>
+                              </property>
+                              <property name="frameShadow">
+                               <enum>QFrame::Raised</enum>
+                              </property>
+                              <layout class="QVBoxLayout" name="frameOrderSuccess">
+                               <property name="leftMargin">
+                                <number>0</number>
                                </property>
-                               <property name="text">
-                                <string>TRANG TIẾP  THEO</string>
+                               <property name="topMargin">
+                                <number>24</number>
                                </property>
-                              </widget>
-                             </item>
-                            </layout>
-                           </widget>
-                          </item>
-                         </layout>
-                        </widget>
-                       </item>
-                       <item>
-                        <widget class="QFrame" name="frame_2">
-                         <property name="minimumSize">
-                          <size>
-                           <width>120</width>
-                           <height>0</height>
-                          </size>
-                         </property>
-                         <property name="frameShape">
-                          <enum>QFrame::NoFrame</enum>
-                         </property>
-                         <property name="frameShadow">
-                          <enum>QFrame::Raised</enum>
-                         </property>
-                         <layout class="QVBoxLayout" name="verticalLayout_8">
-                          <property name="leftMargin">
-                           <number>0</number>
+                               <property name="rightMargin">
+                                <number>0</number>
+                               </property>
+                               <property name="bottomMargin">
+                                <number>24</number>
+                               </property>
+                              </layout>
+                             </widget>
+                            </item>
+                            <item>
+                             <widget class="QFrame" name="frame_6">
+                              <property name="sizePolicy">
+                               <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                                <horstretch>0</horstretch>
+                                <verstretch>0</verstretch>
+                               </sizepolicy>
+                              </property>
+                              <property name="frameShape">
+                               <enum>QFrame::StyledPanel</enum>
+                              </property>
+                              <property name="frameShadow">
+                               <enum>QFrame::Raised</enum>
+                              </property>
+                              <layout class="QGridLayout" name="gridLayout_4">
+                               <item row="4" column="0">
+                                <widget class="QLabel" name="label_45">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[ORDER_ID] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Mã đơn hàng&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="3" column="0">
+                                <widget class="QLabel" name="label_46">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[SHOP_ADD] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Địa chỉ Shop&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="1" column="0" alignment="Qt::AlignTop">
+                                <widget class="QLabel" name="label_47">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="styleSheet">
+                                  <string notr="true"/>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[SHOP_NAME] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Tên Shop&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="2" column="0">
+                                <widget class="QLabel" name="label_48">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[SHOP_PHONE] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Số điện thoại Shop&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="1" column="1">
+                                <widget class="QLabel" name="label_49">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[CUSTOMER_NAME] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Tên Khách Hàng&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="2" column="1">
+                                <widget class="QLabel" name="label_50">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[CUSTOMER_PHONE] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Số điện thoại Khách Hàng&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="3" column="1">
+                                <widget class="QLabel" name="label_51">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[CUSTOMER_ADD] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Địa chỉ nhận hàng&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="1" column="2">
+                                <widget class="QLabel" name="label_52">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[ORDER_DATE] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Ngày đặt hàng&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="2" column="2">
+                                <widget class="QLabel" name="label_53">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[ORDER_DELIVERY] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Ngày giao hàng dự kiến&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="3" column="2">
+                                <widget class="QLabel" name="label_54">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[ORDER_ITEMS] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Số sản phẩm trong đơn hàng&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="4" column="1">
+                                <widget class="QLabel" name="label_55">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[LOGISTIC] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Đơn vị vận chuyển&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="4" column="2">
+                                <widget class="QLabel" name="label_56">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[TOTAL_PAYMENT] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Tổng tiền đơn hàng&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                              </layout>
+                             </widget>
+                            </item>
+                           </layout>
+                          </widget>
+                         </widget>
+                        </item>
+                       </layout>
+                      </widget>
+                      <widget class="QWidget" name="pageOrderShipping">
+                       <layout class="QVBoxLayout" name="verticalLayout_16">
+                        <property name="leftMargin">
+                         <number>5</number>
+                        </property>
+                        <property name="topMargin">
+                         <number>5</number>
+                        </property>
+                        <property name="rightMargin">
+                         <number>5</number>
+                        </property>
+                        <property name="bottomMargin">
+                         <number>5</number>
+                        </property>
+                        <item>
+                         <widget class="QFrame" name="frameTitleOrderShipping">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
                           </property>
-                          <property name="rightMargin">
-                           <number>0</number>
+                          <property name="styleSheet">
+                           <string notr="true"/>
                           </property>
-                          <property name="bottomMargin">
-                           <number>12</number>
+                          <property name="frameShape">
+                           <enum>QFrame::NoFrame</enum>
                           </property>
-                          <item>
-                           <widget class="QFrame" name="frame_4">
-                            <property name="frameShape">
-                             <enum>QFrame::NoFrame</enum>
-                            </property>
-                            <property name="frameShadow">
-                             <enum>QFrame::Raised</enum>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QPushButton" name="btn_remove">
-                            <property name="font">
-                             <font>
-                              <family>Nunito</family>
-                              <pointsize>24</pointsize>
-                              <bold>true</bold>
-                             </font>
-                            </property>
-                            <property name="styleSheet">
-                             <string notr="true">#btn_remove{
-	border-radius: 10px;
-    padding:8px 10px 6px 10px;
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));
-	color: rgb(255, 255, 255);
-}
-#btn_remove:hover{
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(15, 181, 253, 255), stop:1 rgba(89, 64, 231, 255));
-}
-
-#btn_remove:pressed
-{
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));
-}</string>
-                            </property>
-                            <property name="text">
-                             <string>XÓA</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QPushButton" name="btn_add">
-                            <property name="font">
-                             <font>
-                              <family>Nunito</family>
-                              <pointsize>24</pointsize>
-                              <bold>true</bold>
-                             </font>
-                            </property>
-                            <property name="styleSheet">
-                             <string notr="true">#btn_add{
-	border-radius: 10px;
-    padding:8px 10px 6px 10px;
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));
-	color: rgb(255, 255, 255);
-}
-#btn_add:hover{
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(15, 181, 253, 255), stop:1 rgba(89, 64, 231, 255));
-}
-
-#btn_add:pressed
-{
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));
-}</string>
-                            </property>
-                            <property name="text">
-                             <string>THÊM</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QFrame" name="frame_3">
-                            <property name="frameShape">
-                             <enum>QFrame::NoFrame</enum>
-                            </property>
-                            <property name="frameShadow">
-                             <enum>QFrame::Raised</enum>
-                            </property>
-                           </widget>
-                          </item>
-                         </layout>
-                        </widget>
-                       </item>
-                       <item>
-                        <widget class="QTableWidget" name="product_list_user">
-                         <property name="sizePolicy">
-                          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                           <horstretch>0</horstretch>
-                           <verstretch>0</verstretch>
-                          </sizepolicy>
-                         </property>
-                         <property name="minimumSize">
-                          <size>
-                           <width>0</width>
-                           <height>150</height>
-                          </size>
-                         </property>
-                         <property name="font">
-                          <font>
-                           <family>Nunito</family>
-                           <pointsize>15</pointsize>
-                          </font>
-                         </property>
-                         <property name="styleSheet">
-                          <string notr="true"/>
-                         </property>
-                         <property name="frameShape">
-                          <enum>QFrame::NoFrame</enum>
-                         </property>
-                         <property name="lineWidth">
-                          <number>1</number>
-                         </property>
-                         <property name="verticalScrollBarPolicy">
-                          <enum>Qt::ScrollBarAlwaysOn</enum>
-                         </property>
-                         <property name="sizeAdjustPolicy">
-                          <enum>QAbstractScrollArea::AdjustToContents</enum>
-                         </property>
-                         <property name="editTriggers">
-                          <set>QAbstractItemView::NoEditTriggers</set>
-                         </property>
-                         <property name="dragEnabled">
-                          <bool>true</bool>
-                         </property>
-                         <property name="dragDropMode">
-                          <enum>QAbstractItemView::NoDragDrop</enum>
-                         </property>
-                         <property name="defaultDropAction">
-                          <enum>Qt::TargetMoveAction</enum>
-                         </property>
-                         <property name="alternatingRowColors">
-                          <bool>false</bool>
-                         </property>
-                         <property name="selectionMode">
-                          <enum>QAbstractItemView::MultiSelection</enum>
-                         </property>
-                         <property name="selectionBehavior">
-                          <enum>QAbstractItemView::SelectRows</enum>
-                         </property>
-                         <property name="textElideMode">
-                          <enum>Qt::ElideRight</enum>
-                         </property>
-                         <property name="sortingEnabled">
-                          <bool>true</bool>
-                         </property>
-                         <property name="wordWrap">
-                          <bool>false</bool>
-                         </property>
-                         <property name="rowCount">
-                          <number>0</number>
-                         </property>
-                         <property name="columnCount">
-                          <number>2</number>
-                         </property>
-                         <attribute name="horizontalHeaderCascadingSectionResizes">
-                          <bool>true</bool>
-                         </attribute>
-                         <attribute name="horizontalHeaderMinimumSectionSize">
-                          <number>19</number>
-                         </attribute>
-                         <attribute name="horizontalHeaderDefaultSectionSize">
-                          <number>100</number>
-                         </attribute>
-                         <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
-                          <bool>true</bool>
-                         </attribute>
-                         <attribute name="horizontalHeaderStretchLastSection">
-                          <bool>true</bool>
-                         </attribute>
-                         <attribute name="verticalHeaderVisible">
-                          <bool>false</bool>
-                         </attribute>
-                         <attribute name="verticalHeaderCascadingSectionResizes">
-                          <bool>false</bool>
-                         </attribute>
-                         <attribute name="verticalHeaderDefaultSectionSize">
-                          <number>30</number>
-                         </attribute>
-                         <attribute name="verticalHeaderHighlightSections">
-                          <bool>false</bool>
-                         </attribute>
-                         <attribute name="verticalHeaderStretchLastSection">
-                          <bool>true</bool>
-                         </attribute>
-                         <column>
-                          <property name="text">
-                           <string>Hình Ảnh</string>
+                          <property name="frameShadow">
+                           <enum>QFrame::Raised</enum>
                           </property>
-                          <property name="font">
-                           <font>
-                            <family>Nunito</family>
-                            <pointsize>16</pointsize>
-                           </font>
+                          <property name="lineWidth">
+                           <number>5</number>
                           </property>
-                         </column>
-                         <column>
-                          <property name="text">
-                           <string>Sản Phẩm Đã Chọn Để Đẩy</string>
+                          <property name="midLineWidth">
+                           <number>20</number>
                           </property>
-                          <property name="font">
-                           <font>
-                            <family>Nunito</family>
-                            <pointsize>16</pointsize>
-                           </font>
+                          <layout class="QHBoxLayout" name="horizontalLayout_18">
+                           <property name="leftMargin">
+                            <number>24</number>
+                           </property>
+                           <property name="topMargin">
+                            <number>24</number>
+                           </property>
+                           <property name="rightMargin">
+                            <number>24</number>
+                           </property>
+                           <property name="bottomMargin">
+                            <number>24</number>
+                           </property>
+                           <item>
+                            <widget class="QLabel" name="label_31">
+                             <property name="font">
+                              <font>
+                               <family>Nunito</family>
+                               <pointsize>22</pointsize>
+                               <bold>false</bold>
+                              </font>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true"/>
+                             </property>
+                             <property name="text">
+                              <string>Nội dung tin nhắn - Đơn hàng Đang Giao Hàng</string>
+                             </property>
+                             <property name="alignment">
+                              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QPushButton" name="addTextOrderShipping">
+                             <property name="maximumSize">
+                              <size>
+                               <width>200</width>
+                               <height>16777215</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <family>Nunito</family>
+                               <pointsize>18</pointsize>
+                               <bold>true</bold>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string> Thêm nội dung</string>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="../qrc/file_img.qrc">
+                               <normaloff>:/img/btn_add.png</normaloff>:/img/btn_add.png</iconset>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QPushButton" name="btnSaveOrderShipping">
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>0</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>180</width>
+                               <height>16777215</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <family>Nunito</family>
+                               <pointsize>18</pointsize>
+                               <bold>true</bold>
+                              </font>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true"/>
+                             </property>
+                             <property name="text">
+                              <string> Lưu cài đặt</string>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="../qrc/file_img.qrc">
+                               <normaloff>:/icon/cil-save.png</normaloff>:/icon/cil-save.png</iconset>
+                             </property>
+                             <property name="iconSize">
+                              <size>
+                               <width>20</width>
+                               <height>20</height>
+                              </size>
+                             </property>
+                             <property name="checkable">
+                              <bool>false</bool>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QScrollArea" name="scrollAreaOrderShipping">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
                           </property>
-                         </column>
-                        </widget>
-                       </item>
-                      </layout>
+                          <property name="styleSheet">
+                           <string notr="true"/>
+                          </property>
+                          <property name="frameShape">
+                           <enum>QFrame::NoFrame</enum>
+                          </property>
+                          <property name="widgetResizable">
+                           <bool>true</bool>
+                          </property>
+                          <widget class="QWidget" name="scrollAreaWidgetContentsOrderShipping">
+                           <property name="geometry">
+                            <rect>
+                             <x>0</x>
+                             <y>0</y>
+                             <width>1441</width>
+                             <height>708</height>
+                            </rect>
+                           </property>
+                           <layout class="QVBoxLayout" name="verticalLayout_23">
+                            <property name="leftMargin">
+                             <number>32</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>32</number>
+                            </property>
+                            <item alignment="Qt::AlignTop">
+                             <widget class="QFrame" name="frameOrderShipping_obj">
+                              <property name="minimumSize">
+                               <size>
+                                <width>0</width>
+                                <height>0</height>
+                               </size>
+                              </property>
+                              <property name="frameShape">
+                               <enum>QFrame::NoFrame</enum>
+                              </property>
+                              <property name="frameShadow">
+                               <enum>QFrame::Raised</enum>
+                              </property>
+                              <layout class="QVBoxLayout" name="frameOrderShipping">
+                               <property name="leftMargin">
+                                <number>0</number>
+                               </property>
+                               <property name="topMargin">
+                                <number>24</number>
+                               </property>
+                               <property name="rightMargin">
+                                <number>0</number>
+                               </property>
+                               <property name="bottomMargin">
+                                <number>24</number>
+                               </property>
+                              </layout>
+                             </widget>
+                            </item>
+                            <item>
+                             <widget class="QFrame" name="frame_7">
+                              <property name="sizePolicy">
+                               <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                                <horstretch>0</horstretch>
+                                <verstretch>0</verstretch>
+                               </sizepolicy>
+                              </property>
+                              <property name="frameShape">
+                               <enum>QFrame::StyledPanel</enum>
+                              </property>
+                              <property name="frameShadow">
+                               <enum>QFrame::Raised</enum>
+                              </property>
+                              <layout class="QGridLayout" name="gridLayout_3">
+                               <item row="4" column="0">
+                                <widget class="QLabel" name="label_32">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[ORDER_ID] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Mã đơn hàng&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="3" column="0">
+                                <widget class="QLabel" name="label_33">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[SHOP_ADD] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Địa chỉ Shop&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="1" column="0" alignment="Qt::AlignTop">
+                                <widget class="QLabel" name="label_34">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="styleSheet">
+                                  <string notr="true"/>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[SHOP_NAME] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Tên Shop&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="2" column="0">
+                                <widget class="QLabel" name="label_35">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[SHOP_PHONE] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Số điện thoại Shop&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="1" column="1">
+                                <widget class="QLabel" name="label_36">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[CUSTOMER_NAME] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Tên Khách Hàng&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="2" column="1">
+                                <widget class="QLabel" name="label_37">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[CUSTOMER_PHONE] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Số điện thoại Khách Hàng&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="3" column="1">
+                                <widget class="QLabel" name="label_38">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[CUSTOMER_ADD] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Địa chỉ nhận hàng&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="1" column="2">
+                                <widget class="QLabel" name="label_39">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[ORDER_DATE] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Ngày đặt hàng&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="2" column="2">
+                                <widget class="QLabel" name="label_40">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[ORDER_DELIVERY] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Ngày giao hàng dự kiến&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="3" column="2">
+                                <widget class="QLabel" name="label_41">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[ORDER_ITEMS] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Số sản phẩm trong đơn hàng&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="4" column="1">
+                                <widget class="QLabel" name="label_42">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[LOGISTIC] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Đơn vị vận chuyển&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="4" column="2">
+                                <widget class="QLabel" name="label_43">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[TOTAL_PAYMENT] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Tổng tiền đơn hàng&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                              </layout>
+                             </widget>
+                            </item>
+                           </layout>
+                          </widget>
+                         </widget>
+                        </item>
+                       </layout>
+                      </widget>
+                      <widget class="QWidget" name="pageOrderReady">
+                       <layout class="QVBoxLayout" name="verticalLayout_15">
+                        <property name="leftMargin">
+                         <number>5</number>
+                        </property>
+                        <property name="topMargin">
+                         <number>5</number>
+                        </property>
+                        <property name="rightMargin">
+                         <number>5</number>
+                        </property>
+                        <property name="bottomMargin">
+                         <number>5</number>
+                        </property>
+                        <item>
+                         <widget class="QFrame" name="frameTitleOrderReady">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true"/>
+                          </property>
+                          <property name="frameShape">
+                           <enum>QFrame::NoFrame</enum>
+                          </property>
+                          <property name="frameShadow">
+                           <enum>QFrame::Raised</enum>
+                          </property>
+                          <property name="lineWidth">
+                           <number>5</number>
+                          </property>
+                          <property name="midLineWidth">
+                           <number>20</number>
+                          </property>
+                          <layout class="QHBoxLayout" name="horizontalLayout_17">
+                           <property name="leftMargin">
+                            <number>24</number>
+                           </property>
+                           <property name="topMargin">
+                            <number>24</number>
+                           </property>
+                           <property name="rightMargin">
+                            <number>24</number>
+                           </property>
+                           <property name="bottomMargin">
+                            <number>24</number>
+                           </property>
+                           <item>
+                            <widget class="QLabel" name="label_18">
+                             <property name="font">
+                              <font>
+                               <family>Nunito</family>
+                               <pointsize>22</pointsize>
+                               <bold>false</bold>
+                              </font>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true"/>
+                             </property>
+                             <property name="text">
+                              <string>Nội dung tin nhắn - Đơn hàng Đã Chuẩn Bị</string>
+                             </property>
+                             <property name="alignment">
+                              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QPushButton" name="addTextOrderReady">
+                             <property name="maximumSize">
+                              <size>
+                               <width>200</width>
+                               <height>16777215</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <family>Nunito</family>
+                               <pointsize>18</pointsize>
+                               <bold>true</bold>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string> Thêm nội dung</string>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="../qrc/file_img.qrc">
+                               <normaloff>:/img/btn_add.png</normaloff>:/img/btn_add.png</iconset>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QPushButton" name="btnSaveOrderReady">
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>0</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>180</width>
+                               <height>16777215</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <family>Nunito</family>
+                               <pointsize>18</pointsize>
+                               <bold>true</bold>
+                              </font>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true"/>
+                             </property>
+                             <property name="text">
+                              <string> Lưu cài đặt</string>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="../qrc/file_img.qrc">
+                               <normaloff>:/icon/cil-save.png</normaloff>:/icon/cil-save.png</iconset>
+                             </property>
+                             <property name="iconSize">
+                              <size>
+                               <width>20</width>
+                               <height>20</height>
+                              </size>
+                             </property>
+                             <property name="checkable">
+                              <bool>false</bool>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QScrollArea" name="scrollAreaOrderReady">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true"/>
+                          </property>
+                          <property name="frameShape">
+                           <enum>QFrame::NoFrame</enum>
+                          </property>
+                          <property name="widgetResizable">
+                           <bool>true</bool>
+                          </property>
+                          <widget class="QWidget" name="scrollAreaWidgetContentsOrderReady">
+                           <property name="geometry">
+                            <rect>
+                             <x>0</x>
+                             <y>0</y>
+                             <width>1441</width>
+                             <height>708</height>
+                            </rect>
+                           </property>
+                           <layout class="QVBoxLayout" name="verticalLayout_24">
+                            <property name="leftMargin">
+                             <number>32</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>0</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>32</number>
+                            </property>
+                            <item alignment="Qt::AlignTop">
+                             <widget class="QFrame" name="frameOrderReady_obj">
+                              <property name="minimumSize">
+                               <size>
+                                <width>0</width>
+                                <height>0</height>
+                               </size>
+                              </property>
+                              <property name="frameShape">
+                               <enum>QFrame::NoFrame</enum>
+                              </property>
+                              <property name="frameShadow">
+                               <enum>QFrame::Raised</enum>
+                              </property>
+                              <layout class="QVBoxLayout" name="frameOrderReady">
+                               <property name="leftMargin">
+                                <number>0</number>
+                               </property>
+                               <property name="topMargin">
+                                <number>24</number>
+                               </property>
+                               <property name="rightMargin">
+                                <number>0</number>
+                               </property>
+                               <property name="bottomMargin">
+                                <number>24</number>
+                               </property>
+                              </layout>
+                             </widget>
+                            </item>
+                            <item>
+                             <widget class="QPlainTextEdit" name="plainTextEdit"/>
+                            </item>
+                            <item>
+                             <widget class="QFrame" name="frame_12">
+                              <property name="sizePolicy">
+                               <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                                <horstretch>0</horstretch>
+                                <verstretch>0</verstretch>
+                               </sizepolicy>
+                              </property>
+                              <property name="frameShape">
+                               <enum>QFrame::StyledPanel</enum>
+                              </property>
+                              <property name="frameShadow">
+                               <enum>QFrame::Raised</enum>
+                              </property>
+                              <layout class="QGridLayout" name="gridLayout_2">
+                               <item row="4" column="0">
+                                <widget class="QLabel" name="label_19">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[ORDER_ID] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Mã đơn hàng&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="3" column="0">
+                                <widget class="QLabel" name="label_20">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[SHOP_ADD] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Địa chỉ Shop&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="1" column="0" alignment="Qt::AlignTop">
+                                <widget class="QLabel" name="label_21">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="styleSheet">
+                                  <string notr="true"/>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[SHOP_NAME] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Tên Shop&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="2" column="0">
+                                <widget class="QLabel" name="label_22">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[SHOP_PHONE] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Số điện thoại Shop&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="1" column="1">
+                                <widget class="QLabel" name="label_23">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[CUSTOMER_NAME] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Tên Khách Hàng&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="2" column="1">
+                                <widget class="QLabel" name="label_24">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[CUSTOMER_PHONE] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Số điện thoại Khách Hàng&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="3" column="1">
+                                <widget class="QLabel" name="label_25">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[CUSTOMER_ADD] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Địa chỉ nhận hàng&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="1" column="2">
+                                <widget class="QLabel" name="label_26">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[ORDER_DATE] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Ngày đặt hàng&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="2" column="2">
+                                <widget class="QLabel" name="label_27">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[ORDER_DELIVERY] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Ngày giao hàng dự kiến&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="3" column="2">
+                                <widget class="QLabel" name="label_28">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[ORDER_ITEMS] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Số sản phẩm trong đơn hàng&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="4" column="1">
+                                <widget class="QLabel" name="label_29">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[LOGISTIC] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Đơn vị vận chuyển&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="4" column="2">
+                                <widget class="QLabel" name="label_30">
+                                 <property name="font">
+                                  <font>
+                                   <family>Nunito</family>
+                                   <pointsize>18</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;[TOTAL_PAYMENT] -- &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Tổng tiền đơn hàng&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                 </property>
+                                </widget>
+                               </item>
+                              </layout>
+                             </widget>
+                            </item>
+                           </layout>
+                          </widget>
+                         </widget>
+                        </item>
+                       </layout>
+                      </widget>
                      </widget>
                     </item>
                    </layout>
-                  </widget>
-                  <widget class="QWidget" name="page_chat_bot">
-                   <widget class="QLabel" name="label">
-                    <property name="geometry">
-                     <rect>
-                      <x>430</x>
-                      <y>240</y>
-                      <width>601</width>
-                      <height>381</height>
-                     </rect>
-                    </property>
-                    <property name="font">
-                     <font>
-                      <family>Nunito</family>
-                      <pointsize>53</pointsize>
-                     </font>
-                    </property>
-                    <property name="text">
-                     <string>CHAT BOT</string>
-                    </property>
-                   </widget>
                   </widget>
                   <widget class="QWidget" name="page_new_user_shopee">
                    <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -2187,6 +3976,7 @@ QPushButton:disabled{
                         <font>
                          <family>Nunito</family>
                          <pointsize>16</pointsize>
+                         <bold>true</bold>
                         </font>
                        </property>
                       </column>
@@ -2198,6 +3988,7 @@ QPushButton:disabled{
                         <font>
                          <family>Nunito</family>
                          <pointsize>16</pointsize>
+                         <bold>true</bold>
                         </font>
                        </property>
                       </column>
@@ -2209,6 +4000,7 @@ QPushButton:disabled{
                         <font>
                          <family>Nunito</family>
                          <pointsize>16</pointsize>
+                         <bold>true</bold>
                         </font>
                        </property>
                       </column>
@@ -2220,6 +4012,7 @@ QPushButton:disabled{
                         <font>
                          <family>Nunito</family>
                          <pointsize>16</pointsize>
+                         <bold>true</bold>
                         </font>
                        </property>
                       </column>
@@ -2231,6 +4024,7 @@ QPushButton:disabled{
                         <font>
                          <family>Nunito</family>
                          <pointsize>16</pointsize>
+                         <bold>true</bold>
                         </font>
                        </property>
                       </column>
@@ -2242,82 +4036,466 @@ QPushButton:disabled{
                         <font>
                          <family>Nunito</family>
                          <pointsize>16</pointsize>
+                         <bold>true</bold>
                         </font>
                        </property>
                       </column>
                      </widget>
                     </item>
                     <item>
-                     <widget class="QPushButton" name="btn_add_user">
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>60</height>
-                       </size>
+                     <widget class="QFrame" name="frame_9">
+                      <property name="frameShape">
+                       <enum>QFrame::NoFrame</enum>
                       </property>
-                      <property name="font">
-                       <font>
-                        <family>Nunito</family>
-                        <pointsize>24</pointsize>
-                        <bold>true</bold>
-                       </font>
+                      <property name="frameShadow">
+                       <enum>QFrame::Raised</enum>
                       </property>
-                      <property name="styleSheet">
-                       <string notr="true">#btn_add_user{
-	border-radius: 30px;
+                      <layout class="QHBoxLayout" name="horizontalLayout_9">
+                       <item>
+                        <widget class="QFrame" name="frame_10">
+                         <property name="frameShape">
+                          <enum>QFrame::StyledPanel</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QPushButton" name="btn_add_user">
+                         <property name="minimumSize">
+                          <size>
+                           <width>0</width>
+                           <height>50</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>380</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>Nunito</family>
+                           <pointsize>24</pointsize>
+                           <bold>true</bold>
+                          </font>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">#btn_add_user{
+	border-radius: 10px;
     padding:8px 25px 7px 25px;
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));
+	background-color: rgb(64, 112, 244);
 	color: rgb(255, 255, 255);
 
 }
 
 #btn_add_user:hover{
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(15, 181, 253, 255), stop:1 rgba(89, 64, 231, 255));
+		background-color: rgb(107, 145, 250);
 }
 
 #btn_add_user:pressed{
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));
+	background-color: rgb(48, 103, 255);
 }</string>
-                      </property>
-                      <property name="text">
-                       <string>THÊM TÀI KHOẢN</string>
-                      </property>
+                         </property>
+                         <property name="text">
+                          <string> THÊM TÀI KHOẢN</string>
+                         </property>
+                         <property name="icon">
+                          <iconset resource="../qrc/file_img.qrc">
+                           <normaloff>:/img/checked.png</normaloff>:/img/checked.png</iconset>
+                         </property>
+                         <property name="iconSize">
+                          <size>
+                           <width>30</width>
+                           <height>30</height>
+                          </size>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QFrame" name="frame_11">
+                         <property name="frameShape">
+                          <enum>QFrame::StyledPanel</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
                      </widget>
                     </item>
                    </layout>
                   </widget>
-                  <widget class="QWidget" name="page_settings">
-                   <layout class="QHBoxLayout" name="horizontalLayout_9">
+                  <widget class="QWidget" name="page_log">
+                   <layout class="QVBoxLayout" name="verticalLayout_13">
                     <item>
-                     <widget class="QLabel" name="label_8">
-                      <property name="font">
-                       <font>
-                        <family>Nunito</family>
-                        <pointsize>40</pointsize>
-                       </font>
+                     <layout class="QVBoxLayout" name="frame_log">
+                      <item>
+                       <widget class="QToolBox" name="toolBox">
+                        <property name="font">
+                         <font>
+                          <family>Nunito</family>
+                          <pointsize>34</pointsize>
+                         </font>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true">QToolBox::tab{
+	background-color: rgb(75, 123, 243);
+	color: rgb(255, 255, 255);
+	padding-left : 20px;
+}
+
+QToolBox::tab::selected{
+	background-color: rgb(248, 86, 94);
+	color: rgb(255, 255, 255);
+}
+
+</string>
+                        </property>
+                        <property name="frameShape">
+                         <enum>QFrame::StyledPanel</enum>
+                        </property>
+                        <property name="frameShadow">
+                         <enum>QFrame::Sunken</enum>
+                        </property>
+                        <property name="currentIndex">
+                         <number>0</number>
+                        </property>
+                        <widget class="QWidget" name="page_4">
+                         <property name="geometry">
+                          <rect>
+                           <x>0</x>
+                           <y>0</y>
+                           <width>1447</width>
+                           <height>591</height>
+                          </rect>
+                         </property>
+                         <attribute name="label">
+                          <string>Đơn hàng Mới</string>
+                         </attribute>
+                        </widget>
+                        <widget class="QWidget" name="page_3">
+                         <property name="geometry">
+                          <rect>
+                           <x>0</x>
+                           <y>0</y>
+                           <width>1447</width>
+                           <height>591</height>
+                          </rect>
+                         </property>
+                         <attribute name="label">
+                          <string>Đơn hàng Đã Chuẩn Bị</string>
+                         </attribute>
+                        </widget>
+                        <widget class="QWidget" name="page_2">
+                         <property name="geometry">
+                          <rect>
+                           <x>0</x>
+                           <y>0</y>
+                           <width>1447</width>
+                           <height>591</height>
+                          </rect>
+                         </property>
+                         <attribute name="label">
+                          <string>Đơn hàng Đang Giao</string>
+                         </attribute>
+                        </widget>
+                        <widget class="QWidget" name="page">
+                         <property name="geometry">
+                          <rect>
+                           <x>0</x>
+                           <y>0</y>
+                           <width>1447</width>
+                           <height>591</height>
+                          </rect>
+                         </property>
+                         <attribute name="label">
+                          <string>Đơn hàng Thành Công</string>
+                         </attribute>
+                        </widget>
+                        <widget class="QWidget" name="page_5">
+                         <property name="geometry">
+                          <rect>
+                           <x>0</x>
+                           <y>0</y>
+                           <width>1447</width>
+                           <height>591</height>
+                          </rect>
+                         </property>
+                         <attribute name="label">
+                          <string>Đơn hàng Hủy</string>
+                         </attribute>
+                        </widget>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                   </layout>
+                  </widget>
+                  <widget class="QWidget" name="page_push_product">
+                   <layout class="QVBoxLayout" name="verticalLayout_12">
+                    <item>
+                     <widget class="QFrame" name="frame_15">
+                      <property name="frameShape">
+                       <enum>QFrame::StyledPanel</enum>
                       </property>
-                      <property name="text">
-                       <string>SETTINGS</string>
+                      <property name="frameShadow">
+                       <enum>QFrame::Raised</enum>
                       </property>
-                      <property name="alignment">
-                       <set>Qt::AlignCenter</set>
-                      </property>
+                      <layout class="QHBoxLayout" name="horizontalLayout_15">
+                       <property name="leftMargin">
+                        <number>20</number>
+                       </property>
+                       <property name="topMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="rightMargin">
+                        <number>20</number>
+                       </property>
+                       <property name="bottomMargin">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <widget class="QLabel" name="label_7">
+                         <property name="font">
+                          <font>
+                           <family>Nunito</family>
+                           <pointsize>28</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>Danh Sách Đẩy Sản Phẩm</string>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QPushButton" name="btn_add_product_push">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="minimumSize">
+                          <size>
+                           <width>0</width>
+                           <height>45</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>240</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>Nunito</family>
+                           <pointsize>16</pointsize>
+                           <bold>true</bold>
+                          </font>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">#btn_add_product_push{
+	border-radius: 10px;
+    padding:8px 25px 7px 25px;
+	background-color: rgb(64, 112, 244);
+	color: rgb(255, 255, 255);
+}
+
+#btn_add_product_push:hover{
+background-color: rgb(107, 145, 250);
+}
+
+#btn_add_product_push:pressed{
+background-color: rgb(48, 103, 255);
+}
+</string>
+                         </property>
+                         <property name="text">
+                          <string> THÊM SẢN PHẨM</string>
+                         </property>
+                         <property name="icon">
+                          <iconset resource="../qrc/file_img.qrc">
+                           <normaloff>:/img/btn_add.png</normaloff>:/img/btn_add.png</iconset>
+                         </property>
+                         <property name="iconSize">
+                          <size>
+                           <width>16</width>
+                           <height>16</height>
+                          </size>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
                      </widget>
                     </item>
                     <item>
-                     <widget class="QLabel" name="label_9">
+                     <widget class="QTableWidget" name="tableWidget_product_push">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
                       <property name="font">
                        <font>
                         <family>Nunito</family>
-                        <pointsize>15</pointsize>
+                        <pointsize>16</pointsize>
                        </font>
                       </property>
-                      <property name="text">
-                       <string>Page Index 1</string>
+                      <property name="styleSheet">
+                       <string notr="true"/>
                       </property>
-                      <property name="alignment">
-                       <set>Qt::AlignCenter</set>
+                      <property name="frameShape">
+                       <enum>QFrame::NoFrame</enum>
                       </property>
+                      <property name="verticalScrollBarPolicy">
+                       <enum>Qt::ScrollBarAlwaysOn</enum>
+                      </property>
+                      <property name="sizeAdjustPolicy">
+                       <enum>QAbstractScrollArea::AdjustToContents</enum>
+                      </property>
+                      <property name="editTriggers">
+                       <set>QAbstractItemView::NoEditTriggers</set>
+                      </property>
+                      <property name="alternatingRowColors">
+                       <bool>false</bool>
+                      </property>
+                      <property name="selectionMode">
+                       <enum>QAbstractItemView::NoSelection</enum>
+                      </property>
+                      <property name="selectionBehavior">
+                       <enum>QAbstractItemView::SelectRows</enum>
+                      </property>
+                      <property name="rowCount">
+                       <number>0</number>
+                      </property>
+                      <property name="columnCount">
+                       <number>8</number>
+                      </property>
+                      <attribute name="horizontalHeaderCascadingSectionResizes">
+                       <bool>true</bool>
+                      </attribute>
+                      <attribute name="horizontalHeaderMinimumSectionSize">
+                       <number>40</number>
+                      </attribute>
+                      <attribute name="horizontalHeaderDefaultSectionSize">
+                       <number>200</number>
+                      </attribute>
+                      <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+                       <bool>false</bool>
+                      </attribute>
+                      <attribute name="horizontalHeaderStretchLastSection">
+                       <bool>true</bool>
+                      </attribute>
+                      <attribute name="verticalHeaderVisible">
+                       <bool>false</bool>
+                      </attribute>
+                      <attribute name="verticalHeaderCascadingSectionResizes">
+                       <bool>false</bool>
+                      </attribute>
+                      <attribute name="verticalHeaderHighlightSections">
+                       <bool>false</bool>
+                      </attribute>
+                      <attribute name="verticalHeaderStretchLastSection">
+                       <bool>true</bool>
+                      </attribute>
+                      <column>
+                       <property name="text">
+                        <string/>
+                       </property>
+                      </column>
+                      <column>
+                       <property name="text">
+                        <string>Hình ảnh</string>
+                       </property>
+                       <property name="font">
+                        <font>
+                         <family>Nunito</family>
+                         <pointsize>16</pointsize>
+                         <bold>true</bold>
+                        </font>
+                       </property>
+                      </column>
+                      <column>
+                       <property name="text">
+                        <string>Tên sản phẩm</string>
+                       </property>
+                       <property name="font">
+                        <font>
+                         <family>Nunito</family>
+                         <pointsize>16</pointsize>
+                         <bold>true</bold>
+                        </font>
+                       </property>
+                      </column>
+                      <column>
+                       <property name="text">
+                        <string>SKU</string>
+                       </property>
+                       <property name="font">
+                        <font>
+                         <family>Nunito</family>
+                         <pointsize>16</pointsize>
+                         <bold>true</bold>
+                        </font>
+                       </property>
+                      </column>
+                      <column>
+                       <property name="text">
+                        <string>Số lượng</string>
+                       </property>
+                       <property name="font">
+                        <font>
+                         <family>Nunito</family>
+                         <pointsize>16</pointsize>
+                         <bold>true</bold>
+                        </font>
+                       </property>
+                      </column>
+                      <column>
+                       <property name="text">
+                        <string>Giá bán</string>
+                       </property>
+                       <property name="font">
+                        <font>
+                         <family>Nunito</family>
+                         <pointsize>16</pointsize>
+                         <bold>true</bold>
+                        </font>
+                       </property>
+                      </column>
+                      <column>
+                       <property name="text">
+                        <string>Giá SALE</string>
+                       </property>
+                       <property name="font">
+                        <font>
+                         <family>Nunito</family>
+                         <pointsize>16</pointsize>
+                         <bold>true</bold>
+                        </font>
+                       </property>
+                      </column>
+                      <column>
+                       <property name="text">
+                        <string>Đã bán</string>
+                       </property>
+                       <property name="font">
+                        <font>
+                         <family>Nunito</family>
+                         <pointsize>16</pointsize>
+                         <bold>true</bold>
+                        </font>
+                       </property>
+                      </column>
                      </widget>
                     </item>
                    </layout>
@@ -2441,6 +4619,9 @@ QPushButton:disabled{
                     <width>20</width>
                     <height>20</height>
                    </size>
+                  </property>
+                  <property name="cursor">
+                   <cursorShape>SizeFDiagCursor</cursorShape>
                   </property>
                   <property name="styleSheet">
                    <string notr="true">QSizeGrip {

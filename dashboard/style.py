@@ -36,7 +36,7 @@ class Style:
     )
 
     main_light = """
-        /* LINE EDIT */
+   /* LINE EDIT */
     QLineEdit {
         background-color: rgb(27, 29, 35);
         border-radius: 5px;
@@ -53,19 +53,19 @@ class Style:
     /* SCROLL BARS */
     QScrollBar:horizontal {
         border: none;
-        background: rgb(52, 59, 72);
+        background: rgb(225, 224, 226);
         height: 14px;
         margin: 0px 21px 0 21px;
         border-radius: 0px;
     }
     QScrollBar::handle:horizontal {
-        background: rgb(15, 170, 255);
+	background-color: rgb(65, 103, 192);
         min-width: 25px;
         border-radius: 7px
     }
     QScrollBar::add-line:horizontal {
         border: none;
-        background: rgb(55, 63, 77);
+        background: rgb(225, 224, 226);
         width: 20px;
         border-top-right-radius: 7px;
         border-bottom-right-radius: 7px;
@@ -74,7 +74,7 @@ class Style:
     }
     QScrollBar::sub-line:horizontal {
         border: none;
-        background: rgb(55, 63, 77);
+        background: rgb(225, 224, 226);
         width: 20px;
         border-top-left-radius: 7px;
         border-bottom-left-radius: 7px;
@@ -97,7 +97,7 @@ class Style:
         border-radius: 0px;
     }
     QScrollBar::handle:vertical {	
-        background: rgb(85, 170, 255);
+	background-color: rgb(65, 103, 192);
         min-height: 25px;
         border-radius: 7px
     }
@@ -250,15 +250,14 @@ class Style:
         background-color: rgb(254, 253, 255);
         padding: 10px;
         border-radius: 18px;
-        gridline-color: rgb(220, 220,220);
-        border: 1px solid rgb(204, 203, 205);
+        gridline-color: rgb(254, 253, 255);
         color: rgb(84 84, 84);
     }
     QTableWidget::item{
-        border-color: rgb(44, 49, 60);
+        border-bottom : 1px solid rgb(220, 220,220);
         padding-left: 5px;
         padding-right: 5px;
-        gridline-color: rgb(220, 220,220);
+
     }
     QTableWidget::item:selected{
         background-color: rgb(85, 170, 255);
@@ -277,13 +276,12 @@ class Style:
     QHeaderView::section:horizontal
     {
 		border: none;
-
 		border-bottom: 4px solid rgb(89, 125, 245);
-		background-color: rgb(230, 230, 230);
-        padding: 3px;
-        border-top-left-radius: 7px;
-        border-top-right-radius: 7px;
-        color: rgb(84 84, 84);
+		background-color: rgb(237, 237, 242);
+		padding: 3px;
+		border-top-left-radius: 7px;
+		border-top-right-radius: 7px;
+        	color: rgb(88, 88, 88);
     }
     QHeaderView::section:vertical
     {
@@ -313,15 +311,15 @@ class Style:
     }
 
     #frame_left_menu {
-        background-color: rgb(69, 65, 245);
+	background-color: rgb(59, 93, 176);
     }
 
     #frame_extra_menus{
-        background-color: rgb(69, 65, 245);
+	background-color: rgb(59, 93, 176);
     }
 
     #btn_toggle_menu {
-        background-color: rgb(69, 65, 245);
+	background-color: rgb(59, 93, 176);
     }
     #btn_toggle_menu:hover {
         background-color: rgb(89, 125, 245);
@@ -330,12 +328,12 @@ class Style:
         background-color: rgb(85, 170, 255);
     }
     #frame_label_top_btns{	
-        background-color: rgb(89, 125, 245);
+	background-color: rgb(73, 116, 220);
 
     }
 
     #frame_btns_right{	
-        background-color: rgb(89, 125, 245);
+	background-color: rgb(73, 116, 220);
     }
 
     #label_title_bar_top{	
@@ -372,9 +370,39 @@ class Style:
     }
     #btn_minimize:hover, #btn_maximize_restore:hover, #btn_close:hover {
         background-color: rgb(109, 145, 245);
-    }    
+    } 
+
+    #frameButtonChatBot{
+	background-color: rgb(249, 248, 250);
+	border-radius : 2px;
+	margin : 5px;
+    }
+
+    #frameTitleOrderNew ,  #frameTitleOrderCancel,  #frameTitleOrderShipping, #frameTitleOrderSuccess, #frameTitleOrderReady {
+        background-color: rgb(249, 248, 250);
+        border-radius : 2px;
+        margin-bottom: 10px;
+    }
+
+    QScrollArea{
+        background-color: rgb(249, 248, 250);
+        border-radius : 2px;
+    }
+    QPlainTextEdit{
+        border: 1px solid  rgb(127, 126, 128);
+        border-radius : 5px;
+        padding : 12px;
+        background-color: rgb(255, 255, 255);
+        margin-bottom: 24px;
+    }
+
         
     """
+##############################
+##############################
+##############################
+##############################
+##############################
 
     main_dark = """
     /* LINE EDIT */
@@ -590,14 +618,13 @@ class Style:
         background-color: rgb(40, 44, 52);
         padding: 10px;
         border-radius: 18px;
-        gridline-color: rgb(44, 49, 60);
-        border-bottom: 1px solid rgb(44, 49, 60);
+        gridline-color: rgb(40, 44, 52);
+
     }
     QTableWidget::item{
-        border-color: rgb(44, 49, 60);
+		border-bottom : 1px solid rgb(64, 69, 80);
         padding-left: 5px;
         padding-right: 5px;
-        gridline-color: rgb(44, 49, 60);
     }
     QTableWidget::item:selected{
         background-color: rgb(85, 170, 255);
@@ -711,8 +738,36 @@ class Style:
         background-color: rgb(109, 145, 245);
     }
 
-    """
+        #frameButtonChatBot{
+	background-color: rgb(37, 41, 49);
+	border-radius : 2px;
+	margin : 5px;
+    }
 
+    #frameTitleOrderNew ,  #frameTitleOrderCancel,  #frameTitleOrderShipping, #frameTitleOrderSuccess, #frameTitleOrderReady {
+        background-color: rgb(37, 41, 49);
+        border-radius : 2px;
+        margin-bottom: 10px;
+    }
+
+    QScrollArea{
+        background-color: rgb(37, 41, 49);
+        border-radius : 2px;
+    }
+
+    QPlainTextEdit{
+
+        border-radius : 5px;
+        padding : 12px;
+       background-color: rgb(47, 51, 59);
+        margin-bottom: 24px;
+    }
+
+    """
+##############################
+################################################################
+################################################################################################################
+################################################################
     rating_dark = """
     QWidget{
     color: rgb(210, 210, 210);
@@ -775,8 +830,12 @@ class Style:
     #btn_send:pressed{
         background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));
     }
-    """
 
+    """
+################################################################
+################################################################
+################################################################
+################################################################
     rating_light = """
     QWidget{
 	color: rgb(75, 75, 75);

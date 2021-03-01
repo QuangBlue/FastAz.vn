@@ -4,6 +4,8 @@
     <file>bg_login_v1.png</file>
   </qresource>
   <qresource prefix="img">
+    <file>checked.png</file>
+    <file>btn_add.png</file>
     <file>teamwork.png</file>
     <file>remove_red.png</file>
     <file>remove.png</file>
