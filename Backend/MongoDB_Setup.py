@@ -61,12 +61,13 @@ class Database_mongoDB:
         else:
             return False
 
-    def extend_cookie(self,_id,index,new_cookie ):
+    def extend_cookie(self,_id,index,new_cookie,pathName ):
         Database_mongoDB.registered_Users_Collection.update(
             { "_id": _id },
             { "$set": { 
                 f'shopee.{index}.cookie' : new_cookie,
-                f'shopee.{index}.status_cookie' : 'True' 
+                f'shopee.{index}.status_cookie' : 'True', 
+                f'shopee.{index}.pathName' : pathName
             }}
             )
         with open('temp//data.json') as f:
@@ -78,7 +79,7 @@ class Database_mongoDB:
             json.dump(data, f)
 
     def add_protuct_push(self,_id,index,data):
-        Database_mongoDB.registered_Users_Collection.update(
+        r = Database_mongoDB.registered_Users_Collection.update(
             { "_id": _id },
             { "$addToSet": { 
                 f'shopee.{index}.list_push_product' :
@@ -87,13 +88,22 @@ class Database_mongoDB:
             )
         with open('temp//data.json') as f:
                 data = json.load(f)
+        
+        lenOne = len(data['shopee'][index]['list_push_product'])
+
         x = Database_mongoDB.registered_Users_Collection.find({'_id': _id})
         for y in x:
             data['shopee'] = y['shopee']
+
+        lenTwo = len(data['shopee'][index]['list_push_product'])
+
+        change = lenTwo - lenOne
         with open('temp//data.json', 'w') as f:
                     json.dump(data, f)
 
-    def insert_new_shopee_mongodb(self,username_az,shop_cookies,id_sp,shop_id,shop_name):
+        return r , change
+
+    def insert_new_shopee_mongodb(self,username_az,shop_cookies,id_sp,shop_id,shop_name,pathName):
         #SAI CANNOT CREATE NEW USER, MUST LOCATE username_az and insert new shopee to the shopee list
         Database_mongoDB.registered_Users_Collection.update(
             {"username_az": str(username_az)},
@@ -103,6 +113,7 @@ class Database_mongoDB:
                                     "id_sp": str(id_sp),
                                     "shop_name": str(shop_name),
                                     "shop_id": str(shop_id),
+                                    "pathName": str(pathName),
                                     "total_product": "",
                                     "total_order": "",
                                     "status_cookie": "True",

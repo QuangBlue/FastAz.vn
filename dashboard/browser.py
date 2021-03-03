@@ -1,4 +1,4 @@
-import sys,requests, json
+import sys,requests, json , shutil
 from PyQt5.QtCore import QUrl, Qt ,QTimer
 from PyQt5.QtWebEngineWidgets import QWebEngineView, QWebEngineProfile, QWebEnginePage
 from PyQt5.QtWidgets import *
@@ -6,16 +6,15 @@ from PyQt5.QtNetwork import *
 from PyQt5.QtGui import QFont, QPixmap
 from backend.MongoDB_Setup import Database_mongoDB
 from backend.networks import Network
-import json
 
 sys.setrecursionlimit(100000)
 
 status = 0
 
 class Browser(QWidget):
-    def __init__(self):
+    def __init__(self, profileShopee):
         super().__init__()
-
+        self.profileShopee = profileShopee
         self.resize(1700, 1000)
         global status
         status = 0
@@ -25,7 +24,7 @@ class Browser(QWidget):
         self.center()        
     def setup(self):
         self.box = QVBoxLayout(self)
-        self.web = MyWebEngineView()
+        self.web = MyWebEngineView(self.profileShopee)
         self.web.resize(1280, 720)
         self.web.load(QUrl("https://banhang.shopee.vn/"))
         self.web.loadFinished.connect(self.on_load_finished)
@@ -50,28 +49,30 @@ class Browser(QWidget):
     def get_cookie(self):      
         if status == 1:        
             cookie = self.web.get_cookie()
+            pathProfile = self.web.pathProfileFunc()
             shopee_info_json = Network.get_info_account_shopee(self,cookie)
             with open("temp//data.json") as json_file:  #Get username_az
                 data = json.load(json_file)
 
-
-
             # Check for duplicates shopee id_sp on mongodb, if not, create a new shop with blank info.
             if not Database_mongoDB.check_shopee_username(self,data['username_az'],shopee_info_json['shopid']):
-                Database_mongoDB.insert_new_shopee_mongodb(self,data['username_az'],cookie,shopee_info_json['id'],shopee_info_json['shopid'],shopee_info_json['username'])
+                Database_mongoDB.insert_new_shopee_mongodb(self,data['username_az'],cookie,shopee_info_json['id'],shopee_info_json['shopid'],shopee_info_json['username'],self.profileShopee)
                 self.show_popup('Thành Công','Thành Công',f'Bạn đã thêm thành công tài khoản {shopee_info_json["username"]}.',True)
             else:
-
                 for x in range(len(data['shopee'])):
                     if data['shopee'][x]['shop_name'] == shopee_info_json["username"]:
                         shop_c = x
-
-                Database_mongoDB.extend_cookie(self,data['id_wp'],shop_c,cookie)
+                try:
+                    path = pathProfile.replace(self.profileShopee, data['shopee'][shop_c]['pathName'])
+                    shutil.rmtree(path)
+                except:
+                    pass
+                Database_mongoDB.extend_cookie(self,data['id_wp'],shop_c,cookie,self.profileShopee)
                 self.show_popup('Cảnh Báo','Gia Hạn Thành Công',f'Tài khoản {shopee_info_json["username"]} đã có.\nĐã GIA HẠN thành công',False)
             self.close()
         elif status == 0:      
             time = QTimer.singleShot(1000,self.get_cookie)
-        elif status == 2:      
+        elif status == 2:    
             self.close()
 
     def show_popup(self,title,info,notification,c=True):      
@@ -96,11 +97,19 @@ class Browser(QWidget):
         self.move(frameGm.topLeft())
         
 class MyWebEngineView(QWebEngineView):
-    def __init__(self, *args, **kwargs):
-        super(MyWebEngineView, self).__init__(*args, **kwargs)
+    def __init__(self,profileShopee ):
+        super(MyWebEngineView, self).__init__()
 
-        QWebEngineProfile.defaultProfile().cookieStore().deleteAllCookies()
-        QWebEngineProfile.defaultProfile().cookieStore().cookieAdded.connect(self.onCookieAdd)
+        profile = QWebEngineProfile(profileShopee, self)
+        webpage = QWebEnginePage(profile, self)
+        self.pathProfile = profile.persistentStoragePath()
+        self.setPage(webpage)
+
+        # QWebEngineProfile.defaultProfile().cookieStore().deleteAllCookies()
+        # QWebEngineProfile.defaultProfile().cookieStore().cookieAdded.connect(self.onCookieAdd)
+
+        # self.page().profile().cookieStore().deleteAllCookies()
+        self.page().profile().cookieStore().cookieAdded.connect(self.onCookieAdd)
         self.cookies = {}
 
     def onCookieAdd(self, cookie):
@@ -112,6 +121,8 @@ class MyWebEngineView(QWebEngineView):
     def get_cookie(self):
         return self.cookies
 
+    def pathProfileFunc(self):
+        return self.pathProfile
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

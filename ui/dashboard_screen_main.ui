@@ -927,7 +927,7 @@ background-repeat: no-repeat;</string>
                    <string notr="true"/>
                   </property>
                   <property name="currentIndex">
-                   <number>2</number>
+                   <number>1</number>
                   </property>
                   <widget class="QWidget" name="page_reply_ratting">
                    <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -1673,7 +1673,7 @@ background-color: rgb(48, 103, 255);
                     </item>
                    </layout>
                   </widget>
-                  <widget class="QWidget" name="page_settings">
+                  <widget class="QWidget" name="page_browser">
                    <property name="styleSheet">
                     <string notr="true">QPushButton{
 	border-radius: 10px;
@@ -1695,31 +1695,151 @@ border-radius : 10px;
 padding : 12px;
 }</string>
                    </property>
-                   <layout class="QVBoxLayout" name="verticalLayout_10">
+                   <layout class="QVBoxLayout" name="layoutBrowser">
                     <item>
-                     <widget class="QPushButton" name="addText">
-                      <property name="text">
-                       <string>THÊM TEXT</string>
+                     <widget class="QFrame" name="horizontalFrame">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
                       </property>
+                      <layout class="QHBoxLayout" name="horizontalLayout_13">
+                       <item>
+                        <widget class="QPushButton" name="browserBack">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <bold>false</bold>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="icon">
+                          <iconset resource="../qrc/file_img.qrc">
+                           <normaloff>:/icon/cil-media-skip-backward.png</normaloff>:/icon/cil-media-skip-backward.png</iconset>
+                         </property>
+                         <property name="iconSize">
+                          <size>
+                           <width>16</width>
+                           <height>16</height>
+                          </size>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QPushButton" name="browserForward">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="icon">
+                          <iconset resource="../qrc/file_img.qrc">
+                           <normaloff>:/icon/cil-media-skip-forward.png</normaloff>:/icon/cil-media-skip-forward.png</iconset>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QPushButton" name="browserReload">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="icon">
+                          <iconset resource="../qrc/file_img.qrc">
+                           <normaloff>:/icon/cil-reload.png</normaloff>:/icon/cil-reload.png</iconset>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QPushButton" name="browserHome">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="icon">
+                          <iconset resource="../qrc/file_img.qrc">
+                           <normaloff>:/icon/cil-home.png</normaloff>:/icon/cil-home.png</iconset>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QLabel" name="label_70">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>Nunito</family>
+                           <pointsize>24</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>|</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QLabel" name="urlBar">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>Nunito</family>
+                           <pointsize>16</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>Url</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QPushButton" name="openBrowser">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="text">
+                          <string>Mở Trình Duyệt</string>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
                      </widget>
                     </item>
                     <item>
-                     <widget class="QScrollArea" name="scrollArea">
-                      <property name="widgetResizable">
-                       <bool>true</bool>
-                      </property>
-                      <widget class="QWidget" name="scrollAreaWidgetContents">
-                       <property name="geometry">
-                        <rect>
-                         <x>0</x>
-                         <y>0</y>
-                         <width>1449</width>
-                         <height>873</height>
-                        </rect>
-                       </property>
-                       <layout class="QVBoxLayout" name="verticalLayout_21"/>
-                      </widget>
-                     </widget>
+                     <layout class="QVBoxLayout" name="layoutBrowers"/>
                     </item>
                    </layout>
                   </widget>
@@ -2088,8 +2208,8 @@ QPushButton:pressed{
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>1441</width>
-                             <height>702</height>
+                             <width>989</width>
+                             <height>206</height>
                             </rect>
                            </property>
                            <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -2476,8 +2596,8 @@ QPushButton:pressed{
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>1441</width>
-                             <height>708</height>
+                             <width>989</width>
+                             <height>206</height>
                             </rect>
                            </property>
                            <layout class="QVBoxLayout" name="verticalLayout_20">
@@ -2864,8 +2984,8 @@ QPushButton:pressed{
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>1441</width>
-                             <height>708</height>
+                             <width>989</width>
+                             <height>206</height>
                             </rect>
                            </property>
                            <layout class="QVBoxLayout" name="verticalLayout_22">
@@ -3252,8 +3372,8 @@ QPushButton:pressed{
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>1441</width>
-                             <height>708</height>
+                             <width>989</width>
+                             <height>206</height>
                             </rect>
                            </property>
                            <layout class="QVBoxLayout" name="verticalLayout_23">
@@ -3640,8 +3760,8 @@ QPushButton:pressed{
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>1441</width>
-                             <height>708</height>
+                             <width>989</width>
+                             <height>206</height>
                             </rect>
                            </property>
                            <layout class="QVBoxLayout" name="verticalLayout_24">
@@ -3683,9 +3803,6 @@ QPushButton:pressed{
                                </property>
                               </layout>
                              </widget>
-                            </item>
-                            <item>
-                             <widget class="QPlainTextEdit" name="plainTextEdit"/>
                             </item>
                             <item>
                              <widget class="QFrame" name="frame_12">
@@ -4169,8 +4286,8 @@ QToolBox::tab::selected{
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>1447</width>
-                           <height>591</height>
+                           <width>100</width>
+                           <height>30</height>
                           </rect>
                          </property>
                          <attribute name="label">
@@ -4182,8 +4299,8 @@ QToolBox::tab::selected{
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>1447</width>
-                           <height>591</height>
+                           <width>100</width>
+                           <height>30</height>
                           </rect>
                          </property>
                          <attribute name="label">
@@ -4195,8 +4312,8 @@ QToolBox::tab::selected{
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>1447</width>
-                           <height>591</height>
+                           <width>100</width>
+                           <height>30</height>
                           </rect>
                          </property>
                          <attribute name="label">
@@ -4208,8 +4325,8 @@ QToolBox::tab::selected{
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>1447</width>
-                           <height>591</height>
+                           <width>100</width>
+                           <height>30</height>
                           </rect>
                          </property>
                          <attribute name="label">
@@ -4221,8 +4338,8 @@ QToolBox::tab::selected{
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>1447</width>
-                           <height>591</height>
+                           <width>100</width>
+                           <height>30</height>
                           </rect>
                          </property>
                          <attribute name="label">

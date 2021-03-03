@@ -28,6 +28,7 @@ class Dashboard(QMainWindow):
         UIFunctions.addNewMenu(self, "Trả lời Đánh giá", "btn_reply_ratting", "url(:/icon/cil-star.png)", True)
         UIFunctions.addNewMenu(self, "Đẩy sản phẩm", "btn_push_product", "url(:/icon/cil-chevron-double-up-alt.png)", True)
         UIFunctions.addNewMenu(self, "Chat bot", "btn_chat_bot", "url(:/icon/cil-mood-very-good.png)", True)
+        UIFunctions.addNewMenu(self, "Trình duyệt", "btn_browser", "url(:/icon/cil-browser.png)", True)
         # UIFunctions.addNewMenu(self, "Log", "btn_log", "url(:/icon/cil-settings.png)", False)
         UIFunctions.addNewMenu(self, "Setting", "btn_settings", "url(:/icon/cil-settings.png)", False)
 
@@ -48,7 +49,6 @@ class Dashboard(QMainWindow):
 
         # QTimer.singleShot(100, lambda: UIFunctions.table_widget_test(self))
 
-        self.addText.clicked.connect(lambda : UIFunctions.countTextChatBot(self,self.frameMain_ob,self.frameMain))
         self.addTextOrderNew.clicked.connect(lambda : UIFunctions.countTextChatBot(self,self.frameOrderNew_obj,self.frameOrderNew))
         self.addTextOrderCancel.clicked.connect(lambda : UIFunctions.countTextChatBot(self,self.frameOrderCancel_obj,self.frameOrderCancel))
         self.addTextOrderReady.clicked.connect(lambda : UIFunctions.countTextChatBot(self,self.frameOrderReady_obj,self.frameOrderReady))
@@ -61,33 +61,35 @@ class Dashboard(QMainWindow):
         # ########################################################################
 
 
-        listShadow = [
-            self.frameButtonChatBot,
-            self.frameTitleOrderNew,self.scrollAreaOrderNew,
-            self.frameTitleOrderCancel,self.scrollAreaOrderCancel,
-            self.frameTitleOrderReady,self.scrollAreaOrderReady,
-            self.frameTitleOrderSuccess,self.scrollAreaOrderSuccess,
-            self.frameTitleOrderShipping,self.scrollAreaOrderShipping,
-            ]
+        # listShadow = [
+        #     self.frameButtonChatBot,
+        #     self.frameTitleOrderNew,self.scrollAreaOrderNew,
+        #     self.frameTitleOrderCancel,self.scrollAreaOrderCancel,
+        #     self.frameTitleOrderReady,self.scrollAreaOrderReady,
+        #     self.frameTitleOrderSuccess,self.scrollAreaOrderSuccess,
+        #     self.frameTitleOrderShipping,self.scrollAreaOrderShipping,
+        #     ]
 
-        for child in listShadow:
-            shadow = QGraphicsDropShadowEffect()
-            shadow.setBlurRadius(12)
-            shadow.setXOffset(0)
-            shadow.setYOffset(0)
-            shadow.setColor(QColor(0, 0, 0, 30))
-            child.setGraphicsEffect(shadow)
+        # for child in listShadow:
+        #     shadow = QGraphicsDropShadowEffect()
+        #     shadow.setBlurRadius(12)
+        #     shadow.setXOffset(0)
+        #     shadow.setYOffset(0)
+        #     shadow.setColor(QColor(0, 0, 0, 30))
+        #     child.setGraphicsEffect(shadow)
 
         # ########################################################################
         ## FIRST LAUNCH APP - START FUNCTION FOR UPDATE DATA MAIN WINDOW
         # ########################################################################
-
+        
 
         QTimer.singleShot(100, lambda: UIFunctions.set_data_user_shopee(self))
         UIFunctions.set_comboBox_user(self)
+
         QTimer.singleShot(100, lambda: UIFunctions.set_data_rating_shopee(self))
         QTimer.singleShot(100, lambda: UIFunctions.set_data_product_push(self))
         QTimer.singleShot(100, lambda: UIFunctions.setChatBotPlainText(self))
+        QTimer.singleShot(100, lambda: UIFunctions.openBrowser(self))
 
 
         # ########################################################################
@@ -179,7 +181,7 @@ class Dashboard(QMainWindow):
         ## BUTTON OPEN BROWER --> ADD USER SHOPEE
         # ########################################################################
 
-        self.btn_add_user.clicked.connect(lambda: UIFunctions.open_browser(self))
+        self.btn_add_user.clicked.connect(lambda: UIFunctions.openBrowserAddUserShopee(self))
 
         # ########################################################################
         ## SELECT DEFAULT MENU
@@ -248,13 +250,34 @@ class Dashboard(QMainWindow):
             for i in reversed(range(x.rowCount())):
                 x.removeRow(i)
 
-        chatBotText = [self.textOrderNew, self.textOrderReady, self.textOrderShipping, self.textOrderSuccess,self.textOrderCancel]   
-        for x in chatBotText:
-            x.clear()
+        obj = [
+            self.frameOrderNew_obj,
+            self.frameOrderReady_obj,
+            self.frameOrderShipping_obj,
+            self.frameOrderSuccess_obj,
+            self.frameOrderCancel_obj,
+            ]
+
+        layout = [
+            self.frameOrderNew,
+            self.frameOrderReady,
+            self.frameOrderShipping,
+            self.frameOrderSuccess,
+            self.frameOrderCancel,
+            ]    
+        for o , l in zip(obj, layout):
+            for i in range(len(o.findChildren(QPlainTextEdit))):
+                l.removeWidget(o.findChildren(QPlainTextEdit)[0])
+                l.removeWidget(o.findChildren(QLabel)[0])
+                l.removeWidget(o.findChildren(QPushButton)[0])
+
+        self.layoutBrowser.removeWidget(self.page_browser.findChildren(QWebEngineView)[0])
+
 
         QTimer.singleShot(100, lambda: UIFunctions.set_data_rating_shopee(self))
         QTimer.singleShot(100, lambda: UIFunctions.set_data_product_push(self))
         QTimer.singleShot(100, lambda: UIFunctions.setChatBotPlainText(self))
+        QTimer.singleShot(100, lambda: UIFunctions.openBrowser(self))
  
     def mousePressEvent(self, event):
         self.dragPos = event.globalPos()
@@ -299,6 +322,16 @@ class Dashboard(QMainWindow):
                 UIFunctions.labelPage(self, "Chat bot")
                 btnWidget.setStyleSheet(UIFunctions.selectMenu(self,btnWidget.styleSheet()))
 
+        if btnWidget.objectName() == "btn_browser":
+            if self.comboBox_user.count() == 0 or self.comboBox_user.currentText() == "Chưa có tài khoản":
+                r = QMessageBox.warning(self, 'MessageBox', "BẠN CHƯA THÊM TÀI KHOẢN.\nVui lòng thêm ít nhất 1 tài khoản để sử dụng", QMessageBox.Ok, QMessageBox.Ok)
+            else:
+                self.stackedWidget.setCurrentWidget(self.page_browser)
+                UIFunctions.resetStyle(self, "btn_browser")
+                UIFunctions.labelPage(self, "Browser")
+                btnWidget.setStyleSheet(UIFunctions.selectMenu(self,btnWidget.styleSheet()))
+
+
         # if btnWidget.objectName() == "btn_log":
         #     self.stackedWidget.setCurrentWidget(self.page_log)
         #     UIFunctions.resetStyle(self, "btn_log")
@@ -306,7 +339,7 @@ class Dashboard(QMainWindow):
         #     btnWidget.setStyleSheet(UIFunctions.selectMenu(self,btnWidget.styleSheet()))
 
         if btnWidget.objectName() == "btn_settings":
-            self.stackedWidget.setCurrentWidget(self.page_settings)
+            self.stackedWidget.setCurrentWidget(self.page_log)
             UIFunctions.resetStyle(self, "btn_settings")
             UIFunctions.labelPage(self, "Setting")
             btnWidget.setStyleSheet(UIFunctions.selectMenu(self,btnWidget.styleSheet()))            
@@ -507,7 +540,7 @@ class Popup_Product(QMainWindow):
         data = []
         for i in x:
             l.append(i.row())
-        for p in l:
+        for p in set(l):
             k ={}
             k['image'] = self.img[p]
             k['name'] = self.name[p]
@@ -518,4 +551,31 @@ class Popup_Product(QMainWindow):
             k['promotion_price'] = self.promotion_price[p]
             k['sold'] = self.sold[p]
             data.append(k)
-        Database_mongoDB.add_protuct_push(self,self.id_wp,self.cc,data)
+        r , change = Database_mongoDB.add_protuct_push(self,self.id_wp,self.cc,data)
+
+        if r['updatedExisting'] == True:
+            self.tableWidget_product_push_shopee.clearSelection()
+            duplicate = len(set(l)) - change
+            if duplicate == 0 :
+                self.show_popup("Thành Công","Thêm sản phẩm thành công",f"{change} sản phẩm được chọn đã thêm thành công",True)
+            else:
+                self.show_popup("Thành Công","Thêm sản phẩm thành công",f"{change} sản phẩm thêm thành công và {duplicate} sản phẩm bị trùng ",True)    
+        else:
+            self.show_popup("Không Thành Công","Thêm sản phẩm không thành công","Vui lòng liên hệ fanpage để được trợ giúp",False)
+
+    
+    def show_popup(self,title,info,notification,c=True):   
+        msg = QMessageBox()   
+        msg.setWindowTitle(title)
+        msg.setText(notification)
+        msg.setInformativeText(info)
+        if c == True:
+            msg.setIconPixmap(QPixmap("img//success.png"))
+        else:
+            msg.setIconPixmap(QPixmap("img//warning.png"))
+        msg.setStandardButtons(QMessageBox.Ok)
+        msg.exec_()
+
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key_Escape:
+            self.close()

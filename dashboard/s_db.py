@@ -108,8 +108,9 @@ class UIFunctions:
         newText = '| ' + text.upper()
         self.label_top_info_2.setText(newText)
 
-    def open_browser(self):
-        self.ui = Browser()
+    def openBrowserAddUserShopee(self):
+        profileShopee = r = ''.join(random.choice('abcdefghijklmnopqrstuvwxyz') for i in range(8))
+        self.ui = Browser(profileShopee)
         self.ui.show()
         self.ui.msg.buttonClicked.connect(lambda: UIFunctions.set_data_user_shopee(self))
         self.ui.msg.buttonClicked.connect(lambda: UIFunctions.set_comboBox_user(self))
@@ -326,7 +327,7 @@ class UIFunctions:
                     btn_gh.setMinimumSize(QSize(100, 0))
                     btn_gh.setMaximumSize(QSize(100, 16777215))
                     btn_gh.setStyleSheet("QPushButton { border-radius: 10px; background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));color: rgb(255, 255, 255);} QPushButton:hover { background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(15, 181, 253, 255), stop:1 rgba(89, 64, 231, 255));}QPushButton:pressed{background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 64, 231, 255), stop:1 rgba(15, 181, 253, 255));}")
-                    btn_gh.clicked.connect(lambda: UIFunctions.open_browser(self))
+                    btn_gh.clicked.connect(lambda: UIFunctions.openBrowserAddUserShopee(self))
                     
                     f = QFrame()
                     f1 = QFrame()
@@ -532,6 +533,31 @@ class UIFunctions:
             self.frame_main.setStyleSheet(Style.main_light)
             self.btn_theme.setText('Dark Theme')
 
+    def openBrowser(self):
+        if self.comboBox_user.currentText() != 'Chưa có tài khoản':
+            with open('temp//data.json') as f:
+                data = json.load(f)
+            UIFunctions.check_shop_choose(self)   
+            def btnBrowserHome(): 
+                self.webEngineView.setUrl(QUrl("https://banhang.shopee.vn")) 
+            def updateUrlBar(q): 
+                self.urlBar.setText(q.toString()) 
+            self.webEngineView = QWebEngineView()
+            self.profile = QWebEngineProfile(data['shopee'][shop_choose]['pathName'], self.webEngineView)
+            self.webpage = QWebEnginePage(self.profile, self.webEngineView)
+            self.webEngineView.setPage(self.webpage)
+            self.webEngineView.setUrl(QUrl("https://banhang.shopee.vn")) 
+            self.layoutBrowers.addWidget(self.webEngineView)
+            self.urlBar.setText("https://banhang.shopee.vn")
+            self.webEngineView.urlChanged.connect(updateUrlBar) 
+            self.browserBack.clicked.connect(self.webEngineView.back) 
+            self.browserForward.clicked.connect(self.webEngineView.forward)
+            self.browserReload.clicked.connect(self.webEngineView.reload) 
+            self.browserHome.clicked.connect(btnBrowserHome)
+            # self.openBrowser.clicked.connect()
+            self.webEngineView.show()
+
+
     def countTextChatBot(self,obj,layout):
         r = obj.findChildren(QPlainTextEdit)
         UIFunctions.addFrameText(self,len(r)+1,obj,layout)
@@ -604,39 +630,43 @@ class UIFunctions:
         msg.exec_()
 
     def setChatBotPlainText(self):
-        with open('temp//data.json') as f:
-            data = json.load(f)
-        UIFunctions.check_shop_choose(self)
 
-        obj = [
-        self.frameOrderNew_obj,
-        self.frameOrderReady_obj,
-        self.frameOrderShipping_obj,
-        self.frameOrderSuccess_obj,
-        self.frameOrderCancel_obj,
-        ]
+        try:
+            with open('temp//data.json') as f:
+                data = json.load(f)
+            UIFunctions.check_shop_choose(self)
 
-        layout = [
-        self.frameOrderNew,
-        self.frameOrderReady,
-        self.frameOrderShipping,
-        self.frameOrderSuccess,
-        self.frameOrderCancel,
-        ]
-        
-        new = data['shopee'][shop_choose]['orderChatBotList']['textOrderNew']
-        ready = data['shopee'][shop_choose]['orderChatBotList']['textOrderReady']
-        shipping = data['shopee'][shop_choose]['orderChatBotList']['textOrderShipping']
-        success = data['shopee'][shop_choose]['orderChatBotList']['textOrderSuccess']
-        cancel = data['shopee'][shop_choose]['orderChatBotList']['textOrderCancel']
+            obj = [
+            self.frameOrderNew_obj,
+            self.frameOrderReady_obj,
+            self.frameOrderShipping_obj,
+            self.frameOrderSuccess_obj,
+            self.frameOrderCancel_obj,
+            ]
 
-        dataText = [new,ready,shipping,success,cancel]
+            layout = [
+            self.frameOrderNew,
+            self.frameOrderReady,
+            self.frameOrderShipping,
+            self.frameOrderSuccess,
+            self.frameOrderCancel,
+            ]
+            
+            new = data['shopee'][shop_choose]['orderChatBotList']['textOrderNew']
+            ready = data['shopee'][shop_choose]['orderChatBotList']['textOrderReady']
+            shipping = data['shopee'][shop_choose]['orderChatBotList']['textOrderShipping']
+            success = data['shopee'][shop_choose]['orderChatBotList']['textOrderSuccess']
+            cancel = data['shopee'][shop_choose]['orderChatBotList']['textOrderCancel']
 
-        for o , l , d in zip(obj,layout,dataText):
-            count = 1
-            for i in d:
-                UIFunctions.addFrameText(self,count,o,l,i)
-                count += 1
+            dataText = [new,ready,shipping,success,cancel]
+
+            for o , l , d in zip(obj,layout,dataText):
+                count = 1
+                for i in d:
+                    UIFunctions.addFrameText(self,count,o,l,i)
+                    count += 1
+        except: 
+            pass
 
 
     def btnSaveChatBot(self):
@@ -739,12 +769,12 @@ class UIFunctions:
 
 
         ## SHOW ==> DROP SHADOW
-        self.shadow = QGraphicsDropShadowEffect(self)
-        self.shadow.setBlurRadius(30)
-        self.shadow.setXOffset(0)
-        self.shadow.setYOffset(0)
-        self.shadow.setColor(QColor(1, 0, 0, 255))
-        self.frame_main.setGraphicsEffect(self.shadow)
+        # self.shadow = QGraphicsDropShadowEffect(self)
+        # self.shadow.setBlurRadius(30)
+        # self.shadow.setXOffset(0)
+        # self.shadow.setYOffset(0)
+        # self.shadow.setColor(QColor(1, 0, 0, 255))
+        # self.frame_main.setGraphicsEffect(self.shadow)
 
         ## ==> RESIZE WINDOW
         self.sizegrip = QSizeGrip(self.frame_size_grip)
@@ -821,6 +851,8 @@ class ThreadGetListProduct(QThread):
         r = backend.networks.Network.list_products_shopee(self,self.c,self.p)
         l = [r,self.p]
         self.r_json.emit(l)
+
+
 
 # class TableWidgetDragRows(QTableWidget):
 #     def __init__(self, *args, **kwargs):

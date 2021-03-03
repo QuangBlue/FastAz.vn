@@ -1,11 +1,12 @@
-import sys, webbrowser, json, requests , logging
+import sys, webbrowser, json, requests , logging, random 
 
-from functools import partial
 from PyQt5.uic import loadUi
 from PyQt5.QtGui import QColor, QFont, QImage, QPixmap, QFontDatabase, QIcon
 from PyQt5.QtCore import QSize, Qt, QUrl, QEventLoop, QPropertyAnimation, QTimer, QEvent, QEasingCurve, QByteArray, QThread, pyqtSignal,QObject, QModelIndex
-from PyQt5.QtWidgets import QMainWindow, QApplication, QGraphicsDropShadowEffect, QPushButton, QSizePolicy, QSizeGrip, QMessageBox, QHBoxLayout,QVBoxLayout, QLabel, QWidget, QFrame, QStackedWidget, QTableWidgetItem, QPlainTextEdit,QTableWidget,QAbstractItemView, QLayout
-from PyQt5.QtNetwork import QNetworkAccessManager, QNetworkReply, QNetworkRequest
+from PyQt5.QtWidgets import QMainWindow, QApplication, QGraphicsDropShadowEffect, QPushButton, QSizePolicy,QWidgetItem, QSizeGrip, QMessageBox, QHBoxLayout,QVBoxLayout, QLabel, QWidget, QFrame, QStackedWidget, QTableWidgetItem, QPlainTextEdit,QTableWidget,QAbstractItemView, QLayout
+from PyQt5.QtNetwork import QNetworkAccessManager, QNetworkReply, QNetworkRequest, QNetworkCookie
+from PyQt5.QtWebEngineWidgets import QWebEngineView, QWebEngineProfile, QWebEnginePage
+from PyQt5.QtWebEngineCore import QWebEngineUrlRequestInterceptor
 ## IMPORT SCREEN
 from dashboard.dashboard import *
 import qrc.file_img_rc
@@ -21,21 +22,21 @@ class WelcomeScreen(QMainWindow):
         super(WelcomeScreen,self).__init__()
         loadUi("ui//welcome.ui",self)
     # SETTING BUTTON
-        self.pushButton_trangchu.clicked.connect(self.open_webbrowser)
-        self.pushButton_banggia.clicked.connect(self.open_webbrowser)
-        self.pushButton_huongdan.clicked.connect(self.open_webbrowser)
-        self.pushButton_dangnhap.clicked.connect(self.sign_in_screen)
-        self.pushButton_dangky.clicked.connect(self.sign_up_screen)
+        self.pushButton_trangchu.clicked.connect(self.openWebbrowser)
+        self.pushButton_banggia.clicked.connect(self.openWebbrowser)
+        self.pushButton_huongdan.clicked.connect(self.openWebbrowser)
+        self.pushButton_dangnhap.clicked.connect(self.signInScreen)
+        self.pushButton_dangky.clicked.connect(self.signUpScreen)
 
-    def sign_in_screen(self):
+    def signInScreen(self):
         WelcomeScreen.savepass = "False"
         try:
             with open('temp//data.json') as f:
                 WelcomeScreen.data = json.load(f)
                 
         except:
-            sign_in_screen = SignInScreen()
-            MainWindow.widget.addWidget(sign_in_screen)
+            signInScreen = SignInScreen()
+            MainWindow.widget.addWidget(signInScreen)
             MainWindow.widget.setCurrentIndex(MainWindow.widget.currentIndex()+1)
 
         else:
@@ -49,22 +50,22 @@ class WelcomeScreen(QMainWindow):
                     MainWindow.widget.hide()
                 else:
                     WelcomeScreen.savepass = "False"
-                    sign_in_screen = SignInScreen()
-                    MainWindow.widget.addWidget(sign_in_screen)
+                    signInScreen = SignInScreen()
+                    MainWindow.widget.addWidget(signInScreen)
                     MainWindow.widget.setCurrentIndex(MainWindow.widget.currentIndex()+1) 
                     
             else:        
-                sign_in_screen = SignInScreen()
-                MainWindow.widget.addWidget(sign_in_screen)
+                signInScreen = SignInScreen()
+                MainWindow.widget.addWidget(signInScreen)
                 MainWindow.widget.setCurrentIndex(MainWindow.widget.currentIndex()+1)
 
-    def sign_up_screen(self):
-        sign_up_screen = SignUpScreen()
-        MainWindow.widget.addWidget(sign_up_screen)
+    def signUpScreen(self):
+        signUpScreen = SignUpScreen()
+        MainWindow.widget.addWidget(signUpScreen)
         MainWindow.widget.setCurrentIndex(MainWindow.widget.currentIndex()+1)
 
 
-    def open_webbrowser(self):
+    def openWebbrowser(self):
         webbrowser.open('http://fastaz.vn/')
 
 # MANAGER SCREEN ---- SIGN IN ----
@@ -81,7 +82,7 @@ class SignInScreen(QMainWindow):
 
     # SETTING BUTTON
         self.bt_back.clicked.connect(self.back_to_welcome)
-        self.bt_dangky.clicked.connect(self.sign_up_screen)
+        self.bt_dangky.clicked.connect(self.signUpScreen)
         self.pushButton_login.clicked.connect(self.check_login)
         self.bt_reset_password.clicked.connect(self.reset_password_screen)
         self.password.returnPressed.connect(self.check_login)
@@ -124,9 +125,9 @@ class SignInScreen(QMainWindow):
         MainWindow.widget.addWidget(welcome_screen)
         MainWindow.widget.setCurrentIndex(MainWindow.widget.currentIndex()+1)
 
-    def sign_up_screen(self):
-        sign_up_screen = SignUpScreen()
-        MainWindow.widget.addWidget(sign_up_screen)
+    def signUpScreen(self):
+        signUpScreen = SignUpScreen()
+        MainWindow.widget.addWidget(signUpScreen)
         MainWindow.widget.setCurrentIndex(MainWindow.widget.currentIndex()+1)
 
     def reset_password_screen(self):
@@ -149,7 +150,7 @@ class SignUpScreen(QMainWindow):
     # SETTING BUTTON
 
         self.bt_back.clicked.connect(self.back_to_welcome)
-        self.bt_dangnhap.clicked.connect(self.sign_in_screen)
+        self.bt_dangnhap.clicked.connect(self.signInScreen)
         self.pushButton_signup.clicked.connect(self.check_signup)
 
     def check_signup(self):
@@ -171,7 +172,7 @@ class SignUpScreen(QMainWindow):
             sign_up_result = backend.networks.Network.sign_up(self,us,pw,fn,ph,em)
             if sign_up_result['result'] == 'success':
                 print("Create account successfully")
-                self.sign_in_screen()
+                self.signInScreen()
             elif sign_up_result['result'] == 'failure' and 'email' in sign_up_result[
                 'errors']:
                 print("Sign up error!. Both username and email already existed error!")
@@ -185,9 +186,9 @@ class SignUpScreen(QMainWindow):
         MainWindow.widget.addWidget(welcome_screen)
         MainWindow.widget.setCurrentIndex(MainWindow.widget.currentIndex()+1)
 
-    def sign_in_screen(self):
-        sign_in_screen = SignInScreen()
-        MainWindow.widget.addWidget(sign_in_screen)
+    def signInScreen(self):
+        signInScreen = SignInScreen()
+        MainWindow.widget.addWidget(signInScreen)
         MainWindow.widget.setCurrentIndex(MainWindow.widget.currentIndex()+1)
 
 # MANAGER SCREEN ---- RESET PASSWORD ----
@@ -203,8 +204,8 @@ class ResetPasswordScreen(QMainWindow):
 
     # SETTING BUTTON
         self.bt_back.clicked.connect(self.back_to_welcome)
-        self.bt_dangnhap.clicked.connect(self.sign_in_screen)
-        self.bt_dangky.clicked.connect(self.sign_up_screen) 
+        self.bt_dangnhap.clicked.connect(self.signInScreen)
+        self.bt_dangky.clicked.connect(self.signUpScreen) 
         self.bt_reset_password.clicked.connect(self.send_code_reset)
 
     def send_code_reset(self):
@@ -239,14 +240,14 @@ class ResetPasswordScreen(QMainWindow):
         MainWindow.widget.addWidget(welcome_screen)
         MainWindow.widget.setCurrentIndex(MainWindow.widget.currentIndex()+1)
 
-    def sign_in_screen(self):
-        sign_in_screen = SignInScreen()
-        MainWindow.widget.addWidget(sign_in_screen)
+    def signInScreen(self):
+        signInScreen = SignInScreen()
+        MainWindow.widget.addWidget(signInScreen)
         MainWindow.widget.setCurrentIndex(MainWindow.widget.currentIndex()+1)
 
-    def sign_up_screen(self):
-        sign_up_screen = SignUpScreen()
-        MainWindow.widget.addWidget(sign_up_screen)
+    def signUpScreen(self):
+        signUpScreen = SignUpScreen()
+        MainWindow.widget.addWidget(signUpScreen)
         MainWindow.widget.setCurrentIndex(MainWindow.widget.currentIndex()+1)
 
 # MANAGER SCREEN ---- SET NEW PASSWORD ----
@@ -281,7 +282,7 @@ class SetNewPasswordScreen(QMainWindow):
             showMessage(request_result['message'])
             if request_result['data']['status'] == 200:
                 backend.loading.appWait(2000) # Can phai tim ra cach toi uu hon.
-                self.sign_in_screen()
+                self.signInScreen()
 
 
 
@@ -290,9 +291,9 @@ class SetNewPasswordScreen(QMainWindow):
         MainWindow.widget.addWidget(welcome_screen)
         MainWindow.widget.setCurrentIndex(MainWindow.widget.currentIndex()+1)
 
-    def sign_in_screen(self):
-        sign_in_screen = SignInScreen()
-        MainWindow.widget.addWidget(sign_in_screen)
+    def signInScreen(self):
+        signInScreen = SignInScreen()
+        MainWindow.widget.addWidget(signInScreen)
         MainWindow.widget.setCurrentIndex(MainWindow.widget.currentIndex()+1)
 
 class LoadingScreen(QMainWindow):
@@ -305,12 +306,12 @@ class LoadingScreen(QMainWindow):
         self.setAttribute(Qt.WA_TranslucentBackground)
 
         ## DROP SHADOW EFFECT
-        self.shadow = QGraphicsDropShadowEffect(self)
-        self.shadow.setBlurRadius(20)
-        self.shadow.setXOffset(0)
-        self.shadow.setYOffset(0)
-        self.shadow.setColor(QColor(0, 0, 0, 60))
-        self.dropShadowFrame.setGraphicsEffect(self.shadow)
+        # self.shadow = QGraphicsDropShadowEffect(self)
+        # self.shadow.setBlurRadius(20)
+        # self.shadow.setXOffset(0)
+        # self.shadow.setYOffset(0)
+        # self.shadow.setColor(QColor(0, 0, 0, 60))
+        # self.dropShadowFrame.setGraphicsEffect(self.shadow)
 
         ## QTIMER ==> START
         self.timer = QTimer()
