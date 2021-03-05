@@ -606,10 +606,16 @@ background-repeat: no-repeat;</string>
                 </item>
                 <item>
                  <widget class="QComboBox" name="comboBox_user">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
                   <property name="maximumSize">
                    <size>
-                    <width>280</width>
-                    <height>36</height>
+                    <width>16777215</width>
+                    <height>16777215</height>
                    </size>
                   </property>
                   <property name="font">
@@ -641,14 +647,20 @@ background-repeat: no-repeat;</string>
                   <property name="currentText">
                    <string notr="true"/>
                   </property>
+                  <property name="currentIndex">
+                   <number>-1</number>
+                  </property>
                   <property name="insertPolicy">
-                   <enum>QComboBox::NoInsert</enum>
+                   <enum>QComboBox::InsertAtTop</enum>
                   </property>
                   <property name="sizeAdjustPolicy">
-                   <enum>QComboBox::AdjustToContentsOnFirstShow</enum>
+                   <enum>QComboBox::AdjustToContents</enum>
+                  </property>
+                  <property name="placeholderText">
+                   <string/>
                   </property>
                   <property name="duplicatesEnabled">
-                   <bool>false</bool>
+                   <bool>true</bool>
                   </property>
                  </widget>
                 </item>
@@ -1723,12 +1735,12 @@ padding : 12px;
                          </property>
                          <property name="icon">
                           <iconset resource="../qrc/file_img.qrc">
-                           <normaloff>:/icon/cil-media-skip-backward.png</normaloff>:/icon/cil-media-skip-backward.png</iconset>
+                           <normaloff>:/icon/cil-arrow-left.png</normaloff>:/icon/cil-arrow-left.png</iconset>
                          </property>
                          <property name="iconSize">
                           <size>
-                           <width>16</width>
-                           <height>16</height>
+                           <width>20</width>
+                           <height>20</height>
                           </size>
                          </property>
                         </widget>
@@ -1746,7 +1758,13 @@ padding : 12px;
                          </property>
                          <property name="icon">
                           <iconset resource="../qrc/file_img.qrc">
-                           <normaloff>:/icon/cil-media-skip-forward.png</normaloff>:/icon/cil-media-skip-forward.png</iconset>
+                           <normaloff>:/icon/cil-arrow-right.png</normaloff>:/icon/cil-arrow-right.png</iconset>
+                         </property>
+                         <property name="iconSize">
+                          <size>
+                           <width>20</width>
+                           <height>20</height>
+                          </size>
                          </property>
                         </widget>
                        </item>
@@ -1765,6 +1783,12 @@ padding : 12px;
                           <iconset resource="../qrc/file_img.qrc">
                            <normaloff>:/icon/cil-reload.png</normaloff>:/icon/cil-reload.png</iconset>
                          </property>
+                         <property name="iconSize">
+                          <size>
+                           <width>20</width>
+                           <height>20</height>
+                          </size>
+                         </property>
                         </widget>
                        </item>
                        <item>
@@ -1781,6 +1805,12 @@ padding : 12px;
                          <property name="icon">
                           <iconset resource="../qrc/file_img.qrc">
                            <normaloff>:/icon/cil-home.png</normaloff>:/icon/cil-home.png</iconset>
+                         </property>
+                         <property name="iconSize">
+                          <size>
+                           <width>20</width>
+                           <height>20</height>
+                          </size>
                          </property>
                         </widget>
                        </item>
@@ -1830,8 +1860,21 @@ padding : 12px;
                            <verstretch>0</verstretch>
                           </sizepolicy>
                          </property>
+                         <property name="font">
+                          <font>
+                           <family>Nunito</family>
+                           <pointsize>16</pointsize>
+                           <bold>true</bold>
+                          </font>
+                         </property>
                          <property name="text">
                           <string>Mở Trình Duyệt</string>
+                         </property>
+                         <property name="iconSize">
+                          <size>
+                           <width>20</width>
+                           <height>20</height>
+                          </size>
                          </property>
                         </widget>
                        </item>
@@ -3760,8 +3803,8 @@ QPushButton:pressed{
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>989</width>
-                             <height>206</height>
+                             <width>1441</width>
+                             <height>714</height>
                             </rect>
                            </property>
                            <layout class="QVBoxLayout" name="verticalLayout_24">
@@ -4247,108 +4290,42 @@ QPushButton:pressed{
                    </layout>
                   </widget>
                   <widget class="QWidget" name="page_log">
-                   <layout class="QVBoxLayout" name="verticalLayout_13">
-                    <item>
-                     <layout class="QVBoxLayout" name="frame_log">
-                      <item>
-                       <widget class="QToolBox" name="toolBox">
-                        <property name="font">
-                         <font>
-                          <family>Nunito</family>
-                          <pointsize>34</pointsize>
-                         </font>
-                        </property>
-                        <property name="styleSheet">
-                         <string notr="true">QToolBox::tab{
-	background-color: rgb(75, 123, 243);
-	color: rgb(255, 255, 255);
-	padding-left : 20px;
-}
-
-QToolBox::tab::selected{
-	background-color: rgb(248, 86, 94);
-	color: rgb(255, 255, 255);
-}
-
-</string>
-                        </property>
-                        <property name="frameShape">
-                         <enum>QFrame::StyledPanel</enum>
-                        </property>
-                        <property name="frameShadow">
-                         <enum>QFrame::Sunken</enum>
-                        </property>
-                        <property name="currentIndex">
-                         <number>0</number>
-                        </property>
-                        <widget class="QWidget" name="page_4">
-                         <property name="geometry">
-                          <rect>
-                           <x>0</x>
-                           <y>0</y>
-                           <width>100</width>
-                           <height>30</height>
-                          </rect>
-                         </property>
-                         <attribute name="label">
-                          <string>Đơn hàng Mới</string>
-                         </attribute>
-                        </widget>
-                        <widget class="QWidget" name="page_3">
-                         <property name="geometry">
-                          <rect>
-                           <x>0</x>
-                           <y>0</y>
-                           <width>100</width>
-                           <height>30</height>
-                          </rect>
-                         </property>
-                         <attribute name="label">
-                          <string>Đơn hàng Đã Chuẩn Bị</string>
-                         </attribute>
-                        </widget>
-                        <widget class="QWidget" name="page_2">
-                         <property name="geometry">
-                          <rect>
-                           <x>0</x>
-                           <y>0</y>
-                           <width>100</width>
-                           <height>30</height>
-                          </rect>
-                         </property>
-                         <attribute name="label">
-                          <string>Đơn hàng Đang Giao</string>
-                         </attribute>
-                        </widget>
-                        <widget class="QWidget" name="page">
-                         <property name="geometry">
-                          <rect>
-                           <x>0</x>
-                           <y>0</y>
-                           <width>100</width>
-                           <height>30</height>
-                          </rect>
-                         </property>
-                         <attribute name="label">
-                          <string>Đơn hàng Thành Công</string>
-                         </attribute>
-                        </widget>
-                        <widget class="QWidget" name="page_5">
-                         <property name="geometry">
-                          <rect>
-                           <x>0</x>
-                           <y>0</y>
-                           <width>100</width>
-                           <height>30</height>
-                          </rect>
-                         </property>
-                         <attribute name="label">
-                          <string>Đơn hàng Hủy</string>
-                         </attribute>
-                        </widget>
-                       </widget>
-                      </item>
-                     </layout>
+                   <layout class="QGridLayout" name="gridLayout_6">
+                    <item row="1" column="1">
+                     <widget class="QPlainTextEdit" name="textLogFunction"/>
+                    </item>
+                    <item row="1" column="0">
+                     <widget class="QPlainTextEdit" name="textLogSystem">
+                      <property name="readOnly">
+                       <bool>true</bool>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="0">
+                     <widget class="QLabel" name="label_69">
+                      <property name="font">
+                       <font>
+                        <family>Nunito</family>
+                        <pointsize>16</pointsize>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>Log Hệ Thống</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="1">
+                     <widget class="QLabel" name="label_71">
+                      <property name="font">
+                       <font>
+                        <family>Nunito</family>
+                        <pointsize>16</pointsize>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>Log Tính Năng</string>
+                      </property>
+                     </widget>
                     </item>
                    </layout>
                   </widget>

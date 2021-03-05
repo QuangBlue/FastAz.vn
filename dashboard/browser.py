@@ -1,4 +1,4 @@
-import sys,requests, json , shutil
+import sys,requests, json , shutil, os
 from PyQt5.QtCore import QUrl, Qt ,QTimer
 from PyQt5.QtWebEngineWidgets import QWebEngineView, QWebEngineProfile, QWebEnginePage
 from PyQt5.QtWidgets import *
@@ -46,15 +46,14 @@ class Browser(QWidget):
         if html != None:
             status = 1 
 
-    def get_cookie(self):      
+    def get_cookie(self): 
+        pathProfile = self.web.pathProfileFunc()
+        with open("temp//data.json") as json_file:  #Get username_az
+            data = json.load(json_file)     
         if status == 1:        
-            cookie = self.web.get_cookie()
-            pathProfile = self.web.pathProfileFunc()
+            cookie = self.web.get_cookie()       
             shopee_info_json = Network.get_info_account_shopee(self,cookie)
-            with open("temp//data.json") as json_file:  #Get username_az
-                data = json.load(json_file)
-
-            # Check for duplicates shopee id_sp on mongodb, if not, create a new shop with blank info.
+            
             if not Database_mongoDB.check_shopee_username(self,data['username_az'],shopee_info_json['shopid']):
                 Database_mongoDB.insert_new_shopee_mongodb(self,data['username_az'],cookie,shopee_info_json['id'],shopee_info_json['shopid'],shopee_info_json['username'],self.profileShopee)
                 self.show_popup('Thành Công','Thành Công',f'Bạn đã thêm thành công tài khoản {shopee_info_json["username"]}.',True)
@@ -69,12 +68,26 @@ class Browser(QWidget):
                     pass
                 Database_mongoDB.extend_cookie(self,data['id_wp'],shop_c,cookie,self.profileShopee)
                 self.show_popup('Cảnh Báo','Gia Hạn Thành Công',f'Tài khoản {shopee_info_json["username"]} đã có.\nĐã GIA HẠN thành công',False)
+            self.delFolderProfile(pathProfile)
             self.close()
         elif status == 0:      
             time = QTimer.singleShot(1000,self.get_cookie)
         elif status == 2:    
             self.close()
 
+    def delFolderProfile(self, pathProfile):
+        listName = []
+        with open("temp//data.json") as json_file:  
+            d = json.load(json_file)
+        if len(d['shopee']) != 0:
+            for x in d['shopee']:
+                listName.append(x['pathName'])         
+        pathNot = pathProfile.replace(pathProfile.split('/')[-1],'')
+        arr = os.listdir(pathNot)
+        for x in arr:
+            if x not in listName and x !="Default" and x != ".DS_Store" :
+                q = pathNot + x
+                shutil.rmtree(q)
     def show_popup(self,title,info,notification,c=True):      
         self.msg.setWindowTitle(title)
         self.msg.setText(notification)
@@ -105,10 +118,6 @@ class MyWebEngineView(QWebEngineView):
         self.pathProfile = profile.persistentStoragePath()
         self.setPage(webpage)
 
-        # QWebEngineProfile.defaultProfile().cookieStore().deleteAllCookies()
-        # QWebEngineProfile.defaultProfile().cookieStore().cookieAdded.connect(self.onCookieAdd)
-
-        # self.page().profile().cookieStore().deleteAllCookies()
         self.page().profile().cookieStore().cookieAdded.connect(self.onCookieAdd)
         self.cookies = {}
 

@@ -1,6 +1,7 @@
 from main_pyqt5 import *
 from dashboard.s_db import *
 from dashboard.style import *
+from dashboard.accountShopee import *
 from dashboard.browser import Browser
 from data_example import *
 from backend.MongoDB_Setup import * 
@@ -83,8 +84,8 @@ class Dashboard(QMainWindow):
         # ########################################################################
         
 
-        QTimer.singleShot(100, lambda: UIFunctions.set_data_user_shopee(self))
-        UIFunctions.set_comboBox_user(self)
+        QTimer.singleShot(100, lambda: UserShopee.setDataUserShopee(self))
+        UserShopee.setComboBoxUser(self)
 
         QTimer.singleShot(100, lambda: UIFunctions.set_data_rating_shopee(self))
         QTimer.singleShot(100, lambda: UIFunctions.set_data_product_push(self))
@@ -133,13 +134,13 @@ class Dashboard(QMainWindow):
 
         self.threadgetinfo = ThreadGetInfo()
         self.threadgetinfo.start()
-        self.threadgetinfo.finished.connect(lambda: UIFunctions.set_data_user_shopee(self))
+        self.threadgetinfo.finished.connect(lambda: UserShopee.setDataUserShopee(self))
 
 
         # ########################################################################
         ## SET UPDATE WHEN COMBOX CHANGE
         # ########################################################################
-        self.comboBox_user.currentIndexChanged.connect(lambda: self.change_comboBox() )
+        self.comboBox_user.textActivated.connect(lambda: self.change_comboBox() )
 
 
         #############################################################
@@ -181,7 +182,7 @@ class Dashboard(QMainWindow):
         ## BUTTON OPEN BROWER --> ADD USER SHOPEE
         # ########################################################################
 
-        self.btn_add_user.clicked.connect(lambda: UIFunctions.openBrowserAddUserShopee(self))
+        self.btn_add_user.clicked.connect(lambda: UserShopee.openBrowserAddUserShopee(self))
 
         # ########################################################################
         ## SELECT DEFAULT MENU
@@ -244,6 +245,7 @@ class Dashboard(QMainWindow):
 
  
     def change_comboBox(self):
+        print('xxxxxx')
         Dashboard.comboBox_user_text = self.comboBox_user.currentText()
         l = [ self.tw_ratting1, self.tw_ratting1,self.tw_ratting3,self.tw_ratting4,self.tw_ratting5,self.tableWidget_product_push]
         for x in l:
@@ -271,7 +273,8 @@ class Dashboard(QMainWindow):
                 l.removeWidget(o.findChildren(QLabel)[0])
                 l.removeWidget(o.findChildren(QPushButton)[0])
 
-        self.layoutBrowser.removeWidget(self.page_browser.findChildren(QWebEngineView)[0])
+            # self.layoutBrowser.removeWidget(self.page_browser.findChildren(QWebEngineView, 'browserShopee')[0])
+
 
 
         QTimer.singleShot(100, lambda: UIFunctions.set_data_rating_shopee(self))
@@ -295,7 +298,7 @@ class Dashboard(QMainWindow):
             btnWidget.setStyleSheet(UIFunctions.selectMenu(self,btnWidget.styleSheet()))
 
         if btnWidget.objectName() == "btn_reply_ratting":          
-            if self.comboBox_user.count() == 0 or self.comboBox_user.currentText() == "Chưa có tài khoản":
+            if self.comboBox_user.count() == 0 :
                 r = QMessageBox.warning(self, 'MessageBox', "BẠN CHƯA THÊM TÀI KHOẢN.\nVui lòng thêm ít nhất 1 tài khoản để sử dụng", QMessageBox.Ok, QMessageBox.Ok)
             else:        
                 self.stackedWidget.setCurrentWidget(self.page_reply_ratting)
@@ -304,7 +307,7 @@ class Dashboard(QMainWindow):
                 btnWidget.setStyleSheet(UIFunctions.selectMenu(self, btnWidget.styleSheet()))
 
         if btnWidget.objectName() == "btn_push_product":
-            if self.comboBox_user.count() == 0 or self.comboBox_user.currentText() == "Chưa có tài khoản":
+            if self.comboBox_user.count() == 0 :
                 r = QMessageBox.warning(self, 'MessageBox', "BẠN CHƯA THÊM TÀI KHOẢN.\nVui lòng thêm ít nhất 1 tài khoản để sử dụng", QMessageBox.Ok, QMessageBox.Ok)
             else: 
                 
@@ -314,7 +317,7 @@ class Dashboard(QMainWindow):
                 btnWidget.setStyleSheet(UIFunctions.selectMenu(self,btnWidget.styleSheet()))           
                 
         if btnWidget.objectName() == "btn_chat_bot":
-            if self.comboBox_user.count() == 0 or self.comboBox_user.currentText() == "Chưa có tài khoản":
+            if self.comboBox_user.count() == 0 :
                 r = QMessageBox.warning(self, 'MessageBox', "BẠN CHƯA THÊM TÀI KHOẢN.\nVui lòng thêm ít nhất 1 tài khoản để sử dụng", QMessageBox.Ok, QMessageBox.Ok)
             else:
                 self.stackedWidget.setCurrentWidget(self.page_chat_bot)
@@ -323,13 +326,14 @@ class Dashboard(QMainWindow):
                 btnWidget.setStyleSheet(UIFunctions.selectMenu(self,btnWidget.styleSheet()))
 
         if btnWidget.objectName() == "btn_browser":
-            if self.comboBox_user.count() == 0 or self.comboBox_user.currentText() == "Chưa có tài khoản":
+            if self.comboBox_user.count() == 0 :
                 r = QMessageBox.warning(self, 'MessageBox', "BẠN CHƯA THÊM TÀI KHOẢN.\nVui lòng thêm ít nhất 1 tài khoản để sử dụng", QMessageBox.Ok, QMessageBox.Ok)
             else:
                 self.stackedWidget.setCurrentWidget(self.page_browser)
                 UIFunctions.resetStyle(self, "btn_browser")
                 UIFunctions.labelPage(self, "Browser")
                 btnWidget.setStyleSheet(UIFunctions.selectMenu(self,btnWidget.styleSheet()))
+                # UIFunctions.openBrowser(self)
 
 
         # if btnWidget.objectName() == "btn_log":

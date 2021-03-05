@@ -1,4 +1,4 @@
-import sys, webbrowser, json, requests , logging, random 
+import sys, webbrowser, json, requests , logging, random , time
 
 from PyQt5.uic import loadUi
 from PyQt5.QtGui import QColor, QFont, QImage, QPixmap, QFontDatabase, QIcon
@@ -9,8 +9,9 @@ from PyQt5.QtWebEngineWidgets import QWebEngineView, QWebEngineProfile, QWebEngi
 from PyQt5.QtWebEngineCore import QWebEngineUrlRequestInterceptor
 ## IMPORT SCREEN
 from dashboard.dashboard import *
+from backend.function import *
 import qrc.file_img_rc
-## Databaseexiet
+## Databaseexiet    
 import backend.networks
 import backend.MongoDB_Setup as db
 import backend.loading
