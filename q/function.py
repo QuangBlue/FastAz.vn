@@ -137,7 +137,7 @@ def boot_products_shopee(idsp):
 
 # TRẢ LỜI ĐÁNH GIÁ
 def reply_reviews(idsp):
-    url_list_rate = 'https://banhang.shopee.vn/api/v3/settings/search_shop_rating_comments/?SPC_CDS='+ csrftoken() + '&SPC_CDS_VER=2&replied=false&page_number=1&page_size=20'
+    url_list_rate = 'https://banhang.shopee.vn/api/v3/settings/search_shop_rating_comments/'
     so_trang = 1
     stt_danhgia = 1
     try :       
@@ -153,7 +153,7 @@ def reply_reviews(idsp):
                 for x in range(5) :
                     if list_rate_json['data']['list'][i]['rating_star'] == x+1 :
                         reply_rate = {"order_id" : list_rate_json['data']['list'][i]['order_id'],"comment_id" : list_rate_json['data']['list'][i]['comment_id'], "comment" : ask_rate[x+1] }
-                        url_reply_rate = 'https://banhang.shopee.vn/api/v3/settings/reply_shop_rating/?SPC_CDS=' + csrftoken() + '&SPC_CDS_VER=2'
+                        url_reply_rate = 'https://banhang.shopee.vn/api/v3/settings/reply_shop_rating/'
                         post_reply_rate = requests.post(url_reply_rate, json = reply_rate, cookies=load_cookies(f'shoppe{idsp}.txt'))
                 i += 1
                 print (f'Đã trả lời {stt_danhgia} đánh giá.')

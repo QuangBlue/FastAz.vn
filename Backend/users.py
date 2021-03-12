@@ -43,6 +43,7 @@ class Shopee:
             "total_product":"",
             "total_order":"",
             "status_cookie":"",
+            "active_functions" : [],
             "reply_rating":{
                 "rating_1star":[]
                 ,"rating_2star":[]

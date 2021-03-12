@@ -1,17 +1,17 @@
 import sys, webbrowser, json, requests , logging, random , time
 
 from PyQt5.uic import loadUi
-from PyQt5.QtGui import QColor, QFont, QImage, QPixmap, QFontDatabase, QIcon
-from PyQt5.QtCore import QSize, Qt, QUrl, QEventLoop, QPropertyAnimation, QTimer, QEvent, QEasingCurve, QByteArray, QThread, pyqtSignal,QObject, QModelIndex
-from PyQt5.QtWidgets import QMainWindow, QApplication, QGraphicsDropShadowEffect, QPushButton, QSizePolicy,QWidgetItem, QSizeGrip, QMessageBox, QHBoxLayout,QVBoxLayout, QLabel, QWidget, QFrame, QStackedWidget, QTableWidgetItem, QPlainTextEdit,QTableWidget,QAbstractItemView, QLayout
+from PyQt5.QtGui import QColor, QFont, QImage, QPixmap, QFontDatabase, QIcon, QBrush , QPaintEvent, QPen, QPainter
+from PyQt5.QtCore import pyqtSlot, pyqtProperty , QSequentialAnimationGroup, QPoint, QPointF, QRectF, QSize, Qt, QUrl, QEventLoop, QPropertyAnimation, QTimer, QEvent, QEasingCurve, QByteArray, QThread, pyqtSignal,QObject, QModelIndex
+from PyQt5.QtWidgets import QCheckBox, QMainWindow, QApplication, QGraphicsDropShadowEffect, QPushButton, QSizePolicy,QWidgetItem, QSizeGrip, QMessageBox, QHBoxLayout,QVBoxLayout, QLabel, QWidget, QFrame, QStackedWidget, QTableWidgetItem, QPlainTextEdit,QTableWidget,QAbstractItemView, QLayout
 from PyQt5.QtNetwork import QNetworkAccessManager, QNetworkReply, QNetworkRequest, QNetworkCookie
 from PyQt5.QtWebEngineWidgets import QWebEngineView, QWebEngineProfile, QWebEnginePage
-from PyQt5.QtWebEngineCore import QWebEngineUrlRequestInterceptor
+
 ## IMPORT SCREEN
 from dashboard.dashboard import *
 from backend.function import *
 import qrc.file_img_rc
-## Databaseexiet    
+## Database
 import backend.networks
 import backend.MongoDB_Setup as db
 import backend.loading

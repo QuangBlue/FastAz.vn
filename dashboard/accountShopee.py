@@ -11,7 +11,7 @@ class UserShopee:
         self.ui.msg.buttonClicked.connect(lambda: UserShopee.setDataUserShopee(self))
         self.ui.msg.buttonClicked.connect(lambda: UserShopee.setComboBoxUser(self))
         self.ui.msg.buttonClicked.connect(lambda: self.ui.close())
-        UIFunctions.writeLog(self,f'Tạo profile {profileShopee}')
+        self.writeLog(f'Tạo profile {profileShopee}')
 
     def setDataUserShopee(self):
         with open('temp//data.json') as f:
@@ -38,7 +38,7 @@ class UserShopee:
                 self.tableWidget.setItem(row, 3,QTableWidgetItem(data['shop_id']))
                 self.tableWidget.setItem(row, 4,QTableWidgetItem(data['total_product']))
                 self.tableWidget.setItem(row, 5,QTableWidgetItem(data['total_order']))
-                UIFunctions.writeLog(self,f'Hiển thị thông tin User Shopee {data["shop_name"]}')
+                self.writeLog(f'Hiển thị thông tin User Shopee {data["shop_name"]}')
                 if data['status_cookie'] == 'True':
                     layout = QHBoxLayout()
                     label = QLabel('Còn Hiệu Lực')
@@ -95,7 +95,7 @@ class UserShopee:
         if len(data['shopee']) != 0 :
             for x in range(len(data['shopee'])):
                 if data['shopee'][x]['status_cookie'] == "True":
-                    # self.comboBox_user.addItem(data['shopee'][x]['shop_name'])
+    
                     l.append(data['shopee'][x]['shop_name'])
             if len(l) > 0:
                 self.comboBox_user.addItems(l)    
@@ -126,7 +126,5 @@ class UserShopee:
             for i in reversed(range(self.tableWidget.rowCount())):
                 self.tableWidget.removeRow(i)  
                 
-
-
-            UIFunctions.writeLog(self,'Xóa tài khoản Shopee')       
+            self.writeLog('Xóa tài khoản Shopee')       
             UserShopee.setDataUserShopee(self)

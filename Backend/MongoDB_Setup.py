@@ -118,6 +118,7 @@ class Database_mongoDB:
                                     "total_order": "",
                                     "status_cookie": "True",
                                     "total_order": "",
+                                    "active_functions": [],
                                     "reply_rating": {
                                             "rating_1star": [],
                                             "rating_2star": [],

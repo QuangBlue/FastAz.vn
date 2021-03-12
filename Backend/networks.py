@@ -117,23 +117,12 @@ class Network:
             return r.status_code
 
     # @backend.loading.setWaitCursor
-    def list_products_shopee(self,cookie,page_number):
-        url = f'https://banhang.shopee.vn/api/v3/product/page_product_list/?page_number={page_number}&page_size=24'
+    def list_products_shopee(self,cookie,page_number,keyword=""):
+        if keyword == "":
+            url = f'https://banhang.shopee.vn/api/v3/product/page_product_list/?page_number={page_number}&page_size=24&list_order_type=sales_dsc&search_type=name&list_type=live'
+        elif keyword != "":
+            url = f'https://banhang.shopee.vn/api/v3/product/search_product_list/?page_number={page_number}&page_size=24&list_order_type=sales_dsc&search_type=name&list_type=live&keyword={keyword}'
         try:
-            
-            # c = ';'.join(['='.join(i) for i in cookie.items()])
-            # req = QNetworkRequest(QUrl(url))
-            # req.setUrl(QUrl(url))
-            # req.setRawHeader(b'Cookie',QByteArray(c.encode()))
-
-            # nam = QNetworkAccessManager()
-            # loop = QEventLoop()
-            # r = nam.get(req)
-            # nam.finished.connect(loop.quit)
-            # loop.exec_()
-            # y = r.readAll()
-            # d = json.loads(y.data().decode('utf8'))
-
             r = requests.get(url, cookies=cookie)
 
 
@@ -145,6 +134,36 @@ class Network:
             # return d
             return r.json()
 
+    def productsPushSearch(self,keysearch):
+        url = f
+
+
+    def getReplyReviews(self,cookie):
+        url = 'https://banhang.shopee.vn/api/v3/settings/search_shop_rating_comments/'
+        try:
+            r = requests.get(url,cookies = cookie)
+        except (requests.exceptions.HTTPError,requests.exceptions.ConnectionError,requests.exceptions.Timeout,requests.exceptions.RequestException) as err:
+            print(str(err))
+            main_pyqt5.ResetPasswordScreen.show_popup(self)
+            raise Exception("Lỗi Server!!!")
+        else:
+            return r.json()
+
+    def realyReviews(self,cookie,order_id,comment_id,comment):
+        data = {
+            "order_id" : order_id,
+            "comment_id" : comment_id,
+            "comment" : comment
+            }
+        url = 'https://banhang.shopee.vn/api/v3/settings/reply_shop_rating/'
+        try:
+            r = requests.post(url, json= data, cookies = cookie)
+        except (requests.exceptions.HTTPError,requests.exceptions.ConnectionError,requests.exceptions.Timeout,requests.exceptions.RequestException) as err:
+            print(str(err))
+            main_pyqt5.ResetPasswordScreen.show_popup(self)
+            raise Exception("Lỗi Server!!!")
+        else:
+            return r.json()
 
 if __name__ == '__main__':
     pass
