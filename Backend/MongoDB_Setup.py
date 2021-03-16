@@ -1,16 +1,6 @@
 import pymongo, json
 import backend.users
 
-
-# client = pymongo.MongoClient("mongodb+srv://quang_db:Thangkhung123@cluster0.cv2te.mongodb.net/shopee_db?retryWrites=true&w=majority")
-# db = client['Shopee_Master_Tool_Database'] Create a database, if it already exists, skips
-# Collection == table
-# Create Shopee__Registered_Users Collection
-# ShopeeRegisteredUsers = db['Shopee__Registered_Users']
-# Get database and collection
-# db = client.get_database("shopee_db")
-# registered_Users_Collection = db.get_collection("user_db")
-
 class Database_mongoDB:
     def __init__(self):
         # Instantianiate all static variables for the purpose of using shared database instances accross multiple files.
@@ -20,7 +10,7 @@ class Database_mongoDB:
 
     def connect_to_mongoDB(self):
         Database_mongoDB.client = pymongo.MongoClient(
-        "mongodb+srv://huy8208:741456963@shopeemastertoolcluster.n4haz.mongodb.net/Shopee_Master_Tool_Database?retryWrites=true&w=majority")
+        "mongodb+srv://huy8208:741456963@shopeemastertoolcluster.n4haz.mongodb.net/Shopee_Master_Tool_Database?ssl=true&retrywrites=true&ssl_cert_reqs=CERT_NONE")
         try:
             Database_mongoDB.db = Database_mongoDB.client.get_database("Shopee_Master_Tool_Database")
             Database_mongoDB.registered_Users_Collection = Database_mongoDB.db.get_collection("Shopee__Registered_Users")

@@ -408,7 +408,6 @@ class MainWindow():
         MainWindow.widget.addWidget(welcome_screen)
         MainWindow.widget.resize(1920, 1080)
         QFontDatabase.addApplicationFont('font/Nunito/Nunito-Regular.ttf')
-        QFontDatabase.addApplicationFont('font/Nunito/Nunito-Regular.ttf')
         MainWindow.widget.show()       
 
 if __name__ == '__main__': 
