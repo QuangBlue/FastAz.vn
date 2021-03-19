@@ -141,7 +141,7 @@ class Network:
     def getReplyReviews(self,cookie):
         url = 'https://banhang.shopee.vn/api/v3/settings/search_shop_rating_comments/'
         try:
-            r = requests.get(url,cookies = cookie)
+            r = requests.get(url, cookies=cookie)
         except (requests.exceptions.HTTPError,requests.exceptions.ConnectionError,requests.exceptions.Timeout,requests.exceptions.RequestException) as err:
             print(str(err))
             main_pyqt5.ResetPasswordScreen.show_popup(self)
@@ -157,7 +157,7 @@ class Network:
             }
         url = 'https://banhang.shopee.vn/api/v3/settings/reply_shop_rating/'
         try:
-            r = requests.post(url, json= data, cookies = cookie)
+            r = requests.post(url, json=data, cookies=cookie)
         except (requests.exceptions.HTTPError,requests.exceptions.ConnectionError,requests.exceptions.Timeout,requests.exceptions.RequestException) as err:
             print(str(err))
             main_pyqt5.ResetPasswordScreen.show_popup(self)
@@ -165,5 +165,17 @@ class Network:
         else:
             return r.json()
 
-if __name__ == '__main__':
-    pass
+
+    def pushProduct(self,cookie,id_product):
+
+        json = {"id":id_product}
+        spc_cds = cookie['SPC_CDS']
+        url =f"https://banhang.shopee.vn/api/v3/product/boost_product/?SPC_CDS={spc_cds}"
+        try:
+            r = requests.post(url, cookies=cookie, json=json)
+        except (requests.exceptions.HTTPError,requests.exceptions.ConnectionError,requests.exceptions.Timeout,requests.exceptions.RequestException) as err:
+            print(str(err))
+            main_pyqt5.ResetPasswordScreen.show_popup(self)
+            raise Exception("Lỗi Server!!!")
+        else:
+            return r.json()

@@ -204,12 +204,31 @@ class UIFunctions:
         plainText.setLayoutDirection(Qt.LeftToRight)
         plainText.setObjectName(f"plainText_{count}")
         plainText.setFont(font)
-        plainText.setPlaceholderText('Nội dung sẽ gửi cho khách hàng khi đơn hàng có trạng thái mới.')
+        plainText.setPlaceholderText('Nội dung sẽ gửi cho khách hàng.')
         plainText.setFocus()
         plainText.setPlainText(text)
+
+        sizePolicy2 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Maximum)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+
         label = QLabel(f"{count}#")
         label.setObjectName(f"label_{count}")
         label.setFont(font)
+        label.setSizePolicy(sizePolicy2)
+
+        font1 = QFont()
+        font1.setFamily(u"Nunito")
+        font1.setPointSize(14)
+
+
+        labelCount = QLabel("0/400")
+        labelCount.setObjectName(f"count_{count}")
+        labelCount.setFont(font1)
+        labelCount.setStyleSheet("color : #A6A6A6")
+        
+        plainText.textChanged.connect(lambda : UIFunctions.countPlainTextEdit(self,obj,layout))
+
         btn = QPushButton('')
         btn.setObjectName(f"_{count}")
         btn.setStyleSheet('QPushButton { background: transparent;}')
@@ -220,9 +239,28 @@ class UIFunctions:
         btn.setIcon(QIcon('img/clear.png')) 
         btn.clicked.connect(lambda : UIFunctions.delPlainTextEdit(self,obj,layout))       
         frameT.addWidget(label)
+        frameT.addWidget(labelCount)
         frameT.addWidget(btn)
         layout.addLayout(frameT)
         layout.addWidget(plainText)
+
+    def countPlainTextEdit(self,obj,layout):
+        widget = self.sender()
+        objNameCountText = widget.objectName()
+        objNameCountLabel = objNameCountText.replace("plainText","count")
+        plainTextCount = obj.findChildren(QPlainTextEdit,objNameCountText)[0]
+        labelCountText = obj.findChildren(QLabel,objNameCountLabel)[0]
+        countText = len(plainTextCount.toPlainText())
+        labelCountText.setText(f"{countText}/400")
+
+        if countText > 400:
+            labelCountText.setStyleSheet("color : red")
+            plainTextCount.setStyleSheet("border: 1px solid red;")     
+        else:
+            labelCountText.setStyleSheet("color : #A6A6A6")
+            plainTextCount.setStyleSheet("border: 1px solid rgb(127, 126, 128);")
+        
+
 
     def delPlainTextEdit(self,obj,layout):
         btnWidget = self.sender()
@@ -230,6 +268,7 @@ class UIFunctions:
         layout.removeWidget(obj.findChildren(QLabel , f'label{objName}')[0]) 
         layout.removeWidget(obj.findChildren(QPushButton, f'{objName}')[0])
         layout.removeWidget(obj.findChildren(QPlainTextEdit, f'plainText{objName}')[0])
+        layout.removeWidget(obj.findChildren(QLabel, f'count{objName}')[0])
         self.writeLog('Xóa nội dụng chat bot')
 
         if layout in [self.frameOrderNew,
@@ -267,6 +306,23 @@ class UIFunctions:
                 self.workerRealyReviews.update_k.connect(self.updateInfoRealyReviews)
                 self.workerRealyReviews.wait()
         QTimer.singleShot(7200000, lambda: UIFunctions.runReplyReviews(self))
+
+    def runPushProduct(self):
+        with open('temp//data.json') as f:
+            data = json.load(f)
+
+        for index, accShopee in enumerate(data['shopee']):
+            listActiveFunctions = accShopee['active_functions']
+            if 'pushProductSwitch' in listActiveFunctions:
+                self.writeLog(f"Chạy đẩy sản phẩm Shop {accShopee['shop_name']}",1)
+                self.workerPushProduct = ThreadPushProducts(accShopee,index)
+                self.workerPushProduct.start()
+                self.workerPushProduct.donePushProduct.connect(self.updateInfoPushProduct)
+                self.workerPushProduct.pushProductText.connect(self.updateLogPushProduct)
+                self.workerPushProduct.wait()
+        QTimer.singleShot(16200000, lambda: UIFunctions.runPushProduct(self))
+
+
 
     def setActiveFunctions(self):
         with open('temp//data.json') as f:

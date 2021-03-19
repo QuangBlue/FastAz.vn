@@ -1,6 +1,7 @@
 from main_pyqt5 import *
 from dashboard.dashboard import *
 from backend.function import *
+from dashboard.browser import *
 
 class UserShopee:
 
@@ -24,8 +25,8 @@ class UserShopee:
         self.tableWidget.setColumnWidth(1, 180)
         self.tableWidget.setColumnWidth(2, 280)
         self.tableWidget.setColumnWidth(3, 180)
-        self.tableWidget.setColumnWidth(4, 200)
-        self.tableWidget.setColumnWidth(5, 200)
+        self.tableWidget.setColumnWidth(4, 90)
+        self.tableWidget.setColumnWidth(5, 90)
 
         if len(shopee) != 0:            
             for data in shopee:

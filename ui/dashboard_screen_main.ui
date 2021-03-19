@@ -7,26 +7,26 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1560</width>
-    <height>1064</height>
+    <width>1280</width>
+    <height>801</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>1560</width>
-    <height>1000</height>
+    <width>1280</width>
+    <height>720</height>
    </size>
   </property>
   <property name="sizeIncrement">
    <size>
-    <width>1920</width>
-    <height>1080</height>
+    <width>1280</width>
+    <height>720</height>
    </size>
   </property>
   <property name="baseSize">
    <size>
-    <width>1920</width>
-    <height>1080</height>
+    <width>1280</width>
+    <height>720</height>
    </size>
   </property>
   <property name="palette">
@@ -124,6 +124,7 @@
    <font>
     <family>Nunito</family>
     <pointsize>12</pointsize>
+    <weight>50</weight>
     <italic>false</italic>
     <bold>false</bold>
    </font>
@@ -142,7 +143,7 @@ QToolTip {
   <widget class="QWidget" name="centralwidget">
    <property name="minimumSize">
     <size>
-     <width>1450</width>
+     <width>0</width>
      <height>0</height>
     </size>
    </property>
@@ -175,8 +176,8 @@ QToolTip {
      <widget class="QFrame" name="frame_main">
       <property name="baseSize">
        <size>
-        <width>1920</width>
-        <height>1080</height>
+        <width>1280</width>
+        <height>720</height>
        </size>
       </property>
       <property name="styleSheet">
@@ -393,6 +394,7 @@ QToolTip {
                       <font>
                        <family>Nunito</family>
                        <pointsize>14</pointsize>
+                       <weight>75</weight>
                        <bold>true</bold>
                       </font>
                      </property>
@@ -423,6 +425,7 @@ margin-left: 5px;</string>
                       <font>
                        <family>Nunito</family>
                        <pointsize>16</pointsize>
+                       <weight>50</weight>
                        <bold>false</bold>
                       </font>
                      </property>
@@ -622,6 +625,7 @@ background-repeat: no-repeat;</string>
                    <font>
                     <family>Nunito</family>
                     <pointsize>20</pointsize>
+                    <weight>75</weight>
                     <bold>true</bold>
                    </font>
                   </property>
@@ -682,6 +686,7 @@ background-repeat: no-repeat;</string>
                    <font>
                     <family>Nunito</family>
                     <pointsize>16</pointsize>
+                    <weight>75</weight>
                     <bold>true</bold>
                    </font>
                   </property>
@@ -939,7 +944,7 @@ background-repeat: no-repeat;</string>
                    <string notr="true"/>
                   </property>
                   <property name="currentIndex">
-                   <number>3</number>
+                   <number>5</number>
                   </property>
                   <widget class="QWidget" name="page_reply_ratting">
                    <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -1110,6 +1115,7 @@ background-repeat: no-repeat;</string>
                           <font>
                            <family>Nunito</family>
                            <pointsize>16</pointsize>
+                           <weight>75</weight>
                            <bold>true</bold>
                           </font>
                          </property>
@@ -1163,6 +1169,7 @@ background-color: rgb(48, 103, 255);
                           <font>
                            <family>Nunito</family>
                            <pointsize>16</pointsize>
+                           <weight>75</weight>
                            <bold>true</bold>
                           </font>
                          </property>
@@ -1208,6 +1215,7 @@ background-color: rgb(48, 103, 255);
                        <font>
                         <family>Nunito</family>
                         <pointsize>16</pointsize>
+                        <weight>75</weight>
                         <bold>true</bold>
                        </font>
                       </property>
@@ -1993,6 +2001,7 @@ padding : 12px;
                          </property>
                          <property name="font">
                           <font>
+                           <weight>50</weight>
                            <bold>false</bold>
                           </font>
                          </property>
@@ -2130,6 +2139,7 @@ padding : 12px;
                           <font>
                            <family>Nunito</family>
                            <pointsize>16</pointsize>
+                           <weight>75</weight>
                            <bold>true</bold>
                           </font>
                          </property>
@@ -2221,6 +2231,7 @@ QPushButton:pressed{
                           <font>
                            <family>Nunito</family>
                            <pointsize>18</pointsize>
+                           <weight>75</weight>
                            <bold>true</bold>
                           </font>
                          </property>
@@ -2244,6 +2255,7 @@ QPushButton:pressed{
                           <font>
                            <family>Nunito</family>
                            <pointsize>18</pointsize>
+                           <weight>75</weight>
                            <bold>true</bold>
                           </font>
                          </property>
@@ -2267,6 +2279,7 @@ QPushButton:pressed{
                           <font>
                            <family>Nunito</family>
                            <pointsize>18</pointsize>
+                           <weight>75</weight>
                            <bold>true</bold>
                           </font>
                          </property>
@@ -2290,6 +2303,7 @@ QPushButton:pressed{
                           <font>
                            <family>Nunito</family>
                            <pointsize>18</pointsize>
+                           <weight>75</weight>
                            <bold>true</bold>
                           </font>
                          </property>
@@ -2310,6 +2324,7 @@ QPushButton:pressed{
                           <font>
                            <family>Nunito</family>
                            <pointsize>18</pointsize>
+                           <weight>75</weight>
                            <bold>true</bold>
                           </font>
                          </property>
@@ -2346,6 +2361,7 @@ QPushButton:pressed{
                           <font>
                            <family>Nunito</family>
                            <pointsize>20</pointsize>
+                           <weight>50</weight>
                            <bold>false</bold>
                           </font>
                          </property>
@@ -2471,6 +2487,7 @@ QPushButton:pressed{
                               <font>
                                <family>Nunito</family>
                                <pointsize>22</pointsize>
+                               <weight>50</weight>
                                <bold>false</bold>
                               </font>
                              </property>
@@ -2497,6 +2514,7 @@ QPushButton:pressed{
                               <font>
                                <family>Nunito</family>
                                <pointsize>18</pointsize>
+                               <weight>75</weight>
                                <bold>true</bold>
                               </font>
                              </property>
@@ -2533,6 +2551,7 @@ QPushButton:pressed{
                               <font>
                                <family>Nunito</family>
                                <pointsize>18</pointsize>
+                               <weight>75</weight>
                                <bold>true</bold>
                               </font>
                              </property>
@@ -2582,8 +2601,8 @@ QPushButton:pressed{
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>1441</width>
-                             <height>699</height>
+                             <width>1161</width>
+                             <height>436</height>
                             </rect>
                            </property>
                            <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -2865,6 +2884,7 @@ QPushButton:pressed{
                               <font>
                                <family>Nunito</family>
                                <pointsize>22</pointsize>
+                               <weight>50</weight>
                                <bold>false</bold>
                               </font>
                              </property>
@@ -2891,6 +2911,7 @@ QPushButton:pressed{
                               <font>
                                <family>Nunito</family>
                                <pointsize>18</pointsize>
+                               <weight>75</weight>
                                <bold>true</bold>
                               </font>
                              </property>
@@ -2927,6 +2948,7 @@ QPushButton:pressed{
                               <font>
                                <family>Nunito</family>
                                <pointsize>18</pointsize>
+                               <weight>75</weight>
                                <bold>true</bold>
                               </font>
                              </property>
@@ -2976,8 +2998,8 @@ QPushButton:pressed{
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>1441</width>
-                             <height>699</height>
+                             <width>997</width>
+                             <height>206</height>
                             </rect>
                            </property>
                            <layout class="QVBoxLayout" name="verticalLayout_20">
@@ -3259,6 +3281,7 @@ QPushButton:pressed{
                               <font>
                                <family>Nunito</family>
                                <pointsize>22</pointsize>
+                               <weight>50</weight>
                                <bold>false</bold>
                               </font>
                              </property>
@@ -3285,6 +3308,7 @@ QPushButton:pressed{
                               <font>
                                <family>Nunito</family>
                                <pointsize>18</pointsize>
+                               <weight>75</weight>
                                <bold>true</bold>
                               </font>
                              </property>
@@ -3321,6 +3345,7 @@ QPushButton:pressed{
                               <font>
                                <family>Nunito</family>
                                <pointsize>18</pointsize>
+                               <weight>75</weight>
                                <bold>true</bold>
                               </font>
                              </property>
@@ -3370,8 +3395,8 @@ QPushButton:pressed{
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>1441</width>
-                             <height>699</height>
+                             <width>997</width>
+                             <height>206</height>
                             </rect>
                            </property>
                            <layout class="QVBoxLayout" name="verticalLayout_22">
@@ -3653,6 +3678,7 @@ QPushButton:pressed{
                               <font>
                                <family>Nunito</family>
                                <pointsize>22</pointsize>
+                               <weight>50</weight>
                                <bold>false</bold>
                               </font>
                              </property>
@@ -3679,6 +3705,7 @@ QPushButton:pressed{
                               <font>
                                <family>Nunito</family>
                                <pointsize>18</pointsize>
+                               <weight>75</weight>
                                <bold>true</bold>
                               </font>
                              </property>
@@ -3715,6 +3742,7 @@ QPushButton:pressed{
                               <font>
                                <family>Nunito</family>
                                <pointsize>18</pointsize>
+                               <weight>75</weight>
                                <bold>true</bold>
                               </font>
                              </property>
@@ -3764,8 +3792,8 @@ QPushButton:pressed{
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>1441</width>
-                             <height>699</height>
+                             <width>997</width>
+                             <height>206</height>
                             </rect>
                            </property>
                            <layout class="QVBoxLayout" name="verticalLayout_23">
@@ -4047,6 +4075,7 @@ QPushButton:pressed{
                               <font>
                                <family>Nunito</family>
                                <pointsize>22</pointsize>
+                               <weight>50</weight>
                                <bold>false</bold>
                               </font>
                              </property>
@@ -4073,6 +4102,7 @@ QPushButton:pressed{
                               <font>
                                <family>Nunito</family>
                                <pointsize>18</pointsize>
+                               <weight>75</weight>
                                <bold>true</bold>
                               </font>
                              </property>
@@ -4109,6 +4139,7 @@ QPushButton:pressed{
                               <font>
                                <family>Nunito</family>
                                <pointsize>18</pointsize>
+                               <weight>75</weight>
                                <bold>true</bold>
                               </font>
                              </property>
@@ -4158,8 +4189,8 @@ QPushButton:pressed{
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>1441</width>
-                             <height>699</height>
+                             <width>997</width>
+                             <height>206</height>
                             </rect>
                            </property>
                            <layout class="QVBoxLayout" name="verticalLayout_24">
@@ -4455,6 +4486,7 @@ QPushButton:pressed{
                           <font>
                            <family>Nunito</family>
                            <pointsize>18</pointsize>
+                           <weight>75</weight>
                            <bold>true</bold>
                           </font>
                          </property>
@@ -4478,6 +4510,7 @@ QPushButton:pressed{
                           <font>
                            <family>Nunito</family>
                            <pointsize>18</pointsize>
+                           <weight>75</weight>
                            <bold>true</bold>
                           </font>
                          </property>
@@ -4501,6 +4534,7 @@ QPushButton:pressed{
                           <font>
                            <family>Nunito</family>
                            <pointsize>18</pointsize>
+                           <weight>75</weight>
                            <bold>true</bold>
                           </font>
                          </property>
@@ -4524,6 +4558,7 @@ QPushButton:pressed{
                           <font>
                            <family>Nunito</family>
                            <pointsize>18</pointsize>
+                           <weight>75</weight>
                            <bold>true</bold>
                           </font>
                          </property>
@@ -4544,6 +4579,7 @@ QPushButton:pressed{
                           <font>
                            <family>Nunito</family>
                            <pointsize>18</pointsize>
+                           <weight>75</weight>
                            <bold>true</bold>
                           </font>
                          </property>
@@ -4704,6 +4740,7 @@ QPushButton:pressed{
                               <font>
                                <family>Nunito</family>
                                <pointsize>22</pointsize>
+                               <weight>50</weight>
                                <bold>false</bold>
                               </font>
                              </property>
@@ -4730,6 +4767,7 @@ QPushButton:pressed{
                               <font>
                                <family>Nunito</family>
                                <pointsize>18</pointsize>
+                               <weight>75</weight>
                                <bold>true</bold>
                               </font>
                              </property>
@@ -4766,6 +4804,7 @@ QPushButton:pressed{
                               <font>
                                <family>Nunito</family>
                                <pointsize>18</pointsize>
+                               <weight>75</weight>
                                <bold>true</bold>
                               </font>
                              </property>
@@ -4815,8 +4854,8 @@ QPushButton:pressed{
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>1441</width>
-                             <height>699</height>
+                             <width>1401</width>
+                             <height>436</height>
                             </rect>
                            </property>
                            <layout class="QVBoxLayout" name="verticalLayout_29">
@@ -5056,6 +5095,7 @@ QPushButton:pressed{
                               <font>
                                <family>Nunito</family>
                                <pointsize>22</pointsize>
+                               <weight>50</weight>
                                <bold>false</bold>
                               </font>
                              </property>
@@ -5082,6 +5122,7 @@ QPushButton:pressed{
                               <font>
                                <family>Nunito</family>
                                <pointsize>18</pointsize>
+                               <weight>75</weight>
                                <bold>true</bold>
                               </font>
                              </property>
@@ -5118,6 +5159,7 @@ QPushButton:pressed{
                               <font>
                                <family>Nunito</family>
                                <pointsize>18</pointsize>
+                               <weight>75</weight>
                                <bold>true</bold>
                               </font>
                              </property>
@@ -5167,8 +5209,8 @@ QPushButton:pressed{
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>1441</width>
-                             <height>699</height>
+                             <width>1401</width>
+                             <height>288</height>
                             </rect>
                            </property>
                            <layout class="QVBoxLayout" name="verticalLayout_31">
@@ -5408,6 +5450,7 @@ QPushButton:pressed{
                               <font>
                                <family>Nunito</family>
                                <pointsize>22</pointsize>
+                               <weight>50</weight>
                                <bold>false</bold>
                               </font>
                              </property>
@@ -5434,6 +5477,7 @@ QPushButton:pressed{
                               <font>
                                <family>Nunito</family>
                                <pointsize>18</pointsize>
+                               <weight>75</weight>
                                <bold>true</bold>
                               </font>
                              </property>
@@ -5470,6 +5514,7 @@ QPushButton:pressed{
                               <font>
                                <family>Nunito</family>
                                <pointsize>18</pointsize>
+                               <weight>75</weight>
                                <bold>true</bold>
                               </font>
                              </property>
@@ -5519,8 +5564,8 @@ QPushButton:pressed{
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>1441</width>
-                             <height>699</height>
+                             <width>1401</width>
+                             <height>288</height>
                             </rect>
                            </property>
                            <layout class="QVBoxLayout" name="verticalLayout_33">
@@ -5760,6 +5805,7 @@ QPushButton:pressed{
                               <font>
                                <family>Nunito</family>
                                <pointsize>22</pointsize>
+                               <weight>50</weight>
                                <bold>false</bold>
                               </font>
                              </property>
@@ -5786,6 +5832,7 @@ QPushButton:pressed{
                               <font>
                                <family>Nunito</family>
                                <pointsize>18</pointsize>
+                               <weight>75</weight>
                                <bold>true</bold>
                               </font>
                              </property>
@@ -5822,6 +5869,7 @@ QPushButton:pressed{
                               <font>
                                <family>Nunito</family>
                                <pointsize>18</pointsize>
+                               <weight>75</weight>
                                <bold>true</bold>
                               </font>
                              </property>
@@ -5871,8 +5919,8 @@ QPushButton:pressed{
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>1441</width>
-                             <height>699</height>
+                             <width>1401</width>
+                             <height>288</height>
                             </rect>
                            </property>
                            <layout class="QVBoxLayout" name="verticalLayout_35">
@@ -6112,6 +6160,7 @@ QPushButton:pressed{
                               <font>
                                <family>Nunito</family>
                                <pointsize>22</pointsize>
+                               <weight>50</weight>
                                <bold>false</bold>
                               </font>
                              </property>
@@ -6138,6 +6187,7 @@ QPushButton:pressed{
                               <font>
                                <family>Nunito</family>
                                <pointsize>18</pointsize>
+                               <weight>75</weight>
                                <bold>true</bold>
                               </font>
                              </property>
@@ -6174,6 +6224,7 @@ QPushButton:pressed{
                               <font>
                                <family>Nunito</family>
                                <pointsize>18</pointsize>
+                               <weight>75</weight>
                                <bold>true</bold>
                               </font>
                              </property>
@@ -6223,8 +6274,8 @@ QPushButton:pressed{
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>1441</width>
-                             <height>699</height>
+                             <width>1401</width>
+                             <height>288</height>
                             </rect>
                            </property>
                            <layout class="QVBoxLayout" name="verticalLayout_39">
@@ -6514,6 +6565,7 @@ QPushButton:pressed{
                         <font>
                          <family>Nunito</family>
                          <pointsize>16</pointsize>
+                         <weight>75</weight>
                          <bold>true</bold>
                         </font>
                        </property>
@@ -6526,6 +6578,7 @@ QPushButton:pressed{
                         <font>
                          <family>Nunito</family>
                          <pointsize>16</pointsize>
+                         <weight>75</weight>
                          <bold>true</bold>
                         </font>
                        </property>
@@ -6538,30 +6591,33 @@ QPushButton:pressed{
                         <font>
                          <family>Nunito</family>
                          <pointsize>16</pointsize>
+                         <weight>75</weight>
                          <bold>true</bold>
                         </font>
                        </property>
                       </column>
                       <column>
                        <property name="text">
-                        <string>Số lượng sản phẩm</string>
+                        <string>Sản phẩm</string>
                        </property>
                        <property name="font">
                         <font>
                          <family>Nunito</family>
                          <pointsize>16</pointsize>
+                         <weight>75</weight>
                          <bold>true</bold>
                         </font>
                        </property>
                       </column>
                       <column>
                        <property name="text">
-                        <string>Đơn hàng cần xử lý</string>
+                        <string>Đơn hàng</string>
                        </property>
                        <property name="font">
                         <font>
                          <family>Nunito</family>
                          <pointsize>16</pointsize>
+                         <weight>75</weight>
                          <bold>true</bold>
                         </font>
                        </property>
@@ -6574,6 +6630,7 @@ QPushButton:pressed{
                         <font>
                          <family>Nunito</family>
                          <pointsize>16</pointsize>
+                         <weight>75</weight>
                          <bold>true</bold>
                         </font>
                        </property>
@@ -6617,6 +6674,7 @@ QPushButton:pressed{
                           <font>
                            <family>Nunito</family>
                            <pointsize>24</pointsize>
+                           <weight>75</weight>
                            <bold>true</bold>
                           </font>
                          </property>
@@ -6670,10 +6728,26 @@ QPushButton:pressed{
                   <widget class="QWidget" name="page_log">
                    <layout class="QGridLayout" name="gridLayout_6">
                     <item row="1" column="1">
-                     <widget class="QPlainTextEdit" name="textLogFunction"/>
+                     <widget class="QPlainTextEdit" name="textLogFunction">
+                      <property name="font">
+                       <font>
+                        <family>Nunito</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="readOnly">
+                       <bool>true</bool>
+                      </property>
+                     </widget>
                     </item>
                     <item row="1" column="0">
                      <widget class="QPlainTextEdit" name="textLogSystem">
+                      <property name="font">
+                       <font>
+                        <family>Nunito</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
                       <property name="readOnly">
                        <bool>true</bool>
                       </property>
@@ -6831,6 +6905,7 @@ QPushButton:pressed{
                           <font>
                            <family>Nunito</family>
                            <pointsize>16</pointsize>
+                           <weight>75</weight>
                            <bold>true</bold>
                           </font>
                          </property>
@@ -6953,6 +7028,7 @@ background-color: rgb(48, 103, 255);
                         <font>
                          <family>Nunito</family>
                          <pointsize>16</pointsize>
+                         <weight>75</weight>
                          <bold>true</bold>
                         </font>
                        </property>
@@ -6965,6 +7041,7 @@ background-color: rgb(48, 103, 255);
                         <font>
                          <family>Nunito</family>
                          <pointsize>16</pointsize>
+                         <weight>75</weight>
                          <bold>true</bold>
                         </font>
                        </property>
@@ -6977,6 +7054,7 @@ background-color: rgb(48, 103, 255);
                         <font>
                          <family>Nunito</family>
                          <pointsize>16</pointsize>
+                         <weight>75</weight>
                          <bold>true</bold>
                         </font>
                        </property>
@@ -6989,6 +7067,7 @@ background-color: rgb(48, 103, 255);
                         <font>
                          <family>Nunito</family>
                          <pointsize>16</pointsize>
+                         <weight>75</weight>
                          <bold>true</bold>
                         </font>
                        </property>
@@ -7001,6 +7080,7 @@ background-color: rgb(48, 103, 255);
                         <font>
                          <family>Nunito</family>
                          <pointsize>16</pointsize>
+                         <weight>75</weight>
                          <bold>true</bold>
                         </font>
                        </property>
@@ -7013,6 +7093,7 @@ background-color: rgb(48, 103, 255);
                         <font>
                          <family>Nunito</family>
                          <pointsize>16</pointsize>
+                         <weight>75</weight>
                          <bold>true</bold>
                         </font>
                        </property>
@@ -7025,6 +7106,7 @@ background-color: rgb(48, 103, 255);
                         <font>
                          <family>Nunito</family>
                          <pointsize>16</pointsize>
+                         <weight>75</weight>
                          <bold>true</bold>
                         </font>
                        </property>
@@ -7079,6 +7161,12 @@ background-color: rgb(48, 103, 255);
                 </property>
                 <item>
                  <widget class="QFrame" name="frame_label_bottom">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
                   <property name="frameShape">
                    <enum>QFrame::NoFrame</enum>
                   </property>

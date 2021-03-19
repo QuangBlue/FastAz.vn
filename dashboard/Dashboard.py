@@ -18,7 +18,7 @@ class Dashboard(QMainWindow):
         super(Dashboard,self).__init__()
         loadUi("ui//dashboard_screen_main.ui",self)
         UIFunctions.check_theme(self)
-        self.resize(1920, 1080)
+        self.resize(1280, 720)
         QFontDatabase.addApplicationFont('font/Nunito/Nunito-Regular.ttf')
         QFontDatabase.addApplicationFont('font/Nunito/Nunito-Regular.ttf')
         # ########################################################################
@@ -97,7 +97,14 @@ class Dashboard(QMainWindow):
         QTimer.singleShot(100, lambda: ChatBot.setChatBotPlainText(self))
         QTimer.singleShot(100, lambda: ReplyRating.setReplyRatingPlainText(self))
         QTimer.singleShot(100, lambda: UIFunctions.openBrowser(self))
+
+        # ########################################################################
+        ## SETUP QTHREAD
+        # ########################################################################
+
+
         QTimer.singleShot(100, lambda: UIFunctions.runReplyReviews(self))
+        QTimer.singleShot(100, lambda: UIFunctions.runPushProduct(self))
 
 
         # ########################################################################
@@ -222,6 +229,27 @@ class Dashboard(QMainWindow):
         UIFunctions.uiDefinitions(self)
         self.show()
 
+    def updateLogPushProduct(self,text):
+        self.writeLog(text,1,True)
+
+    def updateInfoPushProduct(self,index):
+        with open("temp//data.json") as f:
+            data = json.load(f)
+        
+        listPush = data['shopee'][index]['list_push_product']
+        count = 0
+        for product in listPush:
+            if product['done'] == "False":
+                count += 1
+        
+        if count == 0:
+            for indexProduct, product in enumerate(listPush):
+                data['shopee'][index]['list_push_product'][indexProduct]['done'] = "False"
+                Database_mongoDB.find_and_updateDB(self,data['id_wp'],{f"shopee.{index}.list_push_product.{indexProduct}.done" : "False"})
+        self.writeLog(f"Còn {count} sản phẩm có thể đẩy của Shop {data['shopee'][index]['shop_name']}",1)
+        with open('temp//data.json', 'w') as f:
+            json.dump(data, f)
+                
     def updateInfoRealyReviews(self,k):
         if k == 'success':
             self.writeLog("Đánh giá thành công",1)
@@ -356,14 +384,17 @@ class Dashboard(QMainWindow):
         msg.exec_()
         
 
-    def writeLog(self,textLog,w=0):
+    def writeLog(self,textLog,w=0,red=False):
         t = time.localtime()
         current_time = time.strftime("%H:%M:%S", t)
-        log = f'{current_time} - {textLog}'
+        if red == False:
+            log = f'<b>{current_time}</b> - {textLog}'
+        elif red == True:
+            log = f'<span style="color:red;"><b>{current_time}</b> - {textLog}</span>'
         if w == 0:
-            self.textLogSystem.appendPlainText(log)
+            self.textLogSystem.appendHtml(log)
         elif w == 1:
-            self.textLogFunction.appendPlainText(log)
+            self.textLogFunction.appendHtml(log)
 
     def Button(self):
         btnWidget = self.sender()

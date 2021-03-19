@@ -152,6 +152,7 @@ class Popup_Product(QMainWindow):
             k['normal_price'] = self.normal_price[p]
             k['promotion_price'] = self.promotion_price[p]
             k['sold'] = self.sold[p]
+            k['done'] = 'False'
             data.append(k)
         r , change = Database_mongoDB.add_protuct_push(self,self.id_wp,self.cc,data)
 
