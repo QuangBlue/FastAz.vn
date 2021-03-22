@@ -190,7 +190,7 @@ class UIFunctions:
         r = obj.findChildren(QPlainTextEdit)
         UIFunctions.addFrameText(self,len(r)+1,obj,layout)
 
-    def addFrameText(self,count,obj,layout,text=''):
+    def addFrameText(self,count,obj,layout,text='',lenText=0):
         font = QFont()
         font.setFamily(u"Nunito")
         font.setPointSize(16)
@@ -222,7 +222,7 @@ class UIFunctions:
         font1.setPointSize(14)
 
 
-        labelCount = QLabel("0/400")
+        labelCount = QLabel(f"{lenText}/400")
         labelCount.setObjectName(f"count_{count}")
         labelCount.setFont(font1)
         labelCount.setStyleSheet("color : #A6A6A6")
@@ -292,35 +292,71 @@ class UIFunctions:
             self.btnSaveFourStar.setStyleSheet('background-color: rgb(217, 38, 0);')
             self.btnSaveFiveStar.setStyleSheet('background-color: rgb(217, 38, 0);')
 
+    def runThreadReplyReviews(self,accShopee):
+        self.writeLog(f"Chạy đánh giá Shop {accShopee['shop_name']}",1)
+        self.workerRealyReviews[accShopee['shop_name']] = ThreadReplyReviews(accShopee)
+        self.workerRealyReviews[accShopee['shop_name']].start()
+        self.workerRealyReviews[accShopee['shop_name']].update_k.connect(self.updateInfoRealyReviews)
+
+    def stopThreadReplyReviews(self,accShopee):
+        self.writeLog(f"Ngưng chạy đánh giá Shop {accShopee['shop_name']}",1)
+        self.workerRealyReviews[accShopee['shop_name']].quit()
+
+    def checkThreadReplyReviews(self):
+        with open('temp//data.json') as f:
+            data = json.load(f)
+        shop_choose = self.checkShopChoose()
+        accShopee = data['shopee'][shop_choose]
+        if self.btnReplyRatingSwitch.isChecked() == True:
+            UIFunctions.runThreadReplyReviews(self,accShopee)
+        elif self.btnReplyRatingSwitch.isChecked() == False:
+            UIFunctions.stopThreadReplyReviews(self,accShopee)
 
     def runReplyReviews(self):
         with open('temp//data.json') as f:
             data = json.load(f)
-
-        for accShopee in data['shopee']:
+        for index, accShopee in enumerate(data['shopee']):
             listActiveFunctions = accShopee['active_functions']
             if 'replyRatingSwitch' in listActiveFunctions:
-                self.writeLog(f"Chạy đánh giá Shop {accShopee['shop_name']}",1)
-                self.workerRealyReviews = ThreadReplyReviews(accShopee)
-                self.workerRealyReviews.start()
-                self.workerRealyReviews.update_k.connect(self.updateInfoRealyReviews)
-                self.workerRealyReviews.wait()
-        QTimer.singleShot(7200000, lambda: UIFunctions.runReplyReviews(self))
+                UIFunctions.runThreadReplyReviews(self,accShopee)
+
+    def runThreadPushProduct(self,accShopee,index):
+        self.writeLog(f"Chạy đẩy sản phẩm Shop {accShopee['shop_name']}",1)
+        self.workerPushProduct[accShopee['shop_name']] = ThreadPushProducts(accShopee,index)
+        self.workerPushProduct[accShopee['shop_name']].start()
+        self.workerPushProduct[accShopee['shop_name']].donePushProduct.connect(self.updateInfoPushProduct)
+        self.workerPushProduct[accShopee['shop_name']].pushProductText.connect(self.updateLogPushProduct)
+
+    def stopThreadPushProduct(self,accShopee):
+        self.writeLog(f"Ngưng chạy đẩy sản phẩm Shop {accShopee['shop_name']}",1)
+        self.workerPushProduct[accShopee['shop_name']].quit()
+
+    def checkThreadPushProduct(self):
+        with open('temp//data.json') as f:
+            data = json.load(f)
+        shop_choose = self.checkShopChoose()
+        accShopee = data['shopee'][shop_choose]
+        if self.btnPushProductSwitch.isChecked() == True:
+            UIFunctions.runThreadPushProduct(self,accShopee,shop_choose)
+        elif self.btnPushProductSwitch.isChecked() == False:
+            UIFunctions.stopThreadPushProduct(self,accShopee)
+
 
     def runPushProduct(self):
         with open('temp//data.json') as f:
             data = json.load(f)
-
         for index, accShopee in enumerate(data['shopee']):
             listActiveFunctions = accShopee['active_functions']
             if 'pushProductSwitch' in listActiveFunctions:
-                self.writeLog(f"Chạy đẩy sản phẩm Shop {accShopee['shop_name']}",1)
-                self.workerPushProduct = ThreadPushProducts(accShopee,index)
-                self.workerPushProduct.start()
-                self.workerPushProduct.donePushProduct.connect(self.updateInfoPushProduct)
-                self.workerPushProduct.pushProductText.connect(self.updateLogPushProduct)
-                self.workerPushProduct.wait()
-        QTimer.singleShot(16200000, lambda: UIFunctions.runPushProduct(self))
+                UIFunctions.runThreadPushProduct(self,accShopee,index)
+
+        #         self.writeLog(f"Chạy đẩy sản phẩm Shop {accShopee['shop_name']}",1)
+        #         self.workerPushProduct[index] = ThreadPushProducts(accShopee,index)
+        #         self.workerPushProduct[index].start()
+        #         self.workerPushProduct[index].donePushProduct.connect(self.updateInfoPushProduct)
+        #         self.workerPushProduct[index].pushProductText.connect(self.updateLogPushProduct)
+
+        # QTimer.singleShot(16200000, lambda: UIFunctions.runPushProduct(self))
 
 
 
@@ -353,6 +389,7 @@ class UIFunctions:
                 len(data['shopee'][shop_choose]['list_push_product']) != 0 
                 ):
                 UIFunctions.activeFunctions(self,self.btnPushProductSwitch.isChecked(),objName)
+                UIFunctions.checkThreadPushProduct(self)
             else:
                 self.btnPushProductSwitch.setChecked(False)
                 QMessageBox.warning(self, 'Cảnh báo', "Vui lòng thêm ít nhất 1 sản phẩm đẩy để có thể kích hoạt Đẩy Sản Phẩm", QMessageBox.Ok)
@@ -360,13 +397,15 @@ class UIFunctions:
         elif objName == "replyRatingSwitch":
             try:
                 if (
-                    len(data['shopee'][shop_choose]['replyRatingList']['textOneStar']) != 0 or
-                    len(data['shopee'][shop_choose]['replyRatingList']['textTwoStar']) != 0 or
-                    len(data['shopee'][shop_choose]['replyRatingList']['textThreeStar']) != 0 or
-                    len(data['shopee'][shop_choose]['replyRatingList']['textFourStar']) != 0 or
-                    len(data['shopee'][shop_choose]['replyRatingList']['textFiveStar']) != 0               
+                    len(data['shopee'][shop_choose]['replyRatingList']['1']) != 0 or
+                    len(data['shopee'][shop_choose]['replyRatingList']['2']) != 0 or
+                    len(data['shopee'][shop_choose]['replyRatingList']['3']) != 0 or
+                    len(data['shopee'][shop_choose]['replyRatingList']['4']) != 0 or
+                    len(data['shopee'][shop_choose]['replyRatingList']['5']) != 0               
                     ):
                     UIFunctions.activeFunctions(self,self.btnReplyRatingSwitch.isChecked(),objName)
+                    UIFunctions.checkThreadReplyReviews(self)
+                        
                 else:
                     self.btnReplyRatingSwitch.setChecked(False)
                     QMessageBox.warning(self, 'Cảnh báo', "Vui lòng thêm ít nhất 1 đánh giá để có thể kích hoạt Đánh Giá", QMessageBox.Ok)

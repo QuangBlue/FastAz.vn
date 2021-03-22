@@ -46,7 +46,8 @@ class ChatBot:
             for o , l , d in zip(obj,layout,dataText):
                 count = 1
                 for i in d:
-                    UIFunctions.addFrameText(self,count,o,l,i)
+                    lenText = len(i)
+                    UIFunctions.addFrameText(self,count,o,l,i,lenText)
                     count += 1
             self.writeLog(f"Tải nội dung ChatBot cho account {data['shopee'][shop_choose]['shop_name']}")   
         except: 

@@ -78,4 +78,5 @@ class ProductPush:
         if len(data['shopee'][shop_choose]['list_push_product']) == 0 :
             self.btnPushProductSwitch.setChecked(False)
             UIFunctions.activeFunctions(self,self.btnPushProductSwitch.isChecked(),"pushProductSwitch")
+            UIFunctions.checkThreadPushProduct(self)
 

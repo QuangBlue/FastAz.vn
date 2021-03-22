@@ -37,16 +37,17 @@ class ReplyRating:
             self.frameFourStar,
             self.frameFiveStar,
             ]         
-            oneStar = data['shopee'][shop_choose]['replyRatingList']['textOneStar']
-            twoStar = data['shopee'][shop_choose]['replyRatingList']['textTwoStar']
-            threeStar = data['shopee'][shop_choose]['replyRatingList']['textThreeStar']
-            fourStar = data['shopee'][shop_choose]['replyRatingList']['textFourStar']
-            fiveStar = data['shopee'][shop_choose]['replyRatingList']['textFiveStar']
+            oneStar = data['shopee'][shop_choose]['replyRatingList']['1']
+            twoStar = data['shopee'][shop_choose]['replyRatingList']['2']
+            threeStar = data['shopee'][shop_choose]['replyRatingList']['3']
+            fourStar = data['shopee'][shop_choose]['replyRatingList']['4']
+            fiveStar = data['shopee'][shop_choose]['replyRatingList']['5']
             dataText = [oneStar,twoStar,threeStar,fourStar,fiveStar]
             for o , l , d in zip(obj,layout,dataText):
                 count = 1
                 for i in d:
-                    UIFunctions.addFrameText(self,count,o,l,i)
+                    lenText = len(i)
+                    UIFunctions.addFrameText(self,count,o,l,i,lenText)
                     count += 1
             self.writeLog(f"Tải nội dung Đánh Giá cho account {data['shopee'][shop_choose]['shop_name']}")   
         except: 
@@ -70,10 +71,10 @@ class ReplyRating:
             self.frameFourStar_obj,
             self.frameFiveStar_obj,
         ]
-
+        countError = 0
         for frame in obj:
             for textData in frame.findChildren(QPlainTextEdit):
-                if len(textData.toPlainText()) != 0:
+                if len(textData.toPlainText()) != 0 and len(textData.toPlainText()) <= 400:
                     if frame == self.frameOneStar_obj:
                         textOneStar.append(textData.toPlainText())
                     elif frame == self.frameTwoStar_obj:
@@ -85,30 +86,40 @@ class ReplyRating:
                     elif frame == self.frameFiveStar_obj:
                         textFiveStar.append(textData.toPlainText())
 
+                elif len(textData.toPlainText()) > 400:
+                    countError +=1
+                    # self.showPopup("Cảnh báo","Không lưu được nội dung","Không lưu được nội dung có hơn 400 ký tự",False)
+
         r = Database_mongoDB.registered_Users_Collection.update(
             { '_id': data['id_wp'] },
             { '$set': { 
-                f'shopee.{shop_choose}.replyRatingList.textOneStar': textOneStar, 
-                f'shopee.{shop_choose}.replyRatingList.textTwoStar': textTwoStar,
-                f'shopee.{shop_choose}.replyRatingList.textThreeStar': textThreeStar,
-                f'shopee.{shop_choose}.replyRatingList.textFourStar': textFourStar,
-                f'shopee.{shop_choose}.replyRatingList.textFiveStar': textFiveStar, 
+                f'shopee.{shop_choose}.replyRatingList.1': textOneStar, 
+                f'shopee.{shop_choose}.replyRatingList.2': textTwoStar,
+                f'shopee.{shop_choose}.replyRatingList.3': textThreeStar,
+                f'shopee.{shop_choose}.replyRatingList.4': textFourStar,
+                f'shopee.{shop_choose}.replyRatingList.5': textFiveStar, 
                 }},
             upsert=True  
             )     
 
         if len(textOneStar + textTwoStar + textThreeStar + textFourStar + textFiveStar) == 0 :
-            self.btnReplyRatingSwitch.setChecked(False)
+            self.btnReplyRatingSwitch.setChecked(False)           
             UIFunctions.activeFunctions(self,self.btnReplyRatingSwitch.isChecked(),"replyRatingSwitch")
-        
+            UIFunctions.checkThreadReplyReviews(self)
+            
         if r['updatedExisting'] == True:
             self.updateToDataJson(data['id_wp'])
             ReplyRating.savedReplyRating(self)
-            self.showPopup("Thành Công","Lưu nội dung Thành Công","Tất cả nội dung trả lời đã được lưu Thành Công",True)
-            self.writeLog('Lưu thành công nội dụng Đánh Giá')
+
+            if countError != 0 :
+                self.showPopup("Cảnh báo","Có nội dung không lưu được",f"Có {countError} nội dung có hơn 400 ký tự nên không lưu được\nTất cả nội dung trả lời hợp lệ đã được lưu Thành Công",False)
+                self.writeLog(f"Có {countError} nội dung có hơn 400 ký tự nên không lưu được",1,True)
+            else:
+                self.showPopup("Thành Công","Nội dung đã lưu thành cồng","Tất cả nội dung trả lời đã được lưu Thành Công",True)
+                self.writeLog('Lưu thành công nội dụng Đánh Giá',1)
         else:
             self.showPopup("Không Thành Công","Không lưu được nội dung","Vui lòng liên hệ fanpage để được trợ giúp",False)
-            self.writeLog('Không lưu thành công nội dụng Đánh Giá')     
+            self.writeLog('Không lưu thành công nội dụng Đánh Giá',1,True)     
 
     def setStyleButtonReplyRating(self,objectName):
         for w in self.frameButtonReplyRating.findChildren(QPushButton):

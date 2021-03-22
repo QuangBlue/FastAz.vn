@@ -37,6 +37,11 @@ class Dashboard(QMainWindow):
         UIFunctions.addNewMenu(self, "Setting", "btn_settings", "url(:/icon/cil-settings.png)", False)
 
 
+
+        self.workerPushProduct = {}
+        self.workerRealyReviews = {}
+
+
         # ########################################################################
         ## SHOPEE SHOW-OFF
         # ########################################################################
@@ -230,7 +235,7 @@ class Dashboard(QMainWindow):
         self.show()
 
     def updateLogPushProduct(self,text):
-        self.writeLog(text,1,True)
+        self.writeLog(text,1,"g")
 
     def updateInfoPushProduct(self,index):
         with open("temp//data.json") as f:
@@ -251,14 +256,7 @@ class Dashboard(QMainWindow):
             json.dump(data, f)
                 
     def updateInfoRealyReviews(self,k):
-        if k == 'success':
-            self.writeLog("Đánh giá thành công",1)
-        elif k == 'done':
-            self.writeLog("Hoàn thành đánh giá",1)
-        elif k == 'error':
-            self.writeLog("Lỗi không thể đánh giá",1)
-        elif k == 'notReply':
-            self.writeLog("Vui lòng thêm ít nhất 1 câu trả lời",1)
+        self.writeLog(k,1)
 
     def update_list_products_shopee(self, l):
         self.r = l[0]
@@ -336,6 +334,7 @@ class Dashboard(QMainWindow):
             for i in range(len(o.findChildren(QPlainTextEdit))):
                 l.removeWidget(o.findChildren(QPlainTextEdit)[0])
                 l.removeWidget(o.findChildren(QLabel)[0])
+                l.removeWidget(o.findChildren(QLabel)[0])
                 l.removeWidget(o.findChildren(QPushButton)[0])
 
         QTimer.singleShot(100, lambda: ProductPush.setDataProductPush(self))
@@ -384,13 +383,14 @@ class Dashboard(QMainWindow):
         msg.exec_()
         
 
-    def writeLog(self,textLog,w=0,red=False):
+    def writeLog(self,textLog,w=0,style=None):
         t = time.localtime()
         current_time = time.strftime("%H:%M:%S", t)
-        if red == False:
-            log = f'<b>{current_time}</b> - {textLog}'
-        elif red == True:
+        log = f'<b>{current_time}</b> - {textLog}'
+        if style == "r":
             log = f'<span style="color:red;"><b>{current_time}</b> - {textLog}</span>'
+        elif style == "g":
+            log = f'<span style="color:green;"><b>{current_time}</b> - {textLog}</span>'
         if w == 0:
             self.textLogSystem.appendHtml(log)
         elif w == 1:

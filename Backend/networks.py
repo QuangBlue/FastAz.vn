@@ -134,12 +134,9 @@ class Network:
             # return d
             return r.json()
 
-    def productsPushSearch(self,keysearch):
-        url = f
 
-
-    def getReplyReviews(self,cookie):
-        url = 'https://banhang.shopee.vn/api/v3/settings/search_shop_rating_comments/'
+    def getReplyReviews(self,cookie,star):
+        url = f'https://banhang.shopee.vn/api/v3/settings/search_shop_rating_comments/?replied=false&rating_star={str(star)}'
         try:
             r = requests.get(url, cookies=cookie)
         except (requests.exceptions.HTTPError,requests.exceptions.ConnectionError,requests.exceptions.Timeout,requests.exceptions.RequestException) as err:

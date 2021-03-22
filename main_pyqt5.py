@@ -1,4 +1,4 @@
-import sys, webbrowser, json, requests , logging, random , time
+import sys, webbrowser, json, requests , random , time, math
 
 from PyQt5.uic import loadUi
 from PyQt5.QtGui import QColor, QFont, QImage, QPixmap, QFontDatabase, QIcon, QBrush , QPaintEvent, QPen, QPainter
