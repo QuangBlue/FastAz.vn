@@ -341,7 +341,6 @@ class UIFunctions:
         elif self.btnPushProductSwitch.isChecked() == False:
             UIFunctions.stopThreadPushProduct(self,accShopee)
 
-
     def runPushProduct(self):
         with open('temp//data.json') as f:
             data = json.load(f)
@@ -349,16 +348,6 @@ class UIFunctions:
             listActiveFunctions = accShopee['active_functions']
             if 'pushProductSwitch' in listActiveFunctions:
                 UIFunctions.runThreadPushProduct(self,accShopee,index)
-
-        #         self.writeLog(f"Chạy đẩy sản phẩm Shop {accShopee['shop_name']}",1)
-        #         self.workerPushProduct[index] = ThreadPushProducts(accShopee,index)
-        #         self.workerPushProduct[index].start()
-        #         self.workerPushProduct[index].donePushProduct.connect(self.updateInfoPushProduct)
-        #         self.workerPushProduct[index].pushProductText.connect(self.updateLogPushProduct)
-
-        # QTimer.singleShot(16200000, lambda: UIFunctions.runPushProduct(self))
-
-
 
     def setActiveFunctions(self):
         with open('temp//data.json') as f:

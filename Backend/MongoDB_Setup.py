@@ -69,29 +69,40 @@ class Database_mongoDB:
             json.dump(data, f)
 
     def add_protuct_push(self,_id,index,data):
+        with open('temp//data.json') as f:
+            oldData = json.load(f)
+        listOldData = oldData['shopee'][index]["list_push_product"]
+        oldIdsData = []
+        for itemOldData in listOldData:
+            oldIdsData.append(itemOldData['ids'])
+
+        newData = []
+
+        for itemData in data:    
+            if itemData['ids'] not in oldIdsData:
+                newData.append(itemData)
+
         r = Database_mongoDB.registered_Users_Collection.update(
-            { "_id": _id },
+            { "_id": _id ,
+              "ids": {"$nin" : []}
+            },
             { "$addToSet": { 
                 f'shopee.{index}.list_push_product' :
-                { '$each': data
+                { '$each': newData
             }}}
             )
-        with open('temp//data.json') as f:
-                data = json.load(f)
-        
-        lenOne = len(data['shopee'][index]['list_push_product'])
 
         x = Database_mongoDB.registered_Users_Collection.find({'_id': _id})
         for y in x:
-            data['shopee'] = y['shopee']
+            oldData['shopee'] = y['shopee']
 
-        lenTwo = len(data['shopee'][index]['list_push_product'])
+        duplicate = len(data) - len(newData)
 
-        change = lenTwo - lenOne
+        change = len(newData)
         with open('temp//data.json', 'w') as f:
-                    json.dump(data, f)
+            json.dump(oldData, f)
 
-        return r , change
+        return r , change , duplicate
 
     def insert_new_shopee_mongodb(self,username_az,shop_cookies,id_sp,shop_id,shop_name,pathName):
         #SAI CANNOT CREATE NEW USER, MUST LOCATE username_az and insert new shopee to the shopee list

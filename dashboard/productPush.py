@@ -3,8 +3,6 @@ from dashboard.dashboard import *
 from backend.function import *
 
 class ProductPush:
-
-
     def setDataProductPush(self):
         self.tableWidget_product_push.setRowCount(24)
         for k in range(self.tableWidget_product_push.rowCount()):

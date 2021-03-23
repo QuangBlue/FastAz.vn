@@ -93,23 +93,24 @@ class Dashboard(QMainWindow):
         ## FIRST LAUNCH APP - START FUNCTION FOR UPDATE DATA MAIN WINDOW
         # ########################################################################
         
-
-        QTimer.singleShot(100, lambda: UserShopee.setDataUserShopee(self))
-        UserShopee.setComboBoxUser(self)
-        UIFunctions.setActiveFunctions(self)
-        # QTimer.singleShot(100, lambda: UIFunctions.set_data_rating_shopee(self))
-        QTimer.singleShot(100, lambda: ProductPush.setDataProductPush(self))
-        QTimer.singleShot(100, lambda: ChatBot.setChatBotPlainText(self))
-        QTimer.singleShot(100, lambda: ReplyRating.setReplyRatingPlainText(self))
-        QTimer.singleShot(100, lambda: UIFunctions.openBrowser(self))
+        try:
+            QTimer.singleShot(100, lambda: UserShopee.setDataUserShopee(self))
+            UserShopee.setComboBoxUser(self)
+            UIFunctions.setActiveFunctions(self)
+            QTimer.singleShot(100, lambda: ProductPush.setDataProductPush(self))
+            QTimer.singleShot(100, lambda: ChatBot.setChatBotPlainText(self))
+            QTimer.singleShot(100, lambda: ReplyRating.setReplyRatingPlainText(self))
+            QTimer.singleShot(100, lambda: UIFunctions.openBrowser(self))
 
         # ########################################################################
         ## SETUP QTHREAD
         # ########################################################################
 
-
-        QTimer.singleShot(100, lambda: UIFunctions.runReplyReviews(self))
-        QTimer.singleShot(100, lambda: UIFunctions.runPushProduct(self))
+        
+            QTimer.singleShot(100, lambda: UIFunctions.runReplyReviews(self))
+            QTimer.singleShot(100, lambda: UIFunctions.runPushProduct(self))
+        except:
+            pass
 
 
         # ########################################################################

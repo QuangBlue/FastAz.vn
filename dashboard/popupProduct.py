@@ -154,11 +154,11 @@ class Popup_Product(QMainWindow):
             k['sold'] = self.sold[p]
             k['done'] = 'False'
             data.append(k)
-        r , change = Database_mongoDB.add_protuct_push(self,self.id_wp,self.cc,data)
+            print(data)
+        r , change , duplicate = Database_mongoDB.add_protuct_push(self,self.id_wp,self.cc,data)
 
         if r['updatedExisting'] == True:
             self.tableWidget_product_push_shopee.clearSelection()
-            duplicate = len(set(l)) - change
             if duplicate == 0 :
                 self.showPopup("Thành Công","Thêm sản phẩm thành công",f"{change} sản phẩm được chọn đã thêm thành công",True)
             else:
